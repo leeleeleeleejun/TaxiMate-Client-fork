@@ -1,7 +1,7 @@
 ---
-name: Feature Template
-about: 기능 구현 이슈 템플릿
-title: "[Feature]"
+name: Style Template
+about: 스타일 관련 이슈
+title: "[Style]"
 labels: "✨ Feature"
 assignees: leeleeleeleejun
 
