@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
 /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -34,7 +34,6 @@ footer, header, hgroup, menu, nav, section {
 body {
 	line-height: 1;
   width: 100%;
-  box-sizing: border-box;
 }
 ol, ul {
 	list-style: none;
@@ -52,7 +51,16 @@ table {
 	border-spacing: 0;
 }
 
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
 :root {
+  --header-height: 56px;
+  --footer-height: 70px;  
+    
 	// Colors
   --color-main: #313D4C;
   --color-background: #F3F4F6;

@@ -1,0 +1,31 @@
+{
+  "hash": "7b7147d7",
+  "configHash": "27c91a8d",
+  "lockfileHash": "d37a0b24",
+  "browserHash": "b7cc68a3",
+  "optimized": {
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "e923c344",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "33d4711c",
+      "needsInterop": true
+    },
+    "react-naver-maps": {
+      "src": "../../node_modules/react-naver-maps/dist/index.mjs",
+      "file": "react-naver-maps.js",
+      "fileHash": "5051da10",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-45FXRYJS": {
+      "file": "chunk-45FXRYJS.js"
+    }
+  }
+}
