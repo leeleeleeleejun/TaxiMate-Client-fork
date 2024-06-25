@@ -1,6 +1,6 @@
 import {Outlet} from "react-router-dom";
 
-import Container from "@/components/Layout/Layout.style.ts";
+import Container from "@/components/common/Layout/Layout.style.ts";
 
 const Layout = () => {
   return(
