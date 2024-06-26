@@ -149,6 +149,18 @@ a {
   
   --color-orange: #FF6229;
 
+  // Font size
+  --font-large: 30px;
+  --font-medium: 20px;
+  --font-regular: 16px;
+  --font-small: 14px;
+  --font-micro: 10px;
+    
+  // Font weight
+  --weight-bold: 900;
+  --weight-semi-bold: 700;
+  --weight-regular: 500;
+  --weight-light: 300;
 }
 `;
 
