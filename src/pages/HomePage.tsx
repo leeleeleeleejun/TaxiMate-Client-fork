@@ -35,8 +35,8 @@ const HomePage = () => {
 export default HomePage;
 
 const HeaderItem = styled.span`
-  font-size: 20px;
-  font-weight: bold;
+  font-size: var(--font-medium);
+  font-weight: var(--weight-semi-bold);
   line-height: 50%;
   display: flex;
   align-items: center;
