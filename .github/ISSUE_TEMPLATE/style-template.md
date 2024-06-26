@@ -2,7 +2,7 @@
 name: Style Template
 about: 스타일 관련 이슈
 title: "[Style]"
-labels: "✨ Feature"
+labels: "\U0001F3A8 Style"
 assignees: leeleeleeleejun
 
 ---
