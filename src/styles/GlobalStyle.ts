@@ -1,6 +1,69 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
+    @font-face {
+        font-family: 'Pretendard';
+        font-weight: 900;
+        font-display: swap;
+        src: local('Pretendard Black'), url(../assets/fonts/Pretendard-Black.woff2) format('woff2');
+    }
+
+    @font-face {
+        font-family: 'Pretendard';
+        font-weight: 800;
+        font-display: swap;
+        src: local('Pretendard ExtraBold'), url(../assets/fonts/Pretendard-ExtraBold.woff2) format('woff2');
+    }
+
+    @font-face {
+        font-family: 'Pretendard';
+        font-weight: 700;
+        font-display: swap;
+        src: local('Pretendard Bold'), url(../assets/fonts/Pretendard-Bold.woff2) format('woff2');
+    }
+
+    @font-face {
+        font-family: 'Pretendard';
+        font-weight: 600;
+        font-display: swap;
+        src: local('Pretendard SemiBold'), url(../assets/fonts/Pretendard-SemiBold.woff2) format('woff2');
+    }
+
+    @font-face {
+        font-family: 'Pretendard';
+        font-weight: 500;
+        font-display: swap;
+        src: local('Pretendard Medium'), url(../assets/fonts/Pretendard-Medium.woff2) format('woff2');
+    }
+
+    @font-face {
+        font-family: 'Pretendard';
+        font-weight: 400;
+        font-display: swap;
+        src: local('Pretendard Regular'), url(../assets/fonts/Pretendard-Regular.woff2) format('woff2');
+    }
+
+    @font-face {
+        font-family: 'Pretendard';
+        font-weight: 300;
+        font-display: swap;
+        src: local('Pretendard Light'), url(../assets/fonts/Pretendard-Light.woff2) format('woff2');
+    }
+
+    @font-face {
+        font-family: 'Pretendard';
+        font-weight: 200;
+        font-display: swap;
+        src: local('Pretendard ExtraLight'), url(../assets/fonts/Pretendard-ExtraLight.woff2) format('woff2');
+    }
+
+    @font-face {
+        font-family: 'Pretendard';
+        font-weight: 100;
+        font-display: swap;
+        src: local('Pretendard Thin'), url(../assets/fonts/Pretendard-Thin.woff2) format('woff2');
+    }
+    
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
@@ -34,6 +97,7 @@ footer, header, hgroup, menu, nav, section {
 body {
 	line-height: 1;
   width: 100%;
+  font-family: 'Pretendard', sans-serif;
 }
 ol, ul {
 	list-style: none;
@@ -64,6 +128,7 @@ a {
 	// Colors
   --color-main: #313D4C;
   --color-background: #F3F4F6;
+  --color-white: #FFFFFF;  
   --color-contrast: #181F29;
   --color-shadow : #F4F5F7;
   --color-press : #F2F3F5;
