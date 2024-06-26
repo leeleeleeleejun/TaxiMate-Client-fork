@@ -4,10 +4,11 @@ import styled from 'styled-components';
 import Header from '@/components/common/Layout/Header';
 import Footer from '@/components/common/Layout/Footer';
 import { Main } from '@/components/Home/Home.style.ts';
+import SearchBar from '@/components/Home/SearchBar';
+import ResearchButton from '@/components/Home/ResearchButton';
 
 import TaxiIcon from '@/assets/icons/header/taxi-icon.svg?react';
 import KnuLogoIcon from '@/assets/icons/header/knu-logo-icon.svg?react';
-import SearchBar from '@/components/Home/SearchBar';
 
 const HomePage = () => {
   return (
@@ -21,6 +22,7 @@ const HomePage = () => {
       </Header>
       <Main>
         <SearchBar />
+        <ResearchButton />
         <MapDiv className={'map-wrapper'}>
           <NaverMap>
             <Marker defaultPosition={{ lat: 37.5666103, lng: 126.9783882 }} />
