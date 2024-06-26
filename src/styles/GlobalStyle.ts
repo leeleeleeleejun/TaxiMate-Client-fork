@@ -121,6 +121,14 @@ a {
     text-decoration: none;
 }
 
+button {
+    display: block;
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+
 :root {
   --header-height: 56px;
   --footer-height: 70px;  
