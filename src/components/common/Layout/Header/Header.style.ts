@@ -5,7 +5,6 @@ export const Container = styled.header`
 
   box-sizing: border-box;
   padding: 10px 20px;
-  z-index: 999;
 
   display: flex;
   justify-content: space-between;
