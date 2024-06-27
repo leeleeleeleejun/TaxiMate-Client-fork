@@ -30,6 +30,9 @@ const Map = () => {
               icon={{
                 content: MarkerIcon(input.station),
               }}
+              onClick={() => {
+                console.log(input.station);
+              }}
             />
           ))}
         </NaverMap>
@@ -46,8 +49,8 @@ const myData = {
     { order: 23, station: '종합운동장', code: [37.510997, 127.073642] },
     { order: 1456, station: '삼성', code: [37.508844, 127.06316] },
     { order: 71, station: '선릉', code: [37.504503, 127.049008] },
-    { order: 1341, station: '역삼이다', code: [37.500622, 127.036456] },
-    { order: 65, station: '강남이다', code: [37.497175, 127.027926] },
+    { order: 1341, station: '역삼', code: [37.500622, 127.036456] },
+    { order: 65, station: '강남', code: [37.498095, 127.02761] },
     { order: 333, station: '교대', code: [37.493415, 127.01408] },
     { order: 575, station: '방배', code: [37.481426, 126.997596] },
     { order: 3, station: '사당', code: [37.47653, 126.981685] },
