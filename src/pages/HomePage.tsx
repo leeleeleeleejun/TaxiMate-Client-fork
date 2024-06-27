@@ -6,6 +6,7 @@ import Map from '@/components/Home/Map';
 
 import TaxiIcon from '@/assets/icons/header/taxi-icon.svg?react';
 import KnuLogoIcon from '@/assets/icons/header/knu-logo-icon.svg?react';
+import PostList from '@/components/Home/PostList';
 
 const HomePage = () => {
   return (
@@ -18,6 +19,7 @@ const HomePage = () => {
         <KnuLogoIcon />
       </Header>
       <Map />
+      <PostList />
       <Footer />
     </>
   );
