@@ -5,12 +5,13 @@ const MarkerIconStyle = `
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-left: -100%;
+    margin-top: -70%;
   }
 
   .marker-content-box {
     min-width: 40px;
     max-width: 500px;
-    width: 100%;
     height: 40px;
     padding: 0 10px;
 
