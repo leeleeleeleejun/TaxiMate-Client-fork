@@ -1,3 +1,7 @@
 import styled from 'styled-components';
 
-export const Container = styled.div``;
+export const PostListContainer = styled.ul`
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+`;

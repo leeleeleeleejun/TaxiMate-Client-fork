@@ -98,6 +98,11 @@ body {
 	line-height: 1;
   width: 100%;
   font-family: 'Pretendard', sans-serif;
+  
+  ::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera*/
+  }
+    
 }
 ol, ul {
 	list-style: none;
@@ -162,6 +167,7 @@ button {
   --font-medium: 20px;
   --font-regular: 16px;
   --font-small: 14px;
+  --font-semi-micro: 12px;  
   --font-micro: 10px;
     
   // Font weight
