@@ -1,14 +1,14 @@
 import { useRef } from 'react';
 import 'react-spring-bottom-sheet/dist/style.css';
 import { BottomSheet, BottomSheetRef } from 'react-spring-bottom-sheet';
-
-import Container from '@/components/common/Layout/Layout.style.ts';
+import { PostListContainer } from '@/components/Home/PostList/PostList.style.ts';
+import PostListItem from '@/components/common/PostListItem';
 
 export default function Example() {
   const sheetRef = useRef<BottomSheetRef | null>(null);
 
   return (
-    <Container>
+    <>
       <BottomSheet
         open
         blocking={false}
@@ -21,8 +21,14 @@ export default function Example() {
         ]}
         expandOnContentDrag={true}
       >
-        My awesome content here
+        <PostListContainer>
+          <PostListItem />
+          <PostListItem />
+          <PostListItem />
+          <PostListItem />
+          <PostListItem />
+        </PostListContainer>
       </BottomSheet>
-    </Container>
+    </>
   );
 }
