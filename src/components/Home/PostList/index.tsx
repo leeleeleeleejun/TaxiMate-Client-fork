@@ -1,10 +1,11 @@
 import { useRef } from 'react';
 import 'react-spring-bottom-sheet/dist/style.css';
 import { BottomSheet, BottomSheetRef } from 'react-spring-bottom-sheet';
+
 import { PostListContainer } from '@/components/Home/PostList/PostList.style.ts';
 import PostListItem from '@/components/common/PostListItem';
 
-export default function Example() {
+const PostList = () => {
   const sheetRef = useRef<BottomSheetRef | null>(null);
 
   return (
@@ -31,4 +32,6 @@ export default function Example() {
       </BottomSheet>
     </>
   );
-}
+};
+
+export default PostList;
