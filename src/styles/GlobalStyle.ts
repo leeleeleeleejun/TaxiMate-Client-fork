@@ -171,9 +171,11 @@ button {
   --font-micro: 10px;
     
   // Font weight
-  --weight-bold: 900;
-  --weight-semi-bold: 700;
-  --weight-regular: 500;
+  --weight-extra-bold: 800;   
+  --weight-bold: 700;
+  --weight-semi-bold: 600;
+  --weight-medium: 500;
+  --weight-regular: 400;  
   --weight-light: 300;
 }
 `;

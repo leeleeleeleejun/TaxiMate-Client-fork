@@ -15,7 +15,7 @@ export const PostHeaderContainer = styled.div`
   margin-bottom: 5px;
 
   h2 {
-    font-weight: var(--weight-semi-bold);
+    font-weight: var(--weight-bold);
   }
 `;
 

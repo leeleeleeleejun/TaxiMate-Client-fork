@@ -21,7 +21,7 @@ const MarkerIconStyle = `
 
     color: var(--color-white);
     font-size: var(--font-small);
-    font-weight: var(--weight-semi-bold);
+    font-weight: var(--weight-bold);
     text-align: center;
     line-height: 40px;
 
