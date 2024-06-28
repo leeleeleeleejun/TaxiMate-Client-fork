@@ -9,6 +9,8 @@ import ClockIcon from '@/assets/icons/postList/clock-icon.svg?react';
 import LocationIcon from '@/assets/icons/postList/location-dot-icon.svg?react';
 import CaretRightIcon from '@/assets/icons/postList/caret-right-icon.svg?react';
 
+import { PostBodyProps, PostHeaderProps } from '@/types/props';
+
 const PostListItem = () => {
   return (
     <PostListItemContainer>
@@ -24,15 +26,7 @@ const PostListItem = () => {
 
 export default PostListItem;
 
-const PostHeader = ({
-  title,
-  current,
-  max,
-}: {
-  title: string;
-  current: number;
-  max: number;
-}) => {
+const PostHeader = ({ title, current, max }: PostHeaderProps) => {
   return (
     <PostHeaderContainer>
       <h2>{title}</h2>
@@ -41,15 +35,7 @@ const PostHeader = ({
   );
 };
 
-const PostBody = ({
-  departureTime,
-  origin,
-  destination,
-}: {
-  departureTime: string;
-  origin: string;
-  destination: string;
-}) => {
+const PostBody = ({ departureTime, origin, destination }: PostBodyProps) => {
   return (
     <PostBodyContainer>
       <div>

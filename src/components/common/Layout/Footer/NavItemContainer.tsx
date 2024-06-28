@@ -1,21 +1,17 @@
-import { ReactNode } from 'react'
-import { NavItem } from '@/components/common/Layout/Footer/Footer.style.ts'
+import { NavItem } from '@/components/common/Layout/Footer/Footer.style.ts';
+import { NavItemContainerProps } from '@/types/props';
 
 const NavItemContainer = ({
   children,
   contentName,
   path,
-}: {
-  children: ReactNode
-  contentName?: string
-  path: string
-}) => {
+}: NavItemContainerProps) => {
   return (
     <NavItem to={path}>
       {children}
       {contentName && <span>{contentName}</span>}
     </NavItem>
-  )
-}
+  );
+};
 
-export default NavItemContainer
+export default NavItemContainer;
