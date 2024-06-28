@@ -2,7 +2,7 @@ import {
   SearchBarInput,
   SearchBarWrapper,
 } from '@/components/Home/SearchBar/SearchBar.style.ts';
-import SearchIcon from '@/assets/icons/search/search-icon.svg?react';
+import SearchIcon from '@/assets/icons/map/search-icon.svg?react';
 
 const SearchBar = () => {
   return (

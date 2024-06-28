@@ -16,15 +16,17 @@ export const SearchBarWrapper = styled.div`
   justify-content: space-between;
 
   background: var(--color-white);
-  border-radius: 10px;
+  border-radius: 8px;
 `;
 
 export const SearchBarInput = styled.input`
-  border: none;
-  border-radius: 10px;
-
   width: 90%;
   height: 100%;
+
+  font-size: var(--font-small);
+
+  border: none;
+  border-radius: 8px;
 
   &:focus {
     outline: none;
