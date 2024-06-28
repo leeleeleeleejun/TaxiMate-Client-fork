@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import {
   Container as MapDiv,
   NaverMap,
@@ -9,28 +10,53 @@ import { Main } from '@/components/Home/Map/Map.style.ts';
 import SearchBar from '@/components/Home/SearchBar';
 import ResearchButton from '@/components/Home/ResearchButton';
 import MarkerIcon from '@/components/common/MarkerIcon';
+import MoveCurrentLocation from '@/components/Home/MoveCurrentLocation';
+import getCurrentLocation from '@/utils/getCurrentlocation.ts';
 
 const Map = () => {
-  const navermaps = useNavermaps();
+  const naverMaps = useNavermaps();
+  const [map, setMap] = useState<naver.maps.Map | null>(null);
+  const [location, setLocation] = useState({ lat: 0, lng: 0 });
+  const [activeButton, setActiveButton] = useState<boolean>(false);
+
+  //처음 내 위치로 이동 설정
+  useEffect(() => {
+    (async () => {
+      const { lat, lng } = await getCurrentLocation();
+      setLocation({ lat, lng });
+    })();
+  }, []);
+
+  const setActiveButtonFunc = () => {
+    setActiveButton(!map?.getCenter().equals(new naverMaps.LatLng(location)));
+  };
 
   return (
     <Main>
       <SearchBar />
       <ResearchButton />
+      <MoveCurrentLocation
+        map={map}
+        activeButton={activeButton}
+        setLocation={setLocation}
+      />
       <MapDiv className={'map-wrapper'}>
         <NaverMap
-          defaultCenter={{ lat: 37.497175, lng: 127.027926 }}
+          defaultCenter={location}
           defaultZoom={15}
+          ref={setMap}
+          onCenterChanged={setActiveButtonFunc}
         >
           {myData.line.map((input) => (
             <Marker
               key={input.station}
-              position={new navermaps.LatLng(...input.code)}
+              position={new naverMaps.LatLng(input.code[0], input.code[1])}
               title={input.station}
               icon={{
                 content: MarkerIcon(input.station),
               }}
               onClick={() => {
+                //활성화 이벤트로 변경 예정
                 console.log(input.station);
               }}
             />

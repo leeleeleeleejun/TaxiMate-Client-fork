@@ -20,3 +20,11 @@ export interface PostBodyProps {
   origin: string;
   destination: string;
 }
+
+export interface MoveCurrentLocationProps {
+  map: naver.maps.Map | null;
+  activeButton: boolean;
+  setLocation: React.Dispatch<
+    React.SetStateAction<{ lat: number; lng: number }>
+  >;
+}
