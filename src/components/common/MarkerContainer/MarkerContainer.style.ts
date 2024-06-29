@@ -1,12 +1,20 @@
 //marker 사용하는 상위 map 컴포넌트 스타일 하위로 추가하여 사용
 
-const MarkerIconStyle = `
+const MarkerContainerStyle = `
  .marker-icon-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-left: -100%;
     margin-top: -70%;
+  }
+
+  .activeMarker {
+    opacity: 1;
+  }
+  
+  .nonActiveMarker {
+    opacity: 0.6;
   }
 
   .marker-content-box {
@@ -41,4 +49,4 @@ const MarkerIconStyle = `
   }
 `;
 
-export default MarkerIconStyle;
+export default MarkerContainerStyle;

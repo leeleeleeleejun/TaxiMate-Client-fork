@@ -1,25 +1,22 @@
 import { useEffect, useState } from 'react';
-import {
-  Container as MapDiv,
-  NaverMap,
-  Marker,
-  useNavermaps,
-} from 'react-naver-maps';
+import { Container as MapDiv, NaverMap, useNavermaps } from 'react-naver-maps';
+
+import getCurrentLocation from '@/utils/getCurrentlocation.ts';
 
 import { Main } from '@/components/Home/Map/Map.style.ts';
 import SearchBar from '@/components/Home/SearchBar';
 import ResearchButton from '@/components/Home/ResearchButton';
-import MarkerIcon from '@/components/common/MarkerIcon';
+import MarkerContainer from '@/components/common/MarkerContainer';
 import MoveCurrentLocation from '@/components/Home/MoveCurrentLocation';
-import getCurrentLocation from '@/utils/getCurrentlocation.ts';
 
 const Map = () => {
   const naverMaps = useNavermaps();
   const [map, setMap] = useState<naver.maps.Map | null>(null);
   const [location, setLocation] = useState({ lat: 0, lng: 0 });
   const [activeButton, setActiveButton] = useState<boolean>(false);
+  const [activeMarker, setActiveMarker] = useState<string | null>(null);
 
-  //처음 내 위치로 이동 설정
+  //내 위치를 처음으로 설정
   useEffect(() => {
     (async () => {
       const { lat, lng } = await getCurrentLocation();
@@ -40,25 +37,26 @@ const Map = () => {
         activeButton={activeButton}
         setLocation={setLocation}
       />
-      <MapDiv className={'map-wrapper'}>
+      <MapDiv
+        className={'map-wrapper'}
+        onClick={() => {
+          setActiveMarker(null);
+        }}
+      >
         <NaverMap
-          defaultCenter={location}
+          defaultCenter={{ lat: 37.498095, lng: 127.02761 }}
           defaultZoom={15}
+          minZoom={13}
           ref={setMap}
           onCenterChanged={setActiveButtonFunc}
         >
           {myData.line.map((input) => (
-            <Marker
+            <MarkerContainer
               key={input.station}
-              position={new naverMaps.LatLng(input.code[0], input.code[1])}
+              position={input.code}
               title={input.station}
-              icon={{
-                content: MarkerIcon(input.station),
-              }}
-              onClick={() => {
-                //활성화 이벤트로 변경 예정
-                console.log(input.station);
-              }}
+              activeMarker={activeMarker}
+              setActiveMarker={setActiveMarker}
             />
           ))}
         </NaverMap>

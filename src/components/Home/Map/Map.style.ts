@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import MarkerIconStyle from '@/components/common/MarkerIcon/MarkerIcon.style.ts';
+import MarkerContainerStyle from '@/components/common/MarkerContainer/MarkerContainer.style.ts';
 
 export const Main = styled.main`
   position: relative;
@@ -7,5 +7,5 @@ export const Main = styled.main`
     width: 100%;
     height: calc(100vh - (var(--header-height) + var(--footer-height)));
   }
-  ${MarkerIconStyle}
+  ${MarkerContainerStyle}
 `;

@@ -28,3 +28,10 @@ export interface MoveCurrentLocationProps {
     React.SetStateAction<{ lat: number; lng: number }>
   >;
 }
+
+export interface MarkerContainerProps {
+  position: number[];
+  title: string;
+  activeMarker: string | null;
+  setActiveMarker: (value: React.SetStateAction<string | null>) => void;
+}
