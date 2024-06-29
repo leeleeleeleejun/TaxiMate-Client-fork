@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Container as MapDiv, NaverMap, useNavermaps } from 'react-naver-maps';
 
+import { setActiveMarker } from './MapSlice.ts';
 import { postData } from '@/constants';
 import getCurrentLocation from '@/utils/getCurrentlocation.ts';
 
@@ -15,7 +17,7 @@ const Map = () => {
   const [map, setMap] = useState<naver.maps.Map | null>(null);
   const [location, setLocation] = useState({ lat: 0, lng: 0 });
   const [activeButton, setActiveButton] = useState<boolean>(false);
-  const [activeMarker, setActiveMarker] = useState<string | null>(null);
+  const dispatch = useDispatch();
 
   //내 위치를 처음으로 설정
   useEffect(() => {
@@ -43,7 +45,7 @@ const Map = () => {
       <MapDiv
         className={'map-wrapper'}
         onClick={() => {
-          setActiveMarker(null);
+          dispatch(setActiveMarker(null));
         }}
       >
         <NaverMap
@@ -56,10 +58,9 @@ const Map = () => {
           {myData.map((item) => (
             <MarkerContainer
               key={item.id}
+              id={item.id}
               position={item.originLocation}
               title={item.destination}
-              activeMarker={activeMarker}
-              setActiveMarker={setActiveMarker}
             />
           ))}
         </NaverMap>
