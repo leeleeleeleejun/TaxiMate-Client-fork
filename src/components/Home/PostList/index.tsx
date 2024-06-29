@@ -4,9 +4,14 @@ import { BottomSheet, BottomSheetRef } from 'react-spring-bottom-sheet';
 
 import { PostListContainer } from '@/components/Home/PostList/PostList.style.ts';
 import PostListItem from '@/components/common/PostListItem';
+import { postData } from '@/constants';
+import setDate from '@/utils/setDate.ts';
 
 const PostList = () => {
   const sheetRef = useRef<BottomSheetRef | null>(null);
+
+  const data = postData();
+  const setDepartureTime = setDate(data[0].departureTime);
 
   return (
     <>
@@ -23,11 +28,17 @@ const PostList = () => {
         expandOnContentDrag={true}
       >
         <PostListContainer>
-          <PostListItem />
-          <PostListItem />
-          <PostListItem />
-          <PostListItem />
-          <PostListItem />
+          {data.map((post) => (
+            <PostListItem
+              key={post.id}
+              title={post.title}
+              currentPassengers={post.currentPassengers}
+              maxPassengers={post.maxPassengers}
+              departureTime={setDepartureTime}
+              origin={post.origin}
+              destination={post.destination}
+            />
+          ))}
         </PostListContainer>
       </BottomSheet>
     </>

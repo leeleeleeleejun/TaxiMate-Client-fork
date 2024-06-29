@@ -11,7 +11,7 @@ const MarkerContainer = ({
 
   return (
     <Marker
-      position={new naverMaps.LatLng(position[0], position[1])}
+      position={new naverMaps.LatLng(position.latitude, position.longitude)}
       title={title}
       icon={{
         content: MarkerIcon(title, activeMarker),

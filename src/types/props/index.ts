@@ -30,7 +30,10 @@ export interface MoveCurrentLocationProps {
 }
 
 export interface MarkerContainerProps {
-  position: number[];
+  position: {
+    latitude: number;
+    longitude: number;
+  };
   title: string;
   activeMarker: string | null;
   setActiveMarker: (value: React.SetStateAction<string | null>) => void;

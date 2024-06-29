@@ -11,14 +11,32 @@ import CaretRightIcon from '@/assets/icons/postList/caret-right-icon.svg?react';
 
 import { PostBodyProps, PostHeaderProps } from '@/types/props';
 
-const PostListItem = () => {
+const PostListItem = ({
+  title,
+  currentPassengers,
+  maxPassengers,
+  departureTime,
+  origin,
+  destination,
+}: {
+  title: string;
+  currentPassengers: number;
+  maxPassengers: number;
+  departureTime: string;
+  origin: string;
+  destination: string;
+}) => {
   return (
     <PostListItemContainer>
-      <PostHeader title={'공주대에서 출발'} current={1} max={5} />
+      <PostHeader
+        title={title}
+        current={currentPassengers}
+        max={maxPassengers}
+      />
       <PostBody
-        departureTime={'내일 오후 1:10 쯤'}
-        origin={'우리집'}
-        destination={'너네집'}
+        departureTime={departureTime}
+        origin={origin}
+        destination={destination}
       />
     </PostListItemContainer>
   );
