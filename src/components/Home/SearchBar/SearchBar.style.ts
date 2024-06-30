@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const SearchBarWrapper = styled.div`
   position: absolute;
   z-index: 2;
-  top: 40px;
+  top: 20px;
   left: 5%;
   right: 5%;
 

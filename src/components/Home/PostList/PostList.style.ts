@@ -27,7 +27,7 @@ export const ActivePostListContainer = styled.ul`
   left: 5%;
   right: 5%;
   bottom: 90px;
-  border-radius: 5px;
+  border-radius: 16px;
 
   animation: ${fadeIn} 0.5s ease-in-out;
   opacity: 0;

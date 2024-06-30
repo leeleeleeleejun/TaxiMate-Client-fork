@@ -11,7 +11,7 @@ export const Container = styled.button`
   justify-content: space-between;
 
   position: absolute;
-  top: 120px;
+  top: 81px;
   z-index: 2;
   left: 30%;
   right: 30%;
