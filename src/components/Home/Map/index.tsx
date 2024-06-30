@@ -51,7 +51,7 @@ const Map = () => {
         <NaverMap
           defaultCenter={{ lat: 37.498095, lng: 127.02761 }}
           defaultZoom={15}
-          minZoom={13}
+          minZoom={15}
           ref={setMap}
           onCenterChanged={setActiveButtonFunc}
         >

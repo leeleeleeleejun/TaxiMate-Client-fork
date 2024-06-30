@@ -17,6 +17,7 @@ const MarkerContainer = ({ position, title, id }: MarkerContainerProps) => {
       title={title}
       icon={{
         content: MarkerIcon(id, title, activeMarker),
+        anchor: [36, 53],
       }}
       onClick={(e) => {
         e.pointerEvent.stopPropagation();

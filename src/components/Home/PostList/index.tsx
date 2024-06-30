@@ -46,10 +46,11 @@ const PostList = () => {
         open
         blocking={false}
         ref={sheetRef}
-        defaultSnap={({ maxHeight }) => maxHeight / 10}
-        snapPoints={({ maxHeight }) => [
+        defaultSnap={({ minHeight }) => minHeight * 0.1}
+        snapPoints={({ maxHeight, minHeight }) => [
           maxHeight - maxHeight / 10,
-          maxHeight / 4,
+          maxHeight * 0.38,
+          minHeight * 0.1,
         ]}
         expandOnContentDrag={true}
       >

@@ -5,8 +5,6 @@ const MarkerContainerStyle = `
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-left: -100%;
-    margin-top: -70%;
   }
 
   .activeMarker {
