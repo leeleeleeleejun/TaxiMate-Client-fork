@@ -1,8 +1,10 @@
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Container = styled.footer`
   height: var(--footer-height);
+
+  display: flex;
 
   box-sizing: border-box;
   padding: 10px 20px;
@@ -13,6 +15,7 @@ export const Container = styled.footer`
 `;
 
 export const Nav = styled.nav`
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
