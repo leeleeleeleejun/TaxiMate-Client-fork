@@ -136,7 +136,7 @@ button {
 
 :root {
   --header-height: 56px;
-  --footer-height: 70px;  
+  --footer-height: 60px;  
     
 	// Colors
   --color-main: #313D4C;
