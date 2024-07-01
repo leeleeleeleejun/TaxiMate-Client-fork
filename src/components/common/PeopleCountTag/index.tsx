@@ -2,11 +2,14 @@ import PeopleCountTagIcon from '@/assets/icons/common/people-count-tag-icon.svg?
 import { PeopleCountTagContainer } from '@/components/common/PeopleCountTag/PeopleCountTag.style.ts';
 import { PeopleCountTagProps } from '@/types/props';
 
-const PeopleCountTag = ({ current, max }: PeopleCountTagProps) => {
+const PeopleCountTag = ({
+  currentPassengers,
+  maxPassengers,
+}: PeopleCountTagProps) => {
   return (
     <PeopleCountTagContainer>
       <PeopleCountTagIcon />
-      {current + ' / ' + max}
+      {currentPassengers + ' / ' + maxPassengers}
     </PeopleCountTagContainer>
   );
 };

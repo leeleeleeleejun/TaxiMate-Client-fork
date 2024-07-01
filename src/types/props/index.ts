@@ -7,12 +7,13 @@ export interface NavItemContainerProps {
 }
 
 export interface PeopleCountTagProps {
-  current: number;
-  max: number;
+  currentPassengers: number;
+  maxPassengers: number;
 }
 
 export interface PostHeaderProps extends PeopleCountTagProps {
   title: string;
+  activePostList?: boolean;
 }
 
 export interface PostBodyProps {
@@ -20,6 +21,11 @@ export interface PostBodyProps {
   origin: string;
   destination: string;
 }
+
+export interface PostListItemProps
+  extends PostHeaderProps,
+    PostBodyProps,
+    PeopleCountTagProps {}
 
 export interface MoveCurrentLocationProps {
   map: naver.maps.Map | null;
