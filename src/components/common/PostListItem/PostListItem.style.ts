@@ -12,8 +12,13 @@ export const PostListItemContainer = styled.li`
 
 export const PostHeaderContainer = styled.div`
   display: flex;
-  align-items: center;
+  justify-content: space-between;
   margin-bottom: 5px;
+
+  div {
+    display: flex;
+    align-items: center;
+  }
 
   h2 {
     font-weight: var(--weight-bold);

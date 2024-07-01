@@ -6,10 +6,15 @@ import {
 import PeopleCountTag from '@/components/common/PeopleCountTag';
 
 import ClockIcon from '@/assets/icons/postList/clock-icon.svg?react';
+import ArrowRightIcon from '@/assets/icons/arrow-right-icon.svg?react';
 import LocationIcon from '@/assets/icons/postList/location-dot-icon.svg?react';
 import CaretRightIcon from '@/assets/icons/postList/caret-right-icon.svg?react';
 
-import { PostBodyProps, PostHeaderProps } from '@/types/props';
+import {
+  PostBodyProps,
+  PostHeaderProps,
+  PostListItemProps,
+} from '@/types/props';
 
 const PostListItem = ({
   title,
@@ -18,20 +23,15 @@ const PostListItem = ({
   departureTime,
   origin,
   destination,
-}: {
-  title: string;
-  currentPassengers: number;
-  maxPassengers: number;
-  departureTime: string;
-  origin: string;
-  destination: string;
-}) => {
+  activePostList,
+}: PostListItemProps) => {
   return (
     <PostListItemContainer>
       <PostHeader
         title={title}
-        current={currentPassengers}
-        max={maxPassengers}
+        currentPassengers={currentPassengers}
+        maxPassengers={maxPassengers}
+        activePostList={activePostList}
       />
       <PostBody
         departureTime={departureTime}
@@ -44,11 +44,22 @@ const PostListItem = ({
 
 export default PostListItem;
 
-const PostHeader = ({ title, current, max }: PostHeaderProps) => {
+const PostHeader = ({
+  title,
+  currentPassengers,
+  maxPassengers,
+  activePostList,
+}: PostHeaderProps) => {
   return (
     <PostHeaderContainer>
-      <h2>{title}</h2>
-      <PeopleCountTag current={current} max={max} />
+      <div>
+        <h2>{title}</h2>
+        <PeopleCountTag
+          currentPassengers={currentPassengers}
+          maxPassengers={maxPassengers}
+        />
+      </div>
+      {activePostList && <ArrowRightIcon />}
     </PostHeaderContainer>
   );
 };

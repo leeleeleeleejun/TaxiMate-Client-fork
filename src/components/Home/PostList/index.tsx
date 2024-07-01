@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import 'react-spring-bottom-sheet/dist/style.css';
 import { BottomSheet, BottomSheetRef } from 'react-spring-bottom-sheet';
 
@@ -12,7 +12,6 @@ import {
   ActivePostListContainer,
 } from '@/components/Home/PostList/PostList.style.ts';
 import PostListItem from '@/components/common/PostListItem';
-import { useDispatch } from 'react-redux';
 import { setPostListHeight } from '@/components/Home/PostList/PostListSlice.ts';
 
 const PostList = () => {
@@ -37,6 +36,7 @@ const PostList = () => {
           departureTime={setDate(targetData.departureTime)}
           origin={targetData.origin}
           destination={targetData.destination}
+          activePostList
         />
       </ActivePostListContainer>
     );
@@ -48,11 +48,11 @@ const PostList = () => {
         open
         blocking={false}
         ref={sheetRef}
-        defaultSnap={({ minHeight }) => minHeight * 0.1}
-        snapPoints={({ maxHeight, minHeight }) => [
-          maxHeight - maxHeight / 10,
-          maxHeight * 0.38,
-          minHeight * 0.1,
+        defaultSnap={() => 80}
+        snapPoints={({ maxHeight }) => [
+          Math.floor(maxHeight * 0.9),
+          Math.floor(maxHeight * 0.4),
+          80,
         ]}
         expandOnContentDrag={true}
         onSpringEnd={() =>
