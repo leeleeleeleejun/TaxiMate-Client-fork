@@ -1,6 +1,9 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 import { useNavermaps } from 'react-naver-maps';
 
+import { RootState } from '@/store';
 import getCurrentLocation from '@/utils/getCurrentlocation.ts';
 import { MoveCurrentLocationProps } from '@/types/props/index.ts';
 
@@ -13,6 +16,31 @@ const MoveCurrentLocation = ({
   setLocation,
 }: MoveCurrentLocationProps) => {
   const navermaps = useNavermaps();
+  const postListHeight = useSelector(
+    (state: RootState) => state.postListSlice.height
+  );
+  const activeMarker = useSelector(
+    (state: RootState) => state.mapSlice.activeMarker
+  );
+
+  const [bottom, setBottom] = useState(0);
+  const [isMax, setIsMax] = useState(false);
+
+  useEffect(() => {
+    if (activeMarker) {
+      setBottom(window.innerHeight * 0.1);
+    }
+  }, [activeMarker]);
+
+  useEffect(() => {
+    checkMax(bottom, setIsMax); // 초기 상태 설정
+  }, [bottom]);
+
+  // 자연스러운 애니메이션을 위해 아래에서 위로 나오게
+  useEffect(() => {
+    setBottom(0);
+    return setBottom(postListHeight);
+  }, [postListHeight]);
 
   const moveCurrentLocationFunc = async () => {
     if (map) {
@@ -24,11 +52,16 @@ const MoveCurrentLocation = ({
   };
 
   return (
-    <Button onClick={moveCurrentLocationFunc}>
+    <Button
+      onClick={moveCurrentLocationFunc}
+      $bottom={bottom}
+      $isMax={isMax}
+      $activeMarker={activeMarker}
+    >
       {activeButton ? (
-        <ActiveMoveLocationIcon />
-      ) : (
         <NonActiveMoveLocationIcon />
+      ) : (
+        <ActiveMoveLocationIcon />
       )}
     </Button>
   );
@@ -36,7 +69,23 @@ const MoveCurrentLocation = ({
 
 export default MoveCurrentLocation;
 
-const Button = styled.button`
+const checkMax = (
+  bottom: number,
+  setIsMax: React.Dispatch<React.SetStateAction<boolean>>
+) => {
+  const windowHeight = window.innerHeight;
+  if (bottom >= windowHeight * 0.9) {
+    setIsMax(true);
+  } else {
+    setIsMax(false);
+  }
+};
+
+const Button = styled.button<{
+  $bottom: number;
+  $isMax: boolean;
+  $activeMarker: string | null;
+}>`
   width: 38px;
   height: 38px;
 
@@ -46,7 +95,9 @@ const Button = styled.button`
   border-radius: 50%;
 
   position: absolute;
-  bottom: calc(100vh / 5.5);
+  transition: bottom 0.5s ease;
+  bottom: ${({ $isMax, $bottom, $activeMarker }) =>
+    $activeMarker ? '115px' : $isMax ? '-30px' : `${$bottom - 60}px`};
   right: 5%;
   z-index: 2;
 
