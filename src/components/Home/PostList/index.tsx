@@ -12,12 +12,14 @@ import {
   ActivePostListContainer,
 } from '@/components/Home/PostList/PostList.style.ts';
 import PostListItem from '@/components/common/PostListItem';
+import { useDispatch } from 'react-redux';
+import { setPostListHeight } from '@/components/Home/PostList/PostListSlice.ts';
 
 const PostList = () => {
-  const sheetRef = useRef<BottomSheetRef | null>(null);
+  const dispatch = useDispatch();
 
+  const sheetRef = useRef<BottomSheetRef | null>(null);
   const data = postData();
-  const setDepartureTime = setDate(data[0].departureTime);
 
   const activeMarker = useSelector(
     (state: RootState) => state.mapSlice.activeMarker
@@ -46,12 +48,16 @@ const PostList = () => {
         open
         blocking={false}
         ref={sheetRef}
-        defaultSnap={({ maxHeight }) => maxHeight / 10}
-        snapPoints={({ maxHeight }) => [
+        defaultSnap={({ minHeight }) => minHeight * 0.1}
+        snapPoints={({ maxHeight, minHeight }) => [
           maxHeight - maxHeight / 10,
-          maxHeight / 4,
+          maxHeight * 0.38,
+          minHeight * 0.1,
         ]}
         expandOnContentDrag={true}
+        onSpringEnd={() =>
+          dispatch(setPostListHeight(sheetRef.current?.height))
+        }
       >
         <PostListContainer>
           {data.map((post) => (
@@ -60,7 +66,7 @@ const PostList = () => {
               title={post.title}
               currentPassengers={post.currentPassengers}
               maxPassengers={post.maxPassengers}
-              departureTime={setDepartureTime}
+              departureTime={setDate(post.departureTime)}
               origin={post.origin}
               destination={post.destination}
             />

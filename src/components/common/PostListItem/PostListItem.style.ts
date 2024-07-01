@@ -7,6 +7,7 @@ export const PostListItemContainer = styled.li`
   flex-direction: column;
 
   border-bottom: 1px solid var(--color-gray-300);
+  border-radius: 16px;
 `;
 
 export const PostHeaderContainer = styled.div`
