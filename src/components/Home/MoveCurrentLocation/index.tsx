@@ -28,7 +28,7 @@ const MoveCurrentLocation = ({
 
   useEffect(() => {
     if (activeMarker) {
-      setBottom(window.innerHeight * 0.1);
+      setBottom(80);
     }
   }, [activeMarker]);
 
@@ -74,7 +74,8 @@ const checkMax = (
   setIsMax: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   const windowHeight = window.innerHeight;
-  if (bottom >= windowHeight * 0.9) {
+
+  if (bottom >= Math.floor(windowHeight * 0.9)) {
     setIsMax(true);
   } else {
     setIsMax(false);
@@ -97,7 +98,7 @@ const Button = styled.button<{
   position: absolute;
   transition: bottom 0.5s ease;
   bottom: ${({ $isMax, $bottom, $activeMarker }) =>
-    $activeMarker ? '115px' : $isMax ? '-30px' : `${$bottom - 60}px`};
+    $activeMarker ? '125px' : $isMax ? '30px' : `${$bottom - 50}px`};
   right: 5%;
   z-index: 2;
 

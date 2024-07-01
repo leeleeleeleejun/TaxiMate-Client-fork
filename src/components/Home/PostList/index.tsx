@@ -48,11 +48,11 @@ const PostList = () => {
         open
         blocking={false}
         ref={sheetRef}
-        defaultSnap={({ minHeight }) => minHeight * 0.1}
-        snapPoints={({ maxHeight, minHeight }) => [
-          maxHeight - maxHeight / 10,
-          maxHeight * 0.38,
-          minHeight * 0.1,
+        defaultSnap={() => 80}
+        snapPoints={({ maxHeight }) => [
+          Math.floor(maxHeight * 0.9),
+          Math.floor(maxHeight * 0.4),
+          80,
         ]}
         expandOnContentDrag={true}
         onSpringEnd={() =>
