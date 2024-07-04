@@ -1,10 +1,15 @@
-import { SearchListItemContainer } from '@/components/Search/Search.style.ts';
+import {
+  MatchText,
+  SearchListItemContainer,
+} from '@/components/Search/Search.style.ts';
 import LocationDotIcon from '@/assets/icons/postList/location-dot-icon.svg?react';
 
 const SearchListItem = ({
+  inputValue,
   title,
   address,
 }: {
+  inputValue: string;
   title: string;
   address: string;
 }) => {
@@ -12,7 +17,7 @@ const SearchListItem = ({
     <SearchListItemContainer>
       <div>
         <LocationDotIcon />
-        <h3>{title}</h3>
+        <SetTitle title={title} inputValue={inputValue} />
       </div>
       <span>{address}</span>
     </SearchListItemContainer>
@@ -20,3 +25,22 @@ const SearchListItem = ({
 };
 
 export default SearchListItem;
+
+const SetTitle = ({
+  title,
+  inputValue,
+}: {
+  title: string;
+  inputValue: string;
+}) => {
+  const highlightWord = () => {
+    const regex = new RegExp(`(${inputValue})`, 'gi');
+    const parts = title.split(regex);
+
+    return parts.map((part, index) =>
+      regex.test(part) ? <MatchText key={index}>{part}</MatchText> : part
+    );
+  };
+
+  return <h3>{highlightWord()}</h3>;
+};

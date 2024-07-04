@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Container as MapDiv, NaverMap, useNavermaps } from 'react-naver-maps';
 
-import { setActiveMarker } from './MapSlice.ts';
+import { setActiveMarker, setCenterLocation } from './MapSlice.ts';
 import { postData } from '@/constants';
 import getCurrentLocation from '@/utils/getCurrentlocation.ts';
 
@@ -12,23 +12,28 @@ import ResearchButton from '@/components/Home/ResearchButton';
 import MarkerContainer from '@/components/common/MarkerContainer';
 import MoveCurrentLocation from '@/components/Home/MoveCurrentLocation';
 
+const defaultLocation = await getCurrentLocation();
+
 const Map = () => {
   const naverMaps = useNavermaps();
   const [map, setMap] = useState<naver.maps.Map | null>(null);
-  const [location, setLocation] = useState({ lat: 0, lng: 0 });
   const [activeButton, setActiveButton] = useState<boolean>(false);
   const dispatch = useDispatch();
 
-  //내 위치를 처음으로 설정
   useEffect(() => {
-    (async () => {
-      const { lat, lng } = await getCurrentLocation();
-      setLocation({ lat, lng });
-    })();
+    dispatch(setCenterLocation(defaultLocation));
   }, []);
 
-  const setActiveButtonFunc = () => {
-    setActiveButton(!map?.getCenter().equals(new naverMaps.LatLng(location)));
+  const onCenterChangedFunc = () => {
+    if (!map) return;
+    // 현재 위치 참조
+    const { x, y } = map.getCenter();
+    dispatch(setCenterLocation({ lat: y, lng: x }));
+
+    // 내 위치로 이동 버트 비활성화
+    setActiveButton(
+      !map.getCenter().equals(new naverMaps.LatLng(defaultLocation))
+    );
   };
 
   const myData = postData();
@@ -37,11 +42,7 @@ const Map = () => {
     <Main>
       <SearchBar />
       <ResearchButton />
-      <MoveCurrentLocation
-        map={map}
-        activeButton={activeButton}
-        setLocation={setLocation}
-      />
+      <MoveCurrentLocation map={map} activeButton={activeButton} />
       <MapDiv
         className={'map-wrapper'}
         onClick={() => {
@@ -49,11 +50,11 @@ const Map = () => {
         }}
       >
         <NaverMap
-          defaultCenter={{ lat: 37.498095, lng: 127.02761 }}
+          defaultCenter={defaultLocation}
           defaultZoom={15}
           minZoom={15}
           ref={setMap}
-          onCenterChanged={setActiveButtonFunc}
+          onCenterChanged={onCenterChangedFunc}
         >
           {myData.map((item) => (
             <MarkerContainer

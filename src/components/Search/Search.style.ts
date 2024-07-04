@@ -19,6 +19,8 @@ export const SearchInput = styled.input`
 export const SearchList = styled.ul`
   height: calc(100vh - (var(--header-height)));
   border-top: 1px solid var(--color-gray-300);
+
+  overflow-y: auto;
 `;
 
 export const SearchListItemContainer = styled.li`
@@ -39,7 +41,7 @@ export const SearchListItemContainer = styled.li`
     }
   }
 
-  span {
+  & > span {
     padding-top: 5px;
     padding-left: 18px;
 
@@ -47,4 +49,8 @@ export const SearchListItemContainer = styled.li`
     font-size: var(--font-small);
     font-weight: var(--weight-light);
   }
+`;
+
+export const MatchText = styled.span`
+  color: var(--color-blue);
 `;
