@@ -13,7 +13,6 @@ import MarkerContainer from '@/components/common/MarkerContainer';
 import MoveCurrentLocation from '@/components/Home/MoveCurrentLocation';
 
 const defaultLocation = await getCurrentLocation();
-
 localStorage.setItem('Location', JSON.stringify(defaultLocation));
 
 const Map = () => {

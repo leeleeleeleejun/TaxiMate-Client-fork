@@ -5,7 +5,6 @@ export const PeopleCountTagContainer = styled.div`
   align-items: center;
 
   padding: 5px 8px;
-  margin-left: 8px;
 
   font-size: var(--font-semi-micro);
   font-weight: 600;
