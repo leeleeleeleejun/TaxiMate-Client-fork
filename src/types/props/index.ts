@@ -30,9 +30,6 @@ export interface PostListItemProps
 export interface MoveCurrentLocationProps {
   map: naver.maps.Map | null;
   activeButton: boolean;
-  setLocation: React.Dispatch<
-    React.SetStateAction<{ lat: number; lng: number }>
-  >;
 }
 
 export interface MarkerContainerProps {

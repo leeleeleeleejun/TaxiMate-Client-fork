@@ -11,7 +11,7 @@ import PostList from '@/components/Home/PostList';
 const HomePage = () => {
   return (
     <>
-      <Header>
+      <Header paddingX={20} paddingY={10}>
         <HeaderItem>
           택시팟
           <TaxiIcon />

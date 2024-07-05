@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-export const SearchBarWrapper = styled.div`
+export const SearchBarWrapper = styled(Link)`
   position: absolute;
   z-index: 2;
   top: 20px;

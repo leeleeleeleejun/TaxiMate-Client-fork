@@ -1,0 +1,56 @@
+import styled from 'styled-components';
+
+export const BackButton = styled.button`
+  display: flex;
+  padding: 0 5px 0 0;
+`;
+
+export const SearchInput = styled.input`
+  width: 100%;
+
+  border: none;
+  font-size: 18px;
+
+  &:focus {
+    outline: none;
+  }
+`;
+
+export const SearchList = styled.ul`
+  height: calc(100vh - (var(--header-height)));
+  border-top: 1px solid var(--color-gray-300);
+
+  overflow-y: auto;
+`;
+
+export const SearchListItemContainer = styled.li`
+  display: flex;
+  flex-direction: column;
+
+  margin: 0 10px;
+  padding: 20px 10px;
+  border-bottom: 1px solid var(--color-gray-300);
+
+  div {
+    display: flex;
+
+    font-weight: var(--weight-semi-bold);
+
+    svg {
+      padding-right: 5px;
+    }
+  }
+
+  & > span {
+    padding-top: 5px;
+    padding-left: 18px;
+
+    color: var(--color-gray-100);
+    font-size: var(--font-small);
+    font-weight: var(--weight-light);
+  }
+`;
+
+export const MatchText = styled.span`
+  color: var(--color-blue);
+`;
