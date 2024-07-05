@@ -5,6 +5,7 @@ import Header from '@/components/common/Layout/Header';
 import ArrowLeftIcon from '@/assets/icons/arrow-left-icon.svg?react';
 import EllipsisVerticalIcon from '@/assets/icons/common/ellipsis-vertical-icon.svg?react';
 import PostDetail from '@/components/PostDetail';
+import DropDown from '@/components/common/dropDown.tsx';
 
 const PostDetailPage = () => {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ const PostDetailPage = () => {
           <EllipsisVerticalIcon />
         </button>
       </Header>
+      <DropDown />
       <PostDetail />
     </>
   );
