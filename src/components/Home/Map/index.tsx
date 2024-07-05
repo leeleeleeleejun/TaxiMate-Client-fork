@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Container as MapDiv, NaverMap, useNavermaps } from 'react-naver-maps';
 
@@ -34,6 +34,13 @@ const Map = () => {
       map.getCenter().equals(new naverMaps.LatLng(defaultLocation))
     );
   };
+
+  useEffect(() => {
+    if (!map) return;
+    setActiveButton(
+      map.getCenter().equals(new naverMaps.LatLng(defaultLocation))
+    );
+  }, [map]);
 
   const myData = postData();
 
