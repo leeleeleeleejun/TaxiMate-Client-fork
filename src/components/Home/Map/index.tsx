@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Container as MapDiv, NaverMap, useNavermaps } from 'react-naver-maps';
 
-import { setActiveMarker, setCenterLocation } from './MapSlice.ts';
+import { setActiveMarker } from './MapSlice.ts';
 import { postData } from '@/constants';
 import getCurrentLocation from '@/utils/getCurrentlocation.ts';
 
@@ -14,25 +14,24 @@ import MoveCurrentLocation from '@/components/Home/MoveCurrentLocation';
 
 const defaultLocation = await getCurrentLocation();
 
+localStorage.setItem('Location', JSON.stringify(defaultLocation));
+
 const Map = () => {
   const naverMaps = useNavermaps();
   const [map, setMap] = useState<naver.maps.Map | null>(null);
-  const [activeButton, setActiveButton] = useState<boolean>(false);
+  const [activeButton, setActiveButton] = useState<boolean>(true);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(setCenterLocation(defaultLocation));
-  }, []);
+  const centerLocation = JSON.parse(localStorage.getItem('Location') || '');
 
   const onCenterChangedFunc = () => {
     if (!map) return;
     // 현재 위치 참조
     const { x, y } = map.getCenter();
-    dispatch(setCenterLocation({ lat: y, lng: x }));
+    localStorage.setItem('Location', JSON.stringify({ lat: y, lng: x }));
 
     // 내 위치로 이동 버트 비활성화
     setActiveButton(
-      !map.getCenter().equals(new naverMaps.LatLng(defaultLocation))
+      map.getCenter().equals(new naverMaps.LatLng(defaultLocation))
     );
   };
 
@@ -50,11 +49,12 @@ const Map = () => {
         }}
       >
         <NaverMap
-          defaultCenter={defaultLocation}
+          defaultCenter={centerLocation}
           defaultZoom={15}
           minZoom={15}
           ref={setMap}
           onCenterChanged={onCenterChangedFunc}
+          logoControl={false}
         >
           {myData.map((item) => (
             <MarkerContainer

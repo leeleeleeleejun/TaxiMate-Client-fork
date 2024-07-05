@@ -1,9 +1,7 @@
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect, useRef, useState } from 'react';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 
 import { searchPlace } from '@/types';
-import { RootState } from '@/store';
 import { getSearchList } from '@/api/searchAPI.ts';
 
 import Header from '@/components/common/Layout/Header';
@@ -17,13 +15,12 @@ import ArrowLeftIcon from '@/assets/icons/arrow-left-icon.svg?react';
 
 const useSearchData = () => {
   const [searchListsData, setSearchListsData] = useState<searchPlace[]>([]);
-  const currentLocation = useSelector(
-    (state: RootState) => state.mapSlice.centerLocation
-  );
+  const centerLocation = JSON.parse(localStorage.getItem('Location') || '');
+
   const searchFunc = async (query: string) => {
     const result = await getSearchList(
       query,
-      `${currentLocation.lat},${currentLocation.lng}`
+      `${centerLocation.lat},${centerLocation.lng}`
     );
     setSearchListsData(result.place);
   };
@@ -35,6 +32,11 @@ const SearchPage = () => {
   const navigate: NavigateFunction = useNavigate();
   const { searchListsData, searchFunc } = useSearchData();
   const [inputValue, setInputValue] = useState<string>('');
+  const inputEl = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    inputEl.current?.focus();
+  }, []);
 
   return (
     <div>
@@ -43,10 +45,14 @@ const SearchPage = () => {
           <ArrowLeftIcon />
         </BackButton>
         <SearchInput
+          ref={inputEl}
           placeholder='장소 또는 주소를 검색하세요'
           onChange={(e) => {
-            searchFunc(e.target.value);
             setInputValue(e.target.value);
+
+            if (e.target.value.length > 0) {
+              searchFunc(e.target.value);
+            }
           }}
           value={inputValue}
         />
@@ -59,6 +65,8 @@ const SearchPage = () => {
               inputValue={inputValue}
               title={item.title}
               address={item.roadAddress || item.jibunAddress}
+              lat={item.y}
+              lng={item.x}
             />
           ))}
       </SearchList>
