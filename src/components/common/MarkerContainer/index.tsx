@@ -11,6 +11,7 @@ const MarkerContainer = ({
   title,
   id,
   anchor,
+  showPlace,
 }: MarkerContainerProps) => {
   const naverMaps = useNavermaps();
 
@@ -24,7 +25,7 @@ const MarkerContainer = ({
       position={new naverMaps.LatLng(position.latitude, position.longitude)}
       title={title}
       icon={{
-        content: MarkerIcon(id, title, activeMarker),
+        content: MarkerIcon(id, title, activeMarker, showPlace),
         anchor: [anchor[0], anchor[1]],
       }}
       onClick={(e) => {
@@ -37,7 +38,14 @@ const MarkerContainer = ({
 
 export default MarkerContainer;
 
-const MarkerIcon = (id: string, title: string, activeMarker: null | string) => {
+const MarkerIcon = (
+  id: string,
+  title: string,
+  activeMarker: null | string,
+  showPlace: boolean
+) => {
+  const content = showPlace ? `${title}<span> 도착</span>` : title;
+
   const isActive =
     activeMarker === null
       ? 'activeMarker'
@@ -48,7 +56,7 @@ const MarkerIcon = (id: string, title: string, activeMarker: null | string) => {
   return `
     <div class="marker-icon-container ${isActive}">
       <div class="marker-content-box">
-        <span>${title}</span>
+        ${content}
       </div>
       <div class="marker-bottom-triangle"></div>
     </div>

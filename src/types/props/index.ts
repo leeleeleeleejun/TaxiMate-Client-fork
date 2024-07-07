@@ -41,4 +41,6 @@ export interface MarkerContainerProps {
   title: string;
 
   anchor: number[];
+
+  showPlace: boolean;
 }

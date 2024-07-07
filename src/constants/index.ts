@@ -2,16 +2,16 @@ import { useNavermaps } from 'react-naver-maps';
 
 export const postData = () => {
   const line = [
-    { order: 11, station: '잠실새내', code: [37.511687, 127.086162] },
-    { order: 23, station: '종합운동장', code: [37.510997, 127.073642] },
-    { order: 1456, station: '삼성', code: [37.508844, 127.06316] },
-    { order: 71, station: '선릉', code: [37.504503, 127.049008] },
-    { order: 1341, station: '역삼', code: [37.500622, 127.036456] },
-    { order: 65, station: '강남', code: [37.498095, 127.02761] },
-    { order: 333, station: '교대', code: [37.493415, 127.01408] },
-    { order: 575, station: '방배', code: [37.481426, 126.997596] },
-    { order: 3, station: '사당', code: [37.47653, 126.981685] },
-    { order: 578, station: '신대방', code: [37.487462, 126.913149] },
+    { order: 11, station: '잠실새내', code: [37.5115735, 127.0868931] },
+    { order: 23, station: '종합운동장', code: [37.5110588, 127.0737908] },
+    { order: 1456, station: '삼성', code: [37.5088803, 127.0631076] },
+    { order: 71, station: '선릉', code: [37.504585, 127.0492805] },
+    { order: 1341, station: '역삼', code: [37.5006431, 127.0363764] },
+    { order: 65, station: '강남', code: [37.4979526, 127.0276241] },
+    { order: 333, station: '교대', code: [37.4939732, 127.0146391] },
+    { order: 575, station: '방배', code: [37.4814955, 126.9976669] },
+    { order: 3, station: '사당', code: [37.4765793, 126.981596] },
+    { order: 578, station: '신대방', code: [37.4875672, 126.9133456] },
     {
       order: 976,
       station: '구로디지털단지',
