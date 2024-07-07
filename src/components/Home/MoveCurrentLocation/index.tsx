@@ -89,6 +89,7 @@ const Button = styled.button<{
   height: 38px;
 
   display: flex;
+  justify-content: center;
   align-items: center;
 
   border-radius: 50%;

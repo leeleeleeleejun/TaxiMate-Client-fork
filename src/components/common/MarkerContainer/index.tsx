@@ -1,9 +1,17 @@
-import { Marker, useNavermaps } from 'react-naver-maps';
-import { MarkerContainerProps } from '@/types/props';
 import { useDispatch, useSelector } from 'react-redux';
+import { Marker, useNavermaps } from 'react-naver-maps';
+
 import { RootState } from '@/store';
+import { MarkerContainerProps } from '@/types/props';
+
 import { setActiveMarker } from '@/components/Home/Map/MapSlice.ts';
-const MarkerContainer = ({ position, title, id }: MarkerContainerProps) => {
+
+const MarkerContainer = ({
+  position,
+  title,
+  id,
+  anchor,
+}: MarkerContainerProps) => {
   const naverMaps = useNavermaps();
 
   const dispatch = useDispatch();
@@ -17,7 +25,7 @@ const MarkerContainer = ({ position, title, id }: MarkerContainerProps) => {
       title={title}
       icon={{
         content: MarkerIcon(id, title, activeMarker),
-        anchor: [36, 53],
+        anchor: [anchor[0], anchor[1]],
       }}
       onClick={(e) => {
         e.pointerEvent.stopPropagation();
@@ -29,8 +37,7 @@ const MarkerContainer = ({ position, title, id }: MarkerContainerProps) => {
 
 export default MarkerContainer;
 
-const MarkerIcon = (id: string, place: string, activeMarker: null | string) => {
-  const content = place ? `${place} <span>도착</span>` : '도착';
+const MarkerIcon = (id: string, title: string, activeMarker: null | string) => {
   const isActive =
     activeMarker === null
       ? 'activeMarker'
@@ -41,7 +48,7 @@ const MarkerIcon = (id: string, place: string, activeMarker: null | string) => {
   return `
     <div class="marker-icon-container ${isActive}">
       <div class="marker-content-box">
-        ${content}
+        <span>${title}</span>
       </div>
       <div class="marker-bottom-triangle"></div>
     </div>

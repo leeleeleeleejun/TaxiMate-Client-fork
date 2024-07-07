@@ -39,4 +39,6 @@ export interface MarkerContainerProps {
     longitude: number;
   };
   title: string;
+
+  anchor: number[];
 }

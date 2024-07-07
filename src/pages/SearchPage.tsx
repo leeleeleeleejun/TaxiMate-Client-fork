@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { NavigateFunction, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { searchPlace } from '@/types';
 import { getSearchList } from '@/api/searchAPI.ts';
@@ -29,7 +29,7 @@ const useSearchData = () => {
 };
 
 const SearchPage = () => {
-  const navigate: NavigateFunction = useNavigate();
+  const navigate = useNavigate();
   const { searchListsData, searchFunc } = useSearchData();
   const [inputValue, setInputValue] = useState<string>('');
   const inputEl = useRef<HTMLInputElement>(null);
@@ -39,7 +39,7 @@ const SearchPage = () => {
   }, []);
 
   return (
-    <div>
+    <>
       <Header paddingY={10} paddingX={10}>
         <BackButton onClick={() => navigate(-1)}>
           <ArrowLeftIcon />
@@ -70,7 +70,7 @@ const SearchPage = () => {
             />
           ))}
       </SearchList>
-    </div>
+    </>
   );
 };
 
