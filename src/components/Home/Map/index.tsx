@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Container as MapDiv, NaverMap, useNavermaps } from 'react-naver-maps';
 
-import { setActiveMarker } from './MapSlice.ts';
 import { postData } from '@/constants';
+import { setActiveMarker } from './MapSlice.ts';
 import getCurrentLocation from '@/utils/getCurrentlocation.ts';
 
-import { Main } from '@/components/Home/Map/Map.style.ts';
+import { Main } from './Map.style.ts';
 import SearchBar from '@/components/Home/SearchBar';
 import ResearchButton from '@/components/Home/ResearchButton';
 import MarkerContainer from '@/components/common/MarkerContainer';
@@ -67,7 +67,8 @@ const Map = () => {
               key={item.id}
               id={item.id}
               position={item.originLocation}
-              title={item.destination}
+              title={item.destination + '도착'}
+              anchor={[36, 53]}
             />
           ))}
         </NaverMap>

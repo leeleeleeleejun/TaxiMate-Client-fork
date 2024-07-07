@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import MarkerContainerStyle from '@/components/common/MarkerContainer/MarkerContainer.style.ts';
 
 export const PostDetailContainer = styled.div`
   height: 100%;
@@ -14,6 +15,8 @@ export const PostDetailContainer = styled.div`
     border-radius: 10px;
     overflow: hidden;
   }
+
+  ${MarkerContainerStyle}
 `;
 
 export const PostDetailHeaderContainer = styled.div`
