@@ -92,7 +92,7 @@ export const AuthorContainer = styled.div`
   align-items: center;
 
   border-top: 1px solid var(--color-gray-300);
-  padding: 10px;
+  padding: 15px 10px;
 
   img {
     border-radius: 50%;

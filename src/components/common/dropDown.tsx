@@ -3,21 +3,26 @@ import {
   DropdownTrigger,
   DropdownMenu,
   DropdownItem,
-  Button,
 } from '@nextui-org/react';
+import EllipsisVerticalIcon from '@/assets/icons/common/ellipsis-vertical-icon.svg?react';
 
 const DropDown = () => {
   return (
-    <Dropdown>
+    <Dropdown radius='sm' className={'min-w-[70px]'}>
       <DropdownTrigger>
-        <Button variant='bordered'>Open Menu</Button>
+        <button>
+          <EllipsisVerticalIcon />
+        </button>
       </DropdownTrigger>
-      <DropdownMenu aria-label='Static Actions'>
-        <DropdownItem key='new'>New file</DropdownItem>
-        <DropdownItem key='copy'>Copy link</DropdownItem>
-        <DropdownItem key='edit'>Edit file</DropdownItem>
-        <DropdownItem key='delete' className='text-danger' color='danger'>
-          Delete file
+      <DropdownMenu
+        aria-label='Custom item styles'
+        itemClasses={{ base: ['text-center'] }}
+      >
+        <DropdownItem key='new' showDivider>
+          수정
+        </DropdownItem>
+        <DropdownItem key='delete' className='text-danger ' color='danger'>
+          삭제
         </DropdownItem>
       </DropdownMenu>
     </Dropdown>
