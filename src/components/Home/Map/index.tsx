@@ -67,8 +67,9 @@ const Map = () => {
               key={item.id}
               id={item.id}
               position={item.originLocation}
-              title={item.destination + '도착'}
-              anchor={[36, 53]}
+              title={item.destination}
+              anchor={[item.destination.length * 6 + 22, 53]}
+              showPlace={true}
             />
           ))}
         </NaverMap>

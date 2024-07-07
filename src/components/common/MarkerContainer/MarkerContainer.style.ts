@@ -16,6 +16,7 @@ const MarkerContainerStyle = `
   }
 
   .marker-content-box {
+    
     min-width: 40px;
     max-width: 500px;
     height: 40px;

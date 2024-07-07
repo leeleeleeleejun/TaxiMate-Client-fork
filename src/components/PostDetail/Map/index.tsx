@@ -31,6 +31,7 @@ const Map = () => {
             position={{ longitude: item.x, latitude: item.y }}
             title={index === 0 ? '출발' : '도착'}
             anchor={[22, 53]}
+            showPlace={false}
           />
         ))}
       </NaverMap>
