@@ -1,0 +1,93 @@
+import {
+  Container,
+  ContentContainer,
+  ContentTitle,
+  DepartureTimeContainer,
+  TextArea,
+  TitleInput,
+} from '@/components/CreatePost/createPost.style.ts';
+
+import NextRadio from '@/components/common/Radio.tsx';
+import { LocationInfo } from '@/components/common/LocationInfo';
+
+import TitleIcon from '@/assets/icons/createPost/title-icon.svg?react';
+import ClockIcon from '@/assets/icons/createPost/clock-icon.svg?react';
+import LocationPinIcon from '@/assets/icons/createPost/location-pin-icon.svg?react';
+import MemberIcon from '@/assets/icons/createPost/member-icon.svg?react';
+import ExplainIcon from '@/assets/icons/createPost/explain-icon .svg?react';
+import CalendarIcon from '@/assets/icons/createPost/calendar-icon.svg?react';
+import ArrowRightIcon from '@/assets/icons/arrow-right-icon.svg?react';
+
+const CreatePost = () => {
+  return (
+    <Container>
+      <ContentWrap
+        theme={'제목'}
+        explain={'팟을 한 줄로 표현해주세요!'}
+        SvgIcon={TitleIcon}
+      >
+        <TitleInput placeholder={'오후 1시 반쯤 학교에서 역으로'} />
+      </ContentWrap>
+      <ContentWrap theme={'출발 시간'} SvgIcon={ClockIcon}>
+        <DepartureTimeContainer to={'/'}>
+          <div>
+            <CalendarIcon />
+            2024년 7월 3일(월) 오후 9:20 쯤
+          </div>
+          <ArrowRightIcon />
+        </DepartureTimeContainer>
+      </ContentWrap>
+      <ContentWrap theme={'출도착지'} SvgIcon={LocationPinIcon}>
+        <LocationInfo
+          keyWord={'출발지'}
+          title={'공주대학교'}
+          subTitle={'충남 천안시 서북구 천안대로 1223-24'}
+          inCreate={true}
+        />
+        <LocationInfo
+          keyWord={'도착지'}
+          title={'공주대학교'}
+          subTitle={'충남 천안시 서북구 천안대로 1223-24'}
+          inCreate={true}
+        />
+      </ContentWrap>
+      <ContentWrap theme={'탑승인원'} SvgIcon={MemberIcon}>
+        <NextRadio />
+      </ContentWrap>
+      <ContentWrap
+        theme={'간단 설명'}
+        explain={'동승자들에게 하고 싶은 말을 자유롭게 작성하세요!'}
+        SvgIcon={ExplainIcon}
+      >
+        <TextArea placeholder={'~~ 해주세요'} />
+      </ContentWrap>
+    </Container>
+  );
+};
+
+export default CreatePost;
+
+const ContentWrap = ({
+  theme,
+  explain,
+  SvgIcon,
+  children,
+}: {
+  theme: string;
+  explain?: string;
+  SvgIcon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  children: React.ReactNode;
+}) => {
+  return (
+    <ContentContainer>
+      <ContentTitle>
+        <div>
+          {theme}
+          <SvgIcon />
+        </div>
+        {explain && <p>{explain}</p>}
+      </ContentTitle>
+      {children}
+    </ContentContainer>
+  );
+};

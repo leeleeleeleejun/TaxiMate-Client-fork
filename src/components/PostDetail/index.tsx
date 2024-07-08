@@ -2,6 +2,8 @@ import * as S from './PostDetail.style.ts';
 
 import Map from '@/components/PostDetail/Map';
 import PeopleCountTag from '@/components/common/PeopleCountTag';
+import { LocationInfo } from '@/components/common/LocationInfo';
+
 import ArrowRightIcon from '@/assets/icons/arrow-right-icon.svg?react';
 
 const PostDetail = () => {
@@ -53,25 +55,5 @@ const PostDetailTitle = () => {
       <h2>학교 정문에서 터미널까지 오후 1시</h2>
       6월 4일(화) 오후 1:30 쯤 출발
     </S.PostDetailTitleContainer>
-  );
-};
-
-const LocationInfo = ({
-  keyWord,
-  title,
-  subTitle,
-}: {
-  keyWord: string;
-  title: string;
-  subTitle: string;
-}) => {
-  return (
-    <S.LocationInfoContainer>
-      <S.LocationInfoHeader>
-        <span>{keyWord}</span>
-        {title}
-      </S.LocationInfoHeader>
-      <S.LocationInfoBody>{subTitle}</S.LocationInfoBody>
-    </S.LocationInfoContainer>
   );
 };

@@ -1,12 +1,11 @@
-import styled from 'styled-components';
-
 import Header from '@/components/common/Layout/Header';
+import { HeaderItem } from '@/components/common/Layout/Header/Header.style.ts';
 import Footer from '@/components/common/Layout/Footer';
 import Map from '@/components/Home/Map';
+import PostList from '@/components/Home/PostList';
 
 import TaxiIcon from '@/assets/icons/header/taxi-icon.svg?react';
 import KnuLogoIcon from '@/assets/icons/header/knu-logo-icon.svg?react';
-import PostList from '@/components/Home/PostList';
 
 const HomePage = () => {
   return (
@@ -26,12 +25,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
-
-const HeaderItem = styled.span`
-  font-size: var(--font-medium);
-  font-weight: var(--weight-semi-bold);
-  line-height: 50%;
-  display: flex;
-  align-items: center;
-  text-align: center;
-`;

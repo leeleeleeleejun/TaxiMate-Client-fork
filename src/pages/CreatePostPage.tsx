@@ -1,13 +1,14 @@
 import { useNavigate } from 'react-router-dom';
 
 import Header from '@/components/common/Layout/Header';
-import PostDetail from '@/components/PostDetail';
-import DropDown from '@/components/common/DropDown.tsx';
+import { HeaderItem } from '@/components/common/Layout/Header/Header.style.ts';
 import { BackButton } from '@/components/Search/Search.style.ts';
 
 import ArrowLeftIcon from '@/assets/icons/arrow-left-icon.svg?react';
+import { SummitButton } from '@/components/CreatePost/createPost.style.ts';
+import CreatePost from '@/components/CreatePost';
 
-const PostDetailPage = () => {
+const CreatePostPage = () => {
   const navigate = useNavigate();
 
   return (
@@ -16,11 +17,12 @@ const PostDetailPage = () => {
         <BackButton onClick={() => navigate(-1)}>
           <ArrowLeftIcon />
         </BackButton>
-        <DropDown />
+        <HeaderItem>팟 생성</HeaderItem>
+        <SummitButton>만들기</SummitButton>
       </Header>
-      <PostDetail />
+      <CreatePost />
     </>
   );
 };
 
-export default PostDetailPage;
+export default CreatePostPage;
