@@ -17,6 +17,7 @@ import MemberIcon from '@/assets/icons/createPost/member-icon.svg?react';
 import ExplainIcon from '@/assets/icons/createPost/explain-icon .svg?react';
 import CalendarIcon from '@/assets/icons/createPost/calendar-icon.svg?react';
 import ArrowRightIcon from '@/assets/icons/arrow-right-icon.svg?react';
+import { Link } from 'react-router-dom';
 
 const CreatePost = () => {
   return (
@@ -29,7 +30,7 @@ const CreatePost = () => {
         <TitleInput placeholder={'오후 1시 반쯤 학교에서 역으로'} />
       </ContentWrap>
       <ContentWrap theme={'출발 시간'} SvgIcon={ClockIcon}>
-        <DepartureTimeContainer to={'/create-post/calendar'}>
+        <DepartureTimeContainer to={'/create-post/set-origin'}>
           <div>
             <CalendarIcon />
             2024년 7월 3일(월) 오후 9:20 쯤
@@ -38,12 +39,14 @@ const CreatePost = () => {
         </DepartureTimeContainer>
       </ContentWrap>
       <ContentWrap theme={'출도착지'} SvgIcon={LocationPinIcon}>
-        <LocationInfo
-          keyWord={'출발지'}
-          title={'공주대학교'}
-          subTitle={'충남 천안시 서북구 천안대로 1223-24'}
-          inCreate={true}
-        />
+        <Link to={'/create-post/set-origin'}>
+          <LocationInfo
+            keyWord={'출발지'}
+            title={'공주대학교'}
+            subTitle={'충남 천안시 서북구 천안대로 1223-24'}
+            inCreate={true}
+          />
+        </Link>
         <LocationInfo
           keyWord={'도착지'}
           title={'공주대학교'}

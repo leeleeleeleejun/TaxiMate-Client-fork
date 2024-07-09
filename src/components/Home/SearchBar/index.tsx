@@ -4,9 +4,9 @@ import {
 } from '@/components/Home/SearchBar/SearchBar.style.ts';
 import SearchIcon from '@/assets/icons/map/search-icon.svg?react';
 
-const SearchBar = () => {
+const SearchBar = ({ path }: { path: string }) => {
   return (
-    <SearchBarWrapper to={'/search'}>
+    <SearchBarWrapper to={path} $path={path}>
       <SearchIcon />
       <SearchBarContainer>장소 또는 주소를 검색하세요</SearchBarContainer>
     </SearchBarWrapper>
