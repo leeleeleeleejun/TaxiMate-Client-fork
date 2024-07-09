@@ -29,7 +29,7 @@ const CreatePost = () => {
         <TitleInput placeholder={'오후 1시 반쯤 학교에서 역으로'} />
       </ContentWrap>
       <ContentWrap theme={'출발 시간'} SvgIcon={ClockIcon}>
-        <DepartureTimeContainer to={'/'}>
+        <DepartureTimeContainer to={'/create-post/calendar'}>
           <div>
             <CalendarIcon />
             2024년 7월 3일(월) 오후 9:20 쯤

@@ -4,7 +4,8 @@ import HomePage from '@/pages/HomePage';
 import Layout from '@/components/common/Layout';
 import SearchPage from '@/pages/SearchPage.tsx';
 import PostDetailPage from '@/pages/PostDetailPage.tsx';
-import CreatePostPage from '@/pages/CreatePostPage.tsx';
+import CreatePostPage from '@/pages/CreatePostPage';
+import SetDatePage from '@/pages/CreatePostPage/SetDatePage.tsx';
 
 const Router = () => {
   return (
@@ -15,6 +16,7 @@ const Router = () => {
           <Route path={'/search'} element={<SearchPage />} />
           <Route path={'/post-detail'} element={<PostDetailPage />} />
           <Route path={'/create-post'} element={<CreatePostPage />} />
+          <Route path={'/create-post/calendar'} element={<SetDatePage />} />
         </Route>
       </Routes>
     </BrowserRouter>

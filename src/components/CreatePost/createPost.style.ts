@@ -102,3 +102,8 @@ export const TextArea = styled.textarea`
     outline: none;
   }
 `;
+
+export const SubTitle = styled.h2`
+  font-weight: var(--weight-bold);
+  font-size: var(--font-medium);
+`;
