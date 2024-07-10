@@ -6,3 +6,5 @@ export interface searchPlace {
   roadAddress?: string;
   jibunAddress: string;
 }
+
+export type SelectionKey = 'meridiem' | 'hour' | 'minute';

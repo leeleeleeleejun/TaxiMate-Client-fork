@@ -1,4 +1,5 @@
 import { useNavermaps } from 'react-naver-maps';
+import { SelectionKey } from '@/types';
 
 export const postData = () => {
   const line = [
@@ -54,4 +55,24 @@ export const usePolylinePathData = () => {
     new navermaps.LatLng(37.371657839593894, 127.11645126342773),
     new navermaps.LatLng(37.36855417793982, 127.1207857131958),
   ];
+};
+
+export const selections: Record<SelectionKey, string[]> = {
+  meridiem: ['AM', 'PM'],
+  hour: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+  minute: [
+    '0',
+    '5',
+    '10',
+    '15',
+    '20',
+    '25',
+    '30',
+    '35',
+    '40',
+    '45',
+    '50',
+    '55',
+    '60',
+  ],
 };
