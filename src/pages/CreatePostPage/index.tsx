@@ -5,7 +5,7 @@ import { HeaderItem } from '@/components/common/Layout/Header/Header.style.ts';
 import { BackButton } from '@/components/Search/Search.style.ts';
 
 import ArrowLeftIcon from '@/assets/icons/arrow-left-icon.svg?react';
-import { SummitButton } from '@/components/CreatePost/createPost.style.ts';
+import { CreateSubmitButton } from '@/components/CreatePost/createPost.style.ts';
 import CreatePost from '@/components/CreatePost';
 
 const CreatePostPage = () => {
@@ -18,7 +18,7 @@ const CreatePostPage = () => {
           <ArrowLeftIcon />
         </BackButton>
         <HeaderItem>팟 생성</HeaderItem>
-        <SummitButton>만들기</SummitButton>
+        <CreateSubmitButton>만들기</CreateSubmitButton>
       </Header>
       <CreatePost />
     </>

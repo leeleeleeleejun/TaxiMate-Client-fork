@@ -8,7 +8,7 @@ const CreatePostChilePageLayout = ({
   subTitle,
   children,
 }: {
-  subTitle: string;
+  subTitle?: string;
   children: ReactNode;
 }) => {
   const navigate = useNavigate();
@@ -20,8 +20,8 @@ const CreatePostChilePageLayout = ({
           <ArrowLeftIcon />
         </button>
       </Header>
-      <Container>
-        <SubTitle>{subTitle}</SubTitle>
+      <Container $subTitle={subTitle}>
+        {subTitle && <SubTitle>{subTitle}</SubTitle>}
         {children}
       </Container>
     </>

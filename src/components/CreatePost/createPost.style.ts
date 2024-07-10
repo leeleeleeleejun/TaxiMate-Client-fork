@@ -11,7 +11,7 @@ export const Container = styled.div`
   justify-content: space-around;
 `;
 
-export const SummitButton = styled.button`
+export const CreateSubmitButton = styled.button`
   font-weight: var(--weight-semi-bold);
   color: var(--color-blue);
 `;
@@ -103,7 +103,13 @@ export const TextArea = styled.textarea`
   }
 `;
 
-export const SubTitle = styled.h2`
+export const SubmitButton = styled.button`
+  width: 100%;
+  padding: 12px;
+
+  border-radius: 6px;
+  background-color: var(--color-main);
+
+  color: var(--color-white);
   font-weight: var(--weight-bold);
-  font-size: var(--font-medium);
 `;

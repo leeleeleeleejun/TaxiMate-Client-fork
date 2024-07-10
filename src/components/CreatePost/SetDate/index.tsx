@@ -9,21 +9,19 @@ import { selections } from '@/constants';
 import {
   Container,
   DatePickerContainer,
-  SubmitButton,
 } from '@/components/CreatePost/SetDate/SetDate.style.ts';
+import { SubmitButton } from '@/components/CreatePost/createPost.style.ts';
 
 const today = new Date();
 
 export default function SetDate() {
   const [pickerValue, setPickerValue] = useState({
     meridiem: today.getHours() < 12 ? 'AM' : 'PM',
-    hour: today.getHours().toString(),
+    hour: (today.getHours() % 12 || 12).toString(),
     minute: (Math.ceil(today.getMinutes() / 5) * 5).toString(),
   });
 
   const [date, setDate] = useState(parseAbsoluteToLocal(today.toISOString()));
-
-  console.log(date.year, date.month, date.day);
 
   return (
     <Container>

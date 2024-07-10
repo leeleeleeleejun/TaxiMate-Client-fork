@@ -7,6 +7,7 @@ import PostDetailPage from '@/pages/PostDetailPage.tsx';
 import CreatePostPage from '@/pages/CreatePostPage';
 import SetDatePage from '@/pages/CreatePostPage/SetDatePage.tsx';
 import SetOriginPage from '@/pages/CreatePostPage/SetOriginPage.tsx';
+import SetOriginMapPage from '@/pages/CreatePostPage/SetOriginMapPage.tsx';
 
 const Router = () => {
   return (
@@ -22,6 +23,10 @@ const Router = () => {
           <Route
             path={'/create-post/set-origin/search'}
             element={<SearchPage />}
+          />
+          <Route
+            path={'/create-post/set-origin/map'}
+            element={<SetOriginMapPage />}
           />
         </Route>
       </Routes>

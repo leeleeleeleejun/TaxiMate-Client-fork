@@ -14,6 +14,8 @@ const useOnClickFunc = (lat: string, lng: string) => {
       localStorage.setItem('Location', JSON.stringify({ lat, lng }));
       navigate('/');
     } else {
+      navigate('/create-post/set-origin/map');
+
       console.log(lat, lng);
     }
   };

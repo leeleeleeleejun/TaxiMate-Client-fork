@@ -11,7 +11,8 @@ const useSearchData = () => {
       query,
       `${centerLocation.lat},${centerLocation.lng}`
     );
-    setSearchListsData(result.place);
+
+    setSearchListsData([...result.place, ...result.address]);
   };
 
   return { searchListsData, searchFunc };

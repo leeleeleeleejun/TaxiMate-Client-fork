@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const Container = styled.div<{ $subTitle?: string }>`
   height: 100%;
-  padding: 10px;
+  ${(props) => props.$subTitle && 'padding: 10px;'}
 
   overflow: auto;
 `;
