@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-import { searchPlace } from '@/types';
-import { getSearchList } from '@/api/searchAPI.ts';
+import useSearchData from '@/hooks/useSearchData.ts';
 
 import Header from '@/components/common/Layout/Header';
 import SearchListItem from '@/components/Search/SearchListItem.tsx';
@@ -12,21 +10,6 @@ import {
   SearchList,
 } from '@/components/Search/Search.style.ts';
 import ArrowLeftIcon from '@/assets/icons/arrow-left-icon.svg?react';
-
-const useSearchData = () => {
-  const [searchListsData, setSearchListsData] = useState<searchPlace[]>([]);
-  const centerLocation = JSON.parse(localStorage.getItem('Location') || '');
-
-  const searchFunc = async (query: string) => {
-    const result = await getSearchList(
-      query,
-      `${centerLocation.lat},${centerLocation.lng}`
-    );
-    setSearchListsData(result.place);
-  };
-
-  return { searchListsData, searchFunc };
-};
 
 const SearchPage = () => {
   const navigate = useNavigate();
