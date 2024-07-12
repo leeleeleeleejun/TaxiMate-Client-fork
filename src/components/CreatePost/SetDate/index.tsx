@@ -13,15 +13,21 @@ import {
 import { SubmitButton } from '@/components/CreatePost/createPost.style.ts';
 
 const today = new Date();
+const minutes = today.getMinutes();
+
+const ceilMinutes = Math.ceil(minutes / 5) * 5;
+const now = new Date(today.setMinutes(ceilMinutes));
+
+const initialState = {
+  meridiem: now.getHours() < 12 ? 'AM' : 'PM',
+  hour: (now.getHours() % 12 || 12).toString(),
+  minute: (Math.ceil(now.getMinutes() / 5) * 5).toString(),
+};
 
 export default function SetDate() {
-  const [pickerValue, setPickerValue] = useState({
-    meridiem: today.getHours() < 12 ? 'AM' : 'PM',
-    hour: (today.getHours() % 12 || 12).toString(),
-    minute: (Math.ceil(today.getMinutes() / 5) * 5).toString(),
-  });
+  const [pickerValue, setPickerValue] = useState(initialState);
 
-  const [date, setDate] = useState(parseAbsoluteToLocal(today.toISOString()));
+  const [date, setDate] = useState(parseAbsoluteToLocal(now.toISOString()));
 
   return (
     <Container>

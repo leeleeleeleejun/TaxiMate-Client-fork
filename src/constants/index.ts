@@ -73,6 +73,5 @@ export const selections: Record<SelectionKey, string[]> = {
     '45',
     '50',
     '55',
-    '60',
   ],
 };
