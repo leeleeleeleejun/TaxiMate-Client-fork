@@ -12,7 +12,6 @@ import {
 } from '@/components/CreatePost/createPost.style.ts';
 
 import NextRadio from '@/components/CreatePost/Radio.tsx';
-import { LocationInfo } from '@/components/common/LocationInfo';
 
 import TitleIcon from '@/assets/icons/createPost/title-icon.svg?react';
 import ClockIcon from '@/assets/icons/createPost/clock-icon.svg?react';
@@ -27,6 +26,7 @@ import {
   setTitle,
 } from '@/components/CreatePost/CreatePostSlice.ts';
 import reformatDate from '@/utils/reformatDate.ts';
+import LocationInfo from '@/components/common/LocationInfo';
 
 const CreatePost = () => {
   const dispatch = useDispatch();
@@ -77,15 +77,15 @@ const CreatePost = () => {
         <Link to={'/create-post/set-origin'}>
           <LocationInfo
             keyWord={'출발지'}
-            title={'공주대학교'}
-            subTitle={'충남 천안시 서북구 천안대로 1223-24'}
+            place={'공주대학교'}
+            address={'충남 천안시 서북구 천안대로 1223-24'}
             inCreate={true}
           />
         </Link>
         <LocationInfo
           keyWord={'도착지'}
-          title={'공주대학교'}
-          subTitle={'충남 천안시 서북구 천안대로 1223-24'}
+          place={'공주대학교'}
+          address={'충남 천안시 서북구 천안대로 1223-24'}
           inCreate={true}
         />
       </ContentWrap>

@@ -5,15 +5,15 @@ import {
 } from '@/components/common/LocationInfo/LocationInfo.style.ts';
 import ArrowRightIcon from '@/assets/icons/arrow-right-icon.svg?react';
 
-export const LocationInfo = ({
+const LocationInfo = ({
   keyWord,
-  title,
-  subTitle,
+  place,
+  address,
   inCreate,
 }: {
   keyWord: string;
-  title: string;
-  subTitle: string;
+  place: string;
+  address: string;
   inCreate?: boolean;
 }) => {
   return (
@@ -21,11 +21,13 @@ export const LocationInfo = ({
       <LocationInfoHeader>
         <div>
           <span>{keyWord}</span>
-          {title}
+          {place}
         </div>
         {inCreate && <ArrowRightIcon />}
       </LocationInfoHeader>
-      <LocationInfoBody>{subTitle}</LocationInfoBody>
+      <LocationInfoBody>{address}</LocationInfoBody>
     </LocationInfoContainer>
   );
 };
+
+export default LocationInfo;
