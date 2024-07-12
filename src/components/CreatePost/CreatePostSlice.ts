@@ -1,8 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const today = new Date();
+const minutes = today.getMinutes();
+
+const ceilMinutes = Math.ceil(minutes / 5) * 5;
+const departureTime = new Date(today.setMinutes(ceilMinutes)).toISOString();
+
 const initialState = {
   title: '',
-  departureTime: '',
+  departureTime,
   explanation: '',
   originLocation: {
     latitude: 36.3418454,

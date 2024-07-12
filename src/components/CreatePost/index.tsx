@@ -26,6 +26,7 @@ import {
   setExplanation,
   setTitle,
 } from '@/components/CreatePost/CreatePostSlice.ts';
+import setDate from '@/utils/setDate.ts';
 
 const CreatePost = () => {
   const dispatch = useDispatch();
@@ -46,6 +47,10 @@ const CreatePost = () => {
     dispatch(setExplanation(e.target.value));
   };
 
+  const departureTimeValue = useSelector(
+    (state: RootState) => state.createPostSlice.departureTime
+  );
+
   return (
     <Container>
       <ContentWrap
@@ -63,7 +68,7 @@ const CreatePost = () => {
         <DepartureTimeContainer to={'/create-post/set-date'}>
           <div>
             <CalendarIcon />
-            2024년 7월 3일(월) 오후 9:20 쯤
+            {setDate(departureTimeValue)}
           </div>
           <ArrowRightIcon />
         </DepartureTimeContainer>
