@@ -18,7 +18,7 @@ const initialState = {
     latitude: 36.3418454,
     longitude: 127.5272031,
   },
-  maxParticipants: 4,
+  maxParticipants: '4',
 };
 
 export const createPostSlice = createSlice({

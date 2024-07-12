@@ -11,7 +11,7 @@ import {
   TitleInput,
 } from '@/components/CreatePost/createPost.style.ts';
 
-import NextRadio from '@/components/common/Radio.tsx';
+import NextRadio from '@/components/CreatePost/Radio.tsx';
 import { LocationInfo } from '@/components/common/LocationInfo';
 
 import TitleIcon from '@/assets/icons/createPost/title-icon.svg?react';
