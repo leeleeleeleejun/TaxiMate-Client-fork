@@ -1,3 +1,7 @@
+import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { RootState } from '@/store';
+
 import {
   Container,
   ContentContainer,
@@ -17,9 +21,31 @@ import MemberIcon from '@/assets/icons/createPost/member-icon.svg?react';
 import ExplainIcon from '@/assets/icons/createPost/explain-icon .svg?react';
 import CalendarIcon from '@/assets/icons/createPost/calendar-icon.svg?react';
 import ArrowRightIcon from '@/assets/icons/arrow-right-icon.svg?react';
-import { Link } from 'react-router-dom';
+
+import {
+  setExplanation,
+  setTitle,
+} from '@/components/CreatePost/CreatePostSlice.ts';
 
 const CreatePost = () => {
+  const dispatch = useDispatch();
+
+  const titleValue = useSelector(
+    (state: RootState) => state.createPostSlice.title
+  );
+
+  const setTitleValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setTitle(e.target.value));
+  };
+
+  const explanationValue = useSelector(
+    (state: RootState) => state.createPostSlice.explanation
+  );
+
+  const setExplanationValue = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    dispatch(setExplanation(e.target.value));
+  };
+
   return (
     <Container>
       <ContentWrap
@@ -27,7 +53,11 @@ const CreatePost = () => {
         explain={'팟을 한 줄로 표현해주세요!'}
         SvgIcon={TitleIcon}
       >
-        <TitleInput placeholder={'오후 1시 반쯤 학교에서 역으로'} />
+        <TitleInput
+          value={titleValue}
+          onChange={setTitleValue}
+          placeholder={'오후 1시 반쯤 학교에서 역으로'}
+        />
       </ContentWrap>
       <ContentWrap theme={'출발 시간'} SvgIcon={ClockIcon}>
         <DepartureTimeContainer to={'/create-post/set-date'}>
@@ -62,7 +92,11 @@ const CreatePost = () => {
         explain={'동승자들에게 하고 싶은 말을 자유롭게 작성하세요!'}
         SvgIcon={ExplainIcon}
       >
-        <TextArea placeholder={'~~ 해주세요'} />
+        <TextArea
+          value={explanationValue}
+          placeholder={'~~ 해주세요'}
+          onChange={setExplanationValue}
+        />
       </ContentWrap>
     </Container>
   );
