@@ -3,7 +3,7 @@ import CreatePostChilePageLayout from '@/components/common/Layout/CreatePostChil
 import { DateStringContainer } from '@/components/CreatePost/SetDate/SetDate.style.ts';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
-import setDate from '@/utils/setDate.ts';
+import reformatDate from '@/utils/reformatDate.ts';
 
 const SetDatePage = () => {
   const departureTimeValue = useSelector(
@@ -12,7 +12,9 @@ const SetDatePage = () => {
 
   return (
     <CreatePostChilePageLayout subTitle={'언제 출발하나요?'}>
-      <DateStringContainer>{setDate(departureTimeValue)}</DateStringContainer>
+      <DateStringContainer>
+        {reformatDate(departureTimeValue)}
+      </DateStringContainer>
       <SetDate />
     </CreatePostChilePageLayout>
   );

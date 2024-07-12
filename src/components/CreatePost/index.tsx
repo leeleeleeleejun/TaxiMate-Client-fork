@@ -26,7 +26,7 @@ import {
   setExplanation,
   setTitle,
 } from '@/components/CreatePost/CreatePostSlice.ts';
-import setDate from '@/utils/setDate.ts';
+import reformatDate from '@/utils/reformatDate.ts';
 
 const CreatePost = () => {
   const dispatch = useDispatch();
@@ -68,7 +68,7 @@ const CreatePost = () => {
         <DepartureTimeContainer to={'/create-post/set-date'}>
           <div>
             <CalendarIcon />
-            {setDate(departureTimeValue)}
+            {reformatDate(departureTimeValue)}
           </div>
           <ArrowRightIcon />
         </DepartureTimeContainer>
