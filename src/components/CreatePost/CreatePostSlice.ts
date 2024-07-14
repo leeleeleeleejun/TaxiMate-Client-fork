@@ -11,12 +11,12 @@ const initialState = {
   departureTime,
   explanation: '',
   originLocation: {
-    latitude: 36.3418454,
-    longitude: 127.5272031,
+    lat: 36.3418454,
+    lng: 127.5272031,
   },
   destinationLocation: {
-    latitude: 36.3418454,
-    longitude: 127.5272031,
+    lat: 36.3418454,
+    lng: 127.5272031,
   },
   maxParticipants: '4',
 };

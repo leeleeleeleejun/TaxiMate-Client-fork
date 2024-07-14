@@ -1,4 +1,9 @@
+import { useSelector } from 'react-redux';
 import { Container as MapDiv, NaverMap } from 'react-naver-maps';
+
+import { RootState } from '@/store';
+import useLocationPathPlace from '@/hooks/useLocationPathPlace.ts';
+
 import {
   Main,
   MarkerContainer,
@@ -16,11 +21,28 @@ const Marker = ({ content }: { content: string }) => {
 };
 
 const Map = () => {
+  const path = useLocationPathPlace();
+
+  const content = path ? '출발' : '도착';
+
+  const originLocationValue = useSelector(
+    (state: RootState) => state.createPostSlice.originLocation
+  );
+
+  const destinationLocation = useSelector(
+    (state: RootState) => state.createPostSlice.destinationLocation
+  );
+
   return (
     <Main>
-      <Marker content={'출발'} />
+      <Marker content={content} />
       <MapDiv className={'map-wrapper'}>
-        <NaverMap defaultZoom={15} minZoom={15} logoControl={false}></NaverMap>
+        <NaverMap
+          defaultCenter={path ? originLocationValue : destinationLocation}
+          defaultZoom={15}
+          minZoom={15}
+          logoControl={false}
+        ></NaverMap>
       </MapDiv>
     </Main>
   );

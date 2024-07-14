@@ -82,12 +82,14 @@ const CreatePost = () => {
             inCreate={true}
           />
         </Link>
-        <LocationInfo
-          keyWord={'도착지'}
-          place={'공주대학교'}
-          address={'충남 천안시 서북구 천안대로 1223-24'}
-          inCreate={true}
-        />
+        <Link to={'/create-post/set-destination'}>
+          <LocationInfo
+            keyWord={'도착지'}
+            place={'공주대학교'}
+            address={'충남 천안시 서북구 천안대로 1223-24'}
+            inCreate={true}
+          />
+        </Link>
       </ContentWrap>
       <ContentWrap theme={'탑승인원'} SvgIcon={MemberIcon}>
         <NextRadio />

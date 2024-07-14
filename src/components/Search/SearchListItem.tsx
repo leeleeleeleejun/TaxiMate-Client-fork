@@ -4,19 +4,27 @@ import {
 } from '@/components/Search/Search.style.ts';
 import LocationDotIcon from '@/assets/icons/postList/location-dot-icon.svg?react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import {
+  setDestinationLocation,
+  setOriginLocation,
+} from '@/components/CreatePost/CreatePostSlice.ts';
 
 const useOnClickFunc = (lat: string, lng: string) => {
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   return () => {
     if (location.pathname === '/search') {
       localStorage.setItem('Location', JSON.stringify({ lat, lng }));
       navigate('/');
-    } else {
+    } else if (location.pathname === '/create-post/set-origin/search') {
+      dispatch(setOriginLocation({ lat, lng }));
       navigate('/create-post/set-origin/map');
-
-      console.log(lat, lng);
+    } else {
+      dispatch(setDestinationLocation({ lat, lng }));
+      navigate('/create-post/set-destination/map');
     }
   };
 };
