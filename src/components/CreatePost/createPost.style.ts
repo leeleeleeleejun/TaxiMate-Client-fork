@@ -103,9 +103,7 @@ export const TextArea = styled.textarea`
   }
 `;
 
-export const SubmitButton = styled(Link)`
-  display: block;
-
+export const SubmitButton = styled.button`
   width: 100%;
   padding: 12px;
 

@@ -21,11 +21,11 @@ const LocationInfo = ({
       <LocationInfoHeader>
         <div>
           <span>{keyWord}</span>
-          {place}
+          {place || address}
         </div>
         {inCreate && <ArrowRightIcon />}
       </LocationInfoHeader>
-      <LocationInfoBody>{address}</LocationInfoBody>
+      {<LocationInfoBody>{place && address}</LocationInfoBody>}
     </LocationInfoContainer>
   );
 };

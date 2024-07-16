@@ -14,7 +14,7 @@ const CreatePostPage = () => {
   return (
     <>
       <Header paddingY={10} paddingX={10}>
-        <BackButton onClick={() => navigate(-1)}>
+        <BackButton onClick={() => navigate('/')}>
           <ArrowLeftIcon />
         </BackButton>
         <HeaderItem>팟 생성</HeaderItem>

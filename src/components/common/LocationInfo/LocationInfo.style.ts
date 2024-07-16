@@ -20,6 +20,7 @@ export const LocationInfoHeader = styled.h3`
 `;
 
 export const LocationInfoBody = styled.div`
+  height: 14px;
   margin-left: 50px;
 
   font-size: var(--font-small);

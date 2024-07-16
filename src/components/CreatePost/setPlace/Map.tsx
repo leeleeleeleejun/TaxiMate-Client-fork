@@ -1,13 +1,49 @@
-import { useSelector } from 'react-redux';
 import { Container as MapDiv, NaverMap } from 'react-naver-maps';
-
-import { RootState } from '@/store';
-import useLocationPathPlace from '@/hooks/useLocationPathPlace.ts';
 
 import {
   Main,
   MarkerContainer,
 } from '@/components/CreatePost/setPlace/setPlace.style.ts';
+
+const Map = ({
+  map,
+  setMap,
+  setLocationInfo,
+  defaultCenter,
+  path,
+}: {
+  map: naver.maps.Map | null;
+  setMap: React.Dispatch<React.SetStateAction<naver.maps.Map | null>>;
+  setLocationInfo: (lng: number, lat: number) => void;
+  defaultCenter: { lat: number; lng: number };
+  path: boolean;
+}) => {
+  const content = path ? '출발' : '도착';
+
+  const onCenterChangedFunc = async () => {
+    if (!map) return;
+    // 현재 위치 참조
+    const { x, y } = map.getCenter();
+    setLocationInfo(x, y);
+  };
+
+  return (
+    <Main>
+      <Marker content={content} />
+      <MapDiv className={'map-wrapper'} onTouchEnd={onCenterChangedFunc}>
+        <NaverMap
+          ref={setMap}
+          defaultCenter={defaultCenter}
+          defaultZoom={15}
+          minZoom={15}
+          logoControl={false}
+        ></NaverMap>
+      </MapDiv>
+    </Main>
+  );
+};
+
+export default Map;
 
 const Marker = ({ content }: { content: string }) => {
   return (
@@ -19,33 +55,3 @@ const Marker = ({ content }: { content: string }) => {
     </MarkerContainer>
   );
 };
-
-const Map = () => {
-  const path = useLocationPathPlace();
-
-  const content = path ? '출발' : '도착';
-
-  const originLocationValue = useSelector(
-    (state: RootState) => state.createPostSlice.originLocation
-  );
-
-  const destinationLocation = useSelector(
-    (state: RootState) => state.createPostSlice.destinationLocation
-  );
-
-  return (
-    <Main>
-      <Marker content={content} />
-      <MapDiv className={'map-wrapper'}>
-        <NaverMap
-          defaultCenter={path ? originLocationValue : destinationLocation}
-          defaultZoom={15}
-          minZoom={15}
-          logoControl={false}
-        ></NaverMap>
-      </MapDiv>
-    </Main>
-  );
-};
-
-export default Map;
