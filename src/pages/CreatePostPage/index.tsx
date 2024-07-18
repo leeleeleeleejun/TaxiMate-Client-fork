@@ -5,34 +5,14 @@ import SetPlacePage from '@/pages/CreatePostPage/SetPlacePage.tsx';
 import SetPlaceMapPage from '@/pages/CreatePostPage/SetPlaceMapPage.tsx';
 import { registerDataKeys, stepType } from '@/types';
 
-const today = new Date();
-const minutes = today.getMinutes();
-
-const ceilMinutes = Math.ceil(minutes / 5) * 5;
-const departureTime = new Date(today.setMinutes(ceilMinutes)).toISOString();
-const initialState = {
-  title: '',
-  departureTime,
-  explanation: '',
-  originLocation: {
-    lat: 36.3418454,
-    lng: 127.5272031,
-  },
-  destinationLocation: {
-    lat: 36.3418454,
-    lng: 127.5272031,
-  },
-  maxParticipants: '4',
-};
-
 const CreatePostPage = () => {
   const [step, setStep] = useState<stepType>('main');
 
   const [registerData, setRegisterData] = useState(initialState);
 
-  // const comeBackMain = () => {
-  //   setStep('main');
-  // };
+  const comeBackMain = () => {
+    setStep('main');
+  };
 
   const setRegisterDataFunc = (
     name: registerDataKeys,
@@ -51,7 +31,11 @@ const CreatePostPage = () => {
         />
       </Step>
       <Step check={step === 'time'}>
-        <SetDatePage />
+        <SetDatePage
+          value={registerData.departureTime}
+          setRegisterDataFunc={setRegisterDataFunc}
+          comeBackMain={comeBackMain}
+        />
       </Step>
       <Step check={step === 'origin' || step === 'destination'}>
         <SetPlacePage />
@@ -71,4 +55,24 @@ const Step = ({ check, children }: { check: boolean; children: ReactNode }) => {
   }
 
   return null;
+};
+
+const today = new Date();
+const minutes = today.getMinutes();
+
+const ceilMinutes = Math.ceil(minutes / 5) * 5;
+const departureTime = new Date(today.setMinutes(ceilMinutes)).toISOString();
+const initialState = {
+  title: '',
+  departureTime,
+  explanation: '',
+  originLocation: {
+    lat: 36.3418454,
+    lng: 127.5272031,
+  },
+  destinationLocation: {
+    lat: 36.3418454,
+    lng: 127.5272031,
+  },
+  maxParticipants: '4',
 };
