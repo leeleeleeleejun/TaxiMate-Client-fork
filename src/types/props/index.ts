@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { registerDataKeys, registerDataType, stepType } from '@/types';
 
 export interface NavItemContainerProps {
   children: ReactNode;
@@ -43,4 +44,22 @@ export interface MarkerContainerProps {
   anchor: number[];
 
   showPlace: boolean;
+}
+
+export interface registerProps {
+  registerData: registerDataType;
+  setRegisterDataFunc: (
+    name: registerDataKeys,
+    data: string | { lat: number; lng: number }
+  ) => void;
+  setStep: React.Dispatch<React.SetStateAction<stepType>>;
+}
+
+export interface contentWrapType {
+  value: string;
+  setRegisterDataFunc?: (
+    name: registerDataKeys,
+    data: string | { lat: number; lng: number }
+  ) => void;
+  setStep?: React.Dispatch<React.SetStateAction<stepType>>;
 }

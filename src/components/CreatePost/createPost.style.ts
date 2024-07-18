@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
   height: 100%;
@@ -18,6 +17,11 @@ export const CreateSubmitButton = styled.button`
 
 export const ContentContainer = styled.div`
   padding: 15px 0;
+
+  & > button {
+    width: 100%;
+    text-align: left;
+  }
 `;
 
 export const ContentTitle = styled.h2`
@@ -67,7 +71,7 @@ export const TitleInput = styled.input`
   }
 `;
 
-export const DepartureTimeContainer = styled(Link)`
+export const DepartureTimeContainer = styled.button`
   display: flex;
   justify-content: space-between;
 
