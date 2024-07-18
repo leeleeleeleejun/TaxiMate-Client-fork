@@ -2,11 +2,11 @@ import { useNavigate } from 'react-router-dom';
 import { registerProps } from '@/types/props';
 
 import Header from '@/components/common/Layout/Header';
-import TitleWrap from '@/components/CreatePost/SetDate/main/TitleWrap.tsx';
-import DateWrap from '@/components/CreatePost/SetDate/main/DateWrap.tsx';
-import PlaceInfoWrap from '@/components/CreatePost/SetDate/main/PlaceInfoWrap.tsx';
-import MemberWrap from '@/components/CreatePost/SetDate/main/MemberWrap.tsx';
-import ExplanationWrap from '@/components/CreatePost/SetDate/main/ExplanationWrap.tsx';
+import TitleWrap from '@/components/CreatePost/main/TitleWrap.tsx';
+import DateWrap from '@/components/CreatePost/main/DateWrap.tsx';
+import PlaceInfoWrap from '@/components/CreatePost/main/PlaceInfoWrap.tsx';
+import MemberWrap from '@/components/CreatePost/main/MemberWrap.tsx';
+import ExplanationWrap from '@/components/CreatePost/main/ExplanationWrap.tsx';
 import { HeaderItem } from '@/components/common/Layout/Header/Header.style.ts';
 import { BackButton } from '@/components/Search/Search.style.ts';
 import {
