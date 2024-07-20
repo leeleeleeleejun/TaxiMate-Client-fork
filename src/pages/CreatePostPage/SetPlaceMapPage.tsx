@@ -13,6 +13,7 @@ const SetPlaceMapPage = ({
   value,
   comeBackMain,
   setRegisterDataFunc,
+  backHandle,
 }: setPlaceMapPageProps) => {
   const [map, setMap] = useState<naver.maps.Map | null>(null);
   const [address, setAddress] = useState('');
@@ -45,7 +46,7 @@ const SetPlaceMapPage = ({
   }, []);
 
   return (
-    <CreatePostChilePageLayout>
+    <CreatePostChilePageLayout backHandle={backHandle}>
       <Map
         map={map}
         setMap={setMap}

@@ -37,6 +37,7 @@ const Map = ({
           defaultZoom={15}
           minZoom={15}
           logoControl={false}
+          onZoomChanged={onCenterChangedFunc}
         ></NaverMap>
       </MapDiv>
     </Main>

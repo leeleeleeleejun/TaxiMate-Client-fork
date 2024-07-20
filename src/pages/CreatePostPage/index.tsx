@@ -40,7 +40,11 @@ const CreatePostPage = () => {
         />
       </Step>
       <Step check={step === 'origin' || step === 'destination'}>
-        <SetPlacePage step={step} setStep={setStep} />
+        <SetPlacePage
+          step={step}
+          setStep={setStep}
+          comeBackMain={comeBackMain}
+        />
       </Step>
       <Step check={step === 'searchOrigin' || step === 'searchDestination'}>
         <SearchPage
@@ -59,6 +63,13 @@ const CreatePostPage = () => {
           }
           setRegisterDataFunc={setRegisterDataFunc}
           comeBackMain={comeBackMain}
+          backHandle={() => {
+            if (step === 'originMap') {
+              setStep('searchOrigin');
+            } else {
+              setStep('searchDestination');
+            }
+          }}
         />
       </Step>
     </>
@@ -86,12 +97,12 @@ const initialState = {
   departureTime,
   explanation: '',
   origin: {
-    lat: 36.3418454,
-    lng: 127.5272031,
+    lat: 36.4689627,
+    lng: 127.1408071,
   },
   destination: {
-    lat: 36.3418454,
-    lng: 127.5272031,
+    lat: 36.8511811,
+    lng: 127.1511352,
   },
   maxParticipants: '4',
 };

@@ -58,7 +58,10 @@ const SetDatePage = ({
   };
 
   return (
-    <CreatePostChilePageLayout subTitle={'언제 출발하나요?'}>
+    <CreatePostChilePageLayout
+      subTitle={'언제 출발하나요?'}
+      backHandle={comeBackMain}
+    >
       <Container>
         <DateStringContainer>{reformatDate(newDate)}</DateStringContainer>
         <DatePickerWrap date={date} setDate={setDate} />

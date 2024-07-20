@@ -6,9 +6,11 @@ import SearchBar from '@/components/CreatePost/setPlace/SearchBar.tsx';
 const SetPlacePage = ({
   step,
   setStep,
+  comeBackMain,
 }: {
   step: stepType;
   setStep: setStep;
+  comeBackMain: () => void;
 }) => {
   const path = step === 'origin';
 
@@ -19,7 +21,7 @@ const SetPlacePage = ({
   };
 
   return (
-    <CreatePostChilePageLayout subTitle={subTitle}>
+    <CreatePostChilePageLayout subTitle={subTitle} backHandle={comeBackMain}>
       <SearchBar setStepFunc={setStepFunc} />
     </CreatePostChilePageLayout>
   );

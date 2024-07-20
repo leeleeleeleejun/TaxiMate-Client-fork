@@ -74,4 +74,5 @@ export interface setPlaceMapPageProps {
   value: { lat: number; lng: number };
   comeBackMain: () => void;
   setRegisterDataFunc: setRegisterDataFunc;
+  backHandle: () => void;
 }
