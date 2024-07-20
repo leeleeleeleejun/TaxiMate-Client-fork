@@ -8,6 +8,8 @@ export const SearchBarWrapper = styled(Link)`
   left: 5%;
   right: 5%;
 
+  box-shadow: 0 0 6px 2px var(--color-shadow);
+
   height: 46px;
   padding: 14px;
   box-sizing: border-box;
@@ -20,7 +22,7 @@ export const SearchBarWrapper = styled(Link)`
   border-radius: 8px;
 `;
 
-export const SearchBarContainer = styled.button`
+export const SearchBarContainer = styled.div`
   width: 90%;
   font-size: var(--font-small);
 

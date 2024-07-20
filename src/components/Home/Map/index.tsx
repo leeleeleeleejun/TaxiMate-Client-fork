@@ -45,7 +45,7 @@ const Map = () => {
 
   return (
     <Main>
-      <SearchBar />
+      <SearchBar path={'/search'} />
       <ResearchButton />
       <MoveCurrentLocation map={map} activeButton={activeButton} />
       <MapDiv

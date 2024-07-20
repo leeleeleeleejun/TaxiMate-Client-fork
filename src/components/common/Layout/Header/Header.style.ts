@@ -13,3 +13,12 @@ export const Container = styled.header<{
   justify-content: space-between;
   align-items: center;
 `;
+
+export const HeaderItem = styled.h1`
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  font-size: var(--font-medium);
+  font-weight: var(--weight-semi-bold);
+`;

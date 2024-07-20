@@ -3,30 +3,20 @@ import {
   SearchListItemContainer,
 } from '@/components/Search/Search.style.ts';
 import LocationDotIcon from '@/assets/icons/postList/location-dot-icon.svg?react';
-import { useNavigate } from 'react-router-dom';
 
 const SearchListItem = ({
   inputValue,
   title,
   address,
-  lat,
-  lng,
+  handleClick,
 }: {
   inputValue: string;
   title: string;
   address: string;
-  lat: string;
-  lng: string;
+  handleClick: () => void;
 }) => {
-  const navigate = useNavigate();
-
   return (
-    <SearchListItemContainer
-      onClick={() => {
-        localStorage.setItem('Location', JSON.stringify({ lat, lng }));
-        navigate('/');
-      }}
-    >
+    <SearchListItemContainer onClick={handleClick}>
       <div>
         <LocationDotIcon />
         <SetTitle title={title} inputValue={inputValue} />

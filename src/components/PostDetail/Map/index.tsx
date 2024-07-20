@@ -27,6 +27,7 @@ const Map = () => {
       >
         {markerPlaces.map((item, index) => (
           <MarkerContainer
+            key={index === 0 ? 'origin' : 'destination'}
             id={index === 0 ? 'origin' : 'destination'}
             position={{ longitude: item.x, latitude: item.y }}
             title={index === 0 ? '출발' : '도착'}

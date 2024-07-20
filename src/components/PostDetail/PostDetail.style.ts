@@ -3,9 +3,11 @@ import MarkerContainerStyle from '@/components/common/MarkerContainer/MarkerCont
 
 export const PostDetailContainer = styled.div`
   height: 100%;
+  overflow: auto;
 
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
 
   .map-wrapper {
     width: 100%;
@@ -41,30 +43,6 @@ export const PostDetailTitleContainer = styled.div`
 
     margin-bottom: 5px;
   }
-`;
-
-export const LocationInfoContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-`;
-
-export const LocationInfoHeader = styled.h3`
-  font-weight: var(--weight-semi-bold);
-  padding-bottom: 5px;
-
-  span {
-    color: var(--color-gray-200);
-    margin-right: 8px;
-  }
-`;
-
-export const LocationInfoBody = styled.div`
-  margin-left: 50px;
-
-  font-size: var(--font-small);
-  font-weight: var(--weight-light);
-  color: var(--color-gray-200);
 `;
 
 export const ContentContainer = styled.div`

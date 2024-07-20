@@ -20,7 +20,7 @@ const Footer = () => {
         <NavItemContainer contentName={'채팅'} path={'/'}>
           <ChattingIcon />
         </NavItemContainer>
-        <NavItemContainer path={'/'}>
+        <NavItemContainer path={'/create-post'}>
           <CreateButtonIcon />
         </NavItemContainer>
         <NavItemContainer contentName={'이용내역'} path={'/'}>

@@ -1,4 +1,4 @@
-const setDate = (timestamp: string): string => {
+const reformatDate = (timestamp: string): string => {
   const date = new Date(timestamp);
   const today = new Date();
   const tomorrow = new Date(today);
@@ -29,7 +29,7 @@ const setDate = (timestamp: string): string => {
   const day = date.getDate().toString().padStart(2, '0');
   const dayOfWeek = daysOfWeek[date.getDay()];
 
-  return `${month}월 ${day}일(${dayOfWeek}) ${formatTime(date)}`;
+  return `${month}월 ${day}일(${dayOfWeek}) ${formatTime(date)} 쯤`;
 };
 
-export default setDate;
+export default reformatDate;
