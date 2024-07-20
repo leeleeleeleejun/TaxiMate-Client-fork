@@ -1,6 +1,4 @@
-import { stepType, setStep } from '@/types';
-
-import { setRegisterDataFunc } from '@/types/index.ts';
+import { setPlaceProps } from '@/types/props';
 import getCurrentLocation from '@/utils/getCurrentlocation.ts';
 
 import CreatePostChilePageLayout from '@/components/common/Layout/CreatePostChildPageLayout';
@@ -13,12 +11,7 @@ const SetPlacePage = ({
   setStep,
   setRegisterDataFunc,
   comeBackMain,
-}: {
-  step: stepType;
-  setStep: setStep;
-  setRegisterDataFunc: setRegisterDataFunc;
-  comeBackMain: () => void;
-}) => {
+}: setPlaceProps) => {
   const path = step === 'origin';
 
   const subTitle = (path ? '어디에서 출발' : '어디로 도착') + '하나요?';

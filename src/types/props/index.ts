@@ -76,3 +76,16 @@ export interface setPlaceMapPageProps {
   setRegisterDataFunc: setRegisterDataFunc;
   backHandle: () => void;
 }
+
+export interface setDatePageProps {
+  value: string;
+  setRegisterDataFunc: setRegisterDataFunc;
+  comeBackMain: () => void;
+}
+
+export interface setPlaceProps {
+  step: stepType;
+  setStep: setStep;
+  setRegisterDataFunc: setRegisterDataFunc;
+  comeBackMain: () => void;
+}

@@ -23,6 +23,14 @@ const CreatePostPage = () => {
     setRegisterData((prev) => ({ ...prev, [name]: data }));
   };
 
+  const setPlaceMapPageBackHandle = () => {
+    if (step === 'originMap') {
+      setStep('origin');
+    } else {
+      setStep('destination');
+    }
+  };
+
   return (
     <>
       <Step check={step === 'main'}>
@@ -64,13 +72,7 @@ const CreatePostPage = () => {
           }
           setRegisterDataFunc={setRegisterDataFunc}
           comeBackMain={comeBackMain}
-          backHandle={() => {
-            if (step === 'originMap') {
-              setStep('origin');
-            } else {
-              setStep('destination');
-            }
-          }}
+          backHandle={setPlaceMapPageBackHandle}
         />
       </Step>
     </>

@@ -1,31 +1,24 @@
 import { useState } from 'react';
 import { parseAbsoluteToLocal } from '@internationalized/date';
 
-import { registerDataKeys } from '@/types';
+import { setDatePageProps } from '@/types/props';
 import reformatDate from '@/utils/reformatDate.ts';
 import setDepartureTimeValueFunc from '@/utils/setDepartureTimeValueFunc.ts';
 
 import CreatePostChilePageLayout from '@/components/common/Layout/CreatePostChildPageLayout';
-import DatePickerWrap from '@/components/CreatePost/SetDate/DatePickerWrap.tsx';
-import TimePickerWrap from '@/components/CreatePost/SetDate/TimePickerWrap.tsx';
+import DatePickerWrap from '@/components/CreatePost/setDate/DatePickerWrap.tsx';
+import TimePickerWrap from '@/components/CreatePost/setDate/TimePickerWrap.tsx';
 import {
   Container,
   DateStringContainer,
-} from '@/components/CreatePost/SetDate/SetDate.style.ts';
+} from '@/components/CreatePost/setDate/SetDate.style.ts';
 import { SubmitButton } from '@/components/CreatePost/createPost.style.ts';
 
 const SetDatePage = ({
   value,
   setRegisterDataFunc,
   comeBackMain,
-}: {
-  value: string;
-  setRegisterDataFunc: (
-    name: registerDataKeys,
-    data: string | { lat: number; lng: number }
-  ) => void;
-  comeBackMain: () => void;
-}) => {
+}: setDatePageProps) => {
   const dateDepartureTimeValue = new Date(value);
 
   const timeInitialState = {

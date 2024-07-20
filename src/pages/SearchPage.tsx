@@ -1,16 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useSearchData from '@/hooks/useSearchData.ts';
 import { registerDataKeys } from '@/types';
 import { searchPageProps } from '@/types/props';
 
 import Header from '@/components/common/Layout/Header';
-import SearchListItem from '@/components/Search/SearchListItem.tsx';
-import {
-  BackButton,
-  SearchInput,
-  SearchList,
-} from '@/components/Search/Search.style.ts';
+import SearchList from '@/components/Search/SearchList.tsx';
+import { BackButton, SearchInput } from '@/components/Search/Search.style.ts';
 import ArrowLeftIcon from '@/assets/icons/arrow-left-icon.svg?react';
 
 const SearchPage = ({
@@ -19,7 +14,6 @@ const SearchPage = ({
   setRegisterDataFunc,
 }: searchPageProps) => {
   const navigate = useNavigate();
-  const { searchListsData, searchFunc } = useSearchData();
   const [inputValue, setInputValue] = useState<string>('');
   const inputEl = useRef<HTMLInputElement>(null);
 
@@ -27,24 +21,25 @@ const SearchPage = ({
     inputEl.current?.focus();
   }, []);
 
-  const handleClick = (lat: number, lng: number) => {
+  const listClickHandler = (lat: number, lng: number) => {
     if (step && setStep && setRegisterDataFunc) {
-      const target: registerDataKeys =
-        step === 'searchOrigin' ? 'origin' : 'destination';
+      // 팟생성에서 검색 시 사용
       const nextStep = step === 'searchOrigin' ? 'originMap' : 'destinationMap';
 
-      setRegisterDataFunc(target, {
-        lat,
-        lng,
-      });
+      const registerKey: registerDataKeys =
+        step === 'searchOrigin' ? 'origin' : 'destination';
+
+      setRegisterDataFunc(registerKey, { lat, lng });
+
       setStep(nextStep);
     } else {
+      //메인홈에서 검색 시 사용
       localStorage.setItem('Location', JSON.stringify({ lat, lng }));
       navigate('/');
     }
   };
 
-  const handleBackButtonClick = () => {
+  const backButtonClickHandler = () => {
     if (step && setStep) {
       step === 'searchOrigin' ? setStep('origin') : setStep('destination');
     } else {
@@ -52,39 +47,24 @@ const SearchPage = ({
     }
   };
 
+  const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+  };
+
   return (
     <>
       <Header paddingY={10} paddingX={10}>
-        <BackButton onClick={handleBackButtonClick}>
+        <BackButton onClick={backButtonClickHandler}>
           <ArrowLeftIcon />
         </BackButton>
         <SearchInput
           ref={inputEl}
           placeholder='장소 또는 주소를 검색하세요'
-          onChange={(e) => {
-            setInputValue(e.target.value);
-
-            if (e.target.value.length > 0) {
-              searchFunc(e.target.value);
-            }
-          }}
+          onChange={inputChangeHandler}
           value={inputValue}
         />
       </Header>
-      <SearchList>
-        {inputValue &&
-          searchListsData.map((item) => (
-            <SearchListItem
-              key={item.id}
-              inputValue={inputValue}
-              title={item.title}
-              address={item.roadAddress || item.jibunAddress}
-              handleClick={() => {
-                handleClick(Number(item.y), Number(item.x));
-              }}
-            />
-          ))}
-      </SearchList>
+      <SearchList value={inputValue} listClickHandler={listClickHandler} />
     </>
   );
 };
