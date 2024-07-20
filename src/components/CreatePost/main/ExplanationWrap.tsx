@@ -5,6 +5,7 @@ import { contentWrapType } from '@/types/props';
 
 const ExplanationWrap = ({ value, setRegisterDataFunc }: contentWrapType) => {
   if (!setRegisterDataFunc) return null;
+  if (typeof value !== 'string') return null;
 
   const setExplanationValue = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setRegisterDataFunc('explanation', e.target.value);

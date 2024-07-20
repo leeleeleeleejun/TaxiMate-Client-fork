@@ -5,6 +5,7 @@ import { contentWrapType } from '@/types/props';
 
 const TitleWrap = ({ value, setRegisterDataFunc }: contentWrapType) => {
   if (!setRegisterDataFunc) return null;
+  if (typeof value !== 'string') return null;
 
   const setTitleValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setRegisterDataFunc('title', e.target.value);

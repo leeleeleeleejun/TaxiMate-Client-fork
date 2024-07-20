@@ -1,9 +1,11 @@
 import { ReactNode, useState } from 'react';
+import { registerDataKeys, stepType } from '@/types';
+
 import CreateMainPage from '@/pages/CreatePostPage/CreateMainPage.tsx';
 import SetDatePage from '@/pages/CreatePostPage/SetDatePage.tsx';
 import SetPlacePage from '@/pages/CreatePostPage/SetPlacePage.tsx';
 import SetPlaceMapPage from '@/pages/CreatePostPage/SetPlaceMapPage.tsx';
-import { registerDataKeys, stepType } from '@/types';
+import SearchPage from '@/pages/SearchPage.tsx';
 
 const CreatePostPage = () => {
   const [step, setStep] = useState<stepType>('main');
@@ -38,10 +40,26 @@ const CreatePostPage = () => {
         />
       </Step>
       <Step check={step === 'origin' || step === 'destination'}>
-        <SetPlacePage />
+        <SetPlacePage step={step} setStep={setStep} />
+      </Step>
+      <Step check={step === 'searchOrigin' || step === 'searchDestination'}>
+        <SearchPage
+          step={step}
+          setStep={setStep}
+          setRegisterDataFunc={setRegisterDataFunc}
+        />
       </Step>
       <Step check={step === 'originMap' || step === 'destinationMap'}>
-        <SetPlaceMapPage />
+        <SetPlaceMapPage
+          step={step}
+          value={
+            step === 'originMap'
+              ? registerData.origin
+              : registerData.destination
+          }
+          setRegisterDataFunc={setRegisterDataFunc}
+          comeBackMain={comeBackMain}
+        />
       </Step>
     </>
   );
@@ -57,6 +75,7 @@ const Step = ({ check, children }: { check: boolean; children: ReactNode }) => {
   return null;
 };
 
+// registerData 초기상태 데이터
 const today = new Date();
 const minutes = today.getMinutes();
 
@@ -66,11 +85,11 @@ const initialState = {
   title: '',
   departureTime,
   explanation: '',
-  originLocation: {
+  origin: {
     lat: 36.3418454,
     lng: 127.5272031,
   },
-  destinationLocation: {
+  destination: {
     lat: 36.3418454,
     lng: 127.5272031,
   },

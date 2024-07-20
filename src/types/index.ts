@@ -13,8 +13,8 @@ export interface registerDataType {
   title: string;
   departureTime: string;
   explanation: string;
-  originLocation: { lat: number; lng: number };
-  destinationLocation: { lat: number; lng: number };
+  origin: { lat: number; lng: number };
+  destination: { lat: number; lng: number };
   maxParticipants: string;
 }
 
@@ -22,8 +22,8 @@ export type registerDataKeys =
   | 'title'
   | 'departureTime'
   | 'explanation'
-  | 'originLocation'
-  | 'destinationLocation'
+  | 'origin'
+  | 'destination'
   | 'maxParticipants';
 
 export type stepType =
@@ -31,5 +31,14 @@ export type stepType =
   | 'time'
   | 'origin'
   | 'destination'
+  | 'searchOrigin'
+  | 'searchDestination'
   | 'originMap'
   | 'destinationMap';
+
+export type setStep = React.Dispatch<React.SetStateAction<stepType>>;
+
+export type setRegisterDataFunc = (
+  name: registerDataKeys,
+  data: string | { lat: number; lng: number }
+) => void;

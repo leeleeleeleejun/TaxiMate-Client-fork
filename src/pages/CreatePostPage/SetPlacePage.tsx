@@ -1,18 +1,26 @@
-import CreatePostChilePageLayout from '@/components/common/Layout/CreatePostChildPageLayout';
-import SearchBar from '@/components/Home/SearchBar';
-import useLocationPathPlace from '@/hooks/useLocationPathPlace.ts';
+import { stepType, setStep } from '@/types';
 
-const SetPlacePage = () => {
-  const path = useLocationPathPlace();
+import CreatePostChilePageLayout from '@/components/common/Layout/CreatePostChildPageLayout';
+import SearchBar from '@/components/CreatePost/setPlace/SearchBar.tsx';
+
+const SetPlacePage = ({
+  step,
+  setStep,
+}: {
+  step: stepType;
+  setStep: setStep;
+}) => {
+  const path = step === 'origin';
 
   const subTitle = (path ? '어디에서 출발' : '어디로 도착') + '하나요?';
 
-  const targetPath =
-    '/create-post/' + (path ? 'set-origin' : 'set-destination') + '/search';
+  const setStepFunc = () => {
+    path ? setStep('searchOrigin') : setStep('searchDestination');
+  };
 
   return (
     <CreatePostChilePageLayout subTitle={subTitle}>
-      <SearchBar path={targetPath} />
+      <SearchBar setStepFunc={setStepFunc} />
     </CreatePostChilePageLayout>
   );
 };

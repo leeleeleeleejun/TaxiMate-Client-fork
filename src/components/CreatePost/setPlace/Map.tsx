@@ -8,13 +8,13 @@ import {
 const Map = ({
   map,
   setMap,
-  setLocationInfo,
+  setAddressInfo,
   defaultCenter,
   path,
 }: {
   map: naver.maps.Map | null;
   setMap: React.Dispatch<React.SetStateAction<naver.maps.Map | null>>;
-  setLocationInfo: (lng: number, lat: number) => void;
+  setAddressInfo: (lng: number, lat: number) => void;
   defaultCenter: { lat: number; lng: number };
   path: boolean;
 }) => {
@@ -24,7 +24,7 @@ const Map = ({
     if (!map) return;
     // 현재 위치 참조
     const { x, y } = map.getCenter();
-    setLocationInfo(x, y);
+    setAddressInfo(x, y);
   };
 
   return (

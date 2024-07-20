@@ -10,6 +10,7 @@ import CalendarIcon from '@/assets/icons/createPost/calendar-icon.svg?react';
 
 const DateWrap = ({ value, setStep }: contentWrapType) => {
   if (!setStep) return null;
+  if (typeof value !== 'string') return null;
 
   return (
     <ContentWrap theme={'출발 시간'} SvgIcon={ClockIcon}>

@@ -1,16 +1,12 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-export const SearchBarWrapper = styled(Link)<{ $path: string }>`
-  ${(props) =>
-    props.$path === '/search' &&
-    css`
-      position: absolute;
-      z-index: 2;
-      top: 20px;
-      left: 5%;
-      right: 5%;
-    `};
+export const SearchBarWrapper = styled(Link)`
+  position: absolute;
+  z-index: 2;
+  top: 20px;
+  left: 5%;
+  right: 5%;
 
   box-shadow: 0 0 6px 2px var(--color-shadow);
 

@@ -38,7 +38,11 @@ const CreateMainPage = ({
           setRegisterDataFunc={setRegisterDataFunc}
         />
         <DateWrap value={registerData.departureTime} setStep={setStep} />
-        <PlaceInfoWrap value={registerData.departureTime} setStep={setStep} />
+        <PlaceInfoWrap
+          value={registerData.origin}
+          value2={registerData.destination}
+          setStep={setStep}
+        />
         <MemberWrap
           value={registerData.maxParticipants}
           setRegisterDataFunc={setRegisterDataFunc}
