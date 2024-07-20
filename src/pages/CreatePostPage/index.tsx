@@ -43,6 +43,7 @@ const CreatePostPage = () => {
         <SetPlacePage
           step={step}
           setStep={setStep}
+          setRegisterDataFunc={setRegisterDataFunc}
           comeBackMain={comeBackMain}
         />
       </Step>
@@ -65,9 +66,9 @@ const CreatePostPage = () => {
           comeBackMain={comeBackMain}
           backHandle={() => {
             if (step === 'originMap') {
-              setStep('searchOrigin');
+              setStep('origin');
             } else {
-              setStep('searchDestination');
+              setStep('destination');
             }
           }}
         />
