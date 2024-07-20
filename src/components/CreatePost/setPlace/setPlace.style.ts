@@ -30,6 +30,22 @@ export const SearchBarWrapper = styled.button`
   box-shadow: 0 0 6px 2px var(--color-shadow);
 `;
 
+export const MyLocationButton = styled.button`
+  margin-top: 30px;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+
+  color: var(--color-blue);
+  font-weight: var(--weight-semi-bold);
+
+  svg {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+  }
+`;
+
 export const MarkerContainer = styled.div`
   display: flex;
   flex-direction: column;

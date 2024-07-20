@@ -2,6 +2,8 @@ import { stepType, setStep } from '@/types';
 
 import CreatePostChilePageLayout from '@/components/common/Layout/CreatePostChildPageLayout';
 import SearchBar from '@/components/CreatePost/setPlace/SearchBar.tsx';
+import ActiveMoveLocationIcon from '@/assets/icons/map/active-move-location-icon.svg?react';
+import { MyLocationButton } from '@/components/CreatePost/setPlace/setPlace.style.ts';
 
 const SetPlacePage = ({
   step,
@@ -23,6 +25,9 @@ const SetPlacePage = ({
   return (
     <CreatePostChilePageLayout subTitle={subTitle} backHandle={comeBackMain}>
       <SearchBar setStepFunc={setStepFunc} />
+      <MyLocationButton>
+        <ActiveMoveLocationIcon />내 위치
+      </MyLocationButton>
     </CreatePostChilePageLayout>
   );
 };
