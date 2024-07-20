@@ -8,15 +8,15 @@ const SearchListItem = ({
   inputValue,
   title,
   address,
-  handleClick,
+  clickHandler,
 }: {
   inputValue: string;
   title: string;
   address: string;
-  handleClick: () => void;
+  clickHandler: () => void;
 }) => {
   return (
-    <SearchListItemContainer onClick={handleClick}>
+    <SearchListItemContainer onClick={clickHandler}>
       <div>
         <LocationDotIcon />
         <SetTitle title={title} inputValue={inputValue} />
