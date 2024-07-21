@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const LocationInfoContainer = styled.div<{ $inCreate?: boolean }>`
   display: flex;
   flex-direction: column;
-  padding: ${(props) => (props.$inCreate ? '10px 0' : '10px')};
+  padding: ${(props) => (props.$inCreate ? '10px 0' : '10px 20px')};
 `;
 
 export const LocationInfoHeader = styled.h3`
