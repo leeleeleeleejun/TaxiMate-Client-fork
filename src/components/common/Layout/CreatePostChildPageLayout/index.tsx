@@ -14,7 +14,7 @@ const CreatePostChilePageLayout = ({
 }) => {
   return (
     <>
-      <Header paddingX={10} paddingY={10}>
+      <Header>
         <button onClick={backHandle}>
           <ArrowLeftIcon />
         </button>

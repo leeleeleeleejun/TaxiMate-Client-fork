@@ -25,7 +25,7 @@ const CreateMainPage = ({
 
   return (
     <>
-      <Header paddingY={10} paddingX={10}>
+      <Header>
         <BackButton onClick={() => navigate('/')}>
           <ArrowLeftIcon />
         </BackButton>

@@ -53,7 +53,7 @@ const SearchPage = ({
 
   return (
     <>
-      <Header paddingY={10} paddingX={10}>
+      <Header>
         <BackButton onClick={backButtonClickHandler}>
           <ArrowLeftIcon />
         </BackButton>

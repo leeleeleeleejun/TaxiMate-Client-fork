@@ -12,7 +12,7 @@ const PostDetailPage = () => {
 
   return (
     <>
-      <Header paddingY={10} paddingX={20}>
+      <Header>
         <BackButton onClick={() => navigate(-1)}>
           <ArrowLeftIcon />
         </BackButton>

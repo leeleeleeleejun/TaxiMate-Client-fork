@@ -10,7 +10,7 @@ import KnuLogoIcon from '@/assets/icons/header/knu-logo-icon.svg?react';
 const HomePage = () => {
   return (
     <>
-      <Header paddingX={20} paddingY={10}>
+      <Header>
         <HeaderItem>
           택시팟
           <TaxiIcon />
