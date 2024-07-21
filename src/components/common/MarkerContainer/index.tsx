@@ -29,8 +29,10 @@ const MarkerContainer = ({
         anchor: [anchor[0], anchor[1]],
       }}
       onClick={(e) => {
-        e.pointerEvent.stopPropagation();
-        dispatch(setActiveMarker(id));
+        if (showPlace) {
+          e.pointerEvent.stopPropagation();
+          dispatch(setActiveMarker(id));
+        }
       }}
     />
   );

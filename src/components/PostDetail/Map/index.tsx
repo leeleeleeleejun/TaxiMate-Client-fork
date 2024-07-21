@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Container as MapDiv, NaverMap } from 'react-naver-maps';
+import { useEffect, useState } from 'react';
+import { Container as MapDiv, NaverMap, useNavermaps } from 'react-naver-maps';
 
 import { usePolylinePathData } from '@/constants';
 import MarkerContainer from '@/components/common/MarkerContainer';
@@ -8,6 +8,7 @@ const Map = () => {
   const [map, setMap] = useState<naver.maps.Map | null>(null);
   const polylinePath = usePolylinePathData();
 
+  const navermaps = useNavermaps();
   map &&
     new naver.maps.Polyline({
       map: map,
@@ -16,15 +17,20 @@ const Map = () => {
 
   const markerPlaces = [polylinePath[0], polylinePath[polylinePath.length - 1]];
 
+  const bounds = new navermaps.LatLngBounds(
+    polylinePath[0],
+    polylinePath[polylinePath.length - 1]
+  );
+
+  useEffect(() => {
+    for (let i = 1; i < polylinePath.length - 1; i += 2) {
+      bounds.extend(polylinePath[i]);
+    }
+  }, []);
+
   return (
     <MapDiv className={'map-wrapper'}>
-      <NaverMap
-        ref={setMap}
-        defaultCenter={{ lat: 37.359924641705476, lng: 127.1148204803467 }}
-        defaultZoom={14}
-        minZoom={14}
-        logoControl={false}
-      >
+      <NaverMap defaultBounds={bounds} ref={setMap} logoControl={false}>
         {markerPlaces.map((item, index) => (
           <MarkerContainer
             key={index === 0 ? 'origin' : 'destination'}

@@ -14,7 +14,6 @@ export const PostDetailContainer = styled.div`
     height: 250px;
     margin: 20px 0;
 
-    border-radius: 10px;
     overflow: hidden;
   }
 
@@ -25,7 +24,7 @@ export const PostDetailHeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: 10px 20px;
 
   color: var(--color-gray-100);
   font-size: var(--font-small);
@@ -35,7 +34,7 @@ export const PostDetailTitleContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  padding: 10px;
+  padding: 10px 20px;
 
   h2 {
     font-size: 18px;
@@ -46,7 +45,7 @@ export const PostDetailTitleContainer = styled.div`
 `;
 
 export const ContentContainer = styled.div`
-  padding: 0 10px;
+  padding: 0 20px;
 
   font-size: var(--font-small);
   font-weight: var(--weight-light);
@@ -55,7 +54,7 @@ export const ContentContainer = styled.div`
 `;
 
 export const MoveInfoContainer = styled.div`
-  padding: 15px 10px;
+  padding: 15px 20px;
 
   font-size: var(--font-semi-micro);
   font-weight: var(--weight-light);
@@ -73,7 +72,7 @@ export const AuthorContainer = styled.div`
   align-items: center;
 
   border-top: 1px solid var(--color-gray-300);
-  padding: 15px 10px;
+  padding: 15px 20px;
 
   img {
     border-radius: 50%;
