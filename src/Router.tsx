@@ -6,6 +6,7 @@ import SearchPage from '@/pages/SearchPage.tsx';
 import PostDetailPage from '@/pages/PostDetailPage.tsx';
 import CreatePostPage from '@/pages/CreatePostPage';
 import ChatListPage from '@/pages/ChatListPage.tsx';
+import ChatRoomPage from '@/pages/ChatRoomPage.tsx';
 
 const Router = () => {
   return (
@@ -17,6 +18,7 @@ const Router = () => {
           <Route path={'/post-detail'} element={<PostDetailPage />} />
           <Route path={'/create-post'} element={<CreatePostPage />} />
           <Route path={'/chat-list'} element={<ChatListPage />} />
+          <Route path={'/chat-list/a'} element={<ChatRoomPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

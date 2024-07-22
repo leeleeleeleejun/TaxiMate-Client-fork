@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Header from '@/components/common/Layout/Header';
 import PostDetail from '@/components/PostDetail';
 import DropDown from '@/components/common/DropDown.tsx';
-import { BackButton } from '@/components/Search/Search.style.ts';
+import { BackButton } from '@/components/common/Layout/Header/Header.style.ts';
 
 import ArrowLeftIcon from '@/assets/icons/arrow-left-icon.svg?react';
 

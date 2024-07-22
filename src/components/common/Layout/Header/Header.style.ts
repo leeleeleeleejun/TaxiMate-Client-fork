@@ -23,3 +23,8 @@ export const HeaderItem = styled.h1`
     margin-left: 5px;
   }
 `;
+
+export const BackButton = styled.button`
+  display: flex;
+  padding: 0 10px 0 0;
+`;
