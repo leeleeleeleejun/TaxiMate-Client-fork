@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const PeopleCountTagContainer = styled.div`
+export const PeopleCountTagContainer = styled.div<{ $isMax: boolean }>`
   display: flex;
   align-items: center;
 
@@ -8,13 +8,27 @@ export const PeopleCountTagContainer = styled.div`
 
   font-size: var(--font-semi-micro);
   font-weight: 600;
-  color: var(--color-available-text);
+
+  right: 5%;
+  z-index: 2;
 
   border-radius: 5px;
 
-  background-color: var(--color-available-background);
+  ${({ $isMax }) =>
+    $isMax
+      ? css`
+          color: var(--color-unavailable-text);
+          background-color: var(--color-unavailable-background);
+        `
+      : css`
+          color: var(--color-available-text);
+          background-color: var(--color-available-background);
+        `}
 
-  svg {
+  & > svg {
+    fill: ${({ $isMax }) =>
+      $isMax ? 'var(--color-unavailable-text)' : 'var(--color-available-text)'};
+
     margin-right: 6px;
   }
 `;

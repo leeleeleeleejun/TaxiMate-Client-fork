@@ -39,7 +39,7 @@ const ChatRoomPage = () => {
       </Header>
       <NotificationContainer to={''}>
         <NotificationHeader>
-          <PeopleCountTag currentPassengers={1} maxPassengers={4} />
+          <PeopleCountTag currentPassengers={4} maxPassengers={4} />
           <ArrowRightIcon />
         </NotificationHeader>
         <PostBody

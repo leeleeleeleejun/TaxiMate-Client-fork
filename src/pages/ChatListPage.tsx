@@ -47,7 +47,7 @@ const ChatListPage = () => {
           title={
             '근데 제가 내일 모레 학교에서 머시기 저시기 url 복붙 This guiaaa'
           }
-          currentPassengers={1}
+          currentPassengers={4}
           maxPassengers={4}
           resentMessage={'언제 만나실래ㅐ요??'}
           resentMessageTime={'2023. 11. 02.'}
