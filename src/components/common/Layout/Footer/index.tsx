@@ -17,7 +17,7 @@ const Footer = () => {
         <NavItemContainer contentName={'메인'} path={'/'}>
           <TaxiIcon />
         </NavItemContainer>
-        <NavItemContainer contentName={'채팅'} path={'/'}>
+        <NavItemContainer contentName={'채팅'} path={'/chat-list'}>
           <ChattingIcon />
         </NavItemContainer>
         <NavItemContainer path={'/create-post'}>

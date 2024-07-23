@@ -7,8 +7,10 @@ import DateWrap from '@/components/CreatePost/main/DateWrap.tsx';
 import PlaceInfoWrap from '@/components/CreatePost/main/PlaceInfoWrap.tsx';
 import MemberWrap from '@/components/CreatePost/main/MemberWrap.tsx';
 import ExplanationWrap from '@/components/CreatePost/main/ExplanationWrap.tsx';
-import { HeaderItem } from '@/components/common/Layout/Header/Header.style.ts';
-import { BackButton } from '@/components/Search/Search.style.ts';
+import {
+  BackButton,
+  HeaderItem,
+} from '@/components/common/Layout/Header/Header.style.ts';
 import {
   Container,
   CreateSubmitButton,

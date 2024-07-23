@@ -64,7 +64,11 @@ const PostHeader = ({
   );
 };
 
-const PostBody = ({ departureTime, origin, destination }: PostBodyProps) => {
+export const PostBody = ({
+  departureTime,
+  origin,
+  destination,
+}: PostBodyProps) => {
   return (
     <PostBodyContainer>
       <div>

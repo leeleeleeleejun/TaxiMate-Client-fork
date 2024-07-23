@@ -1,10 +1,5 @@
 import styled from 'styled-components';
 
-export const BackButton = styled.button`
-  display: flex;
-  padding: 0 10px 0 0;
-`;
-
 export const SearchInput = styled.input`
   width: 100%;
 

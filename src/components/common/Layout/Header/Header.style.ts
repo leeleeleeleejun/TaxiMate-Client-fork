@@ -18,4 +18,13 @@ export const HeaderItem = styled.h1`
 
   font-size: var(--font-medium);
   font-weight: var(--weight-semi-bold);
+
+  & > svg {
+    margin-left: 5px;
+  }
+`;
+
+export const BackButton = styled.button`
+  display: flex;
+  padding: 0 10px 0 0;
 `;
