@@ -2,11 +2,12 @@ import {
   Dropdown,
   DropdownTrigger,
   DropdownMenu,
+  DropdownSection,
   DropdownItem,
 } from '@nextui-org/react';
 import EllipsisVerticalIcon from '@/assets/icons/common/ellipsis-vertical-icon.svg?react';
 
-const DropDown = () => {
+const DropDown = ({ items, danger }: { items: string[]; danger: string }) => {
   return (
     <Dropdown radius='sm' className={'min-w-[70px]'}>
       <DropdownTrigger>
@@ -18,11 +19,15 @@ const DropDown = () => {
         aria-label='Custom item styles'
         itemClasses={{ base: ['text-center'] }}
       >
-        <DropdownItem key='new' showDivider>
-          수정
-        </DropdownItem>
+        <DropdownSection>
+          {items.map((item, index) => (
+            <DropdownItem key={item + index} showDivider>
+              {item}
+            </DropdownItem>
+          ))}
+        </DropdownSection>
         <DropdownItem key='delete' className='text-danger ' color='danger'>
-          삭제
+          {danger}
         </DropdownItem>
       </DropdownMenu>
     </Dropdown>

@@ -16,7 +16,7 @@ const PostDetailPage = () => {
         <BackButton onClick={() => navigate(-1)}>
           <ArrowLeftIcon />
         </BackButton>
-        <DropDown />
+        <DropDown items={['수정']} danger={'삭제'} />
       </Header>
       <PostDetail />
     </>

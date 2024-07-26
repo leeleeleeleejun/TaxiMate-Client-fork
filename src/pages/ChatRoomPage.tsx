@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Header from '@/components/common/Layout/Header';
@@ -19,7 +20,6 @@ import {
 import ArrowLeftIcon from '@/assets/icons/arrow-left-icon.svg?react';
 import ArrowRightIcon from '@/assets/icons/arrow-right-icon.svg?react';
 import ArrowUpIcon from '@/assets/icons/arrow-up-icon.svg?react';
-import { useState } from 'react';
 
 const ChatRoomPage = () => {
   const navigate = useNavigate();
@@ -35,11 +35,11 @@ const ChatRoomPage = () => {
         <RoomTitle>
           학생회관 앞 CU앞 종합버스 터미널생회관 앞 CU앞 종합버스 터미널
         </RoomTitle>
-        <DropDown />
+        <DropDown items={['알림끄기']} danger={'나가기'} />
       </Header>
       <NotificationContainer to={''}>
         <NotificationHeader>
-          <PeopleCountTag currentPassengers={1} maxPassengers={4} />
+          <PeopleCountTag currentPassengers={4} maxPassengers={4} />
           <ArrowRightIcon />
         </NotificationHeader>
         <PostBody

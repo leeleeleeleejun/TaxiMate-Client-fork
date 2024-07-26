@@ -6,8 +6,10 @@ const PeopleCountTag = ({
   currentPassengers,
   maxPassengers,
 }: PeopleCountTagProps) => {
+  const isMax = currentPassengers === maxPassengers;
+
   return (
-    <PeopleCountTagContainer>
+    <PeopleCountTagContainer $isMax={isMax}>
       <PeopleCountTagIcon />
       {currentPassengers + ' / ' + maxPassengers}
     </PeopleCountTagContainer>
