@@ -15,11 +15,16 @@ export const postData = () => {
     { order: 578, station: '신대방', code: [37.4875672, 126.9133456] },
     {
       order: 976,
-      station: '구로디지털단지',
+      station: '구로디지털단지구로디지털단지',
       code: [37.485266, 126.901401],
     },
-    { order: 1343, station: '신도림', code: [37.508725, 126.891295] },
+    {
+      order: 1343,
+      station: '신도림',
+      code: [37.5088099, 126.8912061],
+    },
     { order: 2345, station: '문래', code: [37.517933, 126.89476] },
+    { station: '두정역두정역역역역', code: [36.833791, 127.148905] },
   ];
 
   const data = line.map((item, index) => ({

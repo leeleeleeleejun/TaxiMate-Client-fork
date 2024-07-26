@@ -14,11 +14,17 @@ const MarkerContainer = ({
   showPlace,
 }: MarkerContainerProps) => {
   const naverMaps = useNavermaps();
-
   const dispatch = useDispatch();
   const activeMarker = useSelector(
     (state: RootState) => state.mapSlice.activeMarker
   );
+
+  const handleClick = (e: naver.maps.PointerEvent) => {
+    if (showPlace) {
+      e.pointerEvent.stopPropagation();
+      dispatch(setActiveMarker(id));
+    }
+  };
 
   return (
     <Marker
@@ -26,14 +32,9 @@ const MarkerContainer = ({
       title={title}
       icon={{
         content: MarkerIcon(id, title, activeMarker, showPlace),
-        anchor: [anchor[0], anchor[1]],
+        anchor: [anchor[0] >= 72 ? 72 : anchor[0], anchor[1]],
       }}
-      onClick={(e) => {
-        if (showPlace) {
-          e.pointerEvent.stopPropagation();
-          dispatch(setActiveMarker(id));
-        }
-      }}
+      onClick={handleClick}
     />
   );
 };
@@ -46,14 +47,12 @@ const MarkerIcon = (
   activeMarker: null | string,
   showPlace: boolean
 ) => {
-  const content = showPlace ? `${title}<span> 도착</span>` : title;
+  const content = showPlace ? `<div>${title}</div><span>도착</span>` : title;
 
   const isActive =
-    activeMarker === null
+    activeMarker === null || activeMarker === id
       ? 'activeMarker'
-      : activeMarker === id
-        ? 'activeMarker'
-        : 'nonActiveMarker';
+      : 'nonActiveMarker';
 
   return `
     <div class="marker-icon-container ${isActive}">
