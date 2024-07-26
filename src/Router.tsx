@@ -7,6 +7,7 @@ import PostDetailPage from '@/pages/PostDetailPage.tsx';
 import CreatePostPage from '@/pages/CreatePostPage';
 import ChatListPage from '@/pages/ChatListPage.tsx';
 import ChatRoomPage from '@/pages/ChatRoomPage.tsx';
+import UsageHistoryPage from '@/pages/UsageHistoryPage.tsx';
 
 const Router = () => {
   return (
@@ -19,6 +20,7 @@ const Router = () => {
           <Route path={'/create-post'} element={<CreatePostPage />} />
           <Route path={'/chat-list'} element={<ChatListPage />} />
           <Route path={'/chat-list/a'} element={<ChatRoomPage />} />
+          <Route path={'/usage-history/'} element={<UsageHistoryPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
