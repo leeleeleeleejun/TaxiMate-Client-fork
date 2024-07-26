@@ -16,9 +16,9 @@ const MarkerContainerStyle = `
   }
 
   .marker-content-box {
-    
+    display: flex;
     min-width: 40px;
-    max-width: 500px;
+    max-width: 200px;
     height: 40px;
     padding: 0 10px;
 
@@ -33,7 +33,15 @@ const MarkerContainerStyle = `
     line-height: 40px;
 
     white-space: nowrap;
-    span {
+  
+    & > div {
+      max-width: 100px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    & > span {
+      margin-left: 3px;
       font-weight: var(--weight-light);
     }
   }
