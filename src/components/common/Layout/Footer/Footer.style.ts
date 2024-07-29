@@ -21,7 +21,7 @@ export const Nav = styled.nav`
   align-items: center;
 `;
 
-export const NavItem = styled(Link)`
+export const NavItem = styled(Link)<{ $isActive: boolean }>`
   width: 50px;
 
   display: flex;
@@ -32,4 +32,8 @@ export const NavItem = styled(Link)`
   color: var(--color-gray-200);
   font-weight: var(--weight-light);
   font-size: var(--font-micro);
+
+  svg {
+    fill: ${({ $isActive }) => ($isActive ? '#181F29' : '#B0B9C2')};
+  }
 `;
