@@ -3,8 +3,8 @@ import * as S from './PostDetail.style.ts';
 import Map from '@/components/PostDetail/Map';
 import PeopleCountTag from '@/components/common/PeopleCountTag';
 
-import ArrowRightIcon from '@/assets/icons/arrow-right-icon.svg?react';
 import LocationInfo from '@/components/common/LocationInfo';
+import UserContainer from '@/components/common/UserContainer';
 
 const PostDetail = () => {
   return (
@@ -28,11 +28,7 @@ const PostDetail = () => {
       <S.MoveInfoContainer>
         예상금액<span>6,500원</span> 소요시간 <span>13분</span>
       </S.MoveInfoContainer>
-      <S.AuthorContainer>
-        <img src={'profile.png'} alt='profile' />
-        <span>나는야 오빠 짜누야!!</span>
-        <ArrowRightIcon />
-      </S.AuthorContainer>
+      <UserContainer img={'profile.png'} name={'나는야 오빠 짜누야!!'} />
       <S.JoinButton>팟 참여</S.JoinButton>
     </S.PostDetailContainer>
   );

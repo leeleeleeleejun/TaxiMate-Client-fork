@@ -26,7 +26,7 @@ const Footer = () => {
         <NavItemContainer contentName={'이용내역'} path={'/usage-history'}>
           <HistoryIcon />
         </NavItemContainer>
-        <NavItemContainer contentName={'내 정보'} path={'/'}>
+        <NavItemContainer contentName={'내 정보'} path={'/my-profile'}>
           <UserIcon />
         </NavItemContainer>
       </Nav>
