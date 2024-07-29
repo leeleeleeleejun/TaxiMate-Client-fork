@@ -1,6 +1,7 @@
 import { DatePickerContainer } from '@/components/CreatePost/setDate/SetDate.style.ts';
 import { DatePicker } from '@nextui-org/react';
 import { ZonedDateTime } from '@internationalized/date';
+import { getLocalTimeZone, today } from '@internationalized/date';
 
 const DatePickerWrap = ({
   date,
@@ -18,6 +19,7 @@ const DatePickerWrap = ({
         labelPlacement={'outside'}
         value={date}
         onChange={setDate}
+        minValue={today(getLocalTimeZone())}
       />
     </DatePickerContainer>
   );
