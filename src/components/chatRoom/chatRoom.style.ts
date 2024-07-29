@@ -112,4 +112,6 @@ export const MessageInput = styled.textarea<{ $inputLineLength: number }>`
   background-color: var(--color-gray-300);
 
   font-size: var(--font-small);
+
+  outline: none;
 `;
