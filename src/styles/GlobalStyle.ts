@@ -163,7 +163,7 @@ button {
   --color-orange: #FF6229;
 
   // Font size
-  --font-large: 30px;
+  --font-large: 26px;
   --font-medium: 20px;
   --font-regular: 16px;
   --font-small: 14px;

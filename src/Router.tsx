@@ -9,6 +9,7 @@ import ChatListPage from '@/pages/ChatListPage.tsx';
 import ChatRoomPage from '@/pages/ChatRoomPage.tsx';
 import UsageHistoryPage from '@/pages/UsageHistoryPage.tsx';
 import MyProfilePage from '@/pages/MyProfilePage.tsx';
+import LoginPage from '@/pages/LoginPage.tsx';
 
 const Router = () => {
   return (
@@ -23,6 +24,7 @@ const Router = () => {
           <Route path={'/chat-list/a'} element={<ChatRoomPage />} />
           <Route path={'/usage-history/'} element={<UsageHistoryPage />} />
           <Route path={'/my-profile/'} element={<MyProfilePage />} />
+          <Route path={'/login'} element={<LoginPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
