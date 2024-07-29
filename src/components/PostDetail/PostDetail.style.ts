@@ -60,31 +60,12 @@ export const MoveInfoContainer = styled.div`
   font-weight: var(--weight-light);
   color: var(--color-gray-100);
 
+  border-bottom: 1px solid var(--color-gray-300);
+
   span {
     margin: 0 10px 0 5px;
     font-size: var(--font-small);
     color: black;
-  }
-`;
-
-export const AuthorContainer = styled.div`
-  display: flex;
-  align-items: center;
-
-  border-top: 1px solid var(--color-gray-300);
-  padding: 15px 20px;
-
-  img {
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-  }
-
-  span {
-    padding: 0 10px;
-
-    font-size: var(--font-small);
-    font-weight: var(--weight-bold);
   }
 `;
 
