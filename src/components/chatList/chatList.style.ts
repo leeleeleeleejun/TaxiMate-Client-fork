@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.ul`
   height: 100%;
   padding: 0 20px;
+  overflow: auto;
 `;
 
 export const ChatListItemContainer = styled.li`

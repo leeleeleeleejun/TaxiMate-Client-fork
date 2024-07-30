@@ -54,7 +54,7 @@ const PostList = () => {
           Math.floor(maxHeight * 0.4),
           80,
         ]}
-        expandOnContentDrag={true}
+        expandOnContentDrag
         onSpringEnd={() =>
           dispatch(setPostListHeight(sheetRef.current?.height))
         }

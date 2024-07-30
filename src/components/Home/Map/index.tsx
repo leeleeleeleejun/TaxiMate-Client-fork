@@ -69,7 +69,7 @@ const Map = () => {
               position={item.originLocation}
               title={item.destination}
               anchor={[item.destination.length * 6 + 22, 53]}
-              showPlace={true}
+              showPlace
             />
           ))}
         </NaverMap>

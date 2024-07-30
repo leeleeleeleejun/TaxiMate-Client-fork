@@ -56,7 +56,7 @@ const PlaceInfoWrap = ({ value, value2, setStep }: PlaceInfoWrapProps) => {
           keyWord={'출발지'}
           place={originAddress.building_name}
           address={originAddress.address_name}
-          inCreate={true}
+          inCreate
         />
       </button>
       <button
@@ -68,7 +68,7 @@ const PlaceInfoWrap = ({ value, value2, setStep }: PlaceInfoWrapProps) => {
           keyWord={'도착지'}
           place={destinationAddress.building_name}
           address={destinationAddress.address_name}
-          inCreate={true}
+          inCreate
         />
       </button>
     </ContentWrap>

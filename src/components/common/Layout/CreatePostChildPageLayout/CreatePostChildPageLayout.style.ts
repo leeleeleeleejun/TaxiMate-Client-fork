@@ -2,9 +2,9 @@ import styled from 'styled-components';
 
 export const Container = styled.div<{ $subTitle?: string }>`
   height: 100%;
-  ${(props) => props.$subTitle && 'padding: 10px 20px;'}
-
   overflow: auto;
+
+  ${(props) => props.$subTitle && 'padding: 10px 20px;'}
 `;
 
 export const SubTitle = styled.h2`

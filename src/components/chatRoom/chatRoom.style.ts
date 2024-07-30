@@ -12,9 +12,9 @@ export const RoomTitle = styled.h2`
 
 export const Container = styled.div`
   height: 100%;
-  padding: 0 20px;
-
   overflow: auto;
+
+  padding: 0 20px;
 `;
 
 export const NotificationContainer = styled(Link)`
@@ -112,4 +112,6 @@ export const MessageInput = styled.textarea<{ $inputLineLength: number }>`
   background-color: var(--color-gray-300);
 
   font-size: var(--font-small);
+
+  outline: none;
 `;
