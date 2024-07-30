@@ -12,9 +12,9 @@ export const RoomTitle = styled.h2`
 
 export const Container = styled.div`
   height: 100%;
-  padding: 0 20px;
-
   overflow: auto;
+
+  padding: 0 20px;
 `;
 
 export const NotificationContainer = styled(Link)`
