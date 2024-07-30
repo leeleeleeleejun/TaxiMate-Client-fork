@@ -13,7 +13,7 @@ const DatePickerWrap = ({
     <DatePickerContainer>
       <DatePicker
         label='출발 날짜'
-        isOpen={true}
+        isOpen
         granularity='day'
         labelPlacement={'outside'}
         value={date}
