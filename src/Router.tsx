@@ -1,4 +1,7 @@
+import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import { CLIENT_PATH } from '@/constants/path.ts';
 
 import HomePage from '@/pages/HomePage';
 import Layout from '@/components/common/Layout';
@@ -10,7 +13,6 @@ import Layout from '@/components/common/Layout';
 //import UsageHistoryPage from '@/pages/UsageHistoryPage.tsx';
 //import MyProfilePage from '@/pages/MyProfilePage.tsx';
 //import LoginPage from '@/pages/LoginPage.tsx';
-import { lazy, Suspense } from 'react';
 
 const SearchPage = lazy(() => import('@/pages/SearchPage'));
 const PostDetailPage = lazy(() => import('@/pages/PostDetailPage'));
@@ -28,14 +30,23 @@ const Router = () => {
         <Routes>
           <Route element={<Layout />}>
             <Route path={'/'} element={<HomePage />} />
-            <Route path={'/search'} element={<SearchPage />} />
-            <Route path={'/post-detail'} element={<PostDetailPage />} />
-            <Route path={'/create-post'} element={<CreatePostPage />} />
-            <Route path={'/chat-list'} element={<ChatListPage />} />
-            <Route path={'/chat-list/a'} element={<ChatRoomPage />} />
-            <Route path={'/usage-history/'} element={<UsageHistoryPage />} />
-            <Route path={'/my-profile/'} element={<MyProfilePage />} />
-            <Route path={'/login'} element={<LoginPage />} />
+            <Route path={CLIENT_PATH.SEARCH} element={<SearchPage />} />
+            <Route
+              path={CLIENT_PATH.POST_DETAIL}
+              element={<PostDetailPage />}
+            />
+            <Route
+              path={CLIENT_PATH.CREATE_POST}
+              element={<CreatePostPage />}
+            />
+            <Route path={CLIENT_PATH.CHAT_LISTS} element={<ChatListPage />} />
+            <Route path={CLIENT_PATH.CHAT_ROOM} element={<ChatRoomPage />} />
+            <Route
+              path={CLIENT_PATH.USAGE_HISTORY}
+              element={<UsageHistoryPage />}
+            />
+            <Route path={CLIENT_PATH.MY_PROFILE} element={<MyProfilePage />} />
+            <Route path={CLIENT_PATH.LOGIN} element={<LoginPage />} />
           </Route>
         </Routes>
       </Suspense>
