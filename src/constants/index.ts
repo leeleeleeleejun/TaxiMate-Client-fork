@@ -3,16 +3,16 @@ import { SelectionKey } from '@/types';
 
 export const postData = () => {
   const line = [
-    // { order: 11, station: '잠실새내', code: [37.5115735, 127.0868931] },
-    // { order: 23, station: '종합운동장', code: [37.5110588, 127.0737908] },
-    // { order: 1456, station: '삼성', code: [37.5088803, 127.0631076] },
-    // { order: 71, station: '선릉', code: [37.504585, 127.0492805] },
-    // { order: 1341, station: '역삼', code: [37.5006431, 127.0363764] },
-    // { order: 65, station: '강남', code: [37.4979526, 127.0276241] },
-    // { order: 333, station: '교대', code: [37.4939732, 127.0146391] },
-    // { order: 575, station: '방배', code: [37.4814955, 126.9976669] },
-    // { order: 3, station: '사당', code: [37.4765793, 126.981596] },
-    // { order: 578, station: '신대방', code: [37.4875672, 126.9133456] },
+    { order: 11, station: '잠실새내', code: [37.5115735, 127.0868931] },
+    { order: 23, station: '종합운동장', code: [37.5110588, 127.0737908] },
+    { order: 1456, station: '삼성', code: [37.5088803, 127.0631076] },
+    { order: 71, station: '선릉', code: [37.504585, 127.0492805] },
+    { order: 1341, station: '역삼', code: [37.5006431, 127.0363764] },
+    { order: 65, station: '강남', code: [37.4979526, 127.0276241] },
+    { order: 333, station: '교대', code: [37.4939732, 127.0146391] },
+    { order: 575, station: '방배', code: [37.4814955, 126.9976669] },
+    { order: 3, station: '사당', code: [37.4765793, 126.981596] },
+    { order: 578, station: '신대방', code: [37.4875672, 126.9133456] },
     {
       order: 976,
       station: '구로디지털단지구로디지털단지',
@@ -49,7 +49,7 @@ export const usePolylinePathData = () => {
 
   return [
     new navermaps.LatLng(37.359924641705476, 127.1148204803467),
-    new navermaps.LatLng(37.36343797188166, 127.11486339569092),
+    new navermaps.LatLng(37.359924641705476, 127.11486339569092),
     new navermaps.LatLng(37.368520071054576, 127.11473464965819),
     new navermaps.LatLng(37.3685882848096, 127.1088123321533),
     new navermaps.LatLng(37.37295383612657, 127.10876941680907),
