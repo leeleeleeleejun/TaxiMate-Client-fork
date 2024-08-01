@@ -6,8 +6,17 @@ import PostList from '@/components/Home/PostList';
 
 import TaxiIcon from '@/assets/icons/header/taxi-icon.svg?react';
 import KnuLogoIcon from '@/assets/icons/header/knu-logo-icon.svg?react';
+import { Main } from '@/components/Home/Map/Map.style.ts';
+import SearchBar from '@/components/Home/SearchBar';
+import ResearchButton from '@/components/Home/ResearchButton';
+import MoveCurrentLocation from '@/components/Home/MoveCurrentLocation';
+
+import { useState } from 'react';
 
 const HomePage = () => {
+  const [map, setMap] = useState<naver.maps.Map | null>(null);
+  const [activeButton, setActiveButton] = useState<boolean>(true);
+
   return (
     <>
       <Header>
@@ -17,8 +26,13 @@ const HomePage = () => {
         </HeaderItem>
         <KnuLogoIcon />
       </Header>
-      <Map />
-      <PostList />
+      <Main>
+        <SearchBar path={'/search'} />
+        <ResearchButton />
+        <MoveCurrentLocation map={map} activeButton={activeButton} />
+        <Map map={map} setMap={setMap} setActiveButton={setActiveButton} />
+        <PostList />
+      </Main>
       <Footer />
     </>
   );

@@ -38,6 +38,12 @@ export interface MoveCurrentLocationProps {
   activeButton: boolean;
 }
 
+export interface HomeMapProps {
+  map: naver.maps.Map | null;
+  setMap: React.Dispatch<React.SetStateAction<naver.maps.Map | null>>;
+  setActiveButton: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 export interface MarkerContainerProps {
   id: string;
   position: {
