@@ -1,12 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import mapSlice from '@/components/Home/Map/MapSlice.ts';
 import postListSlice from '@/components/Home/PostList/PostListSlice.ts';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { localApi } from '@/api/localApi.ts';
 
 export const store = configureStore({
   reducer: {
-    mapSlice,
     postListSlice,
     [localApi.reducerPath]: localApi.reducer,
   },

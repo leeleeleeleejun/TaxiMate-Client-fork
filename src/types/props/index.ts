@@ -1,10 +1,12 @@
 import { ReactNode } from 'react';
 import {
   registerDataType,
+  setActiveMarker,
   setRegisterDataFunc,
   setStep,
   stepType,
 } from '@/types';
+import { Post } from '@/types/post.ts';
 
 export interface NavItemContainerProps {
   children: ReactNode;
@@ -36,12 +38,16 @@ export interface PostListItemProps
 export interface MoveCurrentLocationProps {
   map: naver.maps.Map | null;
   activeButton: boolean;
+  activeMarker: string | null;
 }
 
 export interface HomeMapProps {
   map: naver.maps.Map | null;
   setMap: React.Dispatch<React.SetStateAction<naver.maps.Map | null>>;
   setActiveButton: React.Dispatch<React.SetStateAction<boolean>>;
+  activeMarker: string | null;
+  setActiveMarker: setActiveMarker;
+  data: Post[];
 }
 
 export interface MarkerContainerProps {
@@ -55,6 +61,8 @@ export interface MarkerContainerProps {
   anchor: number[];
 
   showPlace: boolean;
+  activeMarker: string | null;
+  setActiveMarker: setActiveMarker;
 }
 
 export interface registerProps {

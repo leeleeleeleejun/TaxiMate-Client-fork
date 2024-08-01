@@ -1,9 +1,8 @@
 import { useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import 'react-spring-bottom-sheet/dist/style.css';
 import { BottomSheet, BottomSheetRef } from 'react-spring-bottom-sheet';
 
-import { RootState } from '@/store';
 import reformatDate from '@/utils/reformatDate.ts';
 
 import {
@@ -12,24 +11,21 @@ import {
 } from '@/components/Home/PostList/PostList.style.ts';
 import PostListItem from '@/components/common/PostListItem';
 import { setPostListHeight } from '@/components/Home/PostList/PostListSlice.ts';
-import { useGetPostsQuery } from '@/api/localApi.ts';
+import { Post } from '@/types/post.ts';
 
-const PostList = () => {
+const PostList = ({
+  activeMarker,
+  data,
+}: {
+  activeMarker: string | null;
+  data: Post[];
+}) => {
   const dispatch = useDispatch();
 
   const sheetRef = useRef<BottomSheetRef | null>(null);
 
-  const activeMarker = useSelector(
-    (state: RootState) => state.mapSlice.activeMarker
-  );
-
-  const { data, isLoading } = useGetPostsQuery('posts');
-
-  if (isLoading) return <div>isLoading...</div>;
-  if (!data) return null;
-
   if (activeMarker) {
-    const targetData = data.data.filter((item) => item.id === activeMarker)[0];
+    const targetData = data.filter((item) => item.id === activeMarker)[0];
 
     return (
       <ActivePostListContainer>
@@ -64,7 +60,7 @@ const PostList = () => {
         }
       >
         <PostListContainer>
-          {data.data.map((post) => (
+          {data.map((post) => (
             <PostListItem
               key={post.id}
               title={post.title}

@@ -1,20 +1,24 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { Container as MapDiv, NaverMap, useNavermaps } from 'react-naver-maps';
 
-import { setActiveMarker } from './MapSlice.ts';
 import getCurrentLocation from '@/utils/getCurrentlocation.ts';
 
-//import MarkerContainer from '@/components/common/MarkerContainer';
+import MarkerContainer from '@/components/common/MarkerContainer';
 import { HomeMapProps } from '@/types/props';
 
 const defaultLocation = await getCurrentLocation();
 localStorage.setItem('Location', JSON.stringify(defaultLocation));
 
-const Map = ({ map, setMap, setActiveButton }: HomeMapProps) => {
+const Map = ({
+  map,
+  setMap,
+  setActiveButton,
+  activeMarker,
+  setActiveMarker,
+  data,
+}: HomeMapProps) => {
   const naverMaps = useNavermaps();
 
-  const dispatch = useDispatch();
   const centerLocation = JSON.parse(localStorage.getItem('Location') || '');
 
   const onCenterChangedFunc = () => {
@@ -36,13 +40,11 @@ const Map = ({ map, setMap, setActiveButton }: HomeMapProps) => {
     );
   }, [map]);
 
-  // const myData = postData();
-
   return (
     <MapDiv
       className={'map-wrapper'}
       onClick={() => {
-        dispatch(setActiveMarker(null));
+        setActiveMarker(null);
       }}
     >
       <NaverMap
@@ -53,16 +55,18 @@ const Map = ({ map, setMap, setActiveButton }: HomeMapProps) => {
         onCenterChanged={onCenterChangedFunc}
         logoControl={false}
       >
-        {/*{myData.map((item) => (*/}
-        {/*  <MarkerContainer*/}
-        {/*    key={item.id}*/}
-        {/*    id={item.id}*/}
-        {/*    position={item.originLocation}*/}
-        {/*    title={item.destination}*/}
-        {/*    anchor={[item.destination.length * 6 + 22, 53]}*/}
-        {/*    showPlace*/}
-        {/*  />*/}
-        {/*))}*/}
+        {data.map((item) => (
+          <MarkerContainer
+            key={item.id}
+            id={item.id}
+            position={item.originLocation}
+            title={item.destination}
+            anchor={[item.destination.length * 6 + 22, 53]}
+            showPlace
+            activeMarker={activeMarker}
+            setActiveMarker={setActiveMarker}
+          />
+        ))}
       </NaverMap>
     </MapDiv>
   );

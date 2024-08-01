@@ -13,13 +13,11 @@ import NonActiveMoveLocationIcon from '@/assets/icons/map/non-active-move-locati
 const MoveCurrentLocation = ({
   map,
   activeButton,
+  activeMarker,
 }: MoveCurrentLocationProps) => {
   const naverMaps = useNavermaps();
   const postListHeight = useSelector(
     (state: RootState) => state.postListSlice.height
-  );
-  const activeMarker = useSelector(
-    (state: RootState) => state.mapSlice.activeMarker
   );
 
   const [bottom, setBottom] = useState(0);
