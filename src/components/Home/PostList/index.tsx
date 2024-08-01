@@ -1,5 +1,4 @@
 import { useRef } from 'react';
-import { useDispatch } from 'react-redux';
 import 'react-spring-bottom-sheet/dist/style.css';
 import { BottomSheet, BottomSheetRef } from 'react-spring-bottom-sheet';
 
@@ -10,18 +9,17 @@ import {
   ActivePostListContainer,
 } from '@/components/Home/PostList/PostList.style.ts';
 import PostListItem from '@/components/common/PostListItem';
-import { setPostListHeight } from '@/components/Home/PostList/PostListSlice.ts';
 import { Post } from '@/types/post.ts';
 
 const PostList = ({
   activeMarker,
   data,
+  setPostListHeight,
 }: {
   activeMarker: string | null;
   data: Post[];
+  setPostListHeight: React.Dispatch<React.SetStateAction<number>>;
 }) => {
-  const dispatch = useDispatch();
-
   const sheetRef = useRef<BottomSheetRef | null>(null);
 
   if (activeMarker) {
@@ -55,9 +53,7 @@ const PostList = ({
           80,
         ]}
         expandOnContentDrag
-        onSpringEnd={() =>
-          dispatch(setPostListHeight(sheetRef.current?.height))
-        }
+        onSpringEnd={() => setPostListHeight(sheetRef.current?.height || 0)}
       >
         <PostListContainer>
           {data.map((post) => (

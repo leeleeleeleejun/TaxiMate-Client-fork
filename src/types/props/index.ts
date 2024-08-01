@@ -39,6 +39,7 @@ export interface MoveCurrentLocationProps {
   map: naver.maps.Map | null;
   activeButton: boolean;
   activeMarker: string | null;
+  postListHeight: number;
 }
 
 export interface HomeMapProps {

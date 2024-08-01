@@ -18,6 +18,7 @@ const HomePage = () => {
   const [map, setMap] = useState<naver.maps.Map | null>(null);
   const [activeButton, setActiveButton] = useState<boolean>(true);
   const [activeMarker, setActiveMarker] = useState<string | null>(null);
+  const [postListHeight, setPostListHeight] = useState(0);
 
   const { data, isLoading } = useGetPostsQuery('posts');
 
@@ -40,6 +41,7 @@ const HomePage = () => {
           map={map}
           activeButton={activeButton}
           activeMarker={activeMarker}
+          postListHeight={postListHeight}
         />
         <Map
           map={map}
@@ -50,7 +52,11 @@ const HomePage = () => {
           data={data.data}
         />
       </Main>
-      <PostList activeMarker={activeMarker} data={data.data} />
+      <PostList
+        activeMarker={activeMarker}
+        data={data.data}
+        setPostListHeight={setPostListHeight}
+      />
       <Footer />
     </>
   );
