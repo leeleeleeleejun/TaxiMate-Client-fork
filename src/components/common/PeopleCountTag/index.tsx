@@ -3,15 +3,15 @@ import { PeopleCountTagContainer } from '@/components/common/PeopleCountTag/Peop
 import { PeopleCountTagProps } from '@/types/props';
 
 const PeopleCountTag = ({
-  currentPassengers,
-  maxPassengers,
+  currentParticipants,
+  maxParticipants,
 }: PeopleCountTagProps) => {
-  const isMax = currentPassengers === maxPassengers;
+  const isMax = currentParticipants === maxParticipants;
 
   return (
     <PeopleCountTagContainer $isMax={isMax}>
       <PeopleCountTagIcon />
-      {currentPassengers + ' / ' + maxPassengers}
+      {currentParticipants + ' / ' + maxParticipants}
     </PeopleCountTagContainer>
   );
 };

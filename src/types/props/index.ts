@@ -13,8 +13,8 @@ export interface NavItemContainerProps {
 }
 
 export interface PeopleCountTagProps {
-  currentPassengers: number;
-  maxPassengers: number;
+  currentParticipants: number;
+  maxParticipants: number;
 }
 
 export interface PostHeaderProps extends PeopleCountTagProps {

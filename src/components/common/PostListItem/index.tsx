@@ -18,8 +18,8 @@ import {
 
 const PostListItem = ({
   title,
-  currentPassengers,
-  maxPassengers,
+  currentParticipants,
+  maxParticipants,
   departureTime,
   origin,
   destination,
@@ -29,8 +29,8 @@ const PostListItem = ({
     <PostListItemContainer>
       <PostHeader
         title={title}
-        currentPassengers={currentPassengers}
-        maxPassengers={maxPassengers}
+        currentParticipants={currentParticipants}
+        maxParticipants={maxParticipants}
         activePostList={activePostList}
       />
       <PostBody
@@ -46,8 +46,8 @@ export default PostListItem;
 
 const PostHeader = ({
   title,
-  currentPassengers,
-  maxPassengers,
+  currentParticipants,
+  maxParticipants,
   activePostList,
 }: PostHeaderProps) => {
   return (
@@ -55,8 +55,8 @@ const PostHeader = ({
       <div>
         <h2>{title}</h2>
         <PeopleCountTag
-          currentPassengers={currentPassengers}
-          maxPassengers={maxPassengers}
+          currentParticipants={currentParticipants}
+          maxParticipants={maxParticipants}
         />
       </div>
       {activePostList && <ArrowRightIcon />}

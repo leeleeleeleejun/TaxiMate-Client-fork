@@ -4,7 +4,6 @@ import 'react-spring-bottom-sheet/dist/style.css';
 import { BottomSheet, BottomSheetRef } from 'react-spring-bottom-sheet';
 
 import { RootState } from '@/store';
-import { postData } from '@/constants';
 import reformatDate from '@/utils/reformatDate.ts';
 
 import {
@@ -13,26 +12,31 @@ import {
 } from '@/components/Home/PostList/PostList.style.ts';
 import PostListItem from '@/components/common/PostListItem';
 import { setPostListHeight } from '@/components/Home/PostList/PostListSlice.ts';
+import { useGetPostsQuery } from '@/api/localApi.ts';
 
 const PostList = () => {
   const dispatch = useDispatch();
 
   const sheetRef = useRef<BottomSheetRef | null>(null);
-  const data = postData();
 
   const activeMarker = useSelector(
     (state: RootState) => state.mapSlice.activeMarker
   );
 
+  const { data, isLoading } = useGetPostsQuery('posts');
+
+  if (isLoading) return <div>isLoading...</div>;
+  if (!data) return null;
+
   if (activeMarker) {
-    const targetData = data.filter((item) => item.id === activeMarker)[0];
+    const targetData = data.data.filter((item) => item.id === activeMarker)[0];
 
     return (
       <ActivePostListContainer>
         <PostListItem
           title={targetData.title}
-          currentPassengers={targetData.currentPassengers}
-          maxPassengers={targetData.maxPassengers}
+          currentParticipants={targetData.currentParticipants}
+          maxParticipants={targetData.maxParticipants}
           departureTime={reformatDate(targetData.departureTime)}
           origin={targetData.origin}
           destination={targetData.destination}
@@ -60,12 +64,12 @@ const PostList = () => {
         }
       >
         <PostListContainer>
-          {data.map((post) => (
+          {data.data.map((post) => (
             <PostListItem
               key={post.id}
               title={post.title}
-              currentPassengers={post.currentPassengers}
-              maxPassengers={post.maxPassengers}
+              currentParticipants={post.currentParticipants}
+              maxParticipants={post.maxParticipants}
               departureTime={reformatDate(post.departureTime)}
               origin={post.origin}
               destination={post.destination}
