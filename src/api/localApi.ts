@@ -11,8 +11,17 @@ export const localApi = createApi({
       query: () => API_PATH.POST.GET.ALL,
       transformResponse: (response: { data: Post[] }) => response.data,
     }),
+    getJoinPosts: builder.query<Post[], string>({
+      query: () => API_PATH.POST.GET.JOIN_POSTS,
+      transformResponse: (response: { data: Post[] }) => response.data,
+    }),
+    getClosePosts: builder.query<Post[], string>({
+      query: () => API_PATH.POST.GET.CLOSE_POSTS,
+      transformResponse: (response: { data: Post[] }) => response.data,
+    }),
   }),
 });
 
 // 정의된 엔드포인트에서 자동으로 생성된 훅을 함수형 컴포넌트에서 사용하기 위해 export
-export const { useGetPostsQuery } = localApi;
+export const { useGetPostsQuery, useGetJoinPostsQuery, useGetClosePostsQuery } =
+  localApi;

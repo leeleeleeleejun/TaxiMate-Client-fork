@@ -11,6 +11,8 @@ export const API_PATH = {
       BY_ID: `${API_BASE_URL}/posts/:postId`,
       // 특정 유저의 전체 포스트 조회
       BY_USER: `${API_BASE_URL}/posts/user/:userId`,
+      JOIN_POSTS: `${API_BASE_URL}/join-posts`,
+      CLOSE_POSTS: `${API_BASE_URL}/close-posts`,
     },
   },
 };
