@@ -23,7 +23,7 @@ const HomePage = () => {
   const { data, isLoading } = useGetPostsQuery('posts');
 
   if (isLoading) return <div>isLoading...</div>;
-  if (!data) return <div>epdl...</div>;
+  if (!data) return <div>isLoading...</div>;
 
   return (
     <>

@@ -11,11 +11,14 @@ import {
 
 import UsageHistoryIcon from '@/assets/icons/header/usage-history-icon.svg?react';
 import Footer from '@/components/common/Layout/Footer';
-// import PostListItem from '@/components/common/PostListItem';
-// import reformatDate from '@/utils/reformatDate.ts';
+import PostListItem from '@/components/common/PostListItem';
+import reformatDate from '@/utils/reformatDate.ts';
+import { postData } from '@/constants';
 
 const UsageHistoryPage = () => {
   const [isActive, setIsActive] = useState('join');
+
+  const data = postData();
 
   return (
     <>
@@ -45,17 +48,17 @@ const UsageHistoryPage = () => {
           </Button>
         </ButtonContainer>
         <PostListContainer>
-          {/*{data.map((post) => (*/}
-          {/*  <PostListItem*/}
-          {/*    key={post.id}*/}
-          {/*    title={post.title}*/}
-          {/*    currentPassengers={post.currentPassengers}*/}
-          {/*    maxPassengers={post.maxPassengers}*/}
-          {/*    departureTime={reformatDate(post.departureTime)}*/}
-          {/*    origin={post.origin}*/}
-          {/*    destination={post.destination}*/}
-          {/*  />*/}
-          {/*))}*/}
+          {data.map((post) => (
+            <PostListItem
+              key={post.id}
+              title={post.title}
+              currentPassengers={post.currentPassengers}
+              maxPassengers={post.maxPassengers}
+              departureTime={reformatDate(post.departureTime)}
+              origin={post.origin}
+              destination={post.destination}
+            />
+          ))}
         </PostListContainer>
       </Container>
       <Footer />
