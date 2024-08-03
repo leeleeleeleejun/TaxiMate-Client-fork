@@ -24,6 +24,7 @@ const PostListItem = ({
   origin,
   destination,
   activePostList,
+  isClose,
 }: PostListItemProps) => {
   return (
     <PostListItemContainer>
@@ -32,6 +33,7 @@ const PostListItem = ({
         currentParticipants={currentParticipants}
         maxParticipants={maxParticipants}
         activePostList={activePostList}
+        isClose={isClose}
       />
       <PostBody
         departureTime={departureTime}
@@ -49,6 +51,7 @@ const PostHeader = ({
   currentParticipants,
   maxParticipants,
   activePostList,
+  isClose,
 }: PostHeaderProps) => {
   return (
     <PostHeaderContainer>
@@ -57,6 +60,7 @@ const PostHeader = ({
         <PeopleCountTag
           currentParticipants={currentParticipants}
           maxParticipants={maxParticipants}
+          isClose={isClose}
         />
       </div>
       {activePostList && <ArrowRightIcon />}

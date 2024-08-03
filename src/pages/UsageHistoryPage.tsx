@@ -63,6 +63,7 @@ const UsageHistoryPage = () => {
               departureTime={reformatDate(post.departureTime)}
               origin={post.origin}
               destination={post.destination}
+              isClose={isActive === 'close'}
             />
           ))}
         </PostListContainer>

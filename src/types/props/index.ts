@@ -17,6 +17,7 @@ export interface NavItemContainerProps {
 export interface PeopleCountTagProps {
   currentParticipants: number;
   maxParticipants: number;
+  isClose?: boolean;
 }
 
 export interface PostHeaderProps extends PeopleCountTagProps {
