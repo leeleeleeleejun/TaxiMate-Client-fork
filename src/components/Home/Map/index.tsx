@@ -1,25 +1,24 @@
-import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import { Container as MapDiv, NaverMap, useNavermaps } from 'react-naver-maps';
 
-import { postData } from '@/constants';
-import { setActiveMarker } from './MapSlice.ts';
 import getCurrentLocation from '@/utils/getCurrentlocation.ts';
 
-import { Main } from './Map.style.ts';
-import SearchBar from '@/components/Home/SearchBar';
-import ResearchButton from '@/components/Home/ResearchButton';
 import MarkerContainer from '@/components/common/MarkerContainer';
-import MoveCurrentLocation from '@/components/Home/MoveCurrentLocation';
+import { HomeMapProps } from '@/types/props';
 
 const defaultLocation = await getCurrentLocation();
 localStorage.setItem('Location', JSON.stringify(defaultLocation));
 
-const Map = () => {
+const Map = ({
+  map,
+  setMap,
+  setActiveButton,
+  activeMarker,
+  setActiveMarker,
+  data,
+}: HomeMapProps) => {
   const naverMaps = useNavermaps();
-  const [map, setMap] = useState<naver.maps.Map | null>(null);
-  const [activeButton, setActiveButton] = useState<boolean>(true);
-  const dispatch = useDispatch();
+
   const centerLocation = JSON.parse(localStorage.getItem('Location') || '');
 
   const onCenterChangedFunc = () => {
@@ -41,40 +40,35 @@ const Map = () => {
     );
   }, [map]);
 
-  const myData = postData();
-
   return (
-    <Main>
-      <SearchBar path={'/search'} />
-      <ResearchButton />
-      <MoveCurrentLocation map={map} activeButton={activeButton} />
-      <MapDiv
-        className={'map-wrapper'}
-        onClick={() => {
-          dispatch(setActiveMarker(null));
-        }}
+    <MapDiv
+      className={'map-wrapper'}
+      onClick={() => {
+        setActiveMarker(null);
+      }}
+    >
+      <NaverMap
+        defaultCenter={centerLocation}
+        defaultZoom={15}
+        minZoom={15}
+        ref={setMap}
+        onCenterChanged={onCenterChangedFunc}
+        logoControl={false}
       >
-        <NaverMap
-          defaultCenter={centerLocation}
-          defaultZoom={15}
-          minZoom={15}
-          ref={setMap}
-          onCenterChanged={onCenterChangedFunc}
-          logoControl={false}
-        >
-          {myData.map((item) => (
-            <MarkerContainer
-              key={item.id}
-              id={item.id}
-              position={item.originLocation}
-              title={item.destination}
-              anchor={[item.destination.length * 6 + 22, 53]}
-              showPlace
-            />
-          ))}
-        </NaverMap>
-      </MapDiv>
-    </Main>
+        {data.map((item) => (
+          <MarkerContainer
+            key={item.id}
+            id={item.id}
+            position={item.originLocation}
+            title={item.destination}
+            anchor={[item.destination.length * 6 + 22, 53]}
+            showPlace
+            activeMarker={activeMarker}
+            setActiveMarker={setActiveMarker}
+          />
+        ))}
+      </NaverMap>
+    </MapDiv>
   );
 };
 

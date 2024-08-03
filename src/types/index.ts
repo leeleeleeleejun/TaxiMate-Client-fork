@@ -42,3 +42,7 @@ export type setRegisterDataFunc = (
   name: registerDataKeys,
   data: string | { lat: number; lng: number }
 ) => void;
+
+export type setActiveMarker = React.Dispatch<
+  React.SetStateAction<string | null>
+>;

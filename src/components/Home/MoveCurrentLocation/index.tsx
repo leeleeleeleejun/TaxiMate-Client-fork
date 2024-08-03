@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
 import { useNavermaps } from 'react-naver-maps';
 
-import { RootState } from '@/store';
 import getCurrentLocation from '@/utils/getCurrentlocation.ts';
 import { MoveCurrentLocationProps } from '@/types/props/index.ts';
 
@@ -13,14 +11,10 @@ import NonActiveMoveLocationIcon from '@/assets/icons/map/non-active-move-locati
 const MoveCurrentLocation = ({
   map,
   activeButton,
+  activeMarker,
+  postListHeight,
 }: MoveCurrentLocationProps) => {
   const naverMaps = useNavermaps();
-  const postListHeight = useSelector(
-    (state: RootState) => state.postListSlice.height
-  );
-  const activeMarker = useSelector(
-    (state: RootState) => state.mapSlice.activeMarker
-  );
 
   const [bottom, setBottom] = useState(0);
   const [isMax, setIsMax] = useState(false);

@@ -25,7 +25,7 @@ const data = (() => {
   ];
 
   return line.map((item, index) => ({
-    id: item.order,
+    id: String(item.order),
     title: index + '제목입니다~',
     departureTime: '2024-06-26T14:11:24.888135',
     origin: '우리집',

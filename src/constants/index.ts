@@ -1,49 +1,6 @@
 import { useNavermaps } from 'react-naver-maps';
 import { SelectionKey } from '@/types';
 
-export const postData = () => {
-  const line = [
-    { order: 11, station: '잠실새내', code: [37.5115735, 127.0868931] },
-    { order: 23, station: '종합운동장', code: [37.5110588, 127.0737908] },
-    { order: 1456, station: '삼성', code: [37.5088803, 127.0631076] },
-    { order: 71, station: '선릉', code: [37.504585, 127.0492805] },
-    { order: 1341, station: '역삼', code: [37.5006431, 127.0363764] },
-    { order: 65, station: '강남', code: [37.4979526, 127.0276241] },
-    { order: 333, station: '교대', code: [37.4939732, 127.0146391] },
-    { order: 575, station: '방배', code: [37.4814955, 126.9976669] },
-    { order: 3, station: '사당', code: [37.4765793, 126.981596] },
-    { order: 578, station: '신대방', code: [37.4875672, 126.9133456] },
-    {
-      order: 976,
-      station: '구로디지털단지구로디지털단지',
-      code: [37.485266, 126.901401],
-    },
-    {
-      order: 1343,
-      station: '신도림',
-      code: [37.5088099, 126.8912061],
-    },
-    { order: 2345, station: '문래', code: [37.517933, 126.89476] },
-    { station: '두정역두정역역역역', code: [36.833791, 127.148905] },
-  ];
-
-  const data = line.map((item, index) => ({
-    id: item.station + index,
-    title: '테스트 데이터' + index,
-    departureTime: '2024-06-28T00:11:24.888135',
-    origin: '우리집',
-    destination: item.station,
-    currentPassengers: 1,
-    maxPassengers: 4,
-    originLocation: {
-      latitude: item.code[0],
-      longitude: item.code[1],
-    },
-  }));
-
-  return data;
-};
-
 export const usePolylinePathData = () => {
   const navermaps = useNavermaps();
 

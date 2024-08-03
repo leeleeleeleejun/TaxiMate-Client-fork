@@ -1,10 +1,7 @@
 import { useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import 'react-spring-bottom-sheet/dist/style.css';
 import { BottomSheet, BottomSheetRef } from 'react-spring-bottom-sheet';
 
-import { RootState } from '@/store';
-import { postData } from '@/constants';
 import reformatDate from '@/utils/reformatDate.ts';
 
 import {
@@ -12,17 +9,18 @@ import {
   ActivePostListContainer,
 } from '@/components/Home/PostList/PostList.style.ts';
 import PostListItem from '@/components/common/PostListItem';
-import { setPostListHeight } from '@/components/Home/PostList/PostListSlice.ts';
+import { Post } from '@/types/post.ts';
 
-const PostList = () => {
-  const dispatch = useDispatch();
-
+const PostList = ({
+  activeMarker,
+  data,
+  setPostListHeight,
+}: {
+  activeMarker: string | null;
+  data: Post[];
+  setPostListHeight: React.Dispatch<React.SetStateAction<number>>;
+}) => {
   const sheetRef = useRef<BottomSheetRef | null>(null);
-  const data = postData();
-
-  const activeMarker = useSelector(
-    (state: RootState) => state.mapSlice.activeMarker
-  );
 
   if (activeMarker) {
     const targetData = data.filter((item) => item.id === activeMarker)[0];
@@ -31,8 +29,8 @@ const PostList = () => {
       <ActivePostListContainer>
         <PostListItem
           title={targetData.title}
-          currentPassengers={targetData.currentPassengers}
-          maxPassengers={targetData.maxPassengers}
+          currentParticipants={targetData.currentParticipants}
+          maxParticipants={targetData.maxParticipants}
           departureTime={reformatDate(targetData.departureTime)}
           origin={targetData.origin}
           destination={targetData.destination}
@@ -55,17 +53,15 @@ const PostList = () => {
           80,
         ]}
         expandOnContentDrag
-        onSpringEnd={() =>
-          dispatch(setPostListHeight(sheetRef.current?.height))
-        }
+        onSpringEnd={() => setPostListHeight(sheetRef.current?.height || 0)}
       >
         <PostListContainer>
           {data.map((post) => (
             <PostListItem
               key={post.id}
               title={post.title}
-              currentPassengers={post.currentPassengers}
-              maxPassengers={post.maxPassengers}
+              currentParticipants={post.currentParticipants}
+              maxParticipants={post.maxParticipants}
               departureTime={reformatDate(post.departureTime)}
               origin={post.origin}
               destination={post.destination}

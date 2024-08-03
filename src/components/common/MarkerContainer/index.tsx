@@ -1,10 +1,6 @@
-import { useDispatch, useSelector } from 'react-redux';
 import { Marker, useNavermaps } from 'react-naver-maps';
 
-import { RootState } from '@/store';
 import { MarkerContainerProps } from '@/types/props';
-
-import { setActiveMarker } from '@/components/Home/Map/MapSlice.ts';
 
 const MarkerContainer = ({
   position,
@@ -12,17 +8,15 @@ const MarkerContainer = ({
   id,
   anchor,
   showPlace,
+  activeMarker,
+  setActiveMarker,
 }: MarkerContainerProps) => {
   const naverMaps = useNavermaps();
-  const dispatch = useDispatch();
-  const activeMarker = useSelector(
-    (state: RootState) => state.mapSlice.activeMarker
-  );
 
   const handleClick = (e: naver.maps.PointerEvent) => {
     if (showPlace) {
       e.pointerEvent.stopPropagation();
-      dispatch(setActiveMarker(id));
+      setActiveMarker(id);
     }
   };
 
