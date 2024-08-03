@@ -1,6 +1,9 @@
 import styled, { css } from 'styled-components';
 
-export const PeopleCountTagContainer = styled.div<{ $isMax: boolean }>`
+export const PeopleCountTagContainer = styled.div<{
+  $isClose: boolean | undefined;
+  $isMax: boolean;
+}>`
   display: flex;
   align-items: center;
 
@@ -14,20 +17,29 @@ export const PeopleCountTagContainer = styled.div<{ $isMax: boolean }>`
 
   border-radius: 5px;
 
-  ${({ $isMax }) =>
-    $isMax
+  ${({ $isClose, $isMax }) =>
+    $isClose
       ? css`
-          color: var(--color-unavailable-text);
-          background-color: var(--color-unavailable-background);
+          color: var(--color-gray-100);
+          background-color: var(--color-gray-300);
         `
-      : css`
-          color: var(--color-available-text);
-          background-color: var(--color-available-background);
-        `}
+      : $isMax
+        ? css`
+            color: var(--color-unavailable-text);
+            background-color: var(--color-unavailable-background);
+          `
+        : css`
+            color: var(--color-available-text);
+            background-color: var(--color-available-background);
+          `}
 
   & > svg {
-    fill: ${({ $isMax }) =>
-      $isMax ? 'var(--color-unavailable-text)' : 'var(--color-available-text)'};
+    fill: ${({ $isClose, $isMax }) =>
+      $isClose
+        ? `var(--color-gray-100)`
+        : $isMax
+          ? 'var(--color-unavailable-text)'
+          : 'var(--color-available-text)'};
 
     margin-right: 6px;
   }

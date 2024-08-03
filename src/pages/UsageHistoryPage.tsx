@@ -11,15 +11,21 @@ import {
 
 import UsageHistoryIcon from '@/assets/icons/header/usage-history-icon.svg?react';
 import Footer from '@/components/common/Layout/Footer';
-// import PostListItem from '@/components/common/PostListItem';
-// import reformatDate from '@/utils/reformatDate.ts';
-//import { postData } from '@/constants';
+import { useGetClosePostsQuery, useGetJoinPostsQuery } from '@/api/localApi.ts';
+import PostListItem from '@/components/common/PostListItem';
+import reformatDate from '@/utils/reformatDate.ts';
 
 const UsageHistoryPage = () => {
   const [isActive, setIsActive] = useState('join');
 
-  //const data = postData();
+  const getJoinPostsResult = useGetJoinPostsQuery('joinPosts');
+  const getClosePostsResult = useGetClosePostsQuery('closePosts');
 
+  const { data, isLoading } =
+    isActive === 'join' ? getJoinPostsResult : getClosePostsResult;
+
+  if (isLoading) return <div>Loading...</div>;
+  if (!data) return <div>Missing data!</div>;
   return (
     <>
       <Header>
@@ -48,17 +54,18 @@ const UsageHistoryPage = () => {
           </Button>
         </ButtonContainer>
         <PostListContainer>
-          {/*{data.map((post) => (*/}
-          {/*  <PostListItem*/}
-          {/*    key={post.id}*/}
-          {/*    title={post.title}*/}
-          {/*    currentPassengers={post.currentPassengers}*/}
-          {/*    maxPassengers={post.maxPassengers}*/}
-          {/*    departureTime={reformatDate(post.departureTime)}*/}
-          {/*    origin={post.origin}*/}
-          {/*    destination={post.destination}*/}
-          {/*  />*/}
-          {/*))}*/}
+          {data.map((post) => (
+            <PostListItem
+              key={post.id}
+              title={post.title}
+              currentParticipants={post.currentParticipants}
+              maxParticipants={post.maxParticipants}
+              departureTime={reformatDate(post.departureTime)}
+              origin={post.origin}
+              destination={post.destination}
+              isClose={isActive === 'close'}
+            />
+          ))}
         </PostListContainer>
       </Container>
       <Footer />

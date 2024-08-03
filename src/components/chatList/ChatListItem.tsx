@@ -8,15 +8,15 @@ import PeopleCountTag from '@/components/common/PeopleCountTag';
 
 const ChatListItem = ({
   title,
-  currentPassengers,
-  maxPassengers,
+  currentParticipants,
+  maxParticipants,
   resentMessage,
   resentMessageTime,
   resentMessageCounter,
 }: {
   title: string;
-  currentPassengers: number;
-  maxPassengers: number;
+  currentParticipants: number;
+  maxParticipants: number;
   resentMessage: string;
   resentMessageTime: string;
   resentMessageCounter: string;
@@ -27,8 +27,8 @@ const ChatListItem = ({
         <div>
           <h3>{title}</h3>
           <PeopleCountTag
-            currentPassengers={currentPassengers}
-            maxPassengers={maxPassengers}
+            currentParticipants={currentParticipants}
+            maxParticipants={maxParticipants}
           />
         </div>
         <span>{resentMessageTime}</span>

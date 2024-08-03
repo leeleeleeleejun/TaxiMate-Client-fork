@@ -12,6 +12,12 @@ const PostHandlers = [
   http.get(API_PATH.POST.GET.BY_ID, () => {
     return HttpResponse.json(post);
   }),
+  http.get(API_PATH.POST.GET.JOIN_POSTS, () => {
+    return HttpResponse.json(posts);
+  }),
+  http.get(API_PATH.POST.GET.CLOSE_POSTS, () => {
+    return HttpResponse.json(posts);
+  }),
 ];
 
 export default PostHandlers;

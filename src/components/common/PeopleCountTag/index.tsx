@@ -5,11 +5,12 @@ import { PeopleCountTagProps } from '@/types/props';
 const PeopleCountTag = ({
   currentParticipants,
   maxParticipants,
+  isClose,
 }: PeopleCountTagProps) => {
   const isMax = currentParticipants === maxParticipants;
 
   return (
-    <PeopleCountTagContainer $isMax={isMax}>
+    <PeopleCountTagContainer $isClose={isClose} $isMax={isClose || isMax}>
       <PeopleCountTagIcon />
       {currentParticipants + ' / ' + maxParticipants}
     </PeopleCountTagContainer>
