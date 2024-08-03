@@ -7,8 +7,9 @@ export const localApi = createApi({
   reducerPath: 'localApi',
   baseQuery: fetchBaseQuery({ baseUrl: API_BASE_URL }),
   endpoints: (builder) => ({
-    getPosts: builder.query<{ data: Post[] }, string>({
+    getPosts: builder.query<Post[], string>({
       query: () => API_PATH.POST.GET.ALL,
+      transformResponse: (response: { data: Post[] }) => response.data,
     }),
   }),
 });

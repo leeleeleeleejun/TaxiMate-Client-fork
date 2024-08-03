@@ -20,10 +20,12 @@ const HomePage = () => {
   const [activeMarker, setActiveMarker] = useState<string | null>(null);
   const [postListHeight, setPostListHeight] = useState(0);
 
+  //console.log(map?.getBounds());
+
   const { data, isLoading } = useGetPostsQuery('posts');
 
-  if (isLoading) return <div>isLoading...</div>;
-  if (!data) return <div>isLoading...</div>;
+  if (isLoading) return <div>Loading...</div>;
+  if (!data) return <div>Missing data!</div>;
 
   return (
     <>
@@ -49,12 +51,12 @@ const HomePage = () => {
           setActiveButton={setActiveButton}
           activeMarker={activeMarker}
           setActiveMarker={setActiveMarker}
-          data={data.data}
+          data={data}
         />
       </Main>
       <PostList
         activeMarker={activeMarker}
-        data={data.data}
+        data={data}
         setPostListHeight={setPostListHeight}
       />
       <Footer />
