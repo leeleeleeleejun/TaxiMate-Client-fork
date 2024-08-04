@@ -1,14 +1,21 @@
 import { useEffect, useState } from 'react';
 import { Container as MapDiv, NaverMap, useNavermaps } from 'react-naver-maps';
 
-import { usePolylinePathData } from '@/constants';
 import MarkerContainer from '@/components/common/MarkerContainer';
 
-const Map = () => {
-  const [map, setMap] = useState<naver.maps.Map | null>(null);
-  const polylinePath = usePolylinePathData();
-
+const Map = ({
+  taxiRoute,
+}: {
+  taxiRoute: { latitude: number; longitude: number }[];
+}) => {
   const navermaps = useNavermaps();
+
+  const [map, setMap] = useState<naver.maps.Map | null>(null);
+
+  const polylinePath = taxiRoute.map(
+    (item) => new navermaps.LatLng(item.latitude, item.longitude)
+  );
+
   map &&
     new naver.maps.Polyline({
       map: map,

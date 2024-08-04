@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_BASE_URL, API_PATH } from '@/constants/path.ts';
-import { Post } from '@/types/post.ts';
+import { Post, PostDetail } from '@/types/post.ts';
 
 // base URL과 엔드포인트들로 서비스 정의
 export const localApi = createApi({
@@ -24,6 +24,10 @@ export const localApi = createApi({
       },
       transformResponse: (response: { data: Post[] }) => response.data,
     }),
+    getPostById: builder.query<PostDetail, string>({
+      query: (id) => API_PATH.POST.GET.BY_ID + id,
+      transformResponse: (response: { data: PostDetail }) => response.data,
+    }),
     getJoinPosts: builder.query<Post[], string>({
       query: () => API_PATH.POST.GET.JOIN_POSTS,
       transformResponse: (response: { data: Post[] }) => response.data,
@@ -38,6 +42,7 @@ export const localApi = createApi({
 // 정의된 엔드포인트에서 자동으로 생성된 훅을 함수형 컴포넌트에서 사용하기 위해 export
 export const {
   useLazyGetPostsQuery,
+  useGetPostByIdQuery,
   useGetJoinPostsQuery,
   useGetClosePostsQuery,
 } = localApi;

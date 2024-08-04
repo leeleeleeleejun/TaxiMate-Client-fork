@@ -9,7 +9,7 @@ export const API_PATH = {
     GET: {
       ALL: `${API_BASE_URL}/api/v1/parties`,
       // 포스트 ID 조회
-      BY_ID: `${LocalAPI}/posts/:postId`,
+      BY_ID: `${LocalAPI}/api/v1/parties/:partyId`,
       // 특정 유저의 전체 포스트 조회
       BY_USER: `${API_BASE_URL}/posts/user/:userId`,
       JOIN_POSTS: `${LocalAPI}/join-posts`,

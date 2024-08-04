@@ -52,7 +52,7 @@ export const post = {
     id: 12,
     title: '제목입니다~',
     departureTime: '2024-06-26T14:11:24.888135',
-    explanation: '재잘재잘',
+    explanation: '경유 가능합니다. \n참고로 저 코로나 걸림요',
     origin: '우리집',
     originAddress: '출발지 주소 머시기',
     originLocation: {
@@ -68,7 +68,7 @@ export const post = {
     maxParticipants: 4,
     currentParticipants: 2,
     status: 'NOT_PARTICIPATING', // NOT_PARTICIPATING, PARTICIPATING, CLOSED
-    createdAt: '2024-06-25T20:02:11.523391',
+    createdAt: '2024-07-29T16:43:11.523391',
     views: 14,
     host: {
       id: 16,
