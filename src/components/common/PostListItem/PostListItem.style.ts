@@ -34,7 +34,7 @@ export const PostBodyContainer = styled.div`
   font-weight: var(--weight-light);
   color: var(--color-gray-100);
 
-  div {
+  & > div {
     display: flex;
     align-items: center;
     margin-bottom: 4px;
@@ -43,4 +43,10 @@ export const PostBodyContainer = styled.div`
       margin-right: 4px;
     }
   }
+`;
+
+export const AddressWrapper = styled.span`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
