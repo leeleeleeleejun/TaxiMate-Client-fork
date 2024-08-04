@@ -11,6 +11,7 @@ import NonActiveMoveLocationIcon from '@/assets/icons/map/non-active-move-locati
 const MoveCurrentLocation = ({
   map,
   activeButton,
+  setActiveButton,
   activeMarker,
   postListHeight,
 }: MoveCurrentLocationProps) => {
@@ -41,6 +42,7 @@ const MoveCurrentLocation = ({
       const latLng = new naverMaps.LatLng(lat, lng);
       map.setCenter(latLng);
     }
+    setActiveButton(true);
   };
 
   return (

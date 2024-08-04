@@ -42,6 +42,7 @@ const HomePage = () => {
         <MoveCurrentLocation
           map={map}
           activeButton={activeButton}
+          setActiveButton={setActiveButton}
           activeMarker={activeMarker}
           postListHeight={postListHeight}
         />
