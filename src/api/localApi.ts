@@ -25,7 +25,7 @@ export const localApi = createApi({
       transformResponse: (response: { data: Post[] }) => response.data,
     }),
     getPostById: builder.query<PostDetail, string>({
-      query: (id) => API_PATH.POST.GET.BY_ID + id,
+      query: (id) => API_PATH.POST.GET.BY_ID.replace(':partyId', id),
       transformResponse: (response: { data: PostDetail }) => response.data,
     }),
     getJoinPosts: builder.query<Post[], string>({

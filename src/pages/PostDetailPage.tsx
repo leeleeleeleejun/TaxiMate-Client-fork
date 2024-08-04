@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import Header from '@/components/common/Layout/Header';
 import DropDown from '@/components/common/DropDown.tsx';
@@ -18,11 +18,12 @@ import reformatDetailDate from '@/utils/reformatDetailDate.ts';
 
 const PostDetailPage = () => {
   const navigate = useNavigate();
-  const { data, isLoading } = useGetPostByIdQuery('');
+  const id = useLocation().pathname.split('/')[2];
+  const { data, isLoading } = useGetPostByIdQuery(id);
 
   if (isLoading) return <div>Loading...</div>;
   if (!data) return <div>no data...</div>;
-  const a = reformatDetailDate(data.createdAt);
+  const formatCreatedAt = reformatDetailDate(data.createdAt);
   return (
     <>
       <Header>
@@ -35,7 +36,7 @@ const PostDetailPage = () => {
         <PostDetailHeader
           currentParticipants={data.currentParticipants}
           maxParticipants={data.maxParticipants}
-          createdAt={a}
+          createdAt={formatCreatedAt}
           views={data.views}
         />
         <PostDetailTitle
