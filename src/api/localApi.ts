@@ -7,8 +7,21 @@ export const localApi = createApi({
   reducerPath: 'localApi',
   baseQuery: fetchBaseQuery({ baseUrl: API_BASE_URL }),
   endpoints: (builder) => ({
-    getPosts: builder.query<Post[], string>({
-      query: () => API_PATH.POST.GET.ALL,
+    getPosts: builder.query<
+      Post[],
+      {
+        minLatitude: number;
+        minLongitude: number;
+        maxLatitude: number;
+        maxLongitude: number;
+      }
+    >({
+      query: (arg) => {
+        return {
+          url: API_PATH.POST.GET.ALL,
+          params: arg,
+        };
+      },
       transformResponse: (response: { data: Post[] }) => response.data,
     }),
     getJoinPosts: builder.query<Post[], string>({
@@ -23,5 +36,8 @@ export const localApi = createApi({
 });
 
 // 정의된 엔드포인트에서 자동으로 생성된 훅을 함수형 컴포넌트에서 사용하기 위해 export
-export const { useGetPostsQuery, useGetJoinPostsQuery, useGetClosePostsQuery } =
-  localApi;
+export const {
+  useLazyGetPostsQuery,
+  useGetJoinPostsQuery,
+  useGetClosePostsQuery,
+} = localApi;

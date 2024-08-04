@@ -1,4 +1,5 @@
 export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const LocalAPI = 'http://localhost:5173';
 
 export const API_PATH = {
   SEARCH: {
@@ -6,13 +7,13 @@ export const API_PATH = {
   },
   POST: {
     GET: {
-      ALL: `${API_BASE_URL}/posts`,
+      ALL: `${API_BASE_URL}/api/v1/parties`,
       // 포스트 ID 조회
-      BY_ID: `${API_BASE_URL}/posts/:postId`,
+      BY_ID: `${LocalAPI}/posts/:postId`,
       // 특정 유저의 전체 포스트 조회
       BY_USER: `${API_BASE_URL}/posts/user/:userId`,
-      JOIN_POSTS: `${API_BASE_URL}/join-posts`,
-      CLOSE_POSTS: `${API_BASE_URL}/close-posts`,
+      JOIN_POSTS: `${LocalAPI}/join-posts`,
+      CLOSE_POSTS: `${LocalAPI}/close-posts`,
     },
   },
 };
