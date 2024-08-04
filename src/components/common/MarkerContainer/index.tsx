@@ -14,7 +14,7 @@ const MarkerContainer = ({
   const naverMaps = useNavermaps();
 
   const handleClick = (e: naver.maps.PointerEvent) => {
-    if (showPlace) {
+    if (showPlace && setActiveMarker) {
       e.pointerEvent.stopPropagation();
       setActiveMarker(id);
     }

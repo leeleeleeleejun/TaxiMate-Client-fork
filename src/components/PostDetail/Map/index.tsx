@@ -39,6 +39,7 @@ const Map = () => {
             title={index === 0 ? '출발' : '도착'}
             anchor={[22, 53]}
             showPlace={false}
+            activeMarker={null}
           />
         ))}
       </NaverMap>

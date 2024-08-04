@@ -39,7 +39,7 @@ export default PostDetail;
 const PostDetailHeader = () => {
   return (
     <S.PostDetailHeaderContainer>
-      <PeopleCountTag currentPassengers={1} maxPassengers={4} />
+      <PeopleCountTag currentParticipants={1} maxParticipants={4} />
       15분 전 • 조회 17
     </S.PostDetailHeaderContainer>
   );
