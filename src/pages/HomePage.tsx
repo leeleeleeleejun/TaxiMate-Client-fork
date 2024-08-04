@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useGetPostsQuery } from '@/api/localApi.ts';
+import { useEffect, useState } from 'react';
+import { useLazyGetPostsQuery } from '@/api/localApi.ts';
 
 import Header from '@/components/common/Layout/Header';
 import { HeaderItem } from '@/components/common/Layout/Header/Header.style.ts';
@@ -20,12 +20,25 @@ const HomePage = () => {
   const [activeMarker, setActiveMarker] = useState<string | null>(null);
   const [postListHeight, setPostListHeight] = useState(0);
 
-  //console.log(map?.getBounds());
+  const [trigger, { data }] = useLazyGetPostsQuery();
 
-  const { data, isLoading } = useGetPostsQuery('posts');
+  const getPostsQueryTrigger = () => {
+    if (!map) return;
+    const minLatitude = map.getBounds().minY();
+    const minLongitude = map.getBounds().minX();
+    const maxLatitude = map.getBounds().maxY();
+    const maxLongitude = map.getBounds().maxX();
+    trigger({
+      minLatitude,
+      minLongitude,
+      maxLatitude,
+      maxLongitude,
+    });
+  };
 
-  if (isLoading) return <div>Loading...</div>;
-  if (!data) return <div>Missing data!</div>;
+  useEffect(() => {
+    getPostsQueryTrigger();
+  }, [map]);
 
   return (
     <>
@@ -38,10 +51,11 @@ const HomePage = () => {
       </Header>
       <Main>
         <SearchBar path={'/search'} />
-        <ResearchButton />
+        <ResearchButton onClick={getPostsQueryTrigger} />
         <MoveCurrentLocation
           map={map}
           activeButton={activeButton}
+          setActiveButton={setActiveButton}
           activeMarker={activeMarker}
           postListHeight={postListHeight}
         />
@@ -51,12 +65,12 @@ const HomePage = () => {
           setActiveButton={setActiveButton}
           activeMarker={activeMarker}
           setActiveMarker={setActiveMarker}
-          data={data}
+          data={data || []}
         />
       </Main>
       <PostList
         activeMarker={activeMarker}
-        data={data}
+        data={data || []}
         setPostListHeight={setPostListHeight}
       />
       <Footer />

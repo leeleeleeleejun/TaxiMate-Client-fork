@@ -1,4 +1,5 @@
 import {
+  AddressWrapper,
   PostBodyContainer,
   PostHeaderContainer,
   PostListItemContainer,
@@ -81,9 +82,9 @@ export const PostBody = ({
       </div>
       <div>
         <LocationIcon />
-        {origin}
+        <AddressWrapper>{origin}</AddressWrapper>
         <CaretRightIcon />
-        {destination}
+        <AddressWrapper>{destination}</AddressWrapper>
       </div>
     </PostBodyContainer>
   );

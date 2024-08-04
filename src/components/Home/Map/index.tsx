@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { Container as MapDiv, NaverMap, useNavermaps } from 'react-naver-maps';
+import { Container as MapDiv, NaverMap } from 'react-naver-maps';
 
 import getCurrentLocation from '@/utils/getCurrentlocation.ts';
 
@@ -17,28 +16,17 @@ const Map = ({
   setActiveMarker,
   data,
 }: HomeMapProps) => {
-  const naverMaps = useNavermaps();
-
   const centerLocation = JSON.parse(localStorage.getItem('Location') || '');
 
-  const onCenterChangedFunc = () => {
+  const onCenterChangedFunc = async () => {
     if (!map) return;
     // 현재 위치 참조
     const { x, y } = map.getCenter();
     localStorage.setItem('Location', JSON.stringify({ lat: y, lng: x }));
 
     // 내 위치로 이동 버트 비활성화
-    setActiveButton(
-      map.getCenter().equals(new naverMaps.LatLng(defaultLocation))
-    );
+    setActiveButton(false);
   };
-
-  useEffect(() => {
-    if (!map) return;
-    setActiveButton(
-      map.getCenter().equals(new naverMaps.LatLng(defaultLocation))
-    );
-  }, [map]);
 
   return (
     <MapDiv

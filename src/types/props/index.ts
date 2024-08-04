@@ -39,6 +39,7 @@ export interface PostListItemProps
 export interface MoveCurrentLocationProps {
   map: naver.maps.Map | null;
   activeButton: boolean;
+  setActiveButton: React.Dispatch<React.SetStateAction<boolean>>;
   activeMarker: string | null;
   postListHeight: number;
 }
