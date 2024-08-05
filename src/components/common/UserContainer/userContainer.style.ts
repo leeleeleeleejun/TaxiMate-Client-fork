@@ -8,6 +8,8 @@ export const Container = styled.div`
 
   img {
     border-radius: 50%;
+    object-fit: cover;
+
     width: 40px;
     height: 40px;
   }
