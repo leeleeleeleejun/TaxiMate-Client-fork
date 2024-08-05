@@ -6,17 +6,21 @@ import {
   OthersName,
   OthersProfile,
 } from '@/components/chatRoom/chatRoom.style.ts';
+import UserBasicImg from '@/components/common/userBasicImg';
 
 const OthersMessageBox = ({
   messages,
   time,
+  img,
 }: {
   messages: string[];
   time: string;
+  img: string;
 }) => {
   return (
     <MessageBox>
-      <OthersProfile src={'/profile.png'} alt='profile' />
+      {img ? <OthersProfile src={img} alt='profile' /> : <UserBasicImg />}
+
       <MessageContainer>
         <OthersName>유능한 개발자</OthersName>
         {messages.map((message, index) => (

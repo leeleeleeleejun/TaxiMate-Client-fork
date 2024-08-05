@@ -39,7 +39,7 @@ const ChatRoomPage = () => {
       </Header>
       <NotificationContainer to={''}>
         <NotificationHeader>
-          <PeopleCountTag currentPassengers={4} maxPassengers={4} />
+          <PeopleCountTag currentParticipants={4} maxParticipants={4} />
           <ArrowRightIcon />
         </NotificationHeader>
         <PostBody
@@ -54,7 +54,37 @@ const ChatRoomPage = () => {
           time={'오후 2:30'}
         />
         <OthersMessageBox
+          img={'/profile.png'}
           messages={['안녕하세요', '하이루요~!~!~!~!~!~']}
+          time={'오후 2:30'}
+        />
+        <OthersMessageBox
+          img={''}
+          messages={['안녕하세요', '하이루요~!~!~!~!~!~']}
+          time={'오후 2:30'}
+        />
+        <MyMessageBox
+          messages={[
+            '안녕하세요',
+            '하이루요~!~!~!~!~!~',
+            '안녕하세요',
+            '하이루요~!~!~!~!~!~',
+          ]}
+          time={'오후 2:30'}
+        />
+        <OthersMessageBox
+          img={'/profile.png'}
+          messages={['안녕하세요', '하이루요~!~!~!~!~!~']}
+          time={'오후 2:30'}
+        />
+        <OthersMessageBox
+          img={''}
+          messages={[
+            '안녕하세요',
+            '하이루요~!~!~!~!~!~',
+            '안녕하세요',
+            '하이루요~!~!~!~!~!~',
+          ]}
           time={'오후 2:30'}
         />
       </Container>

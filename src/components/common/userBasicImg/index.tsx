@@ -12,6 +12,7 @@ const UserBasicImg = () => {
 export default UserBasicImg;
 
 const Container = styled.div`
+  margin-right: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
