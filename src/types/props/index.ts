@@ -65,7 +65,7 @@ export interface MarkerContainerProps {
 
   showPlace: boolean;
   activeMarker: string | null;
-  setActiveMarker: setActiveMarker;
+  setActiveMarker?: setActiveMarker;
 }
 
 export interface registerProps {
