@@ -22,6 +22,7 @@ const ChatListPage = () => {
           resentMessage={'언제 만나실래ㅐ요??'}
           resentMessageTime={'오후 2:32'}
           resentMessageCounter={'3'}
+          id={'a'}
         />
         <ChatListItem
           title={'학생회관 앞'}
@@ -32,6 +33,7 @@ const ChatListPage = () => {
           }
           resentMessageTime={'어제'}
           resentMessageCounter={'123'}
+          id={'a'}
         />
         <ChatListItem
           title={'학생회관 앞 CU 편의점 종합버스'}
@@ -42,6 +44,7 @@ const ChatListPage = () => {
           }
           resentMessageTime={'5월 24일'}
           resentMessageCounter={'300+'}
+          id={'a'}
         />
         <ChatListItem
           title={
@@ -52,6 +55,7 @@ const ChatListPage = () => {
           resentMessage={'언제 만나실래ㅐ요??'}
           resentMessageTime={'2023. 11. 02.'}
           resentMessageCounter={'3'}
+          id={'a'}
         />
         <ChatListItem
           title={'학생회관 앞 CU 편의점 종합버스'}
@@ -62,6 +66,7 @@ const ChatListPage = () => {
           }
           resentMessageTime={'5월 24일'}
           resentMessageCounter={'300+'}
+          id={'a'}
         />
         <ChatListItem
           title={
@@ -72,6 +77,7 @@ const ChatListPage = () => {
           resentMessage={'언제 만나실래ㅐ요??'}
           resentMessageTime={'2023. 11. 02.'}
           resentMessageCounter={'3'}
+          id={'a'}
         />
         <ChatListItem
           title={'학생회관 앞 CU 편의점 종합버스'}
@@ -82,6 +88,7 @@ const ChatListPage = () => {
           }
           resentMessageTime={'5월 24일'}
           resentMessageCounter={'300+'}
+          id={'a'}
         />
         <ChatListItem
           title={
@@ -92,6 +99,7 @@ const ChatListPage = () => {
           resentMessage={'언제 만나실래ㅐ요??'}
           resentMessageTime={'2023. 11. 02.'}
           resentMessageCounter={'3'}
+          id={'a'}
         />
         <ChatListItem
           title={'학생회관 앞 CU 편의점 종합버스'}
@@ -102,6 +110,7 @@ const ChatListPage = () => {
           }
           resentMessageTime={'5월 24일'}
           resentMessageCounter={'300+'}
+          id={'a'}
         />
         <ChatListItem
           title={
@@ -112,6 +121,7 @@ const ChatListPage = () => {
           resentMessage={'언제 만나실래ㅐ요??'}
           resentMessageTime={'2023. 11. 02.'}
           resentMessageCounter={'3'}
+          id={'a'}
         />
         <ChatListItem
           title={'학생회관 앞 CU 편의점 종합버스'}
@@ -122,6 +132,7 @@ const ChatListPage = () => {
           }
           resentMessageTime={'5월 24일'}
           resentMessageCounter={'300+'}
+          id={'a'}
         />
       </Container>
       <Footer />

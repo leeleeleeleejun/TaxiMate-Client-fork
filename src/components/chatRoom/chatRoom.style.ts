@@ -21,7 +21,7 @@ export const NotificationContainer = styled(Link)`
   display: flex;
   flex-direction: column;
   padding: 16px 20px;
-  border-bottom: 0.5px solid var(--color-gray-200);
+  border-bottom: 1px solid var(--color-gray-300);
   margin-bottom: 10px;
 `;
 
@@ -35,7 +35,8 @@ export const NotificationHeader = styled.div`
 
 export const MessageBox = styled.div`
   display: flex;
-  max-width: 50%;
+  max-width: 70%;
+  margin-bottom: 10px;
 `;
 
 export const MyMessageBoxContainer = styled(MessageBox)`
@@ -78,8 +79,8 @@ export const MessageTime = styled.span`
 `;
 
 export const OthersProfile = styled.img`
-  width: 34px;
-  height: 34px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
 
   margin-right: 10px;
