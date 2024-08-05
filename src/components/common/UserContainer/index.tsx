@@ -1,10 +1,11 @@
 import { Container } from './userContainer.style.ts';
 import ArrowRightIcon from '@/assets/icons/arrow-right-icon.svg?react';
+import UserBasicImg from '@/components/common/userBasicImg';
 
 const UserContainer = ({ img, name }: { img: string; name: string }) => {
   return (
     <Container>
-      <img src={img} alt='profile' />
+      {img ? <img src={img} alt='profile' /> : <UserBasicImg />}
       <span>{name}</span>
       <ArrowRightIcon />
     </Container>
