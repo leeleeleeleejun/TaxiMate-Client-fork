@@ -41,12 +41,23 @@ export const MessageBox = styled.div`
 
 export const MyMessageBoxContainer = styled(MessageBox)`
   margin-left: auto;
-  flex-direction: row-reverse;
+`;
+
+export const ResentMessage = styled.div`
+  display: flex;
+`;
+
+export const MyResentMessage = styled(ResentMessage)`
+  margin-left: auto;
 `;
 
 export const MessageContainer = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+export const MyMessageContainer = styled(MessageContainer)`
+  margin-left: auto;
 `;
 
 const Message = styled.div`
@@ -57,6 +68,10 @@ const Message = styled.div`
   font-size: var(--font-small);
   border-radius: 14px;
   white-space: pre-wrap;
+`;
+
+export const resentMessage = styled(Message)`
+  display: flex;
 `;
 
 export const OthersMessage = styled(Message)`

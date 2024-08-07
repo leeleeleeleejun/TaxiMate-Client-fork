@@ -5,6 +5,7 @@ import {
   OthersMessage,
   OthersName,
   OthersProfile,
+  ResentMessage,
 } from '@/components/chatRoom/chatRoom.style.ts';
 import UserBasicImg from '@/components/common/userBasicImg';
 import formatMongoDate from '@/utils/formatMongoDate.ts';
@@ -25,11 +26,17 @@ const OthersMessageBox = ({
       {img ? <OthersProfile src={img} alt='profile' /> : <UserBasicImg />}
       <MessageContainer>
         <OthersName>{name}</OthersName>
-        {messages.map((message, index) => (
-          <OthersMessage key={index}>{message}</OthersMessage>
-        ))}
+        {messages.map((message, index) =>
+          index !== messages.length - 1 ? (
+            <OthersMessage key={index}>{message}</OthersMessage>
+          ) : (
+            <ResentMessage>
+              <OthersMessage>{messages[messages.length - 1]}</OthersMessage>
+              <MessageTime>{formatMongoDate(time)}</MessageTime>
+            </ResentMessage>
+          )
+        )}
       </MessageContainer>
-      <MessageTime>{formatMongoDate(time)}</MessageTime>
     </MessageBox>
   );
 };

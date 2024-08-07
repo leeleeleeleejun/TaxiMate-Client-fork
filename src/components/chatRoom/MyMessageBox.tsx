@@ -1,8 +1,9 @@
 import {
-  MessageContainer,
   MessageTime,
   MyMessage,
   MyMessageBoxContainer,
+  MyMessageContainer,
+  MyResentMessage,
 } from '@/components/chatRoom/chatRoom.style.ts';
 import formatMongoDate from '@/utils/formatMongoDate.ts';
 
@@ -15,12 +16,18 @@ const MyMessageBox = ({
 }) => {
   return (
     <MyMessageBoxContainer>
-      <MessageContainer>
-        {messages.map((message, index) => (
-          <MyMessage key={index}>{message}</MyMessage>
-        ))}
-      </MessageContainer>
-      <MessageTime>{formatMongoDate(time)}</MessageTime>
+      <MyMessageContainer>
+        {messages.map((message, index) =>
+          index !== messages.length - 1 ? (
+            <MyMessage key={index}>{message}</MyMessage>
+          ) : (
+            <MyResentMessage key={index}>
+              <MessageTime>{formatMongoDate(time)}</MessageTime>
+              <MyMessage>{message}</MyMessage>
+            </MyResentMessage>
+          )
+        )}
+      </MyMessageContainer>
     </MyMessageBoxContainer>
   );
 };
