@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Header from '@/components/common/Layout/Header';
@@ -56,7 +56,7 @@ const ChatRoomPage = () => {
   const [user, setUser] = useState<testUser | null>();
   const [input, setInput] = useState('');
   const [messageList, setMessageList] = useState<groupMessage[]>([]);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const messageEndRef = useRef<HTMLDivElement>(null);
 
   const sendMessage = () => {
     if (input.trim()) {
@@ -74,16 +74,14 @@ const ChatRoomPage = () => {
         setUser(response.user);
       }
     });
-  }, []);
-
-  useEffect(() => {
     socket.on('message', (message: testChat) => {
       handleMessage(message);
-      if (containerRef.current) {
-        containerRef.current.scrollTop = containerRef.current.scrollHeight;
-      }
     });
   }, []);
+
+  useLayoutEffect(() => {
+    messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messageList]);
 
   const handleMessage = (message: testChat) => {
     const setMessage = { ...message, chat: [message.chat] };
@@ -130,7 +128,7 @@ const ChatRoomPage = () => {
           destination={'천안종합버스터미널'}
         />
       </NotificationContainer>
-      <Container ref={containerRef}>
+      <Container>
         {user &&
           messageList.map((message) =>
             message.user.name === user.name ? (
@@ -149,6 +147,7 @@ const ChatRoomPage = () => {
               />
             )
           )}
+        <div ref={messageEndRef} />
       </Container>
       <MessageInputBox>
         <MessageInput
