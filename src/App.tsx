@@ -1,6 +1,7 @@
 import Router from '@/Router.tsx';
 import { NavermapsProvider } from 'react-naver-maps';
 import GlobalStyle from '@/styles/GlobalStyle.ts';
+import socket from '@/api/SocketTest.ts';
 
 const naverMapApi = import.meta.env.VITE_NAVER_MAP_API;
 const kakaoJsKey = import.meta.env.VITE_KAKAO_JS_KEY;
@@ -15,7 +16,7 @@ window.Kakao.init(kakaoJsKey);
 
 // SDK 초기화 여부를 판단합니다.
 console.log(window.Kakao.isInitialized());
-
+socket;
 function App() {
   return (
     <>
