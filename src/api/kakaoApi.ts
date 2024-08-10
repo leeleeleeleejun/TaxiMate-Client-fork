@@ -17,7 +17,7 @@ const getAddressKakao = async (x: number, y: number) => {
       throw new Error(result.error);
     }
 
-    return result;
+    return result.documents[0];
   } catch (err) {
     console.error(err);
   }

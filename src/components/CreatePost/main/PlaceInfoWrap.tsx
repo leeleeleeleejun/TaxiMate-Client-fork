@@ -28,8 +28,7 @@ const PlaceInfoWrap = ({ value, value2, setStep }: PlaceInfoWrapProps) => {
     >
   ) => {
     const result = await getAddressKakao(lng, lat);
-    const addressObj = result.documents[0];
-    const address = addressObj.road_address || addressObj.address;
+    const address = result.road_address || result.address;
     target({
       address_name: address.address_name,
       building_name: address.building_name || '',
