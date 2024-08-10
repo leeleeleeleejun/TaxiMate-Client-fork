@@ -25,13 +25,18 @@ const SetPlaceMapPage = ({
 
   const setAddressInfo = async (lng: number, lat: number) => {
     const result = await getAddressKakao(lng, lat);
-    const address = result.road_address || result.address;
-    setAddress(
-      address.building_name
-        ? address.address_name
-        : address.region_3depth_name + +address.main_address_no
-    );
-    setPlace(address.building_name || '');
+
+    const { road_address, address } = result;
+
+    const place =
+      road_address?.building_name ||
+      `${address.region_3depth_name} ${address.main_address_no}` +
+        (address.sub_address_no && `-${address.sub_address_no}`);
+
+    const addressName = road_address?.address_name || address.address_name;
+
+    setPlace(place);
+    setAddress(addressName);
   };
 
   const submitFunc = () => {

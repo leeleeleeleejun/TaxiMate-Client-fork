@@ -12,26 +12,35 @@ interface PlaceInfoWrapProps extends contentWrapType {
 
 const PlaceInfoWrap = ({ value, value2, setStep }: PlaceInfoWrapProps) => {
   const [originAddress, setOriginAddress] = useState({
-    address_name: '',
-    building_name: '',
+    addressName: '',
+    place: '',
   });
   const [destinationAddress, setDestinationAddress] = useState({
-    address_name: '',
-    building_name: '',
+    addressName: '',
+    place: '',
   });
 
   const setLocationInfo = async (
     lng: number,
     lat: number,
     target: React.Dispatch<
-      React.SetStateAction<{ address_name: string; building_name: string }>
+      React.SetStateAction<{ addressName: string; place: string }>
     >
   ) => {
     const result = await getAddressKakao(lng, lat);
-    const address = result.road_address || result.address;
+
+    const { road_address, address } = result;
+
+    const place =
+      road_address?.building_name ||
+      `${address.region_3depth_name} ${address.main_address_no}` +
+        (address.sub_address_no && `-${address.sub_address_no}`);
+
+    const addressName = road_address?.address_name || address.address_name;
+
     target({
-      address_name: address.address_name,
-      building_name: address.building_name || '',
+      place,
+      addressName,
     });
   };
 
@@ -53,8 +62,8 @@ const PlaceInfoWrap = ({ value, value2, setStep }: PlaceInfoWrapProps) => {
       >
         <LocationInfo
           keyWord={'출발지'}
-          place={originAddress.building_name}
-          address={originAddress.address_name}
+          place={originAddress.place}
+          address={originAddress.addressName}
           inCreate
         />
       </button>
@@ -65,8 +74,8 @@ const PlaceInfoWrap = ({ value, value2, setStep }: PlaceInfoWrapProps) => {
       >
         <LocationInfo
           keyWord={'도착지'}
-          place={destinationAddress.building_name}
-          address={destinationAddress.address_name}
+          place={destinationAddress.place}
+          address={destinationAddress.addressName}
           inCreate
         />
       </button>
