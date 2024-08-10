@@ -22,8 +22,8 @@ const SetPlacePage = ({
 
   const MyLocationButtonClickHandle = async () => {
     const { lat, lng } = await getCurrentLocation();
-    const registerKey = path ? 'origin' : 'destination';
-    setRegisterDataFunc(registerKey, { lat, lng });
+    const registerKey = path ? 'originLocation' : 'destinationLocation';
+    setRegisterDataFunc(registerKey, { latitude: lat, longitude: lng });
     path ? setStep('originMap') : setStep('destinationMap');
   };
 

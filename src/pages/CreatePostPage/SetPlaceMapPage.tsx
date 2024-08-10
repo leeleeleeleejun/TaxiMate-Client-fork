@@ -44,13 +44,13 @@ const SetPlaceMapPage = ({
     // 현재 위치 참조
     const { x, y } = map.getCenter();
 
-    const registerKey = path ? 'origin' : 'destination';
-    setRegisterDataFunc(registerKey, { lat: y, lng: x });
+    const registerKey = path ? 'originLocation' : 'destinationLocation';
+    setRegisterDataFunc(registerKey, { latitude: y, longitude: x });
     comeBackMain();
   };
 
   useEffect(() => {
-    setAddressInfo(value.lng, value.lat);
+    setAddressInfo(value.longitude, value.latitude);
   }, []);
 
   return (
@@ -60,7 +60,7 @@ const SetPlaceMapPage = ({
         setMap={setMap}
         setAddressInfo={setAddressInfo}
         path={path}
-        defaultCenter={value}
+        defaultCenter={{ lat: value.latitude, lng: value.longitude }}
       />
       <SubmitContainer>
         <LocationInfo keyWord={keyWord} place={place} address={address} />

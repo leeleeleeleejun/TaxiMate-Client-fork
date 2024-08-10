@@ -70,12 +70,13 @@ export interface MarkerContainerProps {
 
 export interface registerProps {
   registerData: registerDataType;
+  createPostSubmit: () => void;
   setRegisterDataFunc: setRegisterDataFunc;
   setStep: setStep;
 }
 
 export interface contentWrapType {
-  value: string | { lat: number; lng: number };
+  value: string | { longitude: number; latitude: number };
   setRegisterDataFunc?: setRegisterDataFunc;
   setStep?: setStep;
 }
@@ -88,7 +89,7 @@ export interface searchPageProps {
 
 export interface setPlaceMapPageProps {
   step: stepType;
-  value: { lat: number; lng: number };
+  value: { latitude: number; longitude: number };
   comeBackMain: () => void;
   setRegisterDataFunc: setRegisterDataFunc;
   backHandle: () => void;

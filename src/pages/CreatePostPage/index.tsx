@@ -1,16 +1,38 @@
 import { ReactNode, useState } from 'react';
-import { registerDataKeys, stepType } from '@/types';
+import { registerDataKeys, registerDataType, stepType } from '@/types';
 
 import CreateMainPage from '@/pages/CreatePostPage/CreateMainPage.tsx';
 import SetDatePage from '@/pages/CreatePostPage/SetDatePage.tsx';
 import SetPlacePage from '@/pages/CreatePostPage/SetPlacePage.tsx';
 import SetPlaceMapPage from '@/pages/CreatePostPage/SetPlaceMapPage.tsx';
 import SearchPage from '@/pages/SearchPage.tsx';
+import { useCreatePostMutation } from '@/api/localApi.ts';
+import { useNavigate } from 'react-router-dom';
 
 const CreatePostPage = () => {
+  const navigate = useNavigate();
+
   const [step, setStep] = useState<stepType>('main');
 
-  const [registerData, setRegisterData] = useState(initialState);
+  const [registerData, setRegisterData] =
+    useState<registerDataType>(initialState);
+
+  const [createPost] = useCreatePostMutation();
+
+  const createPostSubmit = async () => {
+    // TODO: 벨리데이션 하기
+    const formatDate = new Date(
+      new Date(registerData.departureTime).getTime() + 1000 * 60 * 60 * 9
+    ).toISOString();
+
+    const result = await createPost({
+      ...registerData,
+      departureTime: formatDate,
+    }).unwrap();
+
+    alert(result.message);
+    navigate('/posts/' + result.data.partyId);
+  };
 
   const comeBackMain = () => {
     setStep('main');
@@ -18,7 +40,7 @@ const CreatePostPage = () => {
 
   const setRegisterDataFunc = (
     name: registerDataKeys,
-    data: string | { lat: number; lng: number }
+    data: string | { longitude: number; latitude: number }
   ) => {
     setRegisterData((prev) => ({ ...prev, [name]: data }));
   };
@@ -36,6 +58,7 @@ const CreatePostPage = () => {
       <Step check={step === 'main'}>
         <CreateMainPage
           registerData={registerData}
+          createPostSubmit={createPostSubmit}
           setRegisterDataFunc={setRegisterDataFunc}
           setStep={setStep}
         />
@@ -67,8 +90,8 @@ const CreatePostPage = () => {
           step={step}
           value={
             step === 'originMap'
-              ? registerData.origin
-              : registerData.destination
+              ? registerData.originLocation
+              : registerData.destinationLocation
           }
           setRegisterDataFunc={setRegisterDataFunc}
           comeBackMain={comeBackMain}
@@ -99,13 +122,13 @@ const initialState = {
   title: '',
   departureTime,
   explanation: '',
-  origin: {
-    lat: 36.4689627,
-    lng: 127.1408071,
+  originLocation: {
+    latitude: 36.4689627,
+    longitude: 127.1408071,
   },
-  destination: {
-    lat: 36.8511811,
-    lng: 127.1511352,
+  destinationLocation: {
+    latitude: 36.8511811,
+    longitude: 127.1511352,
   },
   maxParticipants: '4',
 };

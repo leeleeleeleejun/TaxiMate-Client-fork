@@ -28,9 +28,9 @@ const SearchPage = ({
       const nextStep = step === 'searchOrigin' ? 'originMap' : 'destinationMap';
 
       const registerKey: registerDataKeys =
-        step === 'searchOrigin' ? 'origin' : 'destination';
+        step === 'searchOrigin' ? 'originLocation' : 'destinationLocation';
 
-      setRegisterDataFunc(registerKey, { lat, lng });
+      setRegisterDataFunc(registerKey, { latitude: lat, longitude: lng });
 
       setStep(nextStep);
     } else {

@@ -7,7 +7,7 @@ import ContentWrap from '@/components/CreatePost/ContentWrap.tsx';
 import LocationPinIcon from '@/assets/icons/createPost/location-pin-icon.svg?react';
 
 interface PlaceInfoWrapProps extends contentWrapType {
-  value2: { lat: number; lng: number };
+  value2: { longitude: number; latitude: number };
 }
 
 const PlaceInfoWrap = ({ value, value2, setStep }: PlaceInfoWrapProps) => {
@@ -21,13 +21,13 @@ const PlaceInfoWrap = ({ value, value2, setStep }: PlaceInfoWrapProps) => {
   });
 
   const setLocationInfo = async (
-    lng: number,
-    lat: number,
+    longitude: number,
+    latitude: number,
     target: React.Dispatch<
       React.SetStateAction<{ addressName: string; place: string }>
     >
   ) => {
-    const result = await getAddressKakao(lng, lat);
+    const result = await getAddressKakao(longitude, latitude);
 
     const { road_address, address } = result;
 
@@ -46,8 +46,8 @@ const PlaceInfoWrap = ({ value, value2, setStep }: PlaceInfoWrapProps) => {
 
   useEffect(() => {
     if (typeof value !== 'string') {
-      setLocationInfo(value.lng, value.lat, setOriginAddress);
-      setLocationInfo(value2.lng, value2.lat, setDestinationAddress);
+      setLocationInfo(value.longitude, value.latitude, setOriginAddress);
+      setLocationInfo(value2.longitude, value2.latitude, setDestinationAddress);
     }
   }, []);
 
