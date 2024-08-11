@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import {
   AddressWrapper,
   PostBodyContainer,
@@ -18,6 +20,7 @@ import {
 } from '@/types/props';
 
 const PostListItem = ({
+  id,
   title,
   currentParticipants,
   maxParticipants,
@@ -29,18 +32,20 @@ const PostListItem = ({
 }: PostListItemProps) => {
   return (
     <PostListItemContainer>
-      <PostHeader
-        title={title}
-        currentParticipants={currentParticipants}
-        maxParticipants={maxParticipants}
-        activePostList={activePostList}
-        isClose={isClose}
-      />
-      <PostBody
-        departureTime={departureTime}
-        origin={origin}
-        destination={destination}
-      />
+      <Link to={'posts/' + id}>
+        <PostHeader
+          title={title}
+          currentParticipants={currentParticipants}
+          maxParticipants={maxParticipants}
+          activePostList={activePostList}
+          isClose={isClose}
+        />
+        <PostBody
+          departureTime={departureTime}
+          origin={origin}
+          destination={destination}
+        />
+      </Link>
     </PostListItemContainer>
   );
 };

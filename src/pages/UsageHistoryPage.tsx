@@ -58,6 +58,7 @@ const UsageHistoryPage = () => {
           {data.map((post) => (
             <Link key={post.id} to={'/posts/' + post.id}>
               <PostListItem
+                id={post.id}
                 title={post.title}
                 currentParticipants={post.currentParticipants}
                 maxParticipants={post.maxParticipants}

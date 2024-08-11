@@ -34,7 +34,9 @@ export interface PostBodyProps {
 export interface PostListItemProps
   extends PostHeaderProps,
     PostBodyProps,
-    PeopleCountTagProps {}
+    PeopleCountTagProps {
+  id: string;
+}
 
 export interface MoveCurrentLocationProps {
   map: naver.maps.Map | null;
