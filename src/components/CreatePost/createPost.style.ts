@@ -118,3 +118,12 @@ export const SubmitButton = styled.button`
   font-weight: var(--weight-bold);
   text-align: center;
 `;
+
+export const CheckLength = styled.div`
+  text-align: right;
+  color: var(--color-gray-200);
+  font-size: var(--font-semi-micro);
+  font-weight: var(--weight-light);
+
+  padding: 2px 8px;
+`;

@@ -1,5 +1,8 @@
 import ContentWrap from '@/components/CreatePost/ContentWrap.tsx';
-import { TextArea } from '@/components/CreatePost/createPost.style.ts';
+import {
+  CheckLength,
+  TextArea,
+} from '@/components/CreatePost/createPost.style.ts';
 import ExplainIcon from '@/assets/icons/createPost/explain-icon .svg?react';
 import { contentWrapType } from '@/types/props';
 
@@ -21,7 +24,9 @@ const ExplanationWrap = ({ value, setRegisterDataFunc }: contentWrapType) => {
         value={value}
         placeholder={'~~ 해주세요'}
         onChange={setExplanationValue}
+        maxLength={500}
       />
+      <CheckLength>{value.length} / 500</CheckLength>
     </ContentWrap>
   );
 };
