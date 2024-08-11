@@ -14,7 +14,6 @@ import Footer from '@/components/common/Layout/Footer';
 import { useGetClosePostsQuery, useGetJoinPostsQuery } from '@/api/localApi.ts';
 import PostListItem from '@/components/common/PostListItem';
 import reformatDate from '@/utils/reformatDate.ts';
-import { Link } from 'react-router-dom';
 
 const UsageHistoryPage = () => {
   const [isActive, setIsActive] = useState('join');
@@ -56,18 +55,16 @@ const UsageHistoryPage = () => {
         </ButtonContainer>
         <PostListContainer>
           {data.map((post) => (
-            <Link key={post.id} to={'/posts/' + post.id}>
-              <PostListItem
-                id={post.id}
-                title={post.title}
-                currentParticipants={post.currentParticipants}
-                maxParticipants={post.maxParticipants}
-                departureTime={reformatDate(post.departureTime)}
-                origin={post.origin}
-                destination={post.destination}
-                isClose={isActive === 'close'}
-              />
-            </Link>
+            <PostListItem
+              id={post.id}
+              title={post.title}
+              currentParticipants={post.currentParticipants}
+              maxParticipants={post.maxParticipants}
+              departureTime={reformatDate(post.departureTime)}
+              origin={post.origin}
+              destination={post.destination}
+              isClose={isActive === 'close'}
+            />
           ))}
         </PostListContainer>
       </Container>

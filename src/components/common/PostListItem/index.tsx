@@ -32,7 +32,7 @@ const PostListItem = ({
 }: PostListItemProps) => {
   return (
     <PostListItemContainer>
-      <Link to={'posts/' + id}>
+      <Link to={'/posts/' + id}>
         <PostHeader
           title={title}
           currentParticipants={currentParticipants}
