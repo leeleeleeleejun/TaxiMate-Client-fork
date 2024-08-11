@@ -56,6 +56,7 @@ const UsageHistoryPage = () => {
         <PostListContainer>
           {data.map((post) => (
             <PostListItem
+              key={post.id}
               id={post.id}
               title={post.title}
               currentParticipants={post.currentParticipants}
