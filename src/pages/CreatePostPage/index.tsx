@@ -8,6 +8,7 @@ import SetPlaceMapPage from '@/pages/CreatePostPage/SetPlaceMapPage.tsx';
 import SearchPage from '@/pages/SearchPage.tsx';
 import { useCreatePostMutation } from '@/api/localApi.ts';
 import { useNavigate } from 'react-router-dom';
+import checkDate from '@/utils/checkDate.ts';
 
 const CreatePostPage = () => {
   const navigate = useNavigate();
@@ -27,6 +28,10 @@ const CreatePostPage = () => {
 
     if (!registerData.explanation) {
       alert('간단 설명을 입력해 주세요.');
+      return;
+    }
+
+    if (!checkDate(registerData.departureTime)) {
       return;
     }
 

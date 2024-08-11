@@ -13,6 +13,7 @@ import {
   DateStringContainer,
 } from '@/components/CreatePost/setDate/SetDate.style.ts';
 import { SubmitButton } from '@/components/CreatePost/createPost.style.ts';
+import checkDate from '@/utils/checkDate.ts';
 
 const SetDatePage = ({
   value,
@@ -39,14 +40,9 @@ const SetDatePage = ({
   ).toISOString();
 
   const submitTimeFunc = () => {
-    const targetDate = new Date(newDate);
-    const currentDate = new Date();
-
-    if (currentDate < targetDate) {
+    if (checkDate(newDate)) {
       setRegisterDataFunc('departureTime', newDate);
       comeBackMain();
-    } else {
-      alert('올바르지 않은 시각입니다.');
     }
   };
 
