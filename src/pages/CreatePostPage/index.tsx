@@ -1,4 +1,5 @@
 import { ReactNode, useState } from 'react';
+import useCreatePost from '@/hooks/useCreatePost.ts';
 import { registerDataKeys, registerDataType, stepType } from '@/types';
 
 import CreateMainPage from '@/pages/CreatePostPage/CreateMainPage.tsx';
@@ -6,47 +7,13 @@ import SetDatePage from '@/pages/CreatePostPage/SetDatePage.tsx';
 import SetPlacePage from '@/pages/CreatePostPage/SetPlacePage.tsx';
 import SetPlaceMapPage from '@/pages/CreatePostPage/SetPlaceMapPage.tsx';
 import SearchPage from '@/pages/SearchPage.tsx';
-import { useCreatePostMutation } from '@/api/localApi.ts';
-import { useNavigate } from 'react-router-dom';
-import checkDate from '@/utils/checkDate.ts';
 
 const CreatePostPage = () => {
-  const navigate = useNavigate();
-
   const [step, setStep] = useState<stepType>('main');
-
   const [registerData, setRegisterData] =
     useState<registerDataType>(initialState);
 
-  const [createPost] = useCreatePostMutation();
-
-  const createPostSubmit = async () => {
-    if (!registerData.title) {
-      alert('제목을 입력해 주세요.');
-      return;
-    }
-
-    if (!registerData.explanation) {
-      alert('간단 설명을 입력해 주세요.');
-      return;
-    }
-
-    if (!checkDate(registerData.departureTime)) {
-      return;
-    }
-
-    const formatDate = new Date(
-      new Date(registerData.departureTime).getTime() + 1000 * 60 * 60 * 9
-    ).toISOString();
-
-    const result = await createPost({
-      ...registerData,
-      departureTime: formatDate,
-    }).unwrap();
-
-    alert(result.message);
-    navigate('/posts/' + result.data.partyId);
-  };
+  const createPostSubmit = useCreatePost(registerData);
 
   const comeBackMain = () => {
     setStep('main');
