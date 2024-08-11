@@ -20,7 +20,16 @@ const CreatePostPage = () => {
   const [createPost] = useCreatePostMutation();
 
   const createPostSubmit = async () => {
-    // TODO: 벨리데이션 하기
+    if (!registerData.title) {
+      alert('제목을 입력해 주세요.');
+      return;
+    }
+
+    if (!registerData.explanation) {
+      alert('간단 설명을 입력해 주세요.');
+      return;
+    }
+
     const formatDate = new Date(
       new Date(registerData.departureTime).getTime() + 1000 * 60 * 60 * 9
     ).toISOString();
