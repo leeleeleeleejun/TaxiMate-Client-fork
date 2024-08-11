@@ -8,6 +8,17 @@ import { SubmitButton } from '@/components/CreatePost/createPost.style.ts';
 import { SubmitContainer } from '@/components/CreatePost/setPlace/setPlace.style.ts';
 import CreatePostChilePageLayout from '@/components/common/Layout/CreatePostChildPageLayout';
 
+const KEYWORDS = {
+  origin: {
+    keyWord: '출발지',
+    content: '여기에서 출발',
+  },
+  destination: {
+    keyWord: '도착지',
+    content: '여기로 도착',
+  },
+};
+
 const SetPlaceMapPage = ({
   step,
   value,
@@ -19,9 +30,10 @@ const SetPlaceMapPage = ({
   const [address, setAddress] = useState('');
   const [place, setPlace] = useState('');
 
-  const path = step === 'originMap';
-  const keyWord = path ? '출발지' : '도착지';
-  const content = path ? '여기에서 출발' : '여기로 도착';
+  const isOrigin = step === 'originMap';
+  const { keyWord, content } = isOrigin
+    ? KEYWORDS.origin
+    : KEYWORDS.destination;
 
   const setAddressInfo = async (lng: number, lat: number) => {
     const result = await getAddressKakao(lng, lat);
@@ -44,7 +56,7 @@ const SetPlaceMapPage = ({
     // 현재 위치 참조
     const { x, y } = map.getCenter();
 
-    const registerKey = path ? 'originLocation' : 'destinationLocation';
+    const registerKey = isOrigin ? 'originLocation' : 'destinationLocation';
     setRegisterDataFunc(registerKey, { latitude: y, longitude: x });
     comeBackMain();
   };
@@ -59,7 +71,7 @@ const SetPlaceMapPage = ({
         map={map}
         setMap={setMap}
         setAddressInfo={setAddressInfo}
-        path={path}
+        isOrigin={isOrigin}
         defaultCenter={{ lat: value.latitude, lng: value.longitude }}
       />
       <SubmitContainer>

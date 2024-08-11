@@ -22,17 +22,11 @@ const SetDatePage = ({
 }: setDatePageProps) => {
   const dateDepartureTimeValue = new Date(value);
 
-  const timeInitialState = {
-    meridiem: dateDepartureTimeValue.getHours() < 12 ? 'AM' : 'PM',
-    hour: (dateDepartureTimeValue.getHours() % 12 || 12).toString(),
-    minute: (Math.ceil(dateDepartureTimeValue.getMinutes() / 5) * 5).toString(),
-  };
-
   const [date, setDate] = useState(
     parseAbsoluteToLocal(dateDepartureTimeValue.toISOString())
   );
 
-  const [time, setTime] = useState(timeInitialState);
+  const [time, setTime] = useState(getTimeInitialState(dateDepartureTimeValue));
 
   const newDate = setDepartureTimeValueFunc(
     date.toString(),
@@ -62,3 +56,10 @@ const SetDatePage = ({
 };
 
 export default SetDatePage;
+
+// 시간 초기값 설정 유틸리티 함수
+const getTimeInitialState = (dateDepartureTimeValue: Date) => ({
+  meridiem: dateDepartureTimeValue.getHours() < 12 ? 'AM' : 'PM',
+  hour: (dateDepartureTimeValue.getHours() % 12 || 12).toString(),
+  minute: (Math.ceil(dateDepartureTimeValue.getMinutes() / 5) * 5).toString(),
+});
