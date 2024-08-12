@@ -14,12 +14,14 @@ import MoveCurrentLocation from '@/components/Home/MoveCurrentLocation';
 import TaxiIcon from '@/assets/icons/header/taxi-icon.svg?react';
 import KnuLogoIcon from '@/assets/icons/header/knu-logo-icon.svg?react';
 import getCurrentLocation from '@/utils/getCurrentlocation.ts';
+import LoadingIcon from '@/components/common/LoadingIcon';
 
 const HomePage = () => {
   const [map, setMap] = useState<naver.maps.Map | null>(null);
   const [activeButton, setActiveButton] = useState<boolean>(true);
   const [activeMarker, setActiveMarker] = useState<string | null>(null);
   const [postListHeight, setPostListHeight] = useState(0);
+  const [isLoading, setIsLoading] = useState(false); // 로딩 상태 관리
 
   const [trigger, { data }] = useLazyGetPostsQuery();
 
@@ -64,12 +66,14 @@ const HomePage = () => {
       <Main>
         <SearchBar path={'/search'} />
         <ResearchButton onClick={getPostsQueryTrigger} />
+        {isLoading && <LoadingIcon />}
         <MoveCurrentLocation
           map={map}
           activeButton={activeButton}
           setActiveButton={setActiveButton}
           activeMarker={activeMarker}
           postListHeight={postListHeight}
+          setIsLoading={setIsLoading}
         />
         <Map
           map={map}
