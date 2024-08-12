@@ -13,6 +13,7 @@ import MoveCurrentLocation from '@/components/Home/MoveCurrentLocation';
 
 import TaxiIcon from '@/assets/icons/header/taxi-icon.svg?react';
 import KnuLogoIcon from '@/assets/icons/header/knu-logo-icon.svg?react';
+import getCurrentLocation from '@/utils/getCurrentlocation.ts';
 
 const HomePage = () => {
   const [map, setMap] = useState<naver.maps.Map | null>(null);
@@ -39,6 +40,17 @@ const HomePage = () => {
   useEffect(() => {
     getPostsQueryTrigger();
   }, [map]);
+
+  useEffect(() => {
+    const centerLocation = JSON.parse(localStorage.getItem('Location') || '');
+
+    (async () => {
+      const { lat, lng } = await getCurrentLocation();
+      if (!(centerLocation.lat === lat && centerLocation.lng === lng)) {
+        setActiveButton(false);
+      }
+    })();
+  }, []);
 
   return (
     <>
