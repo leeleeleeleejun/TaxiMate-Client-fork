@@ -13,6 +13,7 @@ export interface PostDetail extends Post {
   explanation: string;
   originAddress: string;
   destinationAddress: string;
+  originLocation: { latitude: number; longitude: number };
   destinationLocation: { latitude: number; longitude: number };
   status: string;
   createdAt: string;

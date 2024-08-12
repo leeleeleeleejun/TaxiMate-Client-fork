@@ -1,4 +1,7 @@
 import { ReactNode, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+
+import { useGetPostByIdQuery } from '@/api/localApi.ts';
 import useCreatePost from '@/hooks/useCreatePost.ts';
 import { registerDataKeys, registerDataType, stepType } from '@/types';
 
@@ -9,9 +12,26 @@ import SetPlaceMapPage from '@/pages/CreatePostPage/SetPlaceMapPage.tsx';
 import SearchPage from '@/pages/SearchPage.tsx';
 
 const CreatePostPage = () => {
+  const id = useLocation().pathname.split('/')[2];
+  const { data } = useGetPostByIdQuery(id, {
+    skip: !id, // id가 없으면 쿼리 실행을 건너뜀
+  });
+
+  const upDate: registerDataType = {
+    title: data?.title || '',
+    departureTime: data?.departureTime || '',
+    originLocation: data?.originLocation || { latitude: 0, longitude: 0 },
+    destinationLocation: data?.destinationLocation || {
+      latitude: 0,
+      longitude: 0,
+    },
+    explanation: data?.explanation || '',
+    maxParticipants: String(data?.maxParticipants) || '',
+  };
+
   const [step, setStep] = useState<stepType>('main');
   const [registerData, setRegisterData] = useState<registerDataType>(
-    getInitialRegisterData
+    !data ? getInitialRegisterData : upDate
   );
 
   const createPostSubmit = useCreatePost(registerData);

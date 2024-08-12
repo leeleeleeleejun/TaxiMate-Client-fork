@@ -39,6 +39,10 @@ const Router = () => {
               path={CLIENT_PATH.CREATE_POST}
               element={<CreatePostPage />}
             />
+            <Route
+              path={CLIENT_PATH.UPDATE_POST}
+              element={<CreatePostPage />}
+            />
             <Route path={CLIENT_PATH.CHAT_LISTS} element={<ChatListPage />} />
             <Route path={CLIENT_PATH.CHAT_ROOM} element={<ChatRoomPage />} />
             <Route

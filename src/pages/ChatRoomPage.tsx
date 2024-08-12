@@ -115,7 +115,10 @@ const ChatRoomPage = () => {
         <RoomTitle>
           학생회관 앞 CU앞 종합버스 터미널생회관 앞 CU앞 종합버스 터미널
         </RoomTitle>
-        <DropDown items={['알림끄기']} danger={'나가기'} />
+        <DropDown
+          items={[{ name: '알림끄기', handler: () => {} }]}
+          danger={'나가기'}
+        />
       </Header>
       <NotificationContainer to={''}>
         <NotificationHeader>
