@@ -14,6 +14,7 @@ const MoveCurrentLocation = ({
   setActiveButton,
   activeMarker,
   postListHeight,
+  setIsLoading,
 }: MoveCurrentLocationProps) => {
   const naverMaps = useNavermaps();
 
@@ -38,9 +39,11 @@ const MoveCurrentLocation = ({
 
   const moveCurrentLocationFunc = async () => {
     if (map) {
+      setIsLoading(true);
       const { lat, lng } = await getCurrentLocation();
       const latLng = new naverMaps.LatLng(lat, lng);
       map.setCenter(latLng);
+      setIsLoading(false);
     }
     setActiveButton(true);
   };

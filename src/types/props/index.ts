@@ -44,6 +44,7 @@ export interface MoveCurrentLocationProps {
   setActiveButton: React.Dispatch<React.SetStateAction<boolean>>;
   activeMarker: string | null;
   postListHeight: number;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface HomeMapProps {
