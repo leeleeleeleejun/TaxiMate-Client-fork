@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { searchPlace } from '@/types';
-import { getSearchList } from '@/api/searchAPI.ts';
+import { getSearchList } from '@/api/kakaoApi.ts';
 
 const useSearchData = () => {
   const [searchListsData, setSearchListsData] = useState<searchPlace[]>([]);
