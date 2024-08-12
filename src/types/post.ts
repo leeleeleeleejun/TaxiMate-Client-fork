@@ -29,3 +29,11 @@ export interface PostDetail extends Post {
     duration: string;
   };
 }
+
+export interface createPostRes {
+  success: boolean;
+  message: string;
+  data: {
+    partyId: string;
+  };
+}

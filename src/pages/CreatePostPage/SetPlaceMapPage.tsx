@@ -8,6 +8,17 @@ import { SubmitButton } from '@/components/CreatePost/createPost.style.ts';
 import { SubmitContainer } from '@/components/CreatePost/setPlace/setPlace.style.ts';
 import CreatePostChilePageLayout from '@/components/common/Layout/CreatePostChildPageLayout';
 
+const KEYWORDS = {
+  origin: {
+    keyWord: '출발지',
+    content: '여기에서 출발',
+  },
+  destination: {
+    keyWord: '도착지',
+    content: '여기로 도착',
+  },
+};
+
 const SetPlaceMapPage = ({
   step,
   value,
@@ -19,19 +30,25 @@ const SetPlaceMapPage = ({
   const [address, setAddress] = useState('');
   const [place, setPlace] = useState('');
 
-  const path = step === 'originMap';
-  const keyWord = path ? '출발지' : '도착지';
-  const content = path ? '여기에서 출발' : '여기로 도착';
+  const isOrigin = step === 'originMap';
+  const { keyWord, content } = isOrigin
+    ? KEYWORDS.origin
+    : KEYWORDS.destination;
 
   const setAddressInfo = async (lng: number, lat: number) => {
     const result = await getAddressKakao(lng, lat);
-    const address = result.road_address || result.address;
-    setAddress(
-      address.building_name
-        ? address.address_name
-        : address.region_3depth_name + +address.main_address_no
-    );
-    setPlace(address.building_name || '');
+
+    const { road_address, address } = result;
+
+    const place =
+      road_address?.building_name ||
+      `${address.region_3depth_name} ${address.main_address_no}` +
+        (address.sub_address_no && `-${address.sub_address_no}`);
+
+    const addressName = road_address?.address_name || address.address_name;
+
+    setPlace(place);
+    setAddress(addressName);
   };
 
   const submitFunc = () => {
@@ -39,13 +56,13 @@ const SetPlaceMapPage = ({
     // 현재 위치 참조
     const { x, y } = map.getCenter();
 
-    const registerKey = path ? 'origin' : 'destination';
-    setRegisterDataFunc(registerKey, { lat: y, lng: x });
+    const registerKey = isOrigin ? 'originLocation' : 'destinationLocation';
+    setRegisterDataFunc(registerKey, { latitude: y, longitude: x });
     comeBackMain();
   };
 
   useEffect(() => {
-    setAddressInfo(value.lng, value.lat);
+    setAddressInfo(value.longitude, value.latitude);
   }, []);
 
   return (
@@ -54,8 +71,8 @@ const SetPlaceMapPage = ({
         map={map}
         setMap={setMap}
         setAddressInfo={setAddressInfo}
-        path={path}
-        defaultCenter={value}
+        isOrigin={isOrigin}
+        defaultCenter={{ lat: value.latitude, lng: value.longitude }}
       />
       <SubmitContainer>
         <LocationInfo keyWord={keyWord} place={place} address={address} />

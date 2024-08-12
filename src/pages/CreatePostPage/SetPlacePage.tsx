@@ -12,19 +12,18 @@ const SetPlacePage = ({
   setRegisterDataFunc,
   comeBackMain,
 }: setPlaceProps) => {
-  const path = step === 'origin';
-
-  const subTitle = (path ? '어디에서 출발' : '어디로 도착') + '하나요?';
+  const isOrigin = step === 'originMap';
+  const subTitle = (isOrigin ? '어디에서 출발' : '어디로 도착') + '하나요?';
 
   const setStepFunc = () => {
-    path ? setStep('searchOrigin') : setStep('searchDestination');
+    setStep(isOrigin ? 'searchOrigin' : 'searchDestination');
   };
 
   const MyLocationButtonClickHandle = async () => {
     const { lat, lng } = await getCurrentLocation();
-    const registerKey = path ? 'origin' : 'destination';
-    setRegisterDataFunc(registerKey, { lat, lng });
-    path ? setStep('originMap') : setStep('destinationMap');
+    const registerKey = isOrigin ? 'originLocation' : 'destinationLocation';
+    setRegisterDataFunc(registerKey, { latitude: lat, longitude: lng });
+    isOrigin ? setStep('originMap') : setStep('destinationMap');
   };
 
   return (

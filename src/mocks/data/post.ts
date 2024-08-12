@@ -128,3 +128,11 @@ export const post = {
     },
   },
 };
+
+export const creatPost = {
+  success: true,
+  message: '파티가 생성되었습니다.',
+  data: {
+    partyId: 452,
+  },
+};

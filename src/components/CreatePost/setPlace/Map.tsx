@@ -10,15 +10,15 @@ const Map = ({
   setMap,
   setAddressInfo,
   defaultCenter,
-  path,
+  isOrigin,
 }: {
   map: naver.maps.Map | null;
   setMap: React.Dispatch<React.SetStateAction<naver.maps.Map | null>>;
   setAddressInfo: (lng: number, lat: number) => void;
   defaultCenter: { lat: number; lng: number };
-  path: boolean;
+  isOrigin: boolean;
 }) => {
-  const content = path ? '출발' : '도착';
+  const content = isOrigin ? '출발' : '도착';
 
   const onCenterChangedFunc = async () => {
     if (!map) return;

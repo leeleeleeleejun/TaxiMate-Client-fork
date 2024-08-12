@@ -1,5 +1,6 @@
 import { ReactNode, useState } from 'react';
-import { registerDataKeys, stepType } from '@/types';
+import useCreatePost from '@/hooks/useCreatePost.ts';
+import { registerDataKeys, registerDataType, stepType } from '@/types';
 
 import CreateMainPage from '@/pages/CreatePostPage/CreateMainPage.tsx';
 import SetDatePage from '@/pages/CreatePostPage/SetDatePage.tsx';
@@ -9,8 +10,11 @@ import SearchPage from '@/pages/SearchPage.tsx';
 
 const CreatePostPage = () => {
   const [step, setStep] = useState<stepType>('main');
+  const [registerData, setRegisterData] = useState<registerDataType>(
+    getInitialRegisterData
+  );
 
-  const [registerData, setRegisterData] = useState(initialState);
+  const createPostSubmit = useCreatePost(registerData);
 
   const comeBackMain = () => {
     setStep('main');
@@ -18,17 +22,13 @@ const CreatePostPage = () => {
 
   const setRegisterDataFunc = (
     name: registerDataKeys,
-    data: string | { lat: number; lng: number }
+    data: string | { longitude: number; latitude: number }
   ) => {
     setRegisterData((prev) => ({ ...prev, [name]: data }));
   };
 
   const setPlaceMapPageBackHandle = () => {
-    if (step === 'originMap') {
-      setStep('origin');
-    } else {
-      setStep('destination');
-    }
+    setStep(step === 'originMap' ? 'origin' : 'destination');
   };
 
   return (
@@ -36,6 +36,7 @@ const CreatePostPage = () => {
       <Step check={step === 'main'}>
         <CreateMainPage
           registerData={registerData}
+          createPostSubmit={createPostSubmit}
           setRegisterDataFunc={setRegisterDataFunc}
           setStep={setStep}
         />
@@ -67,8 +68,8 @@ const CreatePostPage = () => {
           step={step}
           value={
             step === 'originMap'
-              ? registerData.origin
-              : registerData.destination
+              ? registerData.originLocation
+              : registerData.destinationLocation
           }
           setRegisterDataFunc={setRegisterDataFunc}
           comeBackMain={comeBackMain}
@@ -89,23 +90,24 @@ const Step = ({ check, children }: { check: boolean; children: ReactNode }) => {
   return null;
 };
 
-// registerData 초기상태 데이터
-const today = new Date();
-const minutes = today.getMinutes();
+// 상태 초기화 유틸리티 함수
+const getInitialRegisterData: registerDataType = (() => {
+  const today = new Date();
+  const ceilMinutes = Math.ceil(today.getMinutes() / 5) * 5;
+  const departureTime = new Date(today.setMinutes(ceilMinutes)).toISOString();
 
-const ceilMinutes = Math.ceil(minutes / 5) * 5;
-const departureTime = new Date(today.setMinutes(ceilMinutes)).toISOString();
-const initialState = {
-  title: '',
-  departureTime,
-  explanation: '',
-  origin: {
-    lat: 36.4689627,
-    lng: 127.1408071,
-  },
-  destination: {
-    lat: 36.8511811,
-    lng: 127.1511352,
-  },
-  maxParticipants: '4',
-};
+  return {
+    title: '',
+    departureTime,
+    explanation: '',
+    originLocation: {
+      latitude: 36.4689627,
+      longitude: 127.1408071,
+    },
+    destinationLocation: {
+      latitude: 36.8511811,
+      longitude: 127.1511352,
+    },
+    maxParticipants: '4',
+  };
+})();

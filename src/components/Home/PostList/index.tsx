@@ -10,7 +10,6 @@ import {
 } from '@/components/Home/PostList/PostList.style.ts';
 import PostListItem from '@/components/common/PostListItem';
 import { Post } from '@/types/post.ts';
-import { Link } from 'react-router-dom';
 
 const PostList = ({
   activeMarker,
@@ -28,17 +27,16 @@ const PostList = ({
 
     return (
       <ActivePostListContainer>
-        <Link to={'posts/' + targetData.id}>
-          <PostListItem
-            title={targetData.title}
-            currentParticipants={targetData.currentParticipants}
-            maxParticipants={targetData.maxParticipants}
-            departureTime={reformatDate(targetData.departureTime)}
-            origin={targetData.origin}
-            destination={targetData.destination}
-            activePostList
-          />
-        </Link>
+        <PostListItem
+          id={targetData.id}
+          title={targetData.title}
+          currentParticipants={targetData.currentParticipants}
+          maxParticipants={targetData.maxParticipants}
+          departureTime={reformatDate(targetData.departureTime)}
+          origin={targetData.origin}
+          destination={targetData.destination}
+          activePostList
+        />
       </ActivePostListContainer>
     );
   }
@@ -62,6 +60,7 @@ const PostList = ({
           {data.map((post) => (
             <PostListItem
               key={post.id}
+              id={post.id}
               title={post.title}
               currentParticipants={post.currentParticipants}
               maxParticipants={post.maxParticipants}

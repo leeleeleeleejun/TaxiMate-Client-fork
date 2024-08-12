@@ -15,6 +15,7 @@ export const API_PATH = {
       JOIN_POSTS: `${LocalAPI}/join-posts`,
       CLOSE_POSTS: `${LocalAPI}/close-posts`,
     },
+    POST: `${API_BASE_URL}/api/v1/parties`,
   },
 };
 

@@ -20,11 +20,11 @@ import ArrowLeftIcon from '@/assets/icons/arrow-left-icon.svg?react';
 
 const CreateMainPage = ({
   registerData,
+  createPostSubmit,
   setRegisterDataFunc,
   setStep,
 }: registerProps) => {
   const navigate = useNavigate();
-
   return (
     <>
       <Header>
@@ -32,7 +32,9 @@ const CreateMainPage = ({
           <ArrowLeftIcon />
         </BackButton>
         <HeaderItem>팟 생성</HeaderItem>
-        <CreateSubmitButton>만들기</CreateSubmitButton>
+        <CreateSubmitButton onClick={createPostSubmit}>
+          만들기
+        </CreateSubmitButton>
       </Header>
       <Container>
         <TitleWrap
@@ -41,8 +43,8 @@ const CreateMainPage = ({
         />
         <DateWrap value={registerData.departureTime} setStep={setStep} />
         <PlaceInfoWrap
-          value={registerData.origin}
-          value2={registerData.destination}
+          value={registerData.originLocation}
+          value2={registerData.destinationLocation}
           setStep={setStep}
         />
         <MemberWrap

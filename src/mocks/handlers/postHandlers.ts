@@ -18,6 +18,11 @@ const PostHandlers = [
   http.get(API_PATH.POST.GET.CLOSE_POSTS, () => {
     return HttpResponse.json(posts);
   }),
+
+  // //팟 생성
+  // http.post(API_PATH.POST.POST, () => {
+  //   return HttpResponse.json(creatPost);
+  // }),
 ];
 
 export default PostHandlers;

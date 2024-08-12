@@ -11,7 +11,7 @@ export const PostDetailContainer = styled.div`
 
   .map-wrapper {
     width: 100%;
-    height: 250px;
+    min-height: 250px;
     margin: 20px 0;
 
     overflow: hidden;
@@ -50,7 +50,8 @@ export const ContentContainer = styled.div`
   font-size: var(--font-small);
   font-weight: var(--weight-light);
   color: var(--color-gray-100);
-  white-space: pre;
+
+  white-space: pre-wrap;
 `;
 
 export const MoveInfoContainer = styled.div`
@@ -73,7 +74,7 @@ export const JoinButton = styled.button`
   margin: 20px auto;
   border-radius: 6px;
   width: 110px;
-  height: 45px;
+  min-height: 45px;
   background-color: var(--color-main);
 
   font-size: 18px;

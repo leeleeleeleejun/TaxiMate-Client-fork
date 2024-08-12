@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_BASE_URL, API_PATH } from '@/constants/path.ts';
-import { Post, PostDetail } from '@/types/post.ts';
+import { createPostRes, Post, PostDetail } from '@/types/post.ts';
+import { registerDataType } from '@/types';
 
 // base URL과 엔드포인트들로 서비스 정의
 export const localApi = createApi({
@@ -36,6 +37,15 @@ export const localApi = createApi({
       query: () => API_PATH.POST.GET.CLOSE_POSTS,
       transformResponse: (response: { data: Post[] }) => response.data,
     }),
+    createPost: builder.mutation<createPostRes, registerDataType>({
+      query: (patch) => {
+        return {
+          url: API_PATH.POST.POST,
+          method: 'POST',
+          body: patch,
+        };
+      },
+    }),
   }),
 });
 
@@ -45,4 +55,5 @@ export const {
   useGetPostByIdQuery,
   useGetJoinPostsQuery,
   useGetClosePostsQuery,
+  useCreatePostMutation,
 } = localApi;
