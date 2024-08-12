@@ -1,10 +1,10 @@
 export interface searchPlace {
   id: string;
-  title: string;
+  place_name: string;
   x: string;
   y: string;
-  roadAddress?: string;
-  jibunAddress: string;
+  road_address_name?: string;
+  address_name: string;
 }
 
 export type SelectionKey = 'meridiem' | 'hour' | 'minute';

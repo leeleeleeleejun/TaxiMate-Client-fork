@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import getAddressKakao from '@/api/kakaoApi.ts';
+import { getAddress } from '@/api/kakaoApi.ts';
 import { contentWrapType } from '@/types/props';
 
 import LocationInfo from '@/components/common/LocationInfo';
@@ -27,7 +27,7 @@ const PlaceInfoWrap = ({ value, value2, setStep }: PlaceInfoWrapProps) => {
       React.SetStateAction<{ addressName: string; place: string }>
     >
   ) => {
-    const result = await getAddressKakao(longitude, latitude);
+    const result = await getAddress(longitude, latitude);
 
     const { road_address, address } = result;
 

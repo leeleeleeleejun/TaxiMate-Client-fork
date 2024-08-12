@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { searchPlace } from '@/types';
-import { getSearchList } from '@/api/searchAPI.ts';
+import { getSearchList } from '@/api/kakaoApi.ts';
 
 const useSearchData = () => {
   const [searchListsData, setSearchListsData] = useState<searchPlace[]>([]);
@@ -9,10 +9,11 @@ const useSearchData = () => {
   const searchFunc = async (query: string) => {
     const result = await getSearchList(
       query,
-      `${centerLocation.lat},${centerLocation.lng}`
+      centerLocation.lng,
+      centerLocation.lat
     );
 
-    setSearchListsData([...result.place, ...result.address]);
+    setSearchListsData([...result.documents]);
   };
 
   return { searchListsData, searchFunc };

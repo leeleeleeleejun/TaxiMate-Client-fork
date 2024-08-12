@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import getAddressKakao from '@/api/kakaoApi.ts';
+import { getAddress } from '@/api/kakaoApi.ts';
 import { setPlaceMapPageProps } from '@/types/props';
 
 import Map from '@/components/CreatePost/setPlace/Map.tsx';
@@ -36,7 +36,7 @@ const SetPlaceMapPage = ({
     : KEYWORDS.destination;
 
   const setAddressInfo = async (lng: number, lat: number) => {
-    const result = await getAddressKakao(lng, lat);
+    const result = await getAddress(lng, lat);
 
     const { road_address, address } = result;
 

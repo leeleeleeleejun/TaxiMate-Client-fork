@@ -6,12 +6,12 @@ import LocationDotIcon from '@/assets/icons/postList/location-dot-icon.svg?react
 
 const SearchListItem = ({
   inputValue,
-  title,
+  placeName,
   address,
   clickHandler,
 }: {
   inputValue: string;
-  title: string;
+  placeName: string;
   address: string;
   clickHandler: () => void;
 }) => {
@@ -19,7 +19,7 @@ const SearchListItem = ({
     <SearchListItemContainer onClick={clickHandler}>
       <div>
         <LocationDotIcon />
-        <SetTitle title={title} inputValue={inputValue} />
+        <SetPlaceName placeName={placeName} inputValue={inputValue} />
       </div>
       <span>{address}</span>
     </SearchListItemContainer>
@@ -28,16 +28,16 @@ const SearchListItem = ({
 
 export default SearchListItem;
 
-const SetTitle = ({
-  title,
+const SetPlaceName = ({
+  placeName,
   inputValue,
 }: {
-  title: string;
+  placeName: string;
   inputValue: string;
 }) => {
   const highlightWord = () => {
     const regex = new RegExp(`(${inputValue})`, 'gi');
-    const parts = title.split(regex);
+    const parts = placeName.split(regex);
 
     return parts.map((part, index) =>
       regex.test(part) ? <MatchText key={index}>{part}</MatchText> : part

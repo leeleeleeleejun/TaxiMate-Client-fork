@@ -24,8 +24,8 @@ const SearchList = ({
           <SearchListItem
             key={item.id}
             inputValue={value}
-            title={item.title}
-            address={item.roadAddress || item.jibunAddress}
+            placeName={item.place_name}
+            address={item.road_address_name || item.address_name}
             clickHandler={() => {
               listClickHandler(Number(item.y), Number(item.x));
             }}
