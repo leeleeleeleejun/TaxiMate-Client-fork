@@ -3,7 +3,7 @@ const LocalAPI = 'http://localhost:5173';
 
 export const API_PATH = {
   SEARCH: {
-    GET: 'https://map.naver.com/p/api/search/instant-search',
+    GET: 'https://dapi.kakao.com/v2/local/search/keyword.json',
   },
   POST: {
     GET: {
