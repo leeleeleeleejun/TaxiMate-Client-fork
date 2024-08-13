@@ -24,10 +24,15 @@ export const localApi = createApi({
         };
       },
       transformResponse: (response: { data: Post[] }) => response.data,
+      keepUnusedDataFor: 0,
     }),
     getPostById: builder.query<PostDetail, string>({
-      query: (id) => API_PATH.POST.GET.BY_ID.replace(':partyId', id),
+      query: (id) => {
+        console.log(id);
+        return API_PATH.POST.GET.BY_ID.replace(':partyId', id);
+      },
       transformResponse: (response: { data: PostDetail }) => response.data,
+      keepUnusedDataFor: 5,
     }),
     getJoinPosts: builder.query<Post[], string>({
       query: () => API_PATH.POST.GET.JOIN_POSTS,
