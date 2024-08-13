@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { CLIENT_PATH } from '@/constants/path.ts';
 
-import HomePage from '@/pages/HomePage';
+//import HomePage from '@/pages/HomePage';
 import Layout from '@/components/common/Layout';
 //import SearchPage from '@/pages/SearchPage.tsx';
 //import PostDetailPage from '@/pages/PostDetailPage.tsx';
@@ -14,6 +14,7 @@ import Layout from '@/components/common/Layout';
 //import MyProfilePage from '@/pages/MyProfilePage.tsx';
 //import LoginPage from '@/pages/LoginPage.tsx';
 
+const HomePage = lazy(() => import('./pages/HomePage'));
 const SearchPage = lazy(() => import('@/pages/SearchPage'));
 const PostDetailPage = lazy(() => import('@/pages/PostDetailPage'));
 const CreatePostPage = lazy(() => import('@/pages/CreatePostPage'));

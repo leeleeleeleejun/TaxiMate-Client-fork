@@ -1,5 +1,7 @@
 import Router from '@/Router.tsx';
 import { NavermapsProvider } from 'react-naver-maps';
+import { NextUIProvider } from '@nextui-org/system';
+
 import GlobalStyle from '@/styles/GlobalStyle.ts';
 import socket from '@/api/SocketTest.ts';
 
@@ -19,12 +21,12 @@ console.log(window.Kakao.isInitialized());
 socket;
 function App() {
   return (
-    <>
-      <NavermapsProvider ncpClientId={naverMapApi}>
+    <NavermapsProvider ncpClientId={naverMapApi}>
+      <NextUIProvider>
         <GlobalStyle />
         <Router />
-      </NavermapsProvider>
-    </>
+      </NextUIProvider>
+    </NavermapsProvider>
   );
 }
 
