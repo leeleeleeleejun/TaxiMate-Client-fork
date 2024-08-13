@@ -1,6 +1,6 @@
 import Router from '@/Router.tsx';
 import { NavermapsProvider } from 'react-naver-maps';
-import { NextUIProvider } from '@nextui-org/system';
+//import { NextUIProvider } from '@nextui-org/system';
 
 import GlobalStyle from '@/styles/GlobalStyle.ts';
 import socket from '@/api/SocketTest.ts';
@@ -22,10 +22,10 @@ socket;
 function App() {
   return (
     <NavermapsProvider ncpClientId={naverMapApi}>
-      <NextUIProvider>
-        <GlobalStyle />
-        <Router />
-      </NextUIProvider>
+      {/*<NextUIProvider>*/}
+      <GlobalStyle />
+      <Router />
+      {/*</NextUIProvider>*/}
     </NavermapsProvider>
   );
 }

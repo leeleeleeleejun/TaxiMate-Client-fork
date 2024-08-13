@@ -5,9 +5,10 @@ export default {
   content: [
     './index.html',
     './src/**/*.{js,ts,jsx,tsx}',
-    './node_modules/@nextui-org/theme/dist/comComponents/dropdown.js',
-    './node_modules/@nextui-org/theme/dist/comComponents/radio.js',
-    './node_modules/@nextui-org/theme/dist/comComponents/date-picker.js',
+    './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
+    // './node_modules/@nextui-org/theme/dist/components/dropdown.{js,mjs,ts}',
+    // './node_modules/@nextui-org/theme/dist/components/radio.{js,mjs,ts}',
+    // './node_modules/@nextui-org/theme/dist/components/date-picker.{js,mjs,ts}',
   ],
   theme: {
     extend: {},
