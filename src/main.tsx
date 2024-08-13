@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import { store } from './store';
 import { Provider } from 'react-redux';
-import { NextUIProvider } from '@nextui-org/react';
+import { NextUIProvider } from '@nextui-org/system';
 import './index.css';
 
 async function enableMocking() {

@@ -1,4 +1,4 @@
-import { RadioGroup, Radio } from '@nextui-org/react';
+import { RadioGroup, Radio } from '@nextui-org/radio';
 
 export default function NextRadio({
   value,

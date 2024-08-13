@@ -4,7 +4,7 @@ import {
   DropdownMenu,
   DropdownSection,
   DropdownItem,
-} from '@nextui-org/react';
+} from '@nextui-org/dropdown';
 import EllipsisVerticalIcon from '@/assets/icons/common/ellipsis-vertical-icon.svg?react';
 
 const DropDown = ({
