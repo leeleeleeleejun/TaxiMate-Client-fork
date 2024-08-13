@@ -1,25 +1,29 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import { useGetPostByIdQuery } from '@/api/localApi.ts';
+import { CLIENT_PATH } from '@/constants/path.ts';
+import reformatDate from '@/utils/reformatDate.ts';
+import reformatDetailDate from '@/utils/reformatDetailDate.ts';
+
 import Header from '@/components/common/Layout/Header';
 import DropDown from '@/components/common/DropDown.tsx';
 import { BackButton } from '@/components/common/Layout/Header/Header.style.ts';
-
-import ArrowLeftIcon from '@/assets/icons/arrow-left-icon.svg?react';
-import { useGetPostByIdQuery } from '@/api/localApi.ts';
-import * as S from '@/components/PostDetail/PostDetail.style';
-
 import Map from '@/components/PostDetail/Map';
 import PeopleCountTag from '@/components/common/PeopleCountTag';
-
 import LocationInfo from '@/components/common/LocationInfo';
 import UserContainer from '@/components/common/UserContainer';
-import reformatDate from '@/utils/reformatDate.ts';
-import reformatDetailDate from '@/utils/reformatDetailDate.ts';
+import * as S from '@/components/PostDetail/PostDetail.style';
+
+import ArrowLeftIcon from '@/assets/icons/arrow-left-icon.svg?react';
 
 const PostDetailPage = () => {
   const navigate = useNavigate();
   const id = useLocation().pathname.split('/')[2];
   const { data, isLoading } = useGetPostByIdQuery(id);
+
+  const clickUpdateHandler = () => {
+    navigate(CLIENT_PATH.UPDATE_POST.replace(':postId', id));
+  };
 
   if (isLoading) return <div>Loading...</div>;
   if (!data) return <div>no data...</div>;
@@ -30,7 +34,10 @@ const PostDetailPage = () => {
         <BackButton onClick={() => navigate('/')}>
           <ArrowLeftIcon />
         </BackButton>
-        <DropDown items={['수정']} danger={'삭제'} />
+        <DropDown
+          items={[{ name: '수정', handler: clickUpdateHandler }]}
+          danger={'삭제'}
+        />
       </Header>
       <S.PostDetailContainer>
         <PostDetailHeader
