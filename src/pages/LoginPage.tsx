@@ -8,19 +8,17 @@ const LoginPage = () => {
   };
 
   return (
-    <>
-      <IconWrap>
-        <TaxiIcon />
-        <div>공주대학교</div>
-        <span>택시팟</span>
-        <LoginButton onClick={click}>
-          <img
-            src={'src/assets/icons/login/kakao-login.png'}
-            alt={'kakao-login-button'}
-          />
-        </LoginButton>
-      </IconWrap>
-    </>
+    <IconWrap>
+      <TaxiIcon />
+      <div>공주대학교</div>
+      <span>택시팟</span>
+      <LoginButton onClick={click}>
+        <img
+          src={'src/assets/icons/login/kakao-login.png'}
+          alt={'kakao-login-button'}
+        />
+      </LoginButton>
+    </IconWrap>
   );
 };
 

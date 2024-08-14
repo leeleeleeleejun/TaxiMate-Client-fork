@@ -3,8 +3,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { CLIENT_PATH } from '@/constants/path.ts';
 
-//import HomePage from '@/pages/HomePage';
 import Layout from '@/components/common/Layout';
+import LoadingPage from '@/pages/LoadingPage.tsx';
+// import HomePage from '@/pages/HomePage';
 //import SearchPage from '@/pages/SearchPage.tsx';
 //import PostDetailPage from '@/pages/PostDetailPage.tsx';
 //import CreatePostPage from '@/pages/CreatePostPage';
@@ -27,7 +28,7 @@ const LoginPage = lazy(() => import('@/pages/LoginPage'));
 const Router = () => {
   return (
     <BrowserRouter>
-      <Suspense fallback={<div> 로딩중... </div>}>
+      <Suspense fallback={<LoadingPage />}>
         <Routes>
           <Route element={<Layout />}>
             <Route path={'/'} element={<HomePage />} />
