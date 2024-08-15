@@ -18,6 +18,9 @@ window.Kakao.init(kakaoJsKey);
 
 // SDK 초기화 여부를 판단합니다.
 console.log(window.Kakao.isInitialized());
+const splashDom = document.getElementById('splash');
+splashDom?.remove();
+
 socket;
 function App() {
   return (
