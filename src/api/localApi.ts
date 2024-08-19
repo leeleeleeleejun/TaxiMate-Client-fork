@@ -51,6 +51,27 @@ export const localApi = createApi({
         };
       },
     }),
+    getTokens: builder.query<
+      {
+        accessToken: string;
+        refreshToken: string;
+      },
+      { code: string }
+    >({
+      query: (arg: { code: string }) => {
+        console.log(arg);
+        return {
+          url: API_PATH.USER.GET_TOKEN,
+          params: arg,
+        };
+      },
+      transformResponse: (response: {
+        data: {
+          accessToken: string;
+          refreshToken: string;
+        };
+      }) => response.data,
+    }),
   }),
 });
 
@@ -61,4 +82,5 @@ export const {
   useGetJoinPostsQuery,
   useGetClosePostsQuery,
   useCreatePostMutation,
+  useGetTokensQuery,
 } = localApi;

@@ -1,6 +1,6 @@
 import TaxiIcon from '@/assets/icons/login/taxi-icon.svg?react';
 import styled from 'styled-components';
-import { LoginApi } from '@/api/useApi.ts';
+import { LoginApi } from '@/api/userApi.ts';
 
 const LoginPage = () => {
   const click = () => {

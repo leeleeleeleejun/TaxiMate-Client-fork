@@ -4,6 +4,7 @@ import { CLIENT_PATH, LocalAPI } from '@/constants/path.ts';
 
 export const LoginApi = async () => {
   try {
+    console.log('a');
     const a = await window.Kakao.Auth.authorize({
       redirectUri: LocalAPI + CLIENT_PATH.LOGIN_LOADING,
     });

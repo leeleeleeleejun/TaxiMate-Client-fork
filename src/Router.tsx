@@ -5,6 +5,7 @@ import { CLIENT_PATH } from '@/constants/path.ts';
 
 import Layout from '@/components/common/Layout';
 import LoadingPage from '@/pages/LoadingPage.tsx';
+import LoginLoadingPage from '@/pages/LoginLoadingPage.tsx';
 // import HomePage from '@/pages/HomePage';
 //import SearchPage from '@/pages/SearchPage.tsx';
 //import PostDetailPage from '@/pages/PostDetailPage.tsx';
@@ -53,6 +54,10 @@ const Router = () => {
             />
             <Route path={CLIENT_PATH.MY_PROFILE} element={<MyProfilePage />} />
             <Route path={CLIENT_PATH.LOGIN} element={<LoginPage />} />
+            <Route
+              path={CLIENT_PATH.LOGIN_LOADING}
+              element={<LoginLoadingPage />}
+            />
           </Route>
         </Routes>
       </Suspense>

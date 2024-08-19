@@ -1,5 +1,5 @@
 export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-const LocalAPI = 'http://localhost:5173';
+export const LocalAPI = 'http://localhost:5173';
 
 export const API_PATH = {
   SEARCH: {
@@ -17,6 +17,9 @@ export const API_PATH = {
     },
     POST: `${API_BASE_URL}/api/v1/parties`,
   },
+  USER: {
+    GET_TOKEN: `${API_BASE_URL}/oauth2/kakao`,
+  },
 };
 
 export const CLIENT_PATH = {
@@ -29,4 +32,5 @@ export const CLIENT_PATH = {
   USAGE_HISTORY: '/usage-history',
   MY_PROFILE: '/my-profile',
   LOGIN: '/login',
+  LOGIN_LOADING: '/login-loading',
 };
