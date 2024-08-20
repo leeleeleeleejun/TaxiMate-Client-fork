@@ -44,6 +44,10 @@ export const localApi = createApi({
       query: (patch) => ({
         url: API_PATH.POST.POST,
         method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+        },
         body: patch,
       }),
     }),
@@ -54,7 +58,6 @@ export const localApi = createApi({
       }),
       transformResponse: (response: { data: { accessToken: string } }) => {
         accessToken = response.data.accessToken;
-        // console.log(accessToken);
         return response.data;
       },
     }),
