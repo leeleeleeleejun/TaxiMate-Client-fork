@@ -49,19 +49,22 @@ const Router = () => {
               path={CLIENT_PATH.LOGIN_LOADING}
               element={<LoginLoadingPage />}
             />
-          </Route>
-          <Route element={<AuthChecker />}>
-            <Route path={CLIENT_PATH.MY_PROFILE} element={<MyProfilePage />} />
-            <Route
-              path={CLIENT_PATH.USAGE_HISTORY}
-              element={<UsageHistoryPage />}
-            />
-            <Route
-              path={CLIENT_PATH.CREATE_POST}
-              element={<CreatePostPage />}
-            />
-            <Route path={CLIENT_PATH.CHAT_LISTS} element={<ChatListPage />} />
-            <Route path={CLIENT_PATH.CHAT_ROOM} element={<ChatRoomPage />} />
+            <Route element={<AuthChecker />}>
+              <Route
+                path={CLIENT_PATH.MY_PROFILE}
+                element={<MyProfilePage />}
+              />
+              <Route
+                path={CLIENT_PATH.USAGE_HISTORY}
+                element={<UsageHistoryPage />}
+              />
+              <Route
+                path={CLIENT_PATH.CREATE_POST}
+                element={<CreatePostPage />}
+              />
+              <Route path={CLIENT_PATH.CHAT_LISTS} element={<ChatListPage />} />
+              <Route path={CLIENT_PATH.CHAT_ROOM} element={<ChatRoomPage />} />
+            </Route>
           </Route>
         </Routes>
       </Suspense>
