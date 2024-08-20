@@ -26,6 +26,7 @@ const MyProfilePage = lazy(() => import('@/pages/MyProfilePage'));
 const LoginPage = lazy(() => import('@/pages/LoginPage'));
 const LoginLoadingPage = lazy(() => import('@/pages/LoginLoadingPage'));
 import LoadingPage from '@/pages/LoadingPage';
+import AuthChecker from '@/AuthChecker.tsx';
 
 const Router = () => {
   return (
@@ -40,25 +41,27 @@ const Router = () => {
               element={<PostDetailPage />}
             />
             <Route
-              path={CLIENT_PATH.CREATE_POST}
-              element={<CreatePostPage />}
-            />
-            <Route
               path={CLIENT_PATH.UPDATE_POST}
               element={<CreatePostPage />}
             />
-            <Route path={CLIENT_PATH.CHAT_LISTS} element={<ChatListPage />} />
-            <Route path={CLIENT_PATH.CHAT_ROOM} element={<ChatRoomPage />} />
-            <Route
-              path={CLIENT_PATH.USAGE_HISTORY}
-              element={<UsageHistoryPage />}
-            />
-            <Route path={CLIENT_PATH.MY_PROFILE} element={<MyProfilePage />} />
             <Route path={CLIENT_PATH.LOGIN} element={<LoginPage />} />
             <Route
               path={CLIENT_PATH.LOGIN_LOADING}
               element={<LoginLoadingPage />}
             />
+          </Route>
+          <Route element={<AuthChecker />}>
+            <Route path={CLIENT_PATH.MY_PROFILE} element={<MyProfilePage />} />
+            <Route
+              path={CLIENT_PATH.USAGE_HISTORY}
+              element={<UsageHistoryPage />}
+            />
+            <Route
+              path={CLIENT_PATH.CREATE_POST}
+              element={<CreatePostPage />}
+            />
+            <Route path={CLIENT_PATH.CHAT_LISTS} element={<ChatListPage />} />
+            <Route path={CLIENT_PATH.CHAT_ROOM} element={<ChatRoomPage />} />
           </Route>
         </Routes>
       </Suspense>
