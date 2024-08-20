@@ -1,18 +1,14 @@
 import TaxiIcon from '@/assets/icons/login/taxi-icon.svg?react';
 import styled from 'styled-components';
-import { LoginApi } from '@/api/useApi.ts';
+import { getKakaoInga } from '@/api/kakaoApi.ts';
 
 const LoginPage = () => {
-  const click = () => {
-    LoginApi();
-  };
-
   return (
     <IconWrap>
       <TaxiIcon />
       <div>공주대학교</div>
       <span>택시팟</span>
-      <LoginButton onClick={click}>
+      <LoginButton onClick={getKakaoInga}>
         <img
           src={'src/assets/icons/login/kakao-login.png'}
           alt={'kakao-login-button'}

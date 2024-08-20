@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { CLIENT_PATH } from '@/constants/path.ts';
 
 import Layout from '@/components/common/Layout';
-import LoadingPage from '@/pages/LoadingPage.tsx';
+
 // import HomePage from '@/pages/HomePage';
 //import SearchPage from '@/pages/SearchPage.tsx';
 //import PostDetailPage from '@/pages/PostDetailPage.tsx';
@@ -24,6 +24,8 @@ const ChatRoomPage = lazy(() => import('@/pages/ChatRoomPage'));
 const UsageHistoryPage = lazy(() => import('@/pages/UsageHistoryPage'));
 const MyProfilePage = lazy(() => import('@/pages/MyProfilePage'));
 const LoginPage = lazy(() => import('@/pages/LoginPage'));
+const LoginLoadingPage = lazy(() => import('@/pages/LoginLoadingPage'));
+import LoadingPage from '@/pages/LoadingPage';
 
 const Router = () => {
   return (
@@ -53,6 +55,10 @@ const Router = () => {
             />
             <Route path={CLIENT_PATH.MY_PROFILE} element={<MyProfilePage />} />
             <Route path={CLIENT_PATH.LOGIN} element={<LoginPage />} />
+            <Route
+              path={CLIENT_PATH.LOGIN_LOADING}
+              element={<LoginLoadingPage />}
+            />
           </Route>
         </Routes>
       </Suspense>

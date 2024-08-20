@@ -3,6 +3,9 @@ import { API_BASE_URL, API_PATH } from '@/constants/path.ts';
 import { createPostRes, Post, PostDetail } from '@/types/post.ts';
 import { registerDataType } from '@/types';
 
+//새로 고침 시 accessToken 변수 초기화 => refresh토큰으로 재요청
+let accessToken: string;
+
 // base URL과 엔드포인트들로 서비스 정의
 export const localApi = createApi({
   reducerPath: 'localApi',
@@ -17,20 +20,15 @@ export const localApi = createApi({
         maxLongitude: number;
       }
     >({
-      query: (arg) => {
-        return {
-          url: API_PATH.POST.GET.ALL,
-          params: arg,
-        };
-      },
+      query: (arg) => ({
+        url: API_PATH.POST.GET.ALL,
+        params: arg,
+      }),
       transformResponse: (response: { data: Post[] }) => response.data,
       keepUnusedDataFor: 0,
     }),
     getPostById: builder.query<PostDetail, string>({
-      query: (id) => {
-        console.log(id);
-        return API_PATH.POST.GET.BY_ID.replace(':partyId', id);
-      },
+      query: (id) => API_PATH.POST.GET.BY_ID.replace(':partyId', id),
       transformResponse: (response: { data: PostDetail }) => response.data,
       keepUnusedDataFor: 5,
     }),
@@ -43,12 +41,21 @@ export const localApi = createApi({
       transformResponse: (response: { data: Post[] }) => response.data,
     }),
     createPost: builder.mutation<createPostRes, registerDataType>({
-      query: (patch) => {
-        return {
-          url: API_PATH.POST.POST,
-          method: 'POST',
-          body: patch,
-        };
+      query: (patch) => ({
+        url: API_PATH.POST.POST,
+        method: 'POST',
+        body: patch,
+      }),
+    }),
+    getAccessToken: builder.query<{ accessToken: string }, { code: string }>({
+      query: (arg: { code: string }) => ({
+        url: API_PATH.USER.GET_ACCESS_TOKEN,
+        params: arg,
+      }),
+      transformResponse: (response: { data: { accessToken: string } }) => {
+        accessToken = response.data.accessToken;
+        // console.log(accessToken);
+        return response.data;
       },
     }),
   }),
@@ -61,4 +68,5 @@ export const {
   useGetJoinPostsQuery,
   useGetClosePostsQuery,
   useCreatePostMutation,
+  useGetAccessTokenQuery,
 } = localApi;
