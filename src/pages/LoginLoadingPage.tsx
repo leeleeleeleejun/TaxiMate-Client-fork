@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useGetAccessTokenQuery } from '@/api/localApi.ts';
 import { setIsLogin } from '@/components/myProfile/userSlice.ts';
+import { useEffect } from 'react';
 
 const LoginLoadingPage = () => {
   const dispatch = useDispatch();
@@ -12,10 +13,12 @@ const LoginLoadingPage = () => {
 
   const { isLoading } = useGetAccessTokenQuery({ code: code });
 
-  if (isLoading) {
-    dispatch(setIsLogin(true));
-    navigate('/');
-  }
+  useEffect(() => {
+    if (isLoading) {
+      dispatch(setIsLogin(true));
+      navigate('/');
+    }
+  }, [isLoading, dispatch, navigate]);
 
   return null;
 };
