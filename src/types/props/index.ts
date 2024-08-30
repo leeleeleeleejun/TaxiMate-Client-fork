@@ -1,12 +1,12 @@
 import { ReactNode } from 'react';
 import {
-  registerDataType,
+  registerData,
   setActiveMarker,
   setRegisterDataFunc,
   setStep,
-  stepType,
+  step,
 } from '@/types';
-import { Post } from '@/types/post.ts';
+import { post } from '@/types/post.ts';
 
 export interface NavItemContainerProps {
   children: ReactNode;
@@ -53,7 +53,7 @@ export interface HomeMapProps {
   setActiveButton: React.Dispatch<React.SetStateAction<boolean>>;
   activeMarker: string | null;
   setActiveMarker: setActiveMarker;
-  data: Post[];
+  data: post[];
 }
 
 export interface MarkerContainerProps {
@@ -70,7 +70,7 @@ export interface MarkerContainerProps {
 }
 
 export interface CreateMainPageProps {
-  registerData: registerDataType;
+  registerData: registerData;
   createPostSubmit: () => void;
   setRegisterDataFunc: setRegisterDataFunc;
   setStep: setStep;
@@ -83,13 +83,13 @@ export interface ContentWrapProps {
 }
 
 export interface SearchPageProps {
-  step?: stepType;
+  step?: step;
   setStep?: setStep;
   setRegisterDataFunc?: setRegisterDataFunc;
 }
 
 export interface SetPlaceMapPageProps {
-  step: stepType;
+  step: step;
   value: { latitude: number; longitude: number };
   comeBackMain: () => void;
   setRegisterDataFunc: setRegisterDataFunc;
@@ -103,7 +103,7 @@ export interface SetDatePageProps {
 }
 
 export interface SetPlaceProps {
-  step: stepType;
+  step: step;
   setStep: setStep;
   setRegisterDataFunc: setRegisterDataFunc;
   comeBackMain: () => void;

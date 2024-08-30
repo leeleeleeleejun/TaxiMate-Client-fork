@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_BASE_URL, API_PATH } from '@/constants/path.ts';
-import { createPostRes, Post, PostDetail } from '@/types/post.ts';
-import { registerDataType } from '@/types';
+import { createPostRes, post, postDetail } from '@/types/post.ts';
+import { registerData } from '@/types';
 
 // base URL과 엔드포인트들로 서비스 정의
 export const localApi = createApi({
@@ -9,7 +9,7 @@ export const localApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: API_BASE_URL }),
   endpoints: (builder) => ({
     getPosts: builder.query<
-      Post[],
+      post[],
       {
         minLatitude: number;
         minLongitude: number;
@@ -23,26 +23,26 @@ export const localApi = createApi({
           params: arg,
         };
       },
-      transformResponse: (response: { data: Post[] }) => response.data,
+      transformResponse: (response: { data: post[] }) => response.data,
       keepUnusedDataFor: 0,
     }),
-    getPostById: builder.query<PostDetail, string>({
+    getPostById: builder.query<postDetail, string>({
       query: (id) => {
         console.log(id);
         return API_PATH.POST.GET.BY_ID.replace(':partyId', id);
       },
-      transformResponse: (response: { data: PostDetail }) => response.data,
+      transformResponse: (response: { data: postDetail }) => response.data,
       keepUnusedDataFor: 5,
     }),
-    getJoinPosts: builder.query<Post[], string>({
+    getJoinPosts: builder.query<post[], string>({
       query: () => API_PATH.POST.GET.JOIN_POSTS,
-      transformResponse: (response: { data: Post[] }) => response.data,
+      transformResponse: (response: { data: post[] }) => response.data,
     }),
-    getClosePosts: builder.query<Post[], string>({
+    getClosePosts: builder.query<post[], string>({
       query: () => API_PATH.POST.GET.CLOSE_POSTS,
-      transformResponse: (response: { data: Post[] }) => response.data,
+      transformResponse: (response: { data: post[] }) => response.data,
     }),
-    createPost: builder.mutation<createPostRes, registerDataType>({
+    createPost: builder.mutation<createPostRes, registerData>({
       query: (patch) => {
         return {
           url: API_PATH.POST.POST,

@@ -7,9 +7,9 @@ export interface searchPlace {
   address_name: string;
 }
 
-export type SelectionKey = 'meridiem' | 'hour' | 'minute';
+export type selectionKey = 'meridiem' | 'hour' | 'minute';
 
-export interface registerDataType {
+export interface registerData {
   title: string;
   departureTime: string;
   explanation: string;
@@ -18,7 +18,7 @@ export interface registerDataType {
   maxParticipants: string;
 }
 
-export type registerDataKeys =
+export type registerDataKey =
   | 'title'
   | 'departureTime'
   | 'explanation'
@@ -26,7 +26,7 @@ export type registerDataKeys =
   | 'destinationLocation'
   | 'maxParticipants';
 
-export type stepType =
+export type step =
   | 'main'
   | 'time'
   | 'origin'
@@ -36,10 +36,10 @@ export type stepType =
   | 'originMap'
   | 'destinationMap';
 
-export type setStep = React.Dispatch<React.SetStateAction<stepType>>;
+export type setStep = React.Dispatch<React.SetStateAction<step>>;
 
 export type setRegisterDataFunc = (
-  name: registerDataKeys,
+  name: registerDataKey,
   data: string | { latitude: number; longitude: number }
 ) => void;
 

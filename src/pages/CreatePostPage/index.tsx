@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 
 import { useGetPostByIdQuery } from '@/api/localApi.ts';
 import useCreatePost from '@/hooks/useCreatePost.ts';
-import { registerDataKeys, registerDataType, stepType } from '@/types';
+import { registerDataKey, registerData, step } from '@/types';
 
 import CreateMainPage from '@/pages/CreatePostPage/CreateMainPage.tsx';
 import SetDatePage from '@/pages/CreatePostPage/SetDatePage.tsx';
@@ -17,7 +17,7 @@ const CreatePostPage = () => {
     skip: !id, // id가 없으면 쿼리 실행을 건너뜀
   });
 
-  const upDate: registerDataType = {
+  const upDate: registerData = {
     title: data?.title || '',
     departureTime: data?.departureTime || '',
     originLocation: data?.originLocation || { latitude: 0, longitude: 0 },
@@ -29,8 +29,8 @@ const CreatePostPage = () => {
     maxParticipants: String(data?.maxParticipants) || '',
   };
 
-  const [step, setStep] = useState<stepType>('main');
-  const [registerData, setRegisterData] = useState<registerDataType>(
+  const [step, setStep] = useState<step>('main');
+  const [registerData, setRegisterData] = useState<registerData>(
     !data ? getInitialRegisterData : upDate
   );
 
@@ -41,7 +41,7 @@ const CreatePostPage = () => {
   };
 
   const setRegisterDataFunc = (
-    name: registerDataKeys,
+    name: registerDataKey,
     data: string | { longitude: number; latitude: number }
   ) => {
     setRegisterData((prev) => ({ ...prev, [name]: data }));
@@ -111,7 +111,7 @@ const Step = ({ check, children }: { check: boolean; children: ReactNode }) => {
 };
 
 // 상태 초기화 유틸리티 함수
-const getInitialRegisterData: registerDataType = (() => {
+const getInitialRegisterData: registerData = (() => {
   const today = new Date();
   const ceilMinutes = Math.ceil(today.getMinutes() / 5) * 5;
   const departureTime = new Date(today.setMinutes(ceilMinutes)).toISOString();
