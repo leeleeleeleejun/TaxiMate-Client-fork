@@ -107,7 +107,7 @@ export const OthersName = styled.span`
   color: var(--color-gray-100);
   font-size: var(--font-semi-micro);
 `;
-export const MessageInputBox = styled.div`
+export const MessageInputBoxContainer = styled.div`
   width: 100%;
   padding: 10px 20px;
   display: flex;
