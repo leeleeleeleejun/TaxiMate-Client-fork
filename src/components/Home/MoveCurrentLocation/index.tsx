@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import { useNavermaps } from 'react-naver-maps';
 
 import getCurrentLocation from '@/utils/getCurrentlocation.ts';
@@ -7,6 +6,7 @@ import { MoveCurrentLocationProps } from '@/types/props/index.ts';
 
 import ActiveMoveLocationIcon from '@/assets/icons/map/active-move-location-icon.svg?react';
 import NonActiveMoveLocationIcon from '@/assets/icons/map/non-active-move-location-icon.svg?react';
+import { Button } from '@/components/Home/MoveCurrentLocation/MoveCurrentLocation.style.ts';
 
 const MoveCurrentLocation = ({
   map,
@@ -78,27 +78,3 @@ const checkMax = (
     setIsMax(false);
   }
 };
-
-const Button = styled.button<{
-  $bottom: number;
-  $isMax: boolean;
-  $activeMarker: string | null;
-}>`
-  width: 38px;
-  height: 38px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  border-radius: 50%;
-
-  position: absolute;
-  transition: bottom 0.5s ease;
-  bottom: ${({ $isMax, $bottom, $activeMarker }) =>
-    $activeMarker ? '125px' : $isMax ? '30px' : `${$bottom - 50}px`};
-  right: 5%;
-  z-index: 2;
-
-  background-color: var(--color-white);
-`;
