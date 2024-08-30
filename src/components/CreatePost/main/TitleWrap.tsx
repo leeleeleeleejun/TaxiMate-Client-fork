@@ -4,9 +4,9 @@ import {
 } from '@/components/CreatePost/createPost.style.ts';
 import ContentWrap from '@/components/CreatePost/ContentWrap.tsx';
 import TitleIcon from '@/assets/icons/createPost/title-icon.svg?react';
-import { contentWrapType } from '@/types/props';
+import { ContentWrapProps } from '@/types/props';
 
-const TitleWrap = ({ value, setRegisterDataFunc }: contentWrapType) => {
+const TitleWrap = ({ value, setRegisterDataFunc }: ContentWrapProps) => {
   if (!setRegisterDataFunc) return null;
   if (typeof value !== 'string') return null;
 

@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { getAddress } from '@/api/kakaoApi.ts';
-import { contentWrapType } from '@/types/props';
+import { ContentWrapProps } from '@/types/props';
 
 import LocationInfo from '@/components/common/LocationInfo';
 import ContentWrap from '@/components/CreatePost/ContentWrap.tsx';
 import LocationPinIcon from '@/assets/icons/createPost/location-pin-icon.svg?react';
 
-interface PlaceInfoWrapProps extends contentWrapType {
+interface PlaceInfoWrapProps extends ContentWrapProps {
   value2: { longitude: number; latitude: number };
 }
 

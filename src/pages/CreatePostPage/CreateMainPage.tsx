@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { registerProps } from '@/types/props';
+import { CreateMainPageProps } from '@/types/props';
 
 import Header from '@/components/common/Layout/Header';
 import TitleWrap from '@/components/CreatePost/main/TitleWrap.tsx';
@@ -23,7 +23,7 @@ const CreateMainPage = ({
   createPostSubmit,
   setRegisterDataFunc,
   setStep,
-}: registerProps) => {
+}: CreateMainPageProps) => {
   const navigate = useNavigate();
   return (
     <>

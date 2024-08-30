@@ -1,4 +1,4 @@
-import { contentWrapType } from '@/types/props';
+import { ContentWrapProps } from '@/types/props';
 import reformatDate from '@/utils/reformatDate.ts';
 
 import ContentWrap from '@/components/CreatePost/ContentWrap.tsx';
@@ -8,7 +8,7 @@ import ClockIcon from '@/assets/icons/createPost/clock-icon.svg?react';
 import ArrowRightIcon from '@/assets/icons/arrow-right-icon.svg?react';
 import CalendarIcon from '@/assets/icons/createPost/calendar-icon.svg?react';
 
-const DateWrap = ({ value, setStep }: contentWrapType) => {
+const DateWrap = ({ value, setStep }: ContentWrapProps) => {
   if (!setStep) return null;
   if (typeof value !== 'string') return null;
 

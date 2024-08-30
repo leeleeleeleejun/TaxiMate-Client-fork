@@ -1,9 +1,9 @@
-import { contentWrapType } from '@/types/props';
+import { ContentWrapProps } from '@/types/props';
 import NextRadio from '@/components/CreatePost/Radio.tsx';
 import ContentWrap from '@/components/CreatePost/ContentWrap.tsx';
 import MemberIcon from '@/assets/icons/createPost/member-icon.svg?react';
 
-const MemberWrap = ({ value, setRegisterDataFunc }: contentWrapType) => {
+const MemberWrap = ({ value, setRegisterDataFunc }: ContentWrapProps) => {
   if (!setRegisterDataFunc) return null;
   if (typeof value !== 'string') return null;
 

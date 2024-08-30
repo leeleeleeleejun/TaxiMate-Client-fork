@@ -63,34 +63,32 @@ export interface MarkerContainerProps {
     longitude: number;
   };
   title: string;
-
   anchor: number[];
-
   showPlace: boolean;
   activeMarker: string | null;
   setActiveMarker?: setActiveMarker;
 }
 
-export interface registerProps {
+export interface CreateMainPageProps {
   registerData: registerDataType;
   createPostSubmit: () => void;
   setRegisterDataFunc: setRegisterDataFunc;
   setStep: setStep;
 }
 
-export interface contentWrapType {
+export interface ContentWrapProps {
   value: string | { longitude: number; latitude: number };
   setRegisterDataFunc?: setRegisterDataFunc;
   setStep?: setStep;
 }
 
-export interface searchPageProps {
+export interface SearchPageProps {
   step?: stepType;
   setStep?: setStep;
   setRegisterDataFunc?: setRegisterDataFunc;
 }
 
-export interface setPlaceMapPageProps {
+export interface SetPlaceMapPageProps {
   step: stepType;
   value: { latitude: number; longitude: number };
   comeBackMain: () => void;
@@ -98,13 +96,13 @@ export interface setPlaceMapPageProps {
   backHandle: () => void;
 }
 
-export interface setDatePageProps {
+export interface SetDatePageProps {
   value: string;
   setRegisterDataFunc: setRegisterDataFunc;
   comeBackMain: () => void;
 }
 
-export interface setPlaceProps {
+export interface SetPlaceProps {
   step: stepType;
   setStep: setStep;
   setRegisterDataFunc: setRegisterDataFunc;
