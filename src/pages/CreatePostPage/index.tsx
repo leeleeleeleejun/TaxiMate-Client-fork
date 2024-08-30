@@ -17,7 +17,7 @@ const CreatePostPage = () => {
     skip: !id, // id가 없으면 쿼리 실행을 건너뜀
   });
 
-  const upDate: registerData = {
+  const prevPostData: registerData = {
     title: data?.title || '',
     departureTime: data?.departureTime || '',
     originLocation: data?.originLocation || { latitude: 0, longitude: 0 },
@@ -31,7 +31,7 @@ const CreatePostPage = () => {
 
   const [step, setStep] = useState<step>('main');
   const [registerData, setRegisterData] = useState<registerData>(
-    !data ? getInitialRegisterData : upDate
+    data ? prevPostData : initialRegisterData
   );
 
   const createPostSubmit = useCreatePost(registerData);
@@ -111,7 +111,7 @@ const Step = ({ check, children }: { check: boolean; children: ReactNode }) => {
 };
 
 // 상태 초기화 유틸리티 함수
-const getInitialRegisterData: registerData = (() => {
+const initialRegisterData: registerData = (() => {
   const today = new Date();
   const ceilMinutes = Math.ceil(today.getMinutes() / 5) * 5;
   const departureTime = new Date(today.setMinutes(ceilMinutes)).toISOString();

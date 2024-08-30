@@ -19,7 +19,7 @@ const SetDatePage = ({
   value,
   setRegisterDataFunc,
   comeBackMain,
-}: setDatePageProps) => {
+}: SetDatePageProps) => {
   const dateDepartureTimeValue = new Date(value);
 
   const [date, setDate] = useState(
