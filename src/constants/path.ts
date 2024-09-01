@@ -1,4 +1,3 @@
-export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 export const LocalAPI = 'http://localhost:5173';
 
 export const API_PATH = {
@@ -7,18 +6,19 @@ export const API_PATH = {
   },
   POST: {
     GET: {
-      ALL: `${API_BASE_URL}/api/v1/parties`,
+      ALL: `/api/v1/parties`,
       // 포스트 ID 조회
-      BY_ID: `${API_BASE_URL}/api/v1/parties/:partyId`,
+      BY_ID: `/api/v1/parties/:partyId`,
       // 특정 유저의 전체 포스트 조회
-      BY_USER: `${API_BASE_URL}/posts/user/:userId`,
+      BY_USER: `/posts/user/:userId`,
       JOIN_POSTS: `${LocalAPI}/join-posts`,
       CLOSE_POSTS: `${LocalAPI}/close-posts`,
     },
-    POST: `${API_BASE_URL}/api/v1/parties`,
+    POST: `/api/v1/parties`,
   },
   USER: {
-    GET_ACCESS_TOKEN: `${API_BASE_URL}/oauth2/kakao`,
+    GET_ACCESS_TOKEN: `/oauth2/kakao`,
+    GET_REFRESH_ACCESS_TOKEN: `/api/v1/auth/tokens`,
   },
 };
 

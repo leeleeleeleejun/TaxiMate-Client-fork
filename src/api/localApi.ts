@@ -1,15 +1,25 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { API_BASE_URL, API_PATH } from '@/constants/path.ts';
+import { API_PATH } from '@/constants/path.ts';
 import { createPostRes, Post, PostDetail } from '@/types/post.ts';
 import { registerDataType } from '@/types';
+
+//export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 //새로 고침 시 accessToken 변수 초기화 => refresh토큰으로 재요청
 let accessToken: string;
 
 // base URL과 엔드포인트들로 서비스 정의
+// 배포 시 BASE URL 변경 필요
 export const localApi = createApi({
   reducerPath: 'localApi',
-  baseQuery: fetchBaseQuery({ baseUrl: API_BASE_URL }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: '/',
+    credentials: 'include',
+    prepareHeaders: (headers) => {
+      headers.set('Accept', 'application/json');
+      accessToken && headers.set('Authorization', `Bearer ${accessToken}`);
+    },
+  }),
   endpoints: (builder) => ({
     getPosts: builder.query<
       Post[],
@@ -44,15 +54,11 @@ export const localApi = createApi({
       query: (patch) => ({
         url: API_PATH.POST.POST,
         method: 'POST',
-        headers: {
-          'Content-type': 'application/json',
-          Authorization: `Bearer ${accessToken}`,
-        },
         body: patch,
       }),
     }),
     getAccessToken: builder.query<{ accessToken: string }, { code: string }>({
-      query: (arg: { code: string }) => ({
+      query: (arg) => ({
         url: API_PATH.USER.GET_ACCESS_TOKEN,
         params: arg,
       }),
