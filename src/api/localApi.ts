@@ -67,6 +67,13 @@ export const localApi = createApi({
         return response.data;
       },
     }),
+    getRefreshAccessToken: builder.query<{ accessToken: string }, null>({
+      query: () => API_PATH.USER.GET_REFRESH_ACCESS_TOKEN,
+      transformResponse: (response: { data: { accessToken: string } }) => {
+        accessToken = response.data.accessToken;
+        return response.data;
+      },
+    }),
   }),
 });
 
@@ -78,4 +85,5 @@ export const {
   useGetClosePostsQuery,
   useCreatePostMutation,
   useGetAccessTokenQuery,
+  useGetRefreshAccessTokenQuery,
 } = localApi;

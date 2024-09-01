@@ -15,7 +15,7 @@ import Layout from '@/components/common/Layout';
 //import MyProfilePage from '@/pages/MyProfilePage.tsx';
 //import LoginPage from '@/pages/LoginPage.tsx';
 
-const HomePage = lazy(() => import('./pages/HomePage'));
+const HomePage = lazy(() => import('@/pages/HomePage'));
 const SearchPage = lazy(() => import('@/pages/SearchPage'));
 const PostDetailPage = lazy(() => import('@/pages/PostDetailPage'));
 const CreatePostPage = lazy(() => import('@/pages/CreatePostPage'));
@@ -49,6 +49,7 @@ const Router = () => {
               path={CLIENT_PATH.LOGIN_LOADING}
               element={<LoginLoadingPage />}
             />
+            {/*유저 로그인 상태 체크 필요 페이지*/}
             <Route element={<AuthChecker />}>
               <Route
                 path={CLIENT_PATH.MY_PROFILE}
