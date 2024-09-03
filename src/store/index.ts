@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { localApi } from '@/api/localApi.ts';
+import userSlice from '@/components/myProfile/userSlice.ts';
 
 export const store = configureStore({
   reducer: {
+    userSlice,
     [localApi.reducerPath]: localApi.reducer,
   },
   // 캐싱, 요청 취소, 폴링 등등 유용한 rtk-query의 기능들을 위한 api 미들웨어 추가

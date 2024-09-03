@@ -9,4 +9,18 @@ export default defineConfig({
   resolve: {
     alias: [{ find: '@', replacement: '/src' }],
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://3.34.129.34:8080',
+        changeOrigin: true,
+        secure: false,
+      },
+      '/oauth2': {
+        target: 'http://3.34.129.34:8080',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
 });
