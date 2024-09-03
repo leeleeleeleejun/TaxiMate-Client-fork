@@ -79,12 +79,12 @@ export const localApi = createApi({
         url: API_PATH.POST.GET.ALL,
         params: arg,
       }),
-      transformResponse: (response: { data: Post[] }) => response.data,
+      transformResponse: (response: { data: post[] }) => response.data,
       keepUnusedDataFor: 0,
     }),
-    getPostById: builder.query<PostDetail, string>({
+    getPostById: builder.query<postDetail, string>({
       query: (id) => API_PATH.POST.GET.BY_ID.replace(':partyId', id),
-      transformResponse: (response: { data: PostDetail }) => response.data,
+      transformResponse: (response: { data: postDetail }) => response.data,
       keepUnusedDataFor: 5,
     }),
     getJoinPosts: builder.query<post[], string>({
@@ -95,7 +95,7 @@ export const localApi = createApi({
       query: () => API_PATH.POST.GET.CLOSE_POSTS,
       transformResponse: (response: { data: post[] }) => response.data,
     }),
-    createPost: builder.mutation<createPostRes, registerDataType>({
+    createPost: builder.mutation<createPostRes, registerData>({
       query: (patch) => ({
         url: API_PATH.POST.POST,
         method: 'POST',
