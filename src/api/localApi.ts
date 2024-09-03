@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { API_PATH } from '@/constants/path.ts';
+import { API_PATH, CLIENT_PATH } from '@/constants/path.ts';
 import { createPostRes, Post, PostDetail } from '@/types/post.ts';
 import { registerDataType } from '@/types';
 import type {
@@ -32,8 +32,9 @@ const baseQueryWithReauth: BaseQueryFn<
   FetchBaseQueryError
 > = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
-
   if (result.error && result.error.status === 401) {
+    accessToken = null;
+
     // Refresh token API 호출
     const refreshResult = (await baseQuery(
       API_PATH.USER.GET_REFRESH_ACCESS_TOKEN,
@@ -49,11 +50,12 @@ const baseQueryWithReauth: BaseQueryFn<
       result = await baseQuery(args, api, extraOptions);
     } else {
       // 리프레시 토큰 갱신 실패 시, 사용자 로그아웃 처리 등 추가적인 처리를 여기에 추가할 수 있음
+      alert('로그인이 만료되었습니다');
       accessToken = null;
       api.dispatch(setIsLogin(false));
+      window.location.href = CLIENT_PATH.LOGIN;
     }
   }
-
   return result;
 };
 
