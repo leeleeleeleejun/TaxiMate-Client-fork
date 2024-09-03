@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getAddress } from '@/api/kakaoApi.ts';
-import { setPlaceMapPageProps } from '@/types/props';
+import { SetPlaceMapPageProps } from '@/types/props';
 
 import Map from '@/components/CreatePost/setPlace/Map.tsx';
 import LocationInfo from '@/components/common/LocationInfo';
@@ -25,7 +25,7 @@ const SetPlaceMapPage = ({
   comeBackMain,
   setRegisterDataFunc,
   backHandle,
-}: setPlaceMapPageProps) => {
+}: SetPlaceMapPageProps) => {
   const [map, setMap] = useState<naver.maps.Map | null>(null);
   const [address, setAddress] = useState('');
   const [place, setPlace] = useState('');

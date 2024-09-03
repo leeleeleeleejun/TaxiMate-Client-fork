@@ -1,4 +1,4 @@
-export interface Post {
+export interface post {
   id: string;
   title: string;
   departureTime: string;
@@ -9,7 +9,7 @@ export interface Post {
   originLocation: { latitude: number; longitude: number };
 }
 
-export interface PostDetail extends Post {
+export interface postDetail extends post {
   explanation: string;
   originAddress: string;
   destinationAddress: string;

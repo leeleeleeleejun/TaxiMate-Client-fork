@@ -1,11 +1,14 @@
+import { Link } from 'react-router-dom';
+
+import { ChatListItemProps } from '@/types/props';
+
+import PeopleCountTag from '@/components/common/PeopleCountTag';
 import {
   ChatListItemBody,
   ChatListItemContainer,
   ChatListItemHeader,
   MessageCounter,
 } from '@/components/chatList/chatList.style.ts';
-import PeopleCountTag from '@/components/common/PeopleCountTag';
-import { Link } from 'react-router-dom';
 
 const ChatListItem = ({
   title,
@@ -15,15 +18,7 @@ const ChatListItem = ({
   resentMessageTime,
   resentMessageCounter,
   id,
-}: {
-  title: string;
-  currentParticipants: number;
-  maxParticipants: number;
-  resentMessage: string;
-  resentMessageTime: string;
-  resentMessageCounter: string;
-  id: string;
-}) => {
+}: ChatListItemProps) => {
   return (
     <ChatListItemContainer>
       <Link to={'/chat-list/' + id}>

@@ -1,7 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_PATH, CLIENT_PATH } from '@/constants/path.ts';
-import { createPostRes, Post, PostDetail } from '@/types/post.ts';
-import { registerDataType } from '@/types';
+import { createPostRes, post, postDetail } from '@/types/post.ts';
+import { registerData } from '@/types';
+
 import type {
   BaseQueryFn,
   FetchArgs,
@@ -66,7 +67,7 @@ export const localApi = createApi({
   baseQuery: baseQueryWithReauth,
   endpoints: (builder) => ({
     getPosts: builder.query<
-      Post[],
+      post[],
       {
         minLatitude: number;
         minLongitude: number;
@@ -86,13 +87,13 @@ export const localApi = createApi({
       transformResponse: (response: { data: PostDetail }) => response.data,
       keepUnusedDataFor: 5,
     }),
-    getJoinPosts: builder.query<Post[], string>({
+    getJoinPosts: builder.query<post[], string>({
       query: () => API_PATH.POST.GET.JOIN_POSTS,
-      transformResponse: (response: { data: Post[] }) => response.data,
+      transformResponse: (response: { data: post[] }) => response.data,
     }),
-    getClosePosts: builder.query<Post[], string>({
+    getClosePosts: builder.query<post[], string>({
       query: () => API_PATH.POST.GET.CLOSE_POSTS,
-      transformResponse: (response: { data: Post[] }) => response.data,
+      transformResponse: (response: { data: post[] }) => response.data,
     }),
     createPost: builder.mutation<createPostRes, registerDataType>({
       query: (patch) => ({

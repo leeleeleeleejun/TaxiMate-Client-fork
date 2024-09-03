@@ -4,9 +4,9 @@ import {
   TextArea,
 } from '@/components/CreatePost/createPost.style.ts';
 import ExplainIcon from '@/assets/icons/createPost/explain-icon .svg?react';
-import { contentWrapType } from '@/types/props';
+import { ContentWrapProps } from '@/types/props';
 
-const ExplanationWrap = ({ value, setRegisterDataFunc }: contentWrapType) => {
+const ExplanationWrap = ({ value, setRegisterDataFunc }: ContentWrapProps) => {
   if (!setRegisterDataFunc) return null;
   if (typeof value !== 'string') return null;
 

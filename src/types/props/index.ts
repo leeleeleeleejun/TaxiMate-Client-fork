@@ -1,12 +1,12 @@
 import { ReactNode } from 'react';
 import {
-  registerDataType,
+  registerData,
   setActiveMarker,
   setRegisterDataFunc,
   setStep,
-  stepType,
+  step,
 } from '@/types';
-import { Post } from '@/types/post.ts';
+import { post } from '@/types/post.ts';
 
 export interface NavItemContainerProps {
   children: ReactNode;
@@ -53,7 +53,7 @@ export interface HomeMapProps {
   setActiveButton: React.Dispatch<React.SetStateAction<boolean>>;
   activeMarker: string | null;
   setActiveMarker: setActiveMarker;
-  data: Post[];
+  data: post[];
 }
 
 export interface MarkerContainerProps {
@@ -63,50 +63,58 @@ export interface MarkerContainerProps {
     longitude: number;
   };
   title: string;
-
   anchor: number[];
-
   showPlace: boolean;
   activeMarker: string | null;
   setActiveMarker?: setActiveMarker;
 }
 
-export interface registerProps {
-  registerData: registerDataType;
+export interface CreateMainPageProps {
+  registerData: registerData;
   createPostSubmit: () => void;
   setRegisterDataFunc: setRegisterDataFunc;
   setStep: setStep;
 }
 
-export interface contentWrapType {
+export interface ContentWrapProps {
   value: string | { longitude: number; latitude: number };
   setRegisterDataFunc?: setRegisterDataFunc;
   setStep?: setStep;
 }
 
-export interface searchPageProps {
-  step?: stepType;
+export interface SearchPageProps {
+  step?: step;
   setStep?: setStep;
   setRegisterDataFunc?: setRegisterDataFunc;
 }
 
-export interface setPlaceMapPageProps {
-  step: stepType;
+export interface SetPlaceMapPageProps {
+  step: step;
   value: { latitude: number; longitude: number };
   comeBackMain: () => void;
   setRegisterDataFunc: setRegisterDataFunc;
   backHandle: () => void;
 }
 
-export interface setDatePageProps {
+export interface SetDatePageProps {
   value: string;
   setRegisterDataFunc: setRegisterDataFunc;
   comeBackMain: () => void;
 }
 
-export interface setPlaceProps {
-  step: stepType;
+export interface SetPlaceProps {
+  step: step;
   setStep: setStep;
   setRegisterDataFunc: setRegisterDataFunc;
   comeBackMain: () => void;
+}
+
+export interface ChatListItemProps {
+  id: string;
+  title: string;
+  currentParticipants: number;
+  maxParticipants: number;
+  resentMessage: string;
+  resentMessageTime: string;
+  resentMessageCounter: string;
 }

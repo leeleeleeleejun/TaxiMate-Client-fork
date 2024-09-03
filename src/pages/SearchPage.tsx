@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { registerDataKeys } from '@/types';
-import { searchPageProps } from '@/types/props';
+import { registerDataKey } from '@/types';
+import { SearchPageProps } from '@/types/props';
 
 import Header from '@/components/common/Layout/Header';
 import SearchList from '@/components/Search/SearchList.tsx';
@@ -13,7 +13,7 @@ const SearchPage = ({
   step,
   setStep,
   setRegisterDataFunc,
-}: searchPageProps) => {
+}: SearchPageProps) => {
   const navigate = useNavigate();
   const [inputValue, setInputValue] = useState<string>('');
   const inputEl = useRef<HTMLInputElement>(null);
@@ -27,7 +27,7 @@ const SearchPage = ({
       // 팟생성에서 검색 시 사용
       const nextStep = step === 'searchOrigin' ? 'originMap' : 'destinationMap';
 
-      const registerKey: registerDataKeys =
+      const registerKey: registerDataKey =
         step === 'searchOrigin' ? 'originLocation' : 'destinationLocation';
 
       setRegisterDataFunc(registerKey, { latitude: lat, longitude: lng });

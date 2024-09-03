@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { parseAbsoluteToLocal } from '@internationalized/date';
 
-import { setDatePageProps } from '@/types/props';
+import { SetDatePageProps } from '@/types/props';
 import reformatDate from '@/utils/reformatDate.ts';
 import setDepartureTimeValueFunc from '@/utils/setDepartureTimeValueFunc.ts';
 
@@ -19,7 +19,7 @@ const SetDatePage = ({
   value,
   setRegisterDataFunc,
   comeBackMain,
-}: setDatePageProps) => {
+}: SetDatePageProps) => {
   const dateDepartureTimeValue = new Date(value);
 
   const [date, setDate] = useState(

@@ -1,5 +1,5 @@
 import { selections } from '@/constants';
-import { SelectionKey } from '@/types';
+import { selectionKey } from '@/types';
 import Picker from 'react-mobile-picker';
 
 const TimePickerWrap = ({
@@ -13,7 +13,7 @@ const TimePickerWrap = ({
 }) => {
   return (
     <Picker value={time} onChange={setTime} height={90}>
-      {(Object.keys(selections) as SelectionKey[]).map((name) => (
+      {(Object.keys(selections) as selectionKey[]).map((name) => (
         <Picker.Column key={name} name={name}>
           {selections[name].map((option) => (
             <Picker.Item key={option} value={option}>

@@ -1,4 +1,4 @@
-import { setPlaceProps } from '@/types/props';
+import { SetPlaceProps } from '@/types/props';
 import getCurrentLocation from '@/utils/getCurrentlocation.ts';
 
 import CreatePostChilePageLayout from '@/components/common/Layout/CreatePostChildPageLayout';
@@ -13,7 +13,7 @@ const SetPlacePage = ({
   setStep,
   setRegisterDataFunc,
   comeBackMain,
-}: setPlaceProps) => {
+}: SetPlaceProps) => {
   const [isLoading, setIsLoading] = useState(false); // 로딩 상태 관리
 
   const isOrigin = step === 'origin';
