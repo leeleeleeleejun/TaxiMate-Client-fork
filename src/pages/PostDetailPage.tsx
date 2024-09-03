@@ -34,10 +34,12 @@ const PostDetailPage = () => {
         <BackButton onClick={() => navigate('/')}>
           <ArrowLeftIcon />
         </BackButton>
-        <DropDown
-          items={[{ name: '수정', handler: clickUpdateHandler }]}
-          danger={'삭제'}
-        />
+        {data.host.isMe && (
+          <DropDown
+            items={[{ name: '수정', handler: clickUpdateHandler }]}
+            danger={'삭제'}
+          />
+        )}
       </Header>
       <S.PostDetailContainer>
         <PostDetailHeader
