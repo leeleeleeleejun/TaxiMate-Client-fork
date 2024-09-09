@@ -20,6 +20,9 @@ export const API_PATH = {
     GET_ACCESS_TOKEN: `/oauth2/kakao`,
     GET_REFRESH_ACCESS_TOKEN: `/api/v1/auth/tokens`,
   },
+  CHAT: {
+    PARTICIPATION: `/api/v1/participation`,
+  },
 };
 
 export const CLIENT_PATH = {

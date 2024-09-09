@@ -119,6 +119,13 @@ export const localApi = createApi({
         return response.data;
       },
     }),
+    participationChat: builder.mutation<{ message: string }, string>({
+      query: (partyId) => ({
+        url: API_PATH.CHAT.PARTICIPATION,
+        method: 'POST',
+        body: { partyId: Number(partyId) },
+      }),
+    }),
   }),
 });
 
@@ -131,4 +138,5 @@ export const {
   useCreatePostMutation,
   useGetAccessTokenQuery,
   useGetRefreshAccessTokenQuery,
+  useParticipationChatMutation,
 } = localApi;
