@@ -22,7 +22,7 @@ import ArrowLeftIcon from '@/assets/icons/arrow-left-icon.svg?react';
 const PostDetailPage = () => {
   const navigate = useNavigate();
   const id = useLocation().pathname.split('/')[2];
-  const { data, isLoading } = useGetPostByIdQuery(id);
+  const { data, isLoading, refetch } = useGetPostByIdQuery(id);
   const [participationChat, { error }] = useParticipationChatMutation();
 
   if (isLoading) return <div>Loading...</div>;
@@ -52,6 +52,7 @@ const PostDetailPage = () => {
   const participationChatHandler = async () => {
     const result = await participationChat(data.id).unwrap();
     alert(result.message);
+    refetch();
     // TODO: 채팅방으로 이동 로직 추가
   };
 
