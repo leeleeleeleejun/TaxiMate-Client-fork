@@ -7,6 +7,7 @@ import {
 import { CLIENT_PATH } from '@/constants/path.ts';
 import reformatDate from '@/utils/reformatDate.ts';
 import reformatDetailDate from '@/utils/reformatDetailDate.ts';
+import { postDetailStatus } from '@/types/post.ts';
 
 import Header from '@/components/common/Layout/Header';
 import DropDown from '@/components/common/DropDown.tsx';
@@ -22,7 +23,7 @@ import ArrowLeftIcon from '@/assets/icons/arrow-left-icon.svg?react';
 const PostDetailPage = () => {
   const navigate = useNavigate();
   const id = useLocation().pathname.split('/')[2];
-  const { data, isLoading } = useGetPostByIdQuery(id);
+  const { data, isLoading, refetch } = useGetPostByIdQuery(id);
   const [participationChat, { error }] = useParticipationChatMutation();
 
   if (isLoading) return <div>Loading...</div>;
@@ -46,12 +47,17 @@ const PostDetailPage = () => {
   }
 
   const clickUpdateHandler = () => {
-    navigate(CLIENT_PATH.UPDATE_POST.replace(':postId', id));
+    if (data.currentParticipants > 1) {
+      navigate(CLIENT_PATH.UPDATE_POST.replace(':postId', id));
+    } else {
+      alert('이미 참여자가 존재하여 정보가 수정되지 않습니다');
+    }
   };
 
   const participationChatHandler = async () => {
     const result = await participationChat(data.id).unwrap();
     alert(result.message);
+    refetch();
     // TODO: 채팅방으로 이동 로직 추가
   };
 
@@ -73,6 +79,7 @@ const PostDetailPage = () => {
         <PostDetailHeader
           currentParticipants={data.currentParticipants}
           maxParticipants={data.maxParticipants}
+          status={data.status}
           createdAt={formatCreatedAt}
           views={data.views}
         />
@@ -109,20 +116,28 @@ export default PostDetailPage;
 const PostDetailHeader = ({
   currentParticipants,
   maxParticipants,
+  status,
   createdAt,
   views,
 }: {
   currentParticipants: number;
   maxParticipants: number;
+  status: postDetailStatus;
   createdAt: string;
   views: string;
 }) => {
   return (
     <S.PostDetailHeaderContainer>
-      <PeopleCountTag
-        currentParticipants={currentParticipants}
-        maxParticipants={maxParticipants}
-      />
+      <div>
+        <PeopleCountTag
+          currentParticipants={currentParticipants}
+          maxParticipants={maxParticipants}
+        />
+        {status === 'PARTICIPATING' && (
+          <S.ParticipationTag>참여중인 팟</S.ParticipationTag>
+        )}
+        {status === 'TERMINATED' && <S.CloseTag>종료된 팟</S.CloseTag>}
+      </div>
       {createdAt} • 조회 {views}
     </S.PostDetailHeaderContainer>
   );
