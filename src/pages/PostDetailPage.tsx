@@ -47,7 +47,11 @@ const PostDetailPage = () => {
   }
 
   const clickUpdateHandler = () => {
-    navigate(CLIENT_PATH.UPDATE_POST.replace(':postId', id));
+    if (data.currentParticipants > 1) {
+      navigate(CLIENT_PATH.UPDATE_POST.replace(':postId', id));
+    } else {
+      alert('이미 참여자가 존재하여 정보가 수정되지 않습니다');
+    }
   };
 
   const participationChatHandler = async () => {
