@@ -15,7 +15,7 @@ export const PeopleCountTagContainer = styled.div<{
   right: 5%;
   z-index: 2;
 
-  border-radius: 5px;
+  border-radius: 20px;
 
   ${({ $isClose, $isMax }) =>
     $isClose

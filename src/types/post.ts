@@ -9,13 +9,20 @@ export interface post {
   originLocation: { latitude: number; longitude: number };
 }
 
+export type postDetailStatus =
+  | 'NONE'
+  | 'PARTICIPATING'
+  | 'TERMINATED'
+  | 'WARNED'
+  | 'BANNED';
+
 export interface postDetail extends post {
   explanation: string;
   originAddress: string;
   destinationAddress: string;
   originLocation: { latitude: number; longitude: number };
   destinationLocation: { latitude: number; longitude: number };
-  status: string;
+  status: postDetailStatus;
   createdAt: string;
   views: string;
   host: {

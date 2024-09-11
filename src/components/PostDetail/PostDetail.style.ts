@@ -28,6 +28,10 @@ export const PostDetailHeaderContainer = styled.div`
 
   color: var(--color-gray-100);
   font-size: var(--font-small);
+
+  & > div {
+    display: flex;
+  }
 `;
 
 export const PostDetailTitleContainer = styled.div`
@@ -81,4 +85,20 @@ export const JoinButton = styled.button`
   font-weight: var(--weight-bold);
 
   color: var(--color-white);
+`;
+
+const statusTag = styled.div`
+  margin-left: 5px;
+  padding: 8px;
+  border-radius: 20px;
+`;
+
+export const ParticipationTag = styled(statusTag)`
+  color: var(--color-available-text);
+  background-color: var(--color-available-background);
+`;
+
+export const CloseTag = styled(statusTag)`
+  color: var(--color-unavailable-text);
+  background-color: var(--color-unavailable-background);
 `;
