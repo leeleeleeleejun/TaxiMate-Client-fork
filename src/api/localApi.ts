@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_PATH, CLIENT_PATH } from '@/constants/path.ts';
 import { createPostRes, post, postDetail } from '@/types/post.ts';
 import { registerData } from '@/types';
+import { userProfile } from '@/types/user.ts';
 
 import type {
   BaseQueryFn,
@@ -126,6 +127,12 @@ export const localApi = createApi({
         body: { partyId: Number(partyId) },
       }),
     }),
+    getProfile: builder.query<userProfile, null>({
+      query: () => API_PATH.USER.GET_PROFILES,
+      transformResponse: (response: { data: userProfile }) => {
+        return response.data;
+      },
+    }),
   }),
 });
 
@@ -139,4 +146,5 @@ export const {
   useGetAccessTokenQuery,
   useGetRefreshAccessTokenQuery,
   useParticipationChatMutation,
+  useGetProfileQuery,
 } = localApi;
