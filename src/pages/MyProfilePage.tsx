@@ -5,8 +5,13 @@ import { Container } from '@/components/myProfile/myProfile.style.ts';
 import { HeaderItem } from '@/components/common/Layout/Header/Header.style.ts';
 
 import MyProfileIcon from '@/assets/icons/header/my-porfile-icon.svg?react';
+import { useGetProfileQuery } from '@/api/localApi.ts';
 
 const MyProfilePage = () => {
+  const { data, isLoading } = useGetProfileQuery(null);
+  if (isLoading) return <div>Loading...</div>;
+  if (!data) return <div>no data...</div>;
+
   return (
     <>
       <Header>
@@ -16,7 +21,7 @@ const MyProfilePage = () => {
         </HeaderItem>
       </Header>
       <Container>
-        <UserContainer img={'profile.png'} name={'나는야 오빠 짜누야!!'} />
+        <UserContainer img={data.profileImage} name={data.nickname} />
       </Container>
       <Footer />
     </>
