@@ -1,11 +1,14 @@
 import Header from '@/components/common/Layout/Header';
 import Footer from '@/components/common/Layout/Footer';
 import UserContainer from '@/components/common/UserContainer';
-import { Container } from '@/components/myProfile/myProfile.style.ts';
+import { Container, Menu } from '@/components/myProfile/myProfile.style.ts';
 import { HeaderItem } from '@/components/common/Layout/Header/Header.style.ts';
 
 import MyProfileIcon from '@/assets/icons/header/my-porfile-icon.svg?react';
 import { useGetProfileQuery } from '@/api/localApi.ts';
+import MenuItem from '@/components/myProfile/MenuItem.tsx';
+import FileIcon from '@/assets/icons/file-icon.svg?react';
+import NoticeIcon from '@/assets/icons/notice-icon.svg?react';
 
 const MyProfilePage = () => {
   const { data, isLoading } = useGetProfileQuery(null);
@@ -22,6 +25,10 @@ const MyProfilePage = () => {
       </Header>
       <Container>
         <UserContainer img={data.profileImage} name={data.nickname} />
+        <Menu>
+          <MenuItem content={'알림설정'} SvgIcon={NoticeIcon} />
+          <MenuItem content={'이용약관'} SvgIcon={FileIcon} />
+        </Menu>
       </Container>
       <Footer />
     </>
