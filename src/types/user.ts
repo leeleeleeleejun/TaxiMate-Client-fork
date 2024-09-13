@@ -1,4 +1,4 @@
-export interface userProfile {
+export interface UserProfile {
   nickname: string;
   profileImage: string;
 }

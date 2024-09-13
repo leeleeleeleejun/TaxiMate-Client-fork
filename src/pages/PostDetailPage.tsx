@@ -7,7 +7,7 @@ import {
 import { CLIENT_PATH } from '@/constants/path.ts';
 import reformatDate from '@/utils/reformatDate.ts';
 import reformatDetailDate from '@/utils/reformatDetailDate.ts';
-import { postDetailStatus } from '@/types/post.ts';
+import { PostDetailStatus } from '@/types/post.ts';
 
 import Header from '@/components/common/Layout/Header';
 import DropDown from '@/components/common/DropDown.tsx';
@@ -122,7 +122,7 @@ const PostDetailHeader = ({
 }: {
   currentParticipants: number;
   maxParticipants: number;
-  status: postDetailStatus;
+  status: PostDetailStatus;
   createdAt: string;
   views: string;
 }) => {

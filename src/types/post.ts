@@ -1,4 +1,4 @@
-export interface post {
+export interface Post {
   id: string;
   title: string;
   departureTime: string;
@@ -9,20 +9,20 @@ export interface post {
   originLocation: { latitude: number; longitude: number };
 }
 
-export type postDetailStatus =
+export type PostDetailStatus =
   | 'NONE'
   | 'PARTICIPATING'
   | 'TERMINATED'
   | 'WARNED'
   | 'BANNED';
 
-export interface postDetail extends post {
+export interface PostDetail extends Post {
   explanation: string;
   originAddress: string;
   destinationAddress: string;
   originLocation: { latitude: number; longitude: number };
   destinationLocation: { latitude: number; longitude: number };
-  status: postDetailStatus;
+  status: PostDetailStatus;
   createdAt: string;
   views: string;
   host: {
@@ -38,7 +38,7 @@ export interface postDetail extends post {
   };
 }
 
-export interface createPostRes {
+export interface CreatePostRes {
   success: boolean;
   message: string;
   data: {

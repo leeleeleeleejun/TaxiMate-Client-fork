@@ -1,12 +1,12 @@
 import { ReactNode } from 'react';
 import {
-  registerData,
-  setActiveMarker,
-  setRegisterDataFunc,
-  setStep,
-  step,
+  RegisterData,
+  SetActiveMarker,
+  SetRegisterDataFunc,
+  SetStep,
+  StepType,
 } from '@/types';
-import { post } from '@/types/post.ts';
+import { Post } from '@/types/post.ts';
 
 export interface NavItemContainerProps {
   children: ReactNode;
@@ -52,8 +52,8 @@ export interface HomeMapProps {
   setMap: React.Dispatch<React.SetStateAction<naver.maps.Map | null>>;
   setActiveButton: React.Dispatch<React.SetStateAction<boolean>>;
   activeMarker: string | null;
-  setActiveMarker: setActiveMarker;
-  data: post[];
+  setActiveMarker: SetActiveMarker;
+  data: Post[];
 }
 
 export interface MarkerContainerProps {
@@ -66,46 +66,46 @@ export interface MarkerContainerProps {
   anchor: number[];
   showPlace: boolean;
   activeMarker: string | null;
-  setActiveMarker?: setActiveMarker;
+  setActiveMarker?: SetActiveMarker;
 }
 
 export interface CreateMainPageProps {
-  registerData: registerData;
+  registerData: RegisterData;
   createPostSubmit: () => void;
-  setRegisterDataFunc: setRegisterDataFunc;
-  setStep: setStep;
+  setRegisterDataFunc: SetRegisterDataFunc;
+  setStep: SetStep;
 }
 
 export interface ContentWrapProps {
   value: string | { longitude: number; latitude: number };
-  setRegisterDataFunc?: setRegisterDataFunc;
-  setStep?: setStep;
+  setRegisterDataFunc?: SetRegisterDataFunc;
+  setStep?: SetStep;
 }
 
 export interface SearchPageProps {
-  step?: step;
-  setStep?: setStep;
-  setRegisterDataFunc?: setRegisterDataFunc;
+  step?: StepType;
+  setStep?: SetStep;
+  setRegisterDataFunc?: SetRegisterDataFunc;
 }
 
 export interface SetPlaceMapPageProps {
-  step: step;
+  step: StepType;
   value: { latitude: number; longitude: number };
   comeBackMain: () => void;
-  setRegisterDataFunc: setRegisterDataFunc;
+  setRegisterDataFunc: SetRegisterDataFunc;
   backHandle: () => void;
 }
 
 export interface SetDatePageProps {
   value: string;
-  setRegisterDataFunc: setRegisterDataFunc;
+  setRegisterDataFunc: SetRegisterDataFunc;
   comeBackMain: () => void;
 }
 
 export interface SetPlaceProps {
-  step: step;
-  setStep: setStep;
-  setRegisterDataFunc: setRegisterDataFunc;
+  step: StepType;
+  setStep: SetStep;
+  setRegisterDataFunc: SetRegisterDataFunc;
   comeBackMain: () => void;
 }
 

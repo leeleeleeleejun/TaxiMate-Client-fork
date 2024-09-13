@@ -9,7 +9,7 @@ import {
   ActivePostListContainer,
 } from '@/components/Home/PostList/PostList.style.ts';
 import PostListItem from '@/components/common/PostListItem';
-import { post } from '@/types/post.ts';
+import { Post } from '@/types/post.ts';
 
 const PostList = ({
   activeMarker,
@@ -17,7 +17,7 @@ const PostList = ({
   setPostListHeight,
 }: {
   activeMarker: string | null;
-  data: post[];
+  data: Post[];
   setPostListHeight: React.Dispatch<React.SetStateAction<number>>;
 }) => {
   const sheetRef = useRef<BottomSheetRef | null>(null);

@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_PATH, CLIENT_PATH } from '@/constants/path.ts';
-import { createPostRes, post, postDetail } from '@/types/post.ts';
-import { registerData } from '@/types';
-import { userProfile } from '@/types/user.ts';
+import { CreatePostRes, Post, PostDetail } from '@/types/post.ts';
+import { RegisterData } from '@/types';
+import { UserProfile } from '@/types/user.ts';
 
 import type {
   BaseQueryFn,
@@ -68,7 +68,7 @@ export const localApi = createApi({
   baseQuery: baseQueryWithReauth,
   endpoints: (builder) => ({
     getPosts: builder.query<
-      post[],
+      Post[],
       {
         minLatitude: number;
         minLongitude: number;
@@ -80,23 +80,23 @@ export const localApi = createApi({
         url: API_PATH.POST.GET.ALL,
         params: arg,
       }),
-      transformResponse: (response: { data: post[] }) => response.data,
+      transformResponse: (response: { data: Post[] }) => response.data,
       keepUnusedDataFor: 0,
     }),
-    getPostById: builder.query<postDetail, string>({
+    getPostById: builder.query<PostDetail, string>({
       query: (id) => API_PATH.POST.GET.BY_ID.replace(':partyId', id),
-      transformResponse: (response: { data: postDetail }) => response.data,
+      transformResponse: (response: { data: PostDetail }) => response.data,
       keepUnusedDataFor: 5,
     }),
-    getJoinPosts: builder.query<post[], string>({
+    getJoinPosts: builder.query<Post[], string>({
       query: () => API_PATH.POST.GET.JOIN_POSTS,
-      transformResponse: (response: { data: post[] }) => response.data,
+      transformResponse: (response: { data: Post[] }) => response.data,
     }),
-    getClosePosts: builder.query<post[], string>({
+    getClosePosts: builder.query<Post[], string>({
       query: () => API_PATH.POST.GET.CLOSE_POSTS,
-      transformResponse: (response: { data: post[] }) => response.data,
+      transformResponse: (response: { data: Post[] }) => response.data,
     }),
-    createPost: builder.mutation<createPostRes, registerData>({
+    createPost: builder.mutation<CreatePostRes, RegisterData>({
       query: (patch) => ({
         url: API_PATH.POST.POST,
         method: 'POST',
@@ -127,9 +127,9 @@ export const localApi = createApi({
         body: { partyId: Number(partyId) },
       }),
     }),
-    getProfile: builder.query<userProfile, null>({
+    getProfile: builder.query<UserProfile, null>({
       query: () => API_PATH.USER.GET_PROFILES,
-      transformResponse: (response: { data: userProfile }) => {
+      transformResponse: (response: { data: UserProfile }) => {
         return response.data;
       },
     }),

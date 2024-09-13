@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { registerDataKey } from '@/types';
+import { RegisterDataKey } from '@/types';
 import { SearchPageProps } from '@/types/props';
 
 import Header from '@/components/common/Layout/Header';
@@ -27,7 +27,7 @@ const SearchPage = ({
       // 팟생성에서 검색 시 사용
       const nextStep = step === 'searchOrigin' ? 'originMap' : 'destinationMap';
 
-      const registerKey: registerDataKey =
+      const registerKey: RegisterDataKey =
         step === 'searchOrigin' ? 'originLocation' : 'destinationLocation';
 
       setRegisterDataFunc(registerKey, { latitude: lat, longitude: lng });

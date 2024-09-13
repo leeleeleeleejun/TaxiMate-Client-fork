@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { searchPlace } from '@/types';
+import { SearchPlace } from '@/types';
 import { getSearchList } from '@/api/kakaoApi.ts';
 
 const useSearchData = () => {
-  const [searchListsData, setSearchListsData] = useState<searchPlace[]>([]);
+  const [searchListsData, setSearchListsData] = useState<SearchPlace[]>([]);
   const centerLocation = JSON.parse(localStorage.getItem('Location') || '');
 
   const searchFunc = async (query: string) => {
