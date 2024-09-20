@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { API_PATH, CLIENT_PATH } from '@/constants/path.ts';
+import { API_PATH } from '@/constants/path.ts';
 import { CreatePostRes, Post, PostDetail } from '@/types/post.ts';
 import { RegisterData } from '@/types';
 import { UserProfile } from '@/types/user.ts';
@@ -55,7 +55,6 @@ const baseQueryWithReauth: BaseQueryFn<
       alert('로그인이 만료되었습니다');
       accessToken = null;
       api.dispatch(setIsLogin(false));
-      window.location.href = CLIENT_PATH.LOGIN;
     }
   }
   return result;
