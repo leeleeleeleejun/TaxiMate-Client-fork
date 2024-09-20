@@ -19,12 +19,8 @@ declare global {
 }
 
 window.Kakao.init(kakaoJsKey);
-
 client.activate();
-client.onStompError = function (frame) {
-  console.log('Broker reported error: ' + frame.headers['message']);
-  console.log('Additional details: ' + frame.body);
-};
+
 // SDK 초기화 여부를 판단합니다.
 console.log(window.Kakao.isInitialized());
 const splashDom = document.getElementById('splash');
