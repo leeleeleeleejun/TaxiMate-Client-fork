@@ -12,12 +12,12 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://3.34.129.34:8080',
+        target: 'http://52.78.19.118:8080',
         changeOrigin: true,
         secure: false,
       },
       '/oauth2': {
-        target: 'http://3.34.129.34:8080',
+        target: 'http://52.78.19.118:8080',
         changeOrigin: true,
         secure: false,
       },

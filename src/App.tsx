@@ -4,7 +4,7 @@ import { NavermapsProvider } from 'react-naver-maps';
 
 //import { NextUIProvider } from '@nextui-org/system';
 import Router from '@/Router.tsx';
-import socket from '@/api/SocketTest.ts';
+import client from '@/api/SocketTest.ts';
 import { useGetRefreshAccessTokenQuery } from '@/api/localApi.ts';
 import { setIsLogin } from '@/components/myProfile/userSlice.ts';
 import GlobalStyle from '@/styles/GlobalStyle.ts';
@@ -20,12 +20,15 @@ declare global {
 
 window.Kakao.init(kakaoJsKey);
 
+client.activate();
+client.onStompError = function (frame) {
+  console.log('Broker reported error: ' + frame.headers['message']);
+  console.log('Additional details: ' + frame.body);
+};
 // SDK 초기화 여부를 판단합니다.
 console.log(window.Kakao.isInitialized());
 const splashDom = document.getElementById('splash');
 splashDom?.remove();
-
-socket;
 
 function App() {
   const dispatch = useDispatch();
