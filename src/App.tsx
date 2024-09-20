@@ -19,7 +19,6 @@ declare global {
 }
 
 window.Kakao.init(kakaoJsKey);
-client.activate();
 
 // SDK 초기화 여부를 판단합니다.
 console.log(window.Kakao.isInitialized());
@@ -36,6 +35,7 @@ function App() {
     if (!isLoading) {
       if (isSuccess) {
         dispatch(setIsLogin(true));
+        client.activate();
       }
       setIsReady(true); // 모든 작업이 완료되었음을 표시
     }

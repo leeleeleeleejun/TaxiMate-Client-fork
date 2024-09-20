@@ -1,8 +1,7 @@
 import MyMessageBox from '@/components/chatRoom/MyMessageBox.tsx';
 import OthersMessageBox from '@/components/chatRoom/OthersMessageBox.tsx';
 import { Container } from '@/components/chatRoom/chatRoom.style.ts';
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import socket from '@/api/SocketTest.ts';
+import { useLayoutEffect, useRef, useState } from 'react';
 
 interface testChat {
   _id: string;
@@ -27,7 +26,7 @@ interface groupMessage {
 }
 
 // Todo: userName은 id로 변경 필요
-const MessageList = ({ userName }: { userName: string }) => {
+const MessageList = () => {
   const [messageList, setMessageList] = useState<groupMessage[]>([]);
   const messageEndRef = useRef<HTMLDivElement>(null);
 
@@ -54,11 +53,11 @@ const MessageList = ({ userName }: { userName: string }) => {
     });
   };
 
-  useEffect(() => {
-    socket.on('message', (message: testChat) => {
-      handleMessage(message);
-    });
-  }, []);
+  // useEffect(() => {
+  //   socket.on('message', (message: testChat) => {
+  //     handleMessage(message);
+  //   });
+  // }, []);
 
   useLayoutEffect(() => {
     messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -67,7 +66,8 @@ const MessageList = ({ userName }: { userName: string }) => {
   return (
     <Container>
       {messageList.map((message) =>
-        message.user.name === userName ? (
+        // Todo: 본인 확인 로직 추가 필요 userId로
+        message.user.name ? (
           <MyMessageBox
             key={message.createdAt}
             messages={message.chat}

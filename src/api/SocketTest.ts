@@ -1,7 +1,9 @@
 import { Client } from '@stomp/stompjs';
 import { v4 as uuidv4 } from 'uuid';
 import SockJS from 'sockjs-client';
+import { accessToken } from '@/api/localApi.ts';
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const uuid = uuidv4().replace('-', '');
 
 const client = new Client({
   webSocketFactory: () => {
@@ -12,18 +14,25 @@ const client = new Client({
   reconnectDelay: 5000,
   onConnect: () => {
     client.subscribe(
-      '/queue/messages/' + uuidv4().replace('-', ''),
-      (message) => console.log(`Received: ${message.body}`)
+      '/queue/messages/' + uuid,
+      (message) => console.log(`Received: ${message.body}`),
+      { Authorization: `Bearer ${accessToken}` }
     );
-    client.publish({ destination: '/topic/test01', body: 'First Message' });
   },
   onStompError: (frame) => {
     console.error(frame);
   },
 });
 
-// const socket = io('http://localhost:3000');
-
-//export default socket;
-
 export default client;
+
+export const sendMessageWS = (partyId: string, message: string) => {
+  client.publish({
+    destination: '/app/messages',
+    headers: { Authorization: `Bearer ${accessToken}` },
+    body: JSON.stringify({
+      partyId,
+      message,
+    }),
+  });
+};

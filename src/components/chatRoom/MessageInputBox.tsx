@@ -5,17 +5,17 @@ import {
 import { useState } from 'react';
 
 import ArrowUpIcon from '@/assets/icons/arrow-up-icon.svg?react';
-import socket from '@/api/SocketTest.ts';
+import { sendMessageWS } from '@/api/SocketTest.ts';
 
-const MessageInputBox = () => {
+const MessageInputBox = ({ partyId }: { partyId: string }) => {
   const [input, setInput] = useState('');
 
   const sendMessage = () => {
-    if (input.trim()) {
-      socket.emit('sendMessage', input, (res: string) => {
-        console.log('sendMessage', res);
-      });
+    if (input.trim() && partyId) {
+      sendMessageWS(partyId, input);
       setInput('');
+    } else {
+      console.log('유효하지 않은 파티입니다.');
     }
   };
 
