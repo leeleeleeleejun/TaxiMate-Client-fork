@@ -7,6 +7,7 @@ import {
   ChatListItemBody,
   ChatListItemContainer,
   ChatListItemHeader,
+  MessageContent,
   MessageCounter,
 } from '@/components/chatList/chatList.style.ts';
 
@@ -33,7 +34,7 @@ const ChatListItem = ({
           <span>{resentMessageTime}</span>
         </ChatListItemHeader>
         <ChatListItemBody>
-          <p>{resentMessage}</p>
+          <MessageContent>{resentMessage}</MessageContent>
           <MessageCounter>{resentMessageCounter}</MessageCounter>
         </ChatListItemBody>
       </Link>
