@@ -1,6 +1,9 @@
 import MyMessageBox from '@/components/chatRoom/MyMessageBox.tsx';
 import OthersMessageBox from '@/components/chatRoom/OthersMessageBox.tsx';
-import { Container } from '@/components/chatRoom/chatRoom.style.ts';
+import {
+  Container,
+  SystemMessage,
+} from '@/components/chatRoom/chatRoom.style.ts';
 import { useLayoutEffect, useRef, useState } from 'react';
 
 interface testChat {
@@ -65,6 +68,8 @@ const MessageList = () => {
 
   return (
     <Container>
+      <SystemMessage>이준석님이 들어왔습니다.</SystemMessage>
+      <SystemMessage>2024년 9월 21일 토요일</SystemMessage>
       {messageList.map((message) =>
         // Todo: 본인 확인 로직 추가 필요 userId로
         message.user.name ? (

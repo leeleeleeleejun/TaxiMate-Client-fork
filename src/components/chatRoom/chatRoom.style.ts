@@ -70,10 +70,6 @@ const Message = styled.div`
   white-space: pre-wrap;
 `;
 
-export const resentMessage = styled(Message)`
-  display: flex;
-`;
-
 export const OthersMessage = styled(Message)`
   background-color: var(--color-gray-300);
 `;
@@ -130,4 +126,20 @@ export const MessageInput = styled.textarea<{ $inputLineLength: number }>`
   font-size: var(--font-small);
 
   outline: none;
+`;
+
+export const SystemMessage = styled.div`
+  width: fit-content;
+  margin: 2px auto;
+
+  display: flex;
+  padding: 8px 16px;
+  justify-content: center;
+
+  background-color: var(--color-gray-300);
+  color: var(--color-gray-100);
+  font-size: var(--font-small);
+  font-weight: var(--weight-light);
+
+  border-radius: 30px;
 `;
