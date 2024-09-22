@@ -1,4 +1,7 @@
 import { useNavigate } from 'react-router-dom';
+import { Data } from '@/utils/eventBus.ts';
+import { useMessageSubscription } from '@/api/useMessageSubscription.ts';
+import useStompClient from '@/api/useStompClient.ts';
 
 import Header from '@/components/common/Layout/Header';
 import DropDown from '@/components/common/DropDown.tsx';
@@ -21,9 +24,16 @@ import MessageList from '@/components/chatRoom/MessageList.tsx';
 //   token: string;
 //   online: boolean;
 // }
-
 const ChatRoomPage = () => {
   const navigate = useNavigate();
+  const client = useStompClient();
+
+  const handleNewMessage = (message: Data) => {
+    console.log('New message in ChatRoomPage:', message);
+    // 화면 상단에 인앱 알림을 띄우는 로직
+  };
+
+  useMessageSubscription(handleNewMessage);
 
   return (
     <>
@@ -51,7 +61,7 @@ const ChatRoomPage = () => {
         />
       </NotificationContainer>
       <MessageList />
-      <MessageInputBox partyId={''} />
+      <MessageInputBox client={client} partyId={''} />
     </>
   );
 };

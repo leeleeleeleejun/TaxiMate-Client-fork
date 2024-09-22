@@ -27,6 +27,7 @@ const LoginPage = lazy(() => import('@/pages/LoginPage'));
 const LoginLoadingPage = lazy(() => import('@/pages/LoginLoadingPage'));
 import LoadingPage from '@/pages/LoadingPage';
 import AuthChecker from '@/AuthChecker.tsx';
+import InAppNotificationLayout from '@/components/common/InAppNotification/InAppNotificationLayout.tsx';
 
 const Router = () => {
   return (
@@ -34,38 +35,41 @@ const Router = () => {
       <Suspense fallback={<LoadingPage />}>
         <Routes>
           <Route element={<Layout />}>
-            <Route path={'/'} element={<HomePage />} />
-            <Route path={CLIENT_PATH.SEARCH} element={<SearchPage />} />
-            <Route
-              path={CLIENT_PATH.POST_DETAIL}
-              element={<PostDetailPage />}
-            />
-            <Route
-              path={CLIENT_PATH.UPDATE_POST}
-              element={<CreatePostPage />}
-            />
-            <Route path={CLIENT_PATH.LOGIN} element={<LoginPage />} />
-            <Route
-              path={CLIENT_PATH.LOGIN_LOADING}
-              element={<LoginLoadingPage />}
-            />
-            {/*유저 로그인 상태 체크 필요 페이지*/}
-            <Route element={<AuthChecker />}>
+            <Route element={<InAppNotificationLayout />}>
+              <Route path={'/'} element={<HomePage />} />
+              <Route path={CLIENT_PATH.SEARCH} element={<SearchPage />} />
               <Route
-                path={CLIENT_PATH.MY_PROFILE}
-                element={<MyProfilePage />}
+                path={CLIENT_PATH.POST_DETAIL}
+                element={<PostDetailPage />}
               />
               <Route
-                path={CLIENT_PATH.USAGE_HISTORY}
-                element={<UsageHistoryPage />}
-              />
-              <Route
-                path={CLIENT_PATH.CREATE_POST}
+                path={CLIENT_PATH.UPDATE_POST}
                 element={<CreatePostPage />}
               />
-              <Route path={CLIENT_PATH.CHAT_LISTS} element={<ChatListPage />} />
-              <Route path={CLIENT_PATH.CHAT_ROOM} element={<ChatRoomPage />} />
+              <Route path={CLIENT_PATH.LOGIN} element={<LoginPage />} />
+              <Route
+                path={CLIENT_PATH.LOGIN_LOADING}
+                element={<LoginLoadingPage />}
+              />
+              {/*유저 로그인 상태 체크 필요 페이지*/}
+              <Route element={<AuthChecker />}>
+                <Route
+                  path={CLIENT_PATH.MY_PROFILE}
+                  element={<MyProfilePage />}
+                />
+                <Route
+                  path={CLIENT_PATH.USAGE_HISTORY}
+                  element={<UsageHistoryPage />}
+                />
+                <Route
+                  path={CLIENT_PATH.CREATE_POST}
+                  element={<CreatePostPage />}
+                />
+              </Route>
             </Route>
+
+            <Route path={CLIENT_PATH.CHAT_LISTS} element={<ChatListPage />} />
+            <Route path={CLIENT_PATH.CHAT_ROOM} element={<ChatRoomPage />} />
           </Route>
         </Routes>
       </Suspense>

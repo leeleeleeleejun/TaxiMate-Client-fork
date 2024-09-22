@@ -1,3 +1,7 @@
+import { Data } from '@/utils/eventBus.ts';
+import useStompClient from '@/api/useStompClient.ts';
+import { useMessageSubscription } from '@/api/useMessageSubscription.ts';
+
 import Header from '@/components/common/Layout/Header';
 import ChatIcon from '@/assets/icons/chat/chat-icon.svg?react';
 import { HeaderItem } from '@/components/common/Layout/Header/Header.style.ts';
@@ -6,6 +10,15 @@ import Footer from '@/components/common/Layout/Footer';
 import ChatListItem from '@/components/chatList/ChatListItem.tsx';
 
 const ChatListPage = () => {
+  useStompClient();
+
+  const handleNewMessage = (message: Data) => {
+    console.log('New message in ChatListPage:', message);
+    // 화면 상단에 인앱 알림을 띄우는 로직
+  };
+
+  useMessageSubscription(handleNewMessage);
+
   return (
     <>
       <Header>
