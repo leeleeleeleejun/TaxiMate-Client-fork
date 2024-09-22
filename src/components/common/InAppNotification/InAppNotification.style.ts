@@ -1,8 +1,41 @@
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { MessageContent } from '@/components/chatList/chatList.style.ts';
 
-export const Container = styled.div`
-  display: flex;
+const slideDown = keyframes`
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+`;
+
+// 애니메이션 정의: 아래로 사라지는 애니메이션
+const slideUp = keyframes`
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+`;
+
+export const Container = styled.div<{ $show: boolean }>`
+  display: ${({ $show }) => ($show ? 'flex' : 'none')};
+
+  ${({ $show }) =>
+    $show
+      ? css`
+          animation: ${slideDown} 0.5s ease-out;
+        `
+      : css`
+          animation: ${slideUp} 0.5s ease-in;
+        `};
+
   align-items: center;
   width: 100%;
   padding: 10px 14px;
@@ -11,7 +44,6 @@ export const Container = styled.div`
   z-index: 3;
   background-color: var(--color-white);
   box-shadow: 0 0 2px 2px var(--color-gray-200);
-
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 `;

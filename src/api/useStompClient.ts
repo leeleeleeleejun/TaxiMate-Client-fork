@@ -8,7 +8,10 @@ import { eventBus } from '@/utils/eventBus.ts';
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 export const uuid = uuidv4().replace('-', '');
 
-export const useStompClient = (): Client | null => {
+export const useStompClient = (): {
+  client: Client | null;
+  sendMessage: (partyId: string, message: string) => void;
+} => {
   const clientRef = useRef<Client | null>(null);
 
   useEffect(() => {
@@ -22,7 +25,6 @@ export const useStompClient = (): Client | null => {
         client.subscribe(
           '/queue/messages/' + uuid,
           (message) => {
-            // console.log('Received message from STOMP : ', message);
             const receivedMessage = JSON.parse(message.body);
             eventBus.publish('newMessage', receivedMessage);
           },
@@ -38,6 +40,7 @@ export const useStompClient = (): Client | null => {
     });
 
     client.activate();
+
     clientRef.current = client;
 
     return () => {
@@ -45,7 +48,20 @@ export const useStompClient = (): Client | null => {
     };
   }, []);
 
-  return clientRef.current;
+  const sendMessage = (partyId: string, message: string) => {
+    if (clientRef.current) {
+      clientRef.current.publish({
+        destination: '/app/messages',
+        headers: { Authorization: `Bearer ${accessToken}` },
+        body: JSON.stringify({
+          partyId,
+          message,
+        }),
+      });
+    }
+  };
+
+  return { client: clientRef.current, sendMessage };
 };
 
 export default useStompClient;

@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { Data } from '@/utils/eventBus.ts';
 import { useMessageSubscription } from '@/api/useMessageSubscription.ts';
-import useStompClient from '@/api/useStompClient.ts';
 
 import Header from '@/components/common/Layout/Header';
 import DropDown from '@/components/common/DropDown.tsx';
@@ -18,15 +17,20 @@ import ArrowLeftIcon from '@/assets/icons/arrow-left-icon.svg?react';
 import ArrowRightIcon from '@/assets/icons/arrow-right-icon.svg?react';
 import MessageInputBox from '@/components/chatRoom/MessageInputBox.tsx';
 import MessageList from '@/components/chatRoom/MessageList.tsx';
+import { Client } from '@stomp/stompjs';
 
 // interface testUser {
 //   name: string;
 //   token: string;
 //   online: boolean;
 // }
-const ChatRoomPage = () => {
+const ChatRoomPage = ({
+  sendMessage,
+}: {
+  sendMessage: (partyId: string, message: string) => void;
+}) => {
   const navigate = useNavigate();
-  const client = useStompClient();
+  // const client = useStompClient();
 
   const handleNewMessage = (message: Data) => {
     console.log('New message in ChatRoomPage:', message);
@@ -61,7 +65,7 @@ const ChatRoomPage = () => {
         />
       </NotificationContainer>
       <MessageList />
-      <MessageInputBox client={client} partyId={''} />
+      <MessageInputBox sendMessage={sendMessage} partyId={''} />
     </>
   );
 };

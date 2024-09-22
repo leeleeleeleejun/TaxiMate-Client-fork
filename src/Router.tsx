@@ -28,8 +28,11 @@ const LoginLoadingPage = lazy(() => import('@/pages/LoginLoadingPage'));
 import LoadingPage from '@/pages/LoadingPage';
 import AuthChecker from '@/AuthChecker.tsx';
 import InAppNotificationLayout from '@/components/common/InAppNotification/InAppNotificationLayout.tsx';
+import useStompClient from '@/api/useStompClient.ts';
 
 const Router = () => {
+  const client = useStompClient();
+  // console.log(client.client);
   return (
     <BrowserRouter>
       <Suspense fallback={<LoadingPage />}>
@@ -69,7 +72,10 @@ const Router = () => {
             </Route>
 
             <Route path={CLIENT_PATH.CHAT_LISTS} element={<ChatListPage />} />
-            <Route path={CLIENT_PATH.CHAT_ROOM} element={<ChatRoomPage />} />
+            <Route
+              path={CLIENT_PATH.CHAT_ROOM}
+              element={<ChatRoomPage sendMessage={client.sendMessage} />}
+            />
           </Route>
         </Routes>
       </Suspense>
