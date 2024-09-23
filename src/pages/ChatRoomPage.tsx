@@ -1,11 +1,13 @@
 import { useNavigate } from 'react-router-dom';
-import { Data } from '@/utils/eventBus.ts';
-import { useMessageSubscription } from '@/api/useMessageSubscription.ts';
+import { useGetProfileQuery } from '@/api/localApi.ts';
 
 import Header from '@/components/common/Layout/Header';
 import DropDown from '@/components/common/DropDown.tsx';
 import { PostBody } from '@/components/common/PostListItem';
 import PeopleCountTag from '@/components/common/PeopleCountTag';
+import MessageList from '@/components/chatRoom/MessageList.tsx';
+import MessageInputBox from '@/components/chatRoom/MessageInputBox.tsx';
+
 import { BackButton } from '@/components/common/Layout/Header/Header.style.ts';
 import {
   NotificationContainer,
@@ -15,28 +17,16 @@ import {
 
 import ArrowLeftIcon from '@/assets/icons/arrow-left-icon.svg?react';
 import ArrowRightIcon from '@/assets/icons/arrow-right-icon.svg?react';
-import MessageInputBox from '@/components/chatRoom/MessageInputBox.tsx';
-import MessageList from '@/components/chatRoom/MessageList.tsx';
 
-// interface testUser {
-//   name: string;
-//   token: string;
-//   online: boolean;
-// }
 const ChatRoomPage = ({
   sendMessage,
 }: {
   sendMessage: (partyId: string, message: string) => void;
 }) => {
   const navigate = useNavigate();
-
-  const handleNewMessage = (message: Data) => {
-    console.log('New message in ChatRoomPage:', message);
-    // 화면 상단에 인앱 알림을 띄우는 로직
-  };
-
-  useMessageSubscription(handleNewMessage);
-
+  const { data, isLoading } = useGetProfileQuery(null);
+  if (isLoading) return <div>Loading...</div>;
+  if (!data) return <div>no data...</div>;
   return (
     <>
       <Header>
@@ -62,7 +52,7 @@ const ChatRoomPage = ({
           destination={'천안종합버스터미널'}
         />
       </NotificationContainer>
-      <MessageList />
+      <MessageList userId={data.id} />
       <MessageInputBox sendMessage={sendMessage} partyId={''} />
     </>
   );

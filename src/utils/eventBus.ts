@@ -1,5 +1,6 @@
-export type Data = { partyId: string; message: string };
-type Callback = (data: Data) => void;
+import { ChatMessage } from '@/types/chat.ts';
+
+type Callback = (data: ChatMessage) => void;
 
 class EventBus {
   private subscribers: { [key: string]: Callback[] } = {};
@@ -14,7 +15,7 @@ class EventBus {
     };
   }
 
-  publish(event: string, data: Data): void {
+  publish(event: string, data: ChatMessage): void {
     if (!this.subscribers[event]) return;
     this.subscribers[event].forEach((callback) => callback(data));
   }
