@@ -4,7 +4,7 @@ interface Sender {
   profileImage: string;
 }
 export interface ChatMessage {
-  partyId: string;
+  partyId: number;
   partyTitle: string;
   message: string;
   createdAt: string;

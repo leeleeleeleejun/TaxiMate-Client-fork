@@ -1,5 +1,6 @@
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useGetProfileQuery } from '@/api/localApi.ts';
+import useInAppNotificationHandler from '@/hooks/useInAppNotificationHandler.ts';
 
 import Header from '@/components/common/Layout/Header';
 import DropDown from '@/components/common/DropDown.tsx';
@@ -7,6 +8,7 @@ import { PostBody } from '@/components/common/PostListItem';
 import PeopleCountTag from '@/components/common/PeopleCountTag';
 import MessageList from '@/components/chatRoom/MessageList.tsx';
 import MessageInputBox from '@/components/chatRoom/MessageInputBox.tsx';
+import InAppNotification from '@/components/common/InAppNotification';
 
 import { BackButton } from '@/components/common/Layout/Header/Header.style.ts';
 import {
@@ -25,10 +27,28 @@ const ChatRoomPage = ({
 }) => {
   const navigate = useNavigate();
   const { data, isLoading } = useGetProfileQuery(null);
+  const { notification, showNotification, handleNewMessage } =
+    useInAppNotificationHandler();
+
+  const currentPartyId = useLocation().pathname.split('/')[2];
+
   if (isLoading) return <div>Loading...</div>;
   if (!data) return <div>no data...</div>;
+
   return (
     <>
+      <InAppNotification
+        showNotification={showNotification}
+        partyTitle={notification?.partyTitle || ''}
+        partyId={notification?.partyId || 0}
+        message={notification?.message || ''}
+        sender={{
+          profileImage: '',
+          nickname: '이준석',
+          id: '1',
+        }}
+        createdAt={''}
+      />
       <Header>
         <BackButton onClick={() => navigate(-1)}>
           <ArrowLeftIcon />
@@ -52,7 +72,11 @@ const ChatRoomPage = ({
           destination={'천안종합버스터미널'}
         />
       </NotificationContainer>
-      <MessageList userId={data.id} />
+      <MessageList
+        userId={data.id}
+        currentPartyId={currentPartyId}
+        inAppNotificationHandler={handleNewMessage}
+      />
       <MessageInputBox sendMessage={sendMessage} partyId={''} />
     </>
   );

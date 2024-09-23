@@ -41,7 +41,7 @@ export const Container = styled.div<{ $show: boolean }>`
   padding: 10px 14px;
   position: absolute;
   top: 0;
-  z-index: 3;
+  z-index: 100001;
   background-color: var(--color-white);
   box-shadow: 0 0 2px 2px var(--color-gray-200);
   border-bottom-left-radius: 10px;

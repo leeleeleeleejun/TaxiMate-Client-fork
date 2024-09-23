@@ -9,39 +9,29 @@ import {
   SystemMessage,
 } from '@/components/chatRoom/chatRoom.style.ts';
 
-const MessageList = ({ userId }: { userId: string }) => {
+const MessageList = ({
+  userId,
+  currentPartyId,
+  inAppNotificationHandler,
+}: {
+  userId: string;
+  currentPartyId: string;
+  inAppNotificationHandler: (message: ChatMessage) => void;
+}) => {
   const messageEndRef = useRef<HTMLDivElement>(null);
   const [messageList, setMessageList] = useState<GroupMessage[]>([]);
 
-  const handleMessage = (message: ChatMessage) => {
-    const setMessage = { ...message, chat: [message.message] };
-
-    setMessageList((prevState) => {
-      if (prevState.length > 0) {
-        const lastMessage = prevState[prevState.length - 1];
-        const isSameUser = lastMessage.sender.id === message.sender.id;
-        const isSameTime =
-          lastMessage.createdAt.slice(0, 16) ===
-          message.createdAt?.slice(0, 16);
-
-        if (isSameUser && isSameTime) {
-          const updatedMessage = {
-            ...lastMessage,
-            chat: [...lastMessage.chat, ...setMessage.chat],
-          };
-          return [...prevState.slice(0, prevState.length - 1), updatedMessage];
-        }
-      }
-      return [...prevState, setMessage];
-    });
-  };
-
   const handleNewMessage = (message: ChatMessage) => {
     console.log('New message in ChatRoomPage:', message);
-    handleMessage(message);
+    if (message.partyId === Number(currentPartyId)) {
+      chatHandler(message, setMessageList);
+    } else {
+      inAppNotificationHandler(message);
+    }
   };
 
   useMessageSubscription(handleNewMessage);
+
   useLayoutEffect(() => {
     messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messageList]);
@@ -73,3 +63,28 @@ const MessageList = ({ userId }: { userId: string }) => {
 };
 
 export default MessageList;
+
+const chatHandler = (
+  message: ChatMessage,
+  setMessageList: React.Dispatch<React.SetStateAction<GroupMessage[]>>
+) => {
+  const setMessage = { ...message, chat: [message.message] };
+
+  setMessageList((prevState) => {
+    if (prevState.length > 0) {
+      const lastMessage = prevState[prevState.length - 1];
+      const isSameUser = lastMessage.sender.id === message.sender.id;
+      const isSameTime =
+        lastMessage.createdAt.slice(0, 16) === message.createdAt?.slice(0, 16);
+
+      if (isSameUser && isSameTime) {
+        const updatedMessage = {
+          ...lastMessage,
+          chat: [...lastMessage.chat, ...setMessage.chat],
+        };
+        return [...prevState.slice(0, prevState.length - 1), updatedMessage];
+      }
+    }
+    return [...prevState, setMessage];
+  });
+};
