@@ -32,7 +32,7 @@ import useStompClient from '@/api/useStompClient.ts';
 
 const Router = () => {
   const client = useStompClient();
-  // console.log(client.client);
+
   return (
     <BrowserRouter>
       <Suspense fallback={<LoadingPage />}>

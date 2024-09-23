@@ -25,7 +25,7 @@ const slideUp = keyframes`
 `;
 
 export const Container = styled.div<{ $show: boolean }>`
-  display: ${({ $show }) => ($show ? 'flex' : 'none')};
+  display: flex;
 
   ${({ $show }) =>
     $show
@@ -33,7 +33,7 @@ export const Container = styled.div<{ $show: boolean }>`
           animation: ${slideDown} 0.5s ease-out;
         `
       : css`
-          animation: ${slideUp} 0.5s ease-in;
+          animation: ${slideUp} 1s ease-in;
         `};
 
   align-items: center;

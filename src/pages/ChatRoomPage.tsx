@@ -17,7 +17,6 @@ import ArrowLeftIcon from '@/assets/icons/arrow-left-icon.svg?react';
 import ArrowRightIcon from '@/assets/icons/arrow-right-icon.svg?react';
 import MessageInputBox from '@/components/chatRoom/MessageInputBox.tsx';
 import MessageList from '@/components/chatRoom/MessageList.tsx';
-import { Client } from '@stomp/stompjs';
 
 // interface testUser {
 //   name: string;
@@ -30,7 +29,6 @@ const ChatRoomPage = ({
   sendMessage: (partyId: string, message: string) => void;
 }) => {
   const navigate = useNavigate();
-  // const client = useStompClient();
 
   const handleNewMessage = (message: Data) => {
     console.log('New message in ChatRoomPage:', message);
