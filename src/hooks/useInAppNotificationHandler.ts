@@ -6,7 +6,6 @@ const useInAppNotificationHandler = () => {
   const [showNotification, setShowNotification] = useState(false);
 
   const handleNewMessage = (message: ChatMessage) => {
-    console.log('New message in MainScreen:', message);
     if (!message) return;
 
     setNotification(message);

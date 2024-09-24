@@ -5,6 +5,8 @@ import SockJS from 'sockjs-client';
 
 import { accessToken } from '@/api/localApi.ts';
 import { eventBus } from '@/utils/eventBus.ts';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 export const uuid = uuidv4().replace('-', '');
 
@@ -13,8 +15,14 @@ export const useStompClient = (): {
   sendMessage: (partyId: string, message: string) => void;
 } => {
   const clientRef = useRef<Client | null>(null);
+  const isLogin = useSelector((state: RootState) => state.userSlice.isLogin);
 
   useEffect(() => {
+    if (!isLogin) {
+      console.log('Access token is missing, STOMP connection skipped.');
+      return;
+    }
+
     const client = new Client({
       webSocketFactory: () => new SockJS(API_BASE_URL + '/ws'),
       heartbeatIncoming: 4000,
@@ -46,7 +54,7 @@ export const useStompClient = (): {
     return () => {
       client.deactivate();
     };
-  }, []);
+  }, [isLogin]);
 
   const sendMessage = (partyId: string, message: string) => {
     if (clientRef.current) {
