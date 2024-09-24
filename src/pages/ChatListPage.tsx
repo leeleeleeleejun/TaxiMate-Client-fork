@@ -1,4 +1,4 @@
-import { useMessageSubscription } from '@/api/useMessageSubscription.ts';
+import { useMessageSubscription } from '@/hooks/useMessageSubscription.ts';
 import { ChatMessage, ChatRoom } from '@/types/chat.ts';
 
 import Header from '@/components/common/Layout/Header';

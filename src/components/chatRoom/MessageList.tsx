@@ -1,6 +1,6 @@
 import { useLayoutEffect, useRef, useState } from 'react';
 import { ChatMessage, GroupMessage } from '@/types/chat.ts';
-import { useMessageSubscription } from '@/api/useMessageSubscription.ts';
+import { useMessageSubscription } from '@/hooks/useMessageSubscription.ts';
 
 import MyMessageBox from '@/components/chatRoom/MyMessageBox.tsx';
 import OthersMessageBox from '@/components/chatRoom/OthersMessageBox.tsx';

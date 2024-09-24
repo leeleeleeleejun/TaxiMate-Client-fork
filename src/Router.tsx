@@ -28,7 +28,7 @@ const LoginLoadingPage = lazy(() => import('@/pages/LoginLoadingPage'));
 import LoadingPage from '@/pages/LoadingPage';
 import AuthChecker from '@/AuthChecker.tsx';
 import InAppNotificationLayout from '@/components/common/InAppNotification/InAppNotificationLayout.tsx';
-import useStompClient from '@/api/useStompClient.ts';
+import useStompClient from '@/hooks/useStompClient.ts';
 
 const Router = () => {
   const client = useStompClient();
