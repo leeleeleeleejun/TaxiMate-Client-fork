@@ -65,25 +65,3 @@ export const useStompClient = (): {
 };
 
 export default useStompClient;
-
-//
-// const client = new Client({
-//   webSocketFactory: () => {
-//     return new SockJS(API_BASE_URL + '/ws');
-//   },
-//   heartbeatIncoming: 4000,
-//   heartbeatOutgoing: 4000,
-//   reconnectDelay: 5000,
-//   // onConnect: () => {
-//   //   client.subscribe(
-//   //     '/queue/messages/' + uuid,
-//   //     (message) => console.log(`Received: ${message.body}`),
-//   //     { Authorization: `Bearer ${accessToken}` }
-//   //   );
-//   // },
-//   onStompError: (frame) => {
-//     console.error(frame);
-//   },
-// });
-//
-// export default client;

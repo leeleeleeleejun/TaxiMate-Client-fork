@@ -1,7 +1,5 @@
 import { Link } from 'react-router-dom';
 
-import { ChatListItemProps } from '@/types/props';
-
 import PeopleCountTag from '@/components/common/PeopleCountTag';
 import {
   ChatListItemBody,
@@ -10,16 +8,19 @@ import {
   MessageContent,
   MessageCounter,
 } from '@/components/chatList/chatList.style.ts';
+import { ChatRoom } from '@/types/chat.ts';
+import reformatDetailDate from '@/utils/reformatDetailDate.ts';
 
 const ChatListItem = ({
   title,
   currentParticipants,
   maxParticipants,
-  resentMessage,
-  resentMessageTime,
-  resentMessageCounter,
+  recentMessage,
+  recentMessageTime,
+  unreadCount,
   id,
-}: ChatListItemProps) => {
+}: ChatRoom) => {
+  const formatTime = reformatDetailDate(recentMessageTime);
   return (
     <ChatListItemContainer>
       <Link to={'/chat-list/' + id}>
@@ -31,11 +32,13 @@ const ChatListItem = ({
               maxParticipants={maxParticipants}
             />
           </div>
-          <span>{resentMessageTime}</span>
+          <span>{formatTime}</span>
         </ChatListItemHeader>
         <ChatListItemBody>
-          <MessageContent>{resentMessage}</MessageContent>
-          <MessageCounter>{resentMessageCounter}</MessageCounter>
+          <MessageContent>{recentMessage}</MessageContent>
+          <MessageCounter>
+            {unreadCount >= 300 ? '300+' : unreadCount}
+          </MessageCounter>
         </ChatListItemBody>
       </Link>
     </ChatListItemContainer>

@@ -3,6 +3,8 @@ interface Sender {
   nickname: string;
   profileImage: string;
 }
+
+// 메세지 수신
 export interface ChatMessage {
   partyId: number;
   partyTitle: string;
@@ -11,15 +13,15 @@ export interface ChatMessage {
   sender: Sender;
 }
 
-export interface ChatRoomList {
-  id: string;
+export interface ChatRoom {
+  id: number;
   title: string;
-  maxParticipants: string; // 최대 참여자 수
-  currentParticipants: string; // 현재 참여자 수
+  maxParticipants: number; // 최대 참여자 수
+  currentParticipants: number; // 현재 참여자 수
   isProgress: boolean;
   recentMessage: string;
   recentMessageTime: string;
-  unreadCount: string;
+  unreadCount: number;
 }
 
 interface Chat {

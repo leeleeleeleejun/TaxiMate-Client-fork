@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
-import { eventBus, Data } from '@/utils/eventBus.ts';
+import { eventBus } from '@/utils/eventBus.ts';
+import { ChatMessage } from '@/types/chat.ts';
 
 export const useMessageSubscription = (
-  callback: (message: Data) => void
+  callback: (message: ChatMessage) => void
 ): void => {
   useEffect(() => {
     const unsubscribe = eventBus.subscribe('newMessage', callback);

@@ -1,20 +1,80 @@
-import { Data } from '@/utils/eventBus.ts';
 import { useMessageSubscription } from '@/api/useMessageSubscription.ts';
+import { ChatMessage, ChatRoom } from '@/types/chat.ts';
 
 import Header from '@/components/common/Layout/Header';
-import ChatIcon from '@/assets/icons/chat/chat-icon.svg?react';
 import { HeaderItem } from '@/components/common/Layout/Header/Header.style.ts';
 import { Container } from '@/components/chatList/chatList.style.ts';
 import Footer from '@/components/common/Layout/Footer';
 import ChatListItem from '@/components/chatList/ChatListItem.tsx';
 
+import ChatIcon from '@/assets/icons/chat/chat-icon.svg?react';
+import { useGetChatListQuery } from '@/api/localApi.ts';
+import { useState } from 'react';
+
+const aa = [
+  {
+    id: 1,
+    title: '테스트',
+    maxParticipants: 3, // 최대 참여자 수
+    currentParticipants: 1, // 현재 참여자 수
+    isProgress: true,
+    recentMessage: '안녕',
+    recentMessageTime: '2024-09-24T11:23:41.375090153',
+    unreadCount: 1,
+  },
+  {
+    id: 2,
+    title: '테스트2',
+    maxParticipants: 3, // 최대 참여자 수
+    currentParticipants: 1, // 현재 참여자 수
+    isProgress: true,
+    recentMessage: '안녕',
+    recentMessageTime: '2024-09-22T11:23:41.375090153',
+    unreadCount: 299,
+  },
+  {
+    id: 3,
+    title: '테스트2',
+    maxParticipants: 3, // 최대 참여자 수
+    currentParticipants: 1, // 현재 참여자 수
+    isProgress: true,
+    recentMessage: '안녕',
+    recentMessageTime: '2024-09-22T11:23:41.375090153',
+    unreadCount: 300,
+  },
+];
 const ChatListPage = () => {
-  const handleNewMessage = (message: Data) => {
-    console.log('New message in ChatListPage:', message);
-    // 화면 상단에 인앱 알림을 띄우는 로직
+  const { data, isLoading } = useGetChatListQuery(null);
+  const [chatRoomList, setChatRoomList] = useState<ChatRoom[] | undefined>(aa);
+
+  const handleNewMessage = (message: ChatMessage) => {
+    setChatRoomList((prevList) => {
+      if (!prevList) return prevList;
+
+      const targetIndex = prevList.findIndex(
+        (chatRoom) => chatRoom.id === message.partyId
+      );
+      if (targetIndex === -1) return prevList;
+
+      const updatedRoom = {
+        ...prevList[targetIndex],
+        recentMessage: message.message,
+        recentMessageTime: message.createdAt,
+        unreadCount: prevList[targetIndex].unreadCount + 1,
+      };
+
+      return [
+        updatedRoom,
+        ...prevList.slice(0, targetIndex),
+        ...prevList.slice(targetIndex + 1),
+      ];
+    });
   };
 
   useMessageSubscription(handleNewMessage);
+
+  if (isLoading) return <div>Loading...</div>;
+  if (!chatRoomList) return <div>no data...</div>;
 
   return (
     <>
@@ -25,125 +85,19 @@ const ChatListPage = () => {
         </HeaderItem>
       </Header>
       <Container>
-        <ChatListItem
-          title={'학생회관 앞 CU 편의점 종합버스'}
-          currentParticipants={1}
-          maxParticipants={4}
-          resentMessage={'언제 만나실래ㅐ요??'}
-          resentMessageTime={'오후 2:32'}
-          resentMessageCounter={'3'}
-          id={'a'}
-        />
-        <ChatListItem
-          title={'학생회관 앞'}
-          currentParticipants={1}
-          maxParticipants={4}
-          resentMessage={
-            '근데 제가 내일 모레 학교에서 머시기 저시기 url 복붙 This guiaaa'
-          }
-          resentMessageTime={'어제'}
-          resentMessageCounter={'123'}
-          id={'a'}
-        />
-        <ChatListItem
-          title={'학생회관 앞 CU 편의점 종합버스'}
-          currentParticipants={1}
-          maxParticipants={4}
-          resentMessage={
-            '근데 제가 내일 모레 학교에서 머시기 저시기 url 복붙 This guide walks you through the process of azcasdsadasdasdasdas'
-          }
-          resentMessageTime={'5월 24일'}
-          resentMessageCounter={'300+'}
-          id={'a'}
-        />
-        <ChatListItem
-          title={
-            '근데 제가 내일 모레 학교에서 머시기 저시기 url 복붙 This guiaaa'
-          }
-          currentParticipants={4}
-          maxParticipants={4}
-          resentMessage={'언제 만나실래ㅐ요??'}
-          resentMessageTime={'2023. 11. 02.'}
-          resentMessageCounter={'3'}
-          id={'a'}
-        />
-        <ChatListItem
-          title={'학생회관 앞 CU 편의점 종합버스'}
-          currentParticipants={1}
-          maxParticipants={4}
-          resentMessage={
-            '근데 제가 내일 모레 학교에서 머시기 저시기 url 복붙 This guide walks you through the process of azcasdsadasdasdasdas'
-          }
-          resentMessageTime={'5월 24일'}
-          resentMessageCounter={'300+'}
-          id={'a'}
-        />
-        <ChatListItem
-          title={
-            '근데 제가 내일 모레 학교에서 머시기 저시기 url 복붙 This guiaaa'
-          }
-          currentParticipants={4}
-          maxParticipants={4}
-          resentMessage={'언제 만나실래ㅐ요??'}
-          resentMessageTime={'2023. 11. 02.'}
-          resentMessageCounter={'3'}
-          id={'a'}
-        />
-        <ChatListItem
-          title={'학생회관 앞 CU 편의점 종합버스'}
-          currentParticipants={1}
-          maxParticipants={4}
-          resentMessage={
-            '근데 제가 내일 모레 학교에서 머시기 저시기 url 복붙 This guide walks you through the process of azcasdsadasdasdasdas'
-          }
-          resentMessageTime={'5월 24일'}
-          resentMessageCounter={'300+'}
-          id={'a'}
-        />
-        <ChatListItem
-          title={
-            '근데 제가 내일 모레 학교에서 머시기 저시기 url 복붙 This guiaaa'
-          }
-          currentParticipants={4}
-          maxParticipants={4}
-          resentMessage={'언제 만나실래ㅐ요??'}
-          resentMessageTime={'2023. 11. 02.'}
-          resentMessageCounter={'3'}
-          id={'a'}
-        />
-        <ChatListItem
-          title={'학생회관 앞 CU 편의점 종합버스'}
-          currentParticipants={1}
-          maxParticipants={4}
-          resentMessage={
-            '근데 제가 내일 모레 학교에서 머시기 저시기 url 복붙 This guide walks you through the process of azcasdsadasdasdasdas'
-          }
-          resentMessageTime={'5월 24일'}
-          resentMessageCounter={'300+'}
-          id={'a'}
-        />
-        <ChatListItem
-          title={
-            '근데 제가 내일 모레 학교에서 머시기 저시기 url 복붙 This guiaaa'
-          }
-          currentParticipants={4}
-          maxParticipants={4}
-          resentMessage={'언제 만나실래ㅐ요??'}
-          resentMessageTime={'2023. 11. 02.'}
-          resentMessageCounter={'3'}
-          id={'a'}
-        />
-        <ChatListItem
-          title={'학생회관 앞 CU 편의점 종합버스'}
-          currentParticipants={1}
-          maxParticipants={4}
-          resentMessage={
-            '근데 제가 내일 모레 학교에서 머시기 저시기 url 복붙 This guide walks you through the process of azcasdsadasdasdasdas'
-          }
-          resentMessageTime={'5월 24일'}
-          resentMessageCounter={'300+'}
-          id={'a'}
-        />
+        {chatRoomList.map((item) => (
+          <ChatListItem
+            key={item.id}
+            title={item.title}
+            currentParticipants={item.currentParticipants}
+            maxParticipants={item.maxParticipants}
+            recentMessage={item.recentMessage}
+            recentMessageTime={item.recentMessageTime}
+            unreadCount={item.unreadCount}
+            isProgress={item.isProgress}
+            id={item.id}
+          />
+        ))}
       </Container>
       <Footer />
     </>
