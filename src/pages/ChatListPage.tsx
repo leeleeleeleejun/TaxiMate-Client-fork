@@ -72,6 +72,7 @@ const ChatListPage = () => {
   };
 
   useMessageSubscription(handleNewMessage);
+  console.log(data);
 
   if (isLoading) return <div>Loading...</div>;
   if (!chatRoomList) return <div>no data...</div>;
