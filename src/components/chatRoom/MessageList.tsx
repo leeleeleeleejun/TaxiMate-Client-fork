@@ -18,6 +18,7 @@ const MessageList = ({
   currentPartyId: string;
   inAppNotificationHandler: (message: ChatMessage) => void;
 }) => {
+
   const messageEndRef = useRef<HTMLDivElement>(null);
   const [messageList, setMessageList] = useState<GroupMessage[]>([]);
 
@@ -31,6 +32,7 @@ const MessageList = ({
   };
 
   useMessageSubscription(handleNewMessage);
+
 
   useLayoutEffect(() => {
     messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
