@@ -32,13 +32,15 @@ const ChatListItem = ({
               maxParticipants={maxParticipants}
             />
           </div>
-          <span>{formatTime}</span>
+          {recentMessageTime && <span>{formatTime}</span>}
         </ChatListItemHeader>
         <ChatListItemBody>
           <MessageContent>{recentMessage}</MessageContent>
-          <MessageCounter>
-            {unreadCount >= 300 ? '300+' : unreadCount}
-          </MessageCounter>
+          {unreadCount > 0 && (
+            <MessageCounter>
+              {unreadCount >= 300 ? '300+' : unreadCount}
+            </MessageCounter>
+          )}
         </ChatListItemBody>
       </Link>
     </ChatListItemContainer>

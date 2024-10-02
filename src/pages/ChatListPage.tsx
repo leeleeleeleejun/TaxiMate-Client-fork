@@ -47,6 +47,8 @@ const ChatListPage = () => {
   const { data, isLoading } = useGetChatListQuery(null);
   const [chatRoomList, setChatRoomList] = useState<ChatRoom[] | undefined>(aa);
 
+  console.log(data);
+
   const handleNewMessage = (message: ChatMessage) => {
     setChatRoomList((prevList) => {
       if (!prevList) return prevList;
@@ -85,6 +87,20 @@ const ChatListPage = () => {
         </HeaderItem>
       </Header>
       <Container>
+        {data &&
+          data.map((item) => (
+            <ChatListItem
+              key={item.id}
+              title={item.title}
+              currentParticipants={item.currentParticipants}
+              maxParticipants={item.maxParticipants}
+              recentMessage={item.recentMessage}
+              recentMessageTime={item.recentMessageTime}
+              unreadCount={item.unreadCount}
+              isProgress={item.isProgress}
+              id={item.id}
+            />
+          ))}
         {chatRoomList.map((item) => (
           <ChatListItem
             key={item.id}

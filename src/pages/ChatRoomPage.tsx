@@ -37,18 +37,20 @@ const ChatRoomPage = ({
 
   return (
     <>
-      <InAppNotification
-        showNotification={showNotification}
-        partyTitle={notification?.partyTitle || ''}
-        partyId={notification?.partyId || 0}
-        message={notification?.message || ''}
-        sender={{
-          profileImage: '',
-          nickname: '이준석',
-          id: '1',
-        }}
-        createdAt={''}
-      />
+      {notification && (
+        <InAppNotification
+          showNotification={showNotification}
+          partyTitle={notification?.partyTitle || ''}
+          partyId={notification?.partyId || 0}
+          message={notification?.message || ''}
+          sender={{
+            profileImage: '',
+            nickname: '이준석',
+            id: '1',
+          }}
+          createdAt={''}
+        />
+      )}
       <Header>
         <BackButton onClick={() => navigate(-1)}>
           <ArrowLeftIcon />
@@ -77,7 +79,7 @@ const ChatRoomPage = ({
         currentPartyId={currentPartyId}
         inAppNotificationHandler={handleNewMessage}
       />
-      <MessageInputBox sendMessage={sendMessage} partyId={''} />
+      <MessageInputBox sendMessage={sendMessage} partyId={currentPartyId} />
     </>
   );
 };
