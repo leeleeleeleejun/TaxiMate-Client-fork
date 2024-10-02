@@ -1,24 +1,27 @@
-export interface ChatMessage {
-  partyId: string;
-  partyTitle: string;
-  message: string;
-  createdAt?: string;
-  sender: {
-    id: string;
-    nickname: string;
-    profileImage: string;
-  };
+interface Sender {
+  id: string;
+  nickname: string;
+  profileImage: string;
 }
 
-export interface ChatRoomList {
-  id: string;
+// 메세지 수신
+export interface ChatMessage {
+  partyId: number;
+  partyTitle: string;
+  message: string;
+  createdAt: string;
+  sender: Sender;
+}
+
+export interface ChatRoom {
+  id: number;
   title: string;
-  maxParticipants: string; // 최대 참여자 수
-  currentParticipants: string; // 현재 참여자 수
+  maxParticipants: number; // 최대 참여자 수
+  currentParticipants: number; // 현재 참여자 수
   isProgress: boolean;
   recentMessage: string;
   recentMessageTime: string;
-  unreadCount: string;
+  unreadCount: number;
 }
 
 interface Chat {
@@ -45,4 +48,10 @@ export interface ChatList {
     currentParticipants: string; // 현재 참여자 수
   };
   chat: Chat[];
+}
+
+export interface GroupMessage {
+  chat: string[];
+  createdAt: string;
+  sender: Sender;
 }

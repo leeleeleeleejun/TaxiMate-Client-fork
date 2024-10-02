@@ -10,6 +10,7 @@ import type {
   FetchBaseQueryError,
 } from '@reduxjs/toolkit/query';
 import { setIsLogin } from '@/components/myProfile/userSlice.ts';
+import { ChatRoom } from '@/types/chat.ts';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -52,7 +53,7 @@ const baseQueryWithReauth: BaseQueryFn<
       result = await baseQuery(args, api, extraOptions);
     } else {
       // 리프레시 토큰 갱신 실패 시, 사용자 로그아웃 처리 등 추가적인 처리를 여기에 추가할 수 있음
-      alert('로그인이 만료되었습니다');
+      // alert('로그인이 만료되었습니다');
       accessToken = null;
       api.dispatch(setIsLogin(false));
     }
@@ -132,6 +133,12 @@ export const localApi = createApi({
         return response.data;
       },
     }),
+    getChatList: builder.query<ChatRoom[], null>({
+      query: () => API_PATH.CHAT.GET_CHAT_LIST,
+      transformResponse: (response: { data: ChatRoom[] }) => {
+        return response.data;
+      },
+    }),
   }),
 });
 
@@ -146,4 +153,5 @@ export const {
   useGetRefreshAccessTokenQuery,
   useParticipationChatMutation,
   useGetProfileQuery,
+  useGetChatListQuery,
 } = localApi;

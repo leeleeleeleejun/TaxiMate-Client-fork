@@ -4,7 +4,6 @@ import { NavermapsProvider } from 'react-naver-maps';
 
 //import { NextUIProvider } from '@nextui-org/system';
 import Router from '@/Router.tsx';
-import client from '@/api/SocketTest.ts';
 import { useGetRefreshAccessTokenQuery } from '@/api/localApi.ts';
 import { setIsLogin } from '@/components/myProfile/userSlice.ts';
 import GlobalStyle from '@/styles/GlobalStyle.ts';
@@ -35,7 +34,6 @@ function App() {
     if (!isLoading) {
       if (isSuccess) {
         dispatch(setIsLogin(true));
-        client.activate();
       }
       setIsReady(true); // 모든 작업이 완료되었음을 표시
     }

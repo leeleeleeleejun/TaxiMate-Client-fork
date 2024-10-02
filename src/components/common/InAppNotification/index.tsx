@@ -9,9 +9,18 @@ import {
   Title,
 } from '@/components/common/InAppNotification/InAppNotification.style.ts';
 
-const InAppNotification = ({ partyTitle, message, sender }: ChatMessage) => {
+interface Props extends ChatMessage {
+  showNotification: boolean;
+}
+
+const InAppNotification = ({
+  showNotification,
+  partyTitle,
+  message,
+  sender,
+}: Props) => {
   return (
-    <Container>
+    <Container $show={showNotification}>
       {sender.profileImage ? (
         <ProfileImg src={sender.profileImage} />
       ) : (
