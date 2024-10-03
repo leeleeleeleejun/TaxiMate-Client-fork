@@ -68,6 +68,9 @@ const Message = styled.div`
   font-size: var(--font-small);
   border-radius: 14px;
   white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
 `;
 
 export const OthersMessage = styled(Message)`
