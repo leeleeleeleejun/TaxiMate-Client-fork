@@ -39,7 +39,12 @@ const MessageList = ({
       messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
       // 화면에 요소가 보일 때 발생할 이벤트
     } else {
-      setShowUpButton(true);
+      if (
+        messageList.length > 0 &&
+        messageList[messageList.length - 1].sender.id !== userId
+      ) {
+        setShowUpButton(true);
+      }
       // 화면에서 요소가 벗어났을 때 발생할 이벤트
     }
   }, [messageList]);
