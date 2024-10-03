@@ -9,45 +9,17 @@ import ChatListItem from '@/components/chatList/ChatListItem.tsx';
 
 import ChatIcon from '@/assets/icons/chat/chat-icon.svg?react';
 import { useGetChatListQuery } from '@/api/localApi.ts';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-const aa = [
-  {
-    id: 1,
-    title: '테스트',
-    maxParticipants: 3, // 최대 참여자 수
-    currentParticipants: 1, // 현재 참여자 수
-    isProgress: true,
-    recentMessage: '안녕',
-    recentMessageTime: '2024-09-24T11:23:41.375090153',
-    unreadCount: 1,
-  },
-  {
-    id: 2,
-    title: '테스트2',
-    maxParticipants: 3, // 최대 참여자 수
-    currentParticipants: 1, // 현재 참여자 수
-    isProgress: true,
-    recentMessage: '안녕',
-    recentMessageTime: '2024-09-22T11:23:41.375090153',
-    unreadCount: 299,
-  },
-  {
-    id: 3,
-    title: '테스트2',
-    maxParticipants: 3, // 최대 참여자 수
-    currentParticipants: 1, // 현재 참여자 수
-    isProgress: true,
-    recentMessage: '안녕',
-    recentMessageTime: '2024-09-22T11:23:41.375090153',
-    unreadCount: 300,
-  },
-];
 const ChatListPage = () => {
   const { data, isLoading } = useGetChatListQuery(null);
-  const [chatRoomList, setChatRoomList] = useState<ChatRoom[] | undefined>(aa);
+  const [chatRoomList, setChatRoomList] = useState<ChatRoom[]>([]);
 
-  console.log(data);
+  useEffect(() => {
+    if (data) {
+      setChatRoomList(data);
+    }
+  }, [data]);
 
   const handleNewMessage = (message: ChatMessage) => {
     setChatRoomList((prevList) => {
@@ -76,7 +48,7 @@ const ChatListPage = () => {
   useMessageSubscription(handleNewMessage);
 
   if (isLoading) return <div>Loading...</div>;
-  if (!chatRoomList) return <div>no data...</div>;
+  if (!data) return <div>no data...</div>;
 
   return (
     <>
@@ -87,20 +59,6 @@ const ChatListPage = () => {
         </HeaderItem>
       </Header>
       <Container>
-        {data &&
-          data.map((item) => (
-            <ChatListItem
-              key={item.id}
-              title={item.title}
-              currentParticipants={item.currentParticipants}
-              maxParticipants={item.maxParticipants}
-              recentMessage={item.recentMessage}
-              recentMessageTime={item.recentMessageTime}
-              unreadCount={item.unreadCount}
-              isProgress={item.isProgress}
-              id={item.id}
-            />
-          ))}
         {chatRoomList.map((item) => (
           <ChatListItem
             key={item.id}
@@ -120,3 +78,5 @@ const ChatListPage = () => {
   );
 };
 export default ChatListPage;
+
+// 서버에 저장되거나 불러올 때 최신순으로 주기

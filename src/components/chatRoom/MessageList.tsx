@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { ChatMessage, GroupMessage } from '@/types/chat.ts';
 import { useMessageSubscription } from '@/hooks/useMessageSubscription.ts';
 
@@ -20,9 +20,10 @@ const MessageList = ({
 }) => {
   const messageEndRef = useRef<HTMLDivElement>(null);
   const [messageList, setMessageList] = useState<GroupMessage[]>([]);
+  const [isVisible, setIsVisible] = useState(false);
+  const [showUpButton, setShowUpButton] = useState(false);
 
   const handleNewMessage = (message: ChatMessage) => {
-    console.log('New message in ChatRoomPage:', message);
     if (message.partyId === Number(currentPartyId)) {
       chatHandler(message, setMessageList);
     } else {
@@ -33,32 +34,72 @@ const MessageList = ({
   useMessageSubscription(handleNewMessage);
 
   useLayoutEffect(() => {
-    messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (isVisible) {
+      messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+      // 화면에 요소가 보일 때 발생할 이벤트
+    } else {
+      setShowUpButton(true);
+      // 화면에서 요소가 벗어났을 때 발생할 이벤트
+    }
   }, [messageList]);
 
+  // Intersection Observer를 사용해 요소 가시성 감지
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 1 }
+    );
+
+    const currentRef = messageEndRef.current;
+    if (currentRef) observer.observe(currentRef);
+
+    return () => {
+      if (currentRef) observer.unobserve(currentRef);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isVisible) {
+      setShowUpButton(false);
+    }
+  }, [isVisible]);
+
   return (
-    <Container>
-      <SystemMessage>이준석님이 들어왔습니다.</SystemMessage>
-      <SystemMessage>2024년 9월 21일 토요일</SystemMessage>
-      {messageList.map((message) =>
-        message.sender.id === userId ? (
-          <MyMessageBox
-            key={message.createdAt}
-            messages={message.chat}
-            time={message.createdAt}
-          />
-        ) : (
-          <OthersMessageBox
-            key={message.createdAt}
-            name={message.sender.nickname}
-            img={message.sender.profileImage}
-            messages={message.chat}
-            time={message.createdAt}
-          />
-        )
+    <>
+      <Container>
+        <SystemMessage>이준석님이 들어왔습니다.</SystemMessage>
+        <SystemMessage>2024년 9월 21일 토요일</SystemMessage>
+        {messageList.map((message) =>
+          message.sender.id === userId ? (
+            <MyMessageBox
+              key={message.createdAt}
+              messages={message.chat}
+              time={message.createdAt}
+            />
+          ) : (
+            <OthersMessageBox
+              key={message.createdAt}
+              name={message.sender.nickname}
+              img={message.sender.profileImage}
+              messages={message.chat}
+              time={message.createdAt}
+            />
+          )
+        )}
+        <div ref={messageEndRef} />
+      </Container>
+      {showUpButton && (
+        <button
+          onClick={() => {
+            messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        >
+          up
+        </button>
       )}
-      <div ref={messageEndRef} />
-    </Container>
+    </>
   );
 };
 

@@ -44,9 +44,9 @@ const ChatRoomPage = ({
           partyId={notification?.partyId || 0}
           message={notification?.message || ''}
           sender={{
-            profileImage: '',
-            nickname: '이준석',
-            id: '1',
+            profileImage: notification.sender.profileImage || '',
+            nickname: notification.sender.nickname || '',
+            id: notification.sender.id,
           }}
           createdAt={''}
         />

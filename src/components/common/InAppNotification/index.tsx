@@ -28,7 +28,7 @@ const InAppNotification = ({
       )}
       <Content>
         <Title>{partyTitle}</Title>
-        <ProfileName>{sender.nickname}</ProfileName>
+        <ProfileName>{sender.nickname || 'user'}</ProfileName>
         <Message>{message}</Message>
       </Content>
     </Container>
