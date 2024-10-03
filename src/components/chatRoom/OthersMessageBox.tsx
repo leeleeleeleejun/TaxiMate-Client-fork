@@ -30,7 +30,7 @@ const OthersMessageBox = ({
           index !== messages.length - 1 ? (
             <OthersMessage key={index}>{message}</OthersMessage>
           ) : (
-            <ResentMessage>
+            <ResentMessage key={index}>
               <OthersMessage>{messages[messages.length - 1]}</OthersMessage>
               <MessageTime>{formatMongoDate(time)}</MessageTime>
             </ResentMessage>

@@ -10,7 +10,7 @@ import type {
   FetchBaseQueryError,
 } from '@reduxjs/toolkit/query';
 import { setIsLogin } from '@/components/myProfile/userSlice.ts';
-import { ChatRoom } from '@/types/chat.ts';
+import { ChatList, ChatRoom } from '@/types/chat.ts';
 
 //export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -133,9 +133,16 @@ export const localApi = createApi({
         return response.data;
       },
     }),
+    // 채팅방 목록
     getChatList: builder.query<ChatRoom[], null>({
       query: () => API_PATH.CHAT.GET_CHAT_LIST,
       transformResponse: (response: { data: ChatRoom[] }) => {
+        return response.data;
+      },
+    }),
+    getChat: builder.query<ChatList, string>({
+      query: (id) => API_PATH.CHAT.GET_CHAT.replace(':partyId', id),
+      transformResponse: (response: { data: ChatList }) => {
         return response.data;
       },
     }),
@@ -154,4 +161,5 @@ export const {
   useParticipationChatMutation,
   useGetProfileQuery,
   useGetChatListQuery,
+  useGetChatQuery,
 } = localApi;

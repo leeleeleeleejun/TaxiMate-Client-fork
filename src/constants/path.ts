@@ -24,6 +24,7 @@ export const API_PATH = {
   CHAT: {
     PARTICIPATION: `/api/v1/participation`,
     GET_CHAT_LIST: `/api/v1/chat`,
+    GET_CHAT: '/api/v1/chat/:partyId',
   },
 };
 

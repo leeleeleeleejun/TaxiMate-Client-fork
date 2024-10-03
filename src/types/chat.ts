@@ -9,6 +9,7 @@ export interface ChatMessage {
   partyId: number;
   partyTitle: string;
   message: string;
+  type: string;
   createdAt: string;
   sender: Sender;
 }
@@ -24,7 +25,7 @@ export interface ChatRoom {
   unreadCount: number;
 }
 
-interface Chat {
+export interface Chat {
   id: string;
   partyId: string;
   message: string;
@@ -44,8 +45,8 @@ export interface ChatList {
     departureTime: string;
     origin: string;
     destination: string;
-    maxParticipants: string; // 최대 참여자 수
-    currentParticipants: string; // 현재 참여자 수
+    maxParticipants: number; // 최대 참여자 수
+    currentParticipants: number; // 현재 참여자 수
   };
   chat: Chat[];
 }

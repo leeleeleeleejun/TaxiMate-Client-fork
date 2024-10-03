@@ -1,6 +1,8 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useGetProfileQuery } from '@/api/localApi.ts';
+import { useGetChatQuery, useGetProfileQuery } from '@/api/localApi.ts';
 import useInAppNotificationHandler from '@/hooks/useInAppNotificationHandler.ts';
+import { CLIENT_PATH } from '@/constants/path.ts';
+import reformatDate from '@/utils/reformatDate.ts';
 
 import Header from '@/components/common/Layout/Header';
 import DropDown from '@/components/common/DropDown.tsx';
@@ -26,14 +28,15 @@ const ChatRoomPage = ({
   sendMessage: (partyId: string, message: string) => void;
 }) => {
   const navigate = useNavigate();
-  const { data, isLoading } = useGetProfileQuery(null);
+  const currentPartyId = useLocation().pathname.split('/')[2];
+  const { data: userData, isLoading } = useGetProfileQuery(null);
+  const { data: chatData, isLoading: chatIsLoading } =
+    useGetChatQuery(currentPartyId);
   const { notification, showNotification, handleNewMessage } =
     useInAppNotificationHandler();
 
-  const currentPartyId = useLocation().pathname.split('/')[2];
-
-  if (isLoading) return <div>Loading...</div>;
-  if (!data) return <div>no data...</div>;
+  if (isLoading || chatIsLoading) return <div>Loading...</div>;
+  if (!userData || !chatData) return <div>no data...</div>;
 
   return (
     <>
@@ -49,35 +52,40 @@ const ChatRoomPage = ({
             id: notification.sender.id,
           }}
           createdAt={''}
+          type={''}
         />
       )}
       <Header>
         <BackButton onClick={() => navigate(-1)}>
           <ArrowLeftIcon />
         </BackButton>
-        <RoomTitle>
-          학생회관 앞 CU앞 종합버스 터미널생회관 앞 CU앞 종합버스 터미널
-        </RoomTitle>
+        <RoomTitle>{chatData.party.title}</RoomTitle>
         <DropDown
           items={[{ name: '알림끄기', handler: () => {} }]}
           danger={'나가기'}
         />
       </Header>
-      <NotificationContainer to={''}>
+      <NotificationContainer
+        to={CLIENT_PATH.POST_DETAIL.replace(':postId', currentPartyId)}
+      >
         <NotificationHeader>
-          <PeopleCountTag currentParticipants={4} maxParticipants={4} />
+          <PeopleCountTag
+            currentParticipants={chatData.party.currentParticipants}
+            maxParticipants={chatData.party.maxParticipants}
+          />
           <ArrowRightIcon />
         </NotificationHeader>
         <PostBody
-          departureTime={'오늘 오후 1:10쯤'}
-          origin={'공주대학교 정문'}
-          destination={'천안종합버스터미널'}
+          departureTime={reformatDate(chatData.party.departureTime) || ''}
+          origin={chatData.party.origin || ''}
+          destination={chatData.party.destination || ''}
         />
       </NotificationContainer>
       <MessageList
-        userId={data.id}
+        userId={userData.id}
         currentPartyId={currentPartyId}
         inAppNotificationHandler={handleNewMessage}
+        chatData={chatData.chat}
       />
       <MessageInputBox sendMessage={sendMessage} partyId={currentPartyId} />
     </>
