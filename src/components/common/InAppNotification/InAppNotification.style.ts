@@ -71,7 +71,9 @@ export const Title = styled.div`
 `;
 
 export const Message = styled(MessageContent)`
+  text-align: left;
   font-size: var(--font-small);
   font-weight: var(--weight-light);
   -webkit-line-clamp: 1;
+  flex-grow: 1;
 `;

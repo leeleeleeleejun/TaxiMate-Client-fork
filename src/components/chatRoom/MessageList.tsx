@@ -8,6 +8,7 @@ import {
   Container,
   SystemMessage,
 } from '@/components/chatRoom/chatRoom.style.ts';
+import GoNewMessageButton from '@/components/chatRoom/GoNewMessageButton.tsx';
 
 const MessageList = ({
   userId,
@@ -90,14 +91,19 @@ const MessageList = ({
         )}
         <div ref={messageEndRef} />
       </Container>
-      {showUpButton && (
-        <button
+      {showUpButton && messageList.length > 0 && (
+        <GoNewMessageButton
+          img={messageList[messageList.length - 1].sender.profileImage || ''}
+          name={messageList[messageList.length - 1].sender.nickname || ''}
+          message={
+            messageList[messageList.length - 1].chat[
+              messageList[messageList.length - 1].chat.length - 1
+            ]
+          }
           onClick={() => {
             messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
           }}
-        >
-          up
-        </button>
+        />
       )}
     </>
   );
