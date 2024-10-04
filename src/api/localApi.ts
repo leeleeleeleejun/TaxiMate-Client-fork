@@ -139,6 +139,7 @@ export const localApi = createApi({
       transformResponse: (response: { data: ChatRoom[] }) => {
         return response.data;
       },
+      keepUnusedDataFor: 0,
     }),
     getChat: builder.query<ChatList, string>({
       query: (id) => API_PATH.CHAT.GET_CHAT.replace(':partyId', id),

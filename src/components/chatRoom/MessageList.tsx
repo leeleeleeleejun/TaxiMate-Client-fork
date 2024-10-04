@@ -60,7 +60,7 @@ const MessageList = ({
       ([entry]) => {
         setIsVisible(entry.isIntersecting);
       },
-      { threshold: 1 }
+      { threshold: 0.1 }
     );
 
     const currentRef = messageEndRef.current;
@@ -150,7 +150,7 @@ const MessageList = ({
             />
           )
         )}
-        <div ref={messageEndRef} />
+        <div ref={messageEndRef} style={{ height: '2px' }} />
       </Container>
       {showUpButton && messageList.length > 0 && (
         <GoNewMessageButton
