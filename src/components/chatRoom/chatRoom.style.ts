@@ -133,7 +133,7 @@ export const MessageInput = styled.textarea<{ $inputLineLength: number }>`
 
 export const SystemMessage = styled.div`
   width: fit-content;
-  margin: 2px auto;
+  margin: 20px auto;
 
   display: flex;
   padding: 8px 16px;

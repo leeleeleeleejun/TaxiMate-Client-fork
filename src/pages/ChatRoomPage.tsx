@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { GroupMessage } from '@/types/chat.ts';
 import { CLIENT_PATH } from '@/constants/path.ts';
 import reformatDate from '@/utils/reformatDate.ts';
 import { useGetChatQuery, useGetProfileQuery } from '@/api/localApi.ts';
@@ -20,12 +21,11 @@ import {
   NotificationContainer,
   NotificationHeader,
   RoomTitle,
+  SystemMessage,
 } from '@/components/chatRoom/chatRoom.style.ts';
 
 import ArrowLeftIcon from '@/assets/icons/arrow-left-icon.svg?react';
 import ArrowRightIcon from '@/assets/icons/arrow-right-icon.svg?react';
-
-import { GroupMessage } from '@/types/chat.ts';
 
 const ChatRoomPage = ({
   sendMessage,
@@ -47,16 +47,23 @@ const ChatRoomPage = ({
     if (!chatData) return;
 
     const array: GroupMessage[] = [];
+    let currentDate = '';
 
-    chatData.chat.forEach((message, i) => {
-      if (i === 0) {
-        // 첫 번째 메시지를 처리
-        array.push({ ...message, chat: [message.message] });
-        return;
+    chatData.chat.forEach((message) => {
+      const messageDate = formatDate(message.createdAt);
+
+      if (messageDate !== currentDate) {
+        currentDate = messageDate;
+        array.push({
+          chat: [currentDate],
+          createdAt: '',
+          sender: null,
+          type: 'SYSTEM',
+        });
       }
 
       const lastMessage = array[array.length - 1];
-      const isSameUser = lastMessage.sender.id === message.sender.id;
+      const isSameUser = lastMessage.sender?.id === message.sender?.id;
       const isSameTime =
         lastMessage.createdAt.slice(0, 16) === message.createdAt?.slice(0, 16);
 
@@ -89,7 +96,7 @@ const ChatRoomPage = ({
             id: notification.sender.id,
           }}
           createdAt={''}
-          type={''}
+          type={'MESSAGE'}
         />
       )}
       <Header>
@@ -124,8 +131,12 @@ const ChatRoomPage = ({
         inAppNotificationHandler={handleNewMessage}
         initialChatMessage={initialChatMessage}
       >
-        {initialChatMessage.map((message) =>
-          message.sender.id === userData.id ? (
+        {initialChatMessage.map((message, index) =>
+          !message.sender ? (
+            <SystemMessage key={message.createdAt + index}>
+              {message.chat[0]}
+            </SystemMessage>
+          ) : message.sender?.id === userData.id ? (
             <MyMessageBox
               key={message.createdAt}
               messages={message.chat}
@@ -134,8 +145,8 @@ const ChatRoomPage = ({
           ) : (
             <OthersMessageBox
               key={message.createdAt}
-              name={message.sender.nickname}
-              img={message.sender.profileImage}
+              name={message.sender?.nickname || 'user'}
+              img={message.sender?.profileImage || ''}
               messages={message.chat}
               time={message.createdAt}
             />
@@ -148,3 +159,12 @@ const ChatRoomPage = ({
 };
 
 export default ChatRoomPage;
+
+const formatDate = (dateString: string): string => {
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  const dayOfWeek = ['일', '월', '화', '수', '목', '금', '토'][date.getDay()];
+  return `${year}년 ${month}월 ${day}일 ${dayOfWeek}요일`;
+};

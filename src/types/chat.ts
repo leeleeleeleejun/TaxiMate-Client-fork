@@ -4,12 +4,14 @@ interface Sender {
   profileImage: string;
 }
 
+type ChatType = 'MESSAGE' | 'SYSTEM';
+
 // 메세지 수신
 export interface ChatMessage {
   partyId: number;
   partyTitle: string;
   message: string;
-  type: string;
+  type: ChatType;
   createdAt: string;
   sender: Sender;
 }
@@ -29,13 +31,9 @@ export interface Chat {
   id: string;
   partyId: string;
   message: string;
-  type: 'MESSAGE' | 'SYSTEM';
+  type: ChatType;
   createdAt: string;
-  sender: {
-    id: string;
-    nickname: string;
-    profileImage: string;
-  };
+  sender: Sender | null;
 }
 
 export interface ChatList {
@@ -54,5 +52,6 @@ export interface ChatList {
 export interface GroupMessage {
   chat: string[];
   createdAt: string;
-  sender: Sender;
+  sender: Sender | null;
+  type: ChatType;
 }

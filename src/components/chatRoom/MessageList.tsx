@@ -46,7 +46,7 @@ const MessageList = ({
       // 화면에서 요소가 벗어났을 때 발생할 이벤트
       if (
         messageList.length > 0 &&
-        messageList[messageList.length - 1].sender.id !== userId
+        messageList[messageList.length - 1].sender?.id !== userId
       ) {
         setShowUpButton(true);
       }
@@ -86,11 +86,11 @@ const MessageList = ({
   return (
     <>
       <Container>
-        <SystemMessage>이준석님이 들어왔습니다.</SystemMessage>
-        <SystemMessage>2024년 9월 21일 토요일</SystemMessage>
         {children}
         {messageList.map((message) =>
-          message.sender.id === userId ? (
+          !message.sender ? (
+            <SystemMessage>{message.chat[0]}</SystemMessage>
+          ) : message.sender?.id === userId ? (
             <MyMessageBox
               key={message.createdAt}
               messages={message.chat}
@@ -99,8 +99,8 @@ const MessageList = ({
           ) : (
             <OthersMessageBox
               key={message.createdAt}
-              name={message.sender.nickname}
-              img={message.sender.profileImage}
+              name={message.sender?.nickname || 'user'}
+              img={message.sender?.profileImage || ''}
               messages={message.chat}
               time={message.createdAt}
             />
@@ -110,8 +110,8 @@ const MessageList = ({
       </Container>
       {showUpButton && messageList.length > 0 && (
         <GoNewMessageButton
-          img={messageList[messageList.length - 1].sender.profileImage || ''}
-          name={messageList[messageList.length - 1].sender.nickname || ''}
+          img={messageList[messageList.length - 1].sender?.profileImage || ''}
+          name={messageList[messageList.length - 1].sender?.nickname || ''}
           message={
             messageList[messageList.length - 1].chat[
               messageList[messageList.length - 1].chat.length - 1
@@ -137,7 +137,7 @@ const chatHandler = (
   setMessageList((prevState) => {
     if (prevState.length > 0) {
       const lastMessage = prevState[prevState.length - 1];
-      const isSameUser = lastMessage.sender.id === message.sender.id;
+      const isSameUser = lastMessage.sender?.id === message.sender.id;
       const isSameTime =
         lastMessage.createdAt.slice(0, 16) === message.createdAt?.slice(0, 16);
 
