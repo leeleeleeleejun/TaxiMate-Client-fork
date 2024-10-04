@@ -31,10 +31,10 @@ export const Container = styled(Link)<{ $show: boolean }>`
   ${({ $show }) =>
     $show
       ? css`
-          animation: ${slideDown} 0.5s ease-out;
+          animation: ${slideDown} 0.5s ease-out forwards; /* 애니메이션 종료 후 상태 유지 */
         `
       : css`
-          animation: ${slideUp} 1s ease-in;
+          animation: ${slideUp} 1s ease-in forwards; /* 애니메이션 종료 후 상태 유지 */
         `};
 
   align-items: center;

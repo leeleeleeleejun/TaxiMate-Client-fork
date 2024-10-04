@@ -26,7 +26,7 @@ const InAppNotification = ({
   return (
     <Container
       to={CLIENT_PATH.CHAT_ROOM.replace(':chatRoomId', String(partyId))}
-      onClick={() => setShowNotification()}
+      onClick={setShowNotification}
       $show={showNotification}
     >
       {sender.profileImage ? (

@@ -68,10 +68,13 @@ const Router = () => {
                   path={CLIENT_PATH.CREATE_POST}
                   element={<CreatePostPage />}
                 />
+                <Route
+                  path={CLIENT_PATH.CHAT_LISTS}
+                  element={<ChatListPage />}
+                />
               </Route>
             </Route>
             <Route element={<AuthChecker />}>
-              <Route path={CLIENT_PATH.CHAT_LISTS} element={<ChatListPage />} />
               <Route
                 path={CLIENT_PATH.CHAT_ROOM}
                 element={
