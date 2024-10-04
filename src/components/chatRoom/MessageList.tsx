@@ -1,5 +1,5 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { Chat, ChatMessage, GroupMessage } from '@/types/chat.ts';
+import { ReactNode, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { ChatMessage, GroupMessage } from '@/types/chat.ts';
 import { useMessageSubscription } from '@/hooks/useMessageSubscription.ts';
 
 import MyMessageBox from '@/components/chatRoom/MyMessageBox.tsx';
@@ -14,17 +14,16 @@ const MessageList = ({
   userId,
   currentPartyId,
   inAppNotificationHandler,
-  chatData,
+  initialChatMessage,
+  children,
 }: {
   userId: string;
   currentPartyId: string;
   inAppNotificationHandler: (message: ChatMessage) => void;
-  chatData: Chat[];
+  initialChatMessage: GroupMessage[];
+  children: ReactNode;
 }) => {
   const messageEndRef = useRef<HTMLDivElement>(null);
-  const [initialChatMessage, setInitialChatMessage] = useState<GroupMessage[]>(
-    []
-  );
   const [messageList, setMessageList] = useState<GroupMessage[]>([]);
   const [isVisible, setIsVisible] = useState(false);
   const [showUpButton, setShowUpButton] = useState(false);
@@ -41,16 +40,16 @@ const MessageList = ({
 
   useLayoutEffect(() => {
     if (isVisible) {
-      messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
       // 화면에 요소가 보일 때 발생할 이벤트
+      messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     } else {
+      // 화면에서 요소가 벗어났을 때 발생할 이벤트
       if (
         messageList.length > 0 &&
         messageList[messageList.length - 1].sender.id !== userId
       ) {
         setShowUpButton(true);
       }
-      // 화면에서 요소가 벗어났을 때 발생할 이벤트
     }
   }, [messageList]);
 
@@ -77,33 +76,6 @@ const MessageList = ({
     }
   }, [isVisible]);
 
-  useEffect(() => {
-    const array: GroupMessage[] = [];
-
-    chatData.forEach((message, i) => {
-      if (i === 0) {
-        // 첫 번째 메시지를 처리
-        array.push({ ...message, chat: [message.message] });
-        return;
-      }
-
-      const lastMessage = array[array.length - 1];
-      const isSameUser = lastMessage.sender.id === message.sender.id;
-      const isSameTime =
-        lastMessage.createdAt.slice(0, 16) === message.createdAt?.slice(0, 16);
-
-      if (isSameUser && isSameTime) {
-        // 이전 메시지와 같은 유저, 같은 시간대의 메시지라면 chat 배열에 추가
-        lastMessage.chat.push(message.message);
-      } else {
-        // 새로운 유저이거나 시간이 다르면 새로운 그룹 추가
-        array.push({ ...message, chat: [message.message] });
-      }
-    });
-
-    setInitialChatMessage(array);
-  }, []);
-
   // 메시지가 업데이트될 때마다 최하단으로 스크롤
   useEffect(() => {
     if (messageEndRef.current) {
@@ -116,23 +88,7 @@ const MessageList = ({
       <Container>
         <SystemMessage>이준석님이 들어왔습니다.</SystemMessage>
         <SystemMessage>2024년 9월 21일 토요일</SystemMessage>
-        {initialChatMessage.map((message) =>
-          message.sender.id === userId ? (
-            <MyMessageBox
-              key={message.createdAt}
-              messages={message.chat}
-              time={message.createdAt}
-            />
-          ) : (
-            <OthersMessageBox
-              key={message.createdAt}
-              name={message.sender.nickname}
-              img={message.sender.profileImage}
-              messages={message.chat}
-              time={message.createdAt}
-            />
-          )
-        )}
+        {children}
         {messageList.map((message) =>
           message.sender.id === userId ? (
             <MyMessageBox
