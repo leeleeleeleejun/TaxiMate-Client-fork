@@ -22,6 +22,7 @@ const HomePage = () => {
   const [activeMarker, setActiveMarker] = useState<string | null>(null);
   const [postListHeight, setPostListHeight] = useState(0);
   const [isLoading, setIsLoading] = useState(false); // 로딩 상태 관리
+  const [showResearchButton, setShowResearchButton] = useState(false);
 
   const [trigger, { data }] = useLazyGetPostsQuery();
 
@@ -37,6 +38,7 @@ const HomePage = () => {
       maxLatitude,
       maxLongitude,
     });
+    setShowResearchButton(false);
   };
 
   useEffect(() => {
@@ -65,7 +67,9 @@ const HomePage = () => {
       </Header>
       <Main>
         <SearchBar path={'/search'} />
-        <ResearchButton onClick={getPostsQueryTrigger} />
+        {showResearchButton && (
+          <ResearchButton onClick={getPostsQueryTrigger} />
+        )}
         {isLoading && <LoadingIcon />}
         <MoveCurrentLocation
           map={map}
@@ -81,6 +85,7 @@ const HomePage = () => {
           setActiveButton={setActiveButton}
           activeMarker={activeMarker}
           setActiveMarker={setActiveMarker}
+          setShowResearchButton={setShowResearchButton}
           data={data || []}
         />
       </Main>
