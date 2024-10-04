@@ -1,12 +1,14 @@
-import { useCreatePostMutation } from '@/api/localApi.ts';
-import checkDate from '@/utils/checkDate.ts';
 import { RegisterData } from '@/types';
 import { useNavigate } from 'react-router-dom';
+import checkDate from '@/utils/checkDate.ts';
+import useErrorHandle from '@/hooks/useErrorHandle.ts';
+import { useCreatePostMutation } from '@/api/localApi.ts';
 
 const useCreatePost = (registerData: RegisterData) => {
   const navigate = useNavigate();
 
-  const [createPost] = useCreatePostMutation();
+  const [createPost, { error }] = useCreatePostMutation();
+  useErrorHandle(error);
 
   return async () => {
     if (!registerData.title) {

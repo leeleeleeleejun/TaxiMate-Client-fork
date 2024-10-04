@@ -19,32 +19,17 @@ import UserContainer from '@/components/common/UserContainer';
 import * as S from '@/components/PostDetail/PostDetail.style';
 
 import ArrowLeftIcon from '@/assets/icons/arrow-left-icon.svg?react';
+import useErrorHandle from '@/hooks/useErrorHandle.ts';
 
 const PostDetailPage = () => {
   const navigate = useNavigate();
   const id = useLocation().pathname.split('/')[2];
   const { data, isLoading, refetch } = useGetPostByIdQuery(id);
   const [participationChat, { error }] = useParticipationChatMutation();
+  useErrorHandle(error);
 
   if (isLoading) return <div>Loading...</div>;
   if (!data) return <div>no data...</div>;
-
-  if (error) {
-    if ('status' in error) {
-      let errMsg = '';
-
-      if ('data' in error) {
-        const errorData = error.data as {
-          message: string;
-        };
-        errMsg = errorData.message;
-      } else {
-        errMsg = 'error' in error ? error.error : 'An unknown error occurred';
-      }
-
-      alert(errMsg);
-    }
-  }
 
   const clickUpdateHandler = () => {
     if (data.currentParticipants > 1) {
@@ -55,10 +40,12 @@ const PostDetailPage = () => {
   };
 
   const participationChatHandler = async () => {
-    const result = await participationChat(data.id).unwrap();
-    alert(result.message);
-    refetch();
-    // TODO: 채팅방으로 이동 로직 추가
+    if (data.status !== 'PARTICIPATING') {
+      const result = await participationChat(data.id).unwrap();
+      alert(result.message);
+      refetch();
+    }
+    navigate(CLIENT_PATH.CHAT_ROOM.replace(':chatRoomId', id));
   };
 
   const formatCreatedAt = reformatDetailDate(data.createdAt);
@@ -105,7 +92,9 @@ const PostDetailPage = () => {
           <span>{Math.ceil(Number(data.taxi.duration) / 60)}분</span>
         </S.MoveInfoContainer>
         <UserContainer img={data.host.profileImage} name={data.host.nickname} />
-        <S.JoinButton onClick={participationChatHandler}>팟 참여</S.JoinButton>
+        <S.JoinButton onClick={participationChatHandler}>
+          {data.status === 'PARTICIPATING' ? '채팅방' : '팟 참여'}
+        </S.JoinButton>
       </S.PostDetailContainer>
     </>
   );
