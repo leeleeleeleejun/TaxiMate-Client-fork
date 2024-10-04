@@ -1,5 +1,6 @@
 import styled, { css, keyframes } from 'styled-components';
 import { MessageContent } from '@/components/chatList/chatList.style.ts';
+import { Link } from 'react-router-dom';
 
 const slideDown = keyframes`
     0% {
@@ -24,16 +25,16 @@ const slideUp = keyframes`
     }
 `;
 
-export const Container = styled.div<{ $show: boolean }>`
+export const Container = styled(Link)<{ $show: boolean }>`
   display: flex;
 
   ${({ $show }) =>
     $show
       ? css`
-          animation: ${slideDown} 0.5s ease-out;
+          animation: ${slideDown} 0.5s ease-out forwards; /* 애니메이션 종료 후 상태 유지 */
         `
       : css`
-          animation: ${slideUp} 1s ease-in;
+          animation: ${slideUp} 1s ease-in forwards; /* 애니메이션 종료 후 상태 유지 */
         `};
 
   align-items: center;

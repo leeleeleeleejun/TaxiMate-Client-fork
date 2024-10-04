@@ -29,8 +29,10 @@ import ArrowRightIcon from '@/assets/icons/arrow-right-icon.svg?react';
 
 const ChatRoomPage = ({
   sendMessage,
+  checkReceive,
 }: {
   sendMessage: (partyId: string, message: string) => void;
+  checkReceive: (partyId: string, chatId: string) => void;
 }) => {
   const navigate = useNavigate();
   const currentPartyId = useLocation().pathname.split('/')[2];
@@ -86,6 +88,7 @@ const ChatRoomPage = ({
     <>
       {notification && (
         <InAppNotification
+          id={notification.id}
           showNotification={showNotification}
           partyTitle={notification?.partyTitle || ''}
           partyId={notification?.partyId || 0}
@@ -130,6 +133,7 @@ const ChatRoomPage = ({
         currentPartyId={currentPartyId}
         inAppNotificationHandler={handleNewMessage}
         initialChatMessage={initialChatMessage}
+        checkReceive={checkReceive}
       >
         {initialChatMessage.map((message, index) =>
           !message.sender ? (

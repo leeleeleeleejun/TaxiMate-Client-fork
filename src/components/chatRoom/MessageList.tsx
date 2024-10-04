@@ -15,12 +15,14 @@ const MessageList = ({
   currentPartyId,
   inAppNotificationHandler,
   initialChatMessage,
+  checkReceive,
   children,
 }: {
   userId: string;
   currentPartyId: string;
   inAppNotificationHandler: (message: ChatMessage) => void;
   initialChatMessage: GroupMessage[];
+  checkReceive: (partyId: string, chatId: string) => void;
   children: ReactNode;
 }) => {
   const messageEndRef = useRef<HTMLDivElement>(null);
@@ -31,6 +33,9 @@ const MessageList = ({
   const handleNewMessage = (message: ChatMessage) => {
     if (message.partyId === Number(currentPartyId)) {
       chatHandler(message, setMessageList);
+      if (message.sender.id !== userId) {
+        checkReceive(currentPartyId, message.id);
+      }
     } else {
       inAppNotificationHandler(message);
     }
@@ -39,17 +44,18 @@ const MessageList = ({
   useMessageSubscription(handleNewMessage);
 
   useLayoutEffect(() => {
-    if (isVisible) {
-      // 화면에 요소가 보일 때 발생할 이벤트
-      messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (!messageEndRef.current) return; // Ref가 없으면 아무 작업도 하지 않음
+
+    const isLastMessageMine =
+      messageList.length > 0 &&
+      messageList[messageList.length - 1].sender?.id === userId;
+
+    if (isVisible || isLastMessageMine) {
+      // 요소가 보이거나 마지막 메시지가 내 메시지일 경우
+      messageEndRef.current.scrollIntoView();
     } else {
-      // 화면에서 요소가 벗어났을 때 발생할 이벤트
-      if (
-        messageList.length > 0 &&
-        messageList[messageList.length - 1].sender?.id !== userId
-      ) {
-        setShowUpButton(true);
-      }
+      // 새로운 메시지가 있고 마지막 메시지가 다른 유저일 경우
+      setShowUpButton(true);
     }
   }, [messageList]);
 
@@ -76,7 +82,6 @@ const MessageList = ({
     }
   }, [isVisible]);
 
-  // 메시지가 업데이트될 때마다 최하단으로 스크롤
   useEffect(() => {
     if (messageEndRef.current) {
       messageEndRef.current.scrollIntoView();

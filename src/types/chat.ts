@@ -8,6 +8,7 @@ type ChatType = 'MESSAGE' | 'SYSTEM';
 
 // 메세지 수신
 export interface ChatMessage {
+  id: string;
   partyId: number;
   partyTitle: string;
   message: string;
