@@ -1,5 +1,6 @@
 import styled, { css, keyframes } from 'styled-components';
 import { MessageContent } from '@/components/chatList/chatList.style.ts';
+import { Link } from 'react-router-dom';
 
 const slideDown = keyframes`
     0% {
@@ -24,7 +25,7 @@ const slideUp = keyframes`
     }
 `;
 
-export const Container = styled.div<{ $show: boolean }>`
+export const Container = styled(Link)<{ $show: boolean }>`
   display: flex;
 
   ${({ $show }) =>

@@ -146,6 +146,7 @@ export const localApi = createApi({
       transformResponse: (response: { data: ChatList }) => {
         return response.data;
       },
+      keepUnusedDataFor: 0,
     }),
   }),
 });

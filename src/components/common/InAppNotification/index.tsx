@@ -1,4 +1,5 @@
 import { ChatMessage } from '@/types/chat.ts';
+import { CLIENT_PATH } from '@/constants/path.ts';
 import UserBasicImg from '@/components/common/userBasicImg';
 import {
   Container,
@@ -11,16 +12,23 @@ import {
 
 interface Props extends ChatMessage {
   showNotification: boolean;
+  setShowNotification: () => void;
 }
 
 const InAppNotification = ({
-  showNotification,
   partyTitle,
   message,
   sender,
+  partyId,
+  showNotification,
+  setShowNotification,
 }: Props) => {
   return (
-    <Container $show={showNotification}>
+    <Container
+      to={CLIENT_PATH.CHAT_ROOM.replace(':chatRoomId', String(partyId))}
+      onClick={() => setShowNotification()}
+      $show={showNotification}
+    >
       {sender.profileImage ? (
         <ProfileImg src={sender.profileImage} />
       ) : (

@@ -14,7 +14,12 @@ const useInAppNotificationHandler = () => {
     setTimeout(() => setShowNotification(false), 3000);
   };
 
-  return { notification, showNotification, handleNewMessage };
+  return {
+    notification,
+    showNotification,
+    setShowNotification,
+    handleNewMessage,
+  };
 };
 
 export default useInAppNotificationHandler;
