@@ -51,6 +51,7 @@ export interface HomeMapProps {
   map: naver.maps.Map | null;
   setMap: React.Dispatch<React.SetStateAction<naver.maps.Map | null>>;
   setActiveButton: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowResearchButton: React.Dispatch<React.SetStateAction<boolean>>;
   activeMarker: string | null;
   setActiveMarker: SetActiveMarker;
   data: Post[];
