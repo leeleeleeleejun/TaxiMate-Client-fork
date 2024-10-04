@@ -20,10 +20,15 @@ export const LocationInfoHeader = styled.h3`
 `;
 
 export const LocationInfoBody = styled.div`
+  max-width: 100%;
   height: 14px;
   margin-left: 50px;
 
   font-size: var(--font-small);
   font-weight: var(--weight-light);
   color: var(--color-gray-200);
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
