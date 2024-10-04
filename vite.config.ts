@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import svgr from 'vite-plugin-svgr';
-//import mkcert from 'vite-plugin-mkcert';
+// import mkcert from 'vite-plugin-mkcert';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -12,12 +12,12 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://3.34.129.34:8080',
+        target: 'http://52.78.19.118:8080',
         changeOrigin: true,
         secure: false,
       },
       '/oauth2': {
-        target: 'http://3.34.129.34:8080',
+        target: 'http://52.78.19.118:8080',
         changeOrigin: true,
         secure: false,
       },

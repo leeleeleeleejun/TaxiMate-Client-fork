@@ -108,13 +108,3 @@ export interface SetPlaceProps {
   setRegisterDataFunc: SetRegisterDataFunc;
   comeBackMain: () => void;
 }
-
-export interface ChatListItemProps {
-  id: string;
-  title: string;
-  currentParticipants: number;
-  maxParticipants: number;
-  resentMessage: string;
-  resentMessageTime: string;
-  resentMessageCounter: string;
-}

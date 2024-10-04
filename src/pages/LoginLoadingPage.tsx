@@ -11,14 +11,17 @@ const LoginLoadingPage = () => {
   const queryParams = new URLSearchParams(location.search);
   const code = queryParams.get('code') || '';
 
-  const { isLoading } = useGetAccessTokenQuery({ code: code });
+  const { isLoading, isSuccess } = useGetAccessTokenQuery({ code: code });
 
   useEffect(() => {
-    if (isLoading) {
-      dispatch(setIsLogin(true));
+    if (!isLoading) {
+      if (isSuccess) {
+        dispatch(setIsLogin(true));
+      }
+      // 모든 작업이 완료된 후 네비게이션 수행
       navigate('/');
     }
-  }, [isLoading, dispatch, navigate]);
+  }, [isSuccess, isLoading, dispatch, navigate]);
 
   return null;
 };

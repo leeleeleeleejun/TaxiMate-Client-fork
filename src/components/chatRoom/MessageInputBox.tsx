@@ -5,17 +5,23 @@ import {
 import { useState } from 'react';
 
 import ArrowUpIcon from '@/assets/icons/arrow-up-icon.svg?react';
-import socket from '@/api/SocketTest.ts';
 
-const MessageInputBox = () => {
+const MessageInputBox = ({
+  sendMessage,
+  partyId,
+}: {
+  sendMessage: (partyId: string, message: string) => void;
+  partyId: string;
+}) => {
   const [input, setInput] = useState('');
 
-  const sendMessage = () => {
+  const sendMessageFunc = () => {
     if (input.trim()) {
-      socket.emit('sendMessage', input, (res: string) => {
-        console.log('sendMessage', res);
-      });
+      sendMessage(partyId, input);
+
       setInput('');
+    } else {
+      console.log('유효하지 않은 메시지이거나 파티입니다.');
     }
   };
 
@@ -27,7 +33,7 @@ const MessageInputBox = () => {
         onChange={(e) => setInput(e.target.value)}
         $inputLineLength={input.split('\n').length}
       />
-      <button onClick={sendMessage}>
+      <button onClick={sendMessageFunc}>
         <ArrowUpIcon />
       </button>
     </MessageInputBoxContainer>

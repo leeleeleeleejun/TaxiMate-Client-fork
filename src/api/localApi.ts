@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { API_PATH, CLIENT_PATH } from '@/constants/path.ts';
+import { API_PATH } from '@/constants/path.ts';
 import { CreatePostRes, Post, PostDetail } from '@/types/post.ts';
 import { RegisterData } from '@/types';
 import { UserProfile } from '@/types/user.ts';
@@ -10,11 +10,12 @@ import type {
   FetchBaseQueryError,
 } from '@reduxjs/toolkit/query';
 import { setIsLogin } from '@/components/myProfile/userSlice.ts';
+import { ChatList, ChatRoom } from '@/types/chat.ts';
 
 //export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 //새로 고침 시 accessToken 변수 초기화 => refresh토큰으로 재요청
-let accessToken: string | null = null;
+export let accessToken: string | null = null;
 
 const baseQuery = fetchBaseQuery({
   baseUrl: '/',
@@ -52,10 +53,9 @@ const baseQueryWithReauth: BaseQueryFn<
       result = await baseQuery(args, api, extraOptions);
     } else {
       // 리프레시 토큰 갱신 실패 시, 사용자 로그아웃 처리 등 추가적인 처리를 여기에 추가할 수 있음
-      alert('로그인이 만료되었습니다');
+      // alert('로그인이 만료되었습니다');
       accessToken = null;
       api.dispatch(setIsLogin(false));
-      window.location.href = CLIENT_PATH.LOGIN;
     }
   }
   return result;
@@ -133,6 +133,20 @@ export const localApi = createApi({
         return response.data;
       },
     }),
+    // 채팅방 목록
+    getChatList: builder.query<ChatRoom[], null>({
+      query: () => API_PATH.CHAT.GET_CHAT_LIST,
+      transformResponse: (response: { data: ChatRoom[] }) => {
+        return response.data;
+      },
+      keepUnusedDataFor: 0,
+    }),
+    getChat: builder.query<ChatList, string>({
+      query: (id) => API_PATH.CHAT.GET_CHAT.replace(':partyId', id),
+      transformResponse: (response: { data: ChatList }) => {
+        return response.data;
+      },
+    }),
   }),
 });
 
@@ -147,4 +161,6 @@ export const {
   useGetRefreshAccessTokenQuery,
   useParticipationChatMutation,
   useGetProfileQuery,
+  useGetChatListQuery,
+  useGetChatQuery,
 } = localApi;

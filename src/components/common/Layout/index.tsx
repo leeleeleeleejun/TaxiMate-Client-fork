@@ -1,13 +1,12 @@
-import {Outlet} from "react-router-dom";
-
-import Container from "@/components/common/Layout/Layout.style.ts";
+import { Outlet } from 'react-router-dom';
+import Container from '@/components/common/Layout/Layout.style.ts';
 
 const Layout = () => {
-  return(
+  return (
     <Container>
       <Outlet />
     </Container>
   );
-}
+};
 
 export default Layout;
