@@ -74,7 +74,12 @@ const Router = () => {
               <Route path={CLIENT_PATH.CHAT_LISTS} element={<ChatListPage />} />
               <Route
                 path={CLIENT_PATH.CHAT_ROOM}
-                element={<ChatRoomPage sendMessage={client.sendMessage} />}
+                element={
+                  <ChatRoomPage
+                    sendMessage={client.sendMessage}
+                    checkReceive={client.checkReceive}
+                  />
+                }
               />
             </Route>
           </Route>

@@ -13,6 +13,7 @@ export const uuid = uuidv4().replace('-', '');
 export const useStompClient = (): {
   client: Client | null;
   sendMessage: (partyId: string, message: string) => void;
+  checkReceive: (partyId: string, chatId: string) => void;
 } => {
   const clientRef = useRef<Client | null>(null);
   const isLogin = useSelector((state: RootState) => state.userSlice.isLogin);
@@ -69,7 +70,20 @@ export const useStompClient = (): {
     }
   };
 
-  return { client: clientRef.current, sendMessage };
+  const checkReceive = (partyId: string, chatId: string) => {
+    if (clientRef.current) {
+      clientRef.current.publish({
+        destination: '/app/received',
+        headers: { Authorization: `Bearer ${accessToken}` },
+        body: JSON.stringify({
+          partyId,
+          chatId,
+        }),
+      });
+    }
+  };
+
+  return { client: clientRef.current, sendMessage, checkReceive };
 };
 
 export default useStompClient;

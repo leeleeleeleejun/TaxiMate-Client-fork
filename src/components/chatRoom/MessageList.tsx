@@ -15,12 +15,14 @@ const MessageList = ({
   currentPartyId,
   inAppNotificationHandler,
   initialChatMessage,
+  checkReceive,
   children,
 }: {
   userId: string;
   currentPartyId: string;
   inAppNotificationHandler: (message: ChatMessage) => void;
   initialChatMessage: GroupMessage[];
+  checkReceive: (partyId: string, chatId: string) => void;
   children: ReactNode;
 }) => {
   const messageEndRef = useRef<HTMLDivElement>(null);
@@ -31,6 +33,9 @@ const MessageList = ({
   const handleNewMessage = (message: ChatMessage) => {
     if (message.partyId === Number(currentPartyId)) {
       chatHandler(message, setMessageList);
+      if (message.sender.id !== userId) {
+        checkReceive(currentPartyId, message.id);
+      }
     } else {
       inAppNotificationHandler(message);
     }
