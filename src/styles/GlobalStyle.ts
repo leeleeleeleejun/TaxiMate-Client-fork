@@ -135,6 +135,10 @@ button {
 
 
 :root {
+  --rsbs-max-w: 400px;
+  --rsbs-ml: auto;
+  --rsbs-mr: auto;
+    
   --header-height: 56px;
   --footer-height: 60px;  
     

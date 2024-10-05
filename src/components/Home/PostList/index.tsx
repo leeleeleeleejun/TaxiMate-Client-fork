@@ -42,36 +42,34 @@ const PostList = ({
   }
 
   return (
-    <>
-      <BottomSheet
-        open
-        blocking={false}
-        ref={sheetRef}
-        defaultSnap={() => 80}
-        snapPoints={({ maxHeight }) => [
-          Math.floor(maxHeight * 0.9),
-          Math.floor(maxHeight * 0.4),
-          80,
-        ]}
-        expandOnContentDrag
-        onSpringEnd={() => setPostListHeight(sheetRef.current?.height || 0)}
-      >
-        <PostListContainer>
-          {data.map((post) => (
-            <PostListItem
-              key={post.id}
-              id={post.id}
-              title={post.title}
-              currentParticipants={post.currentParticipants}
-              maxParticipants={post.maxParticipants}
-              departureTime={reformatDate(post.departureTime)}
-              origin={post.origin}
-              destination={post.destination}
-            />
-          ))}
-        </PostListContainer>
-      </BottomSheet>
-    </>
+    <BottomSheet
+      open
+      blocking={false}
+      ref={sheetRef}
+      defaultSnap={() => 80}
+      snapPoints={({ maxHeight }) => [
+        Math.floor(maxHeight * 0.9),
+        Math.floor(maxHeight * 0.4),
+        80,
+      ]}
+      expandOnContentDrag
+      onSpringEnd={() => setPostListHeight(sheetRef.current?.height || 0)}
+    >
+      <PostListContainer>
+        {data.map((post) => (
+          <PostListItem
+            key={post.id}
+            id={post.id}
+            title={post.title}
+            currentParticipants={post.currentParticipants}
+            maxParticipants={post.maxParticipants}
+            departureTime={reformatDate(post.departureTime)}
+            origin={post.origin}
+            destination={post.destination}
+          />
+        ))}
+      </PostListContainer>
+    </BottomSheet>
   );
 };
 
