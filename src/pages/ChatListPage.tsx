@@ -1,21 +1,16 @@
+import { useGetChatListQuery } from '@/api/localApi.ts';
+
+import NoData from '@/components/common/NoData.tsx';
 import Header from '@/components/common/Layout/Header';
+import Footer from '@/components/common/Layout/Footer';
+import ChatListWrap from '@/components/chatList/ChatListWrap.tsx';
 import { HeaderItem } from '@/components/common/Layout/Header/Header.style.ts';
 import { Container, Divider } from '@/components/chatList/chatList.style.ts';
-import Footer from '@/components/common/Layout/Footer';
 
 import ChatIcon from '@/assets/icons/chat/chat-icon.svg?react';
-import { useGetChatListQuery } from '@/api/localApi.ts';
-import ChatListWrap from '@/components/chatList/ChatListWrap.tsx';
 
 const ChatListPage = () => {
   const { data, isLoading } = useGetChatListQuery(null);
-  // const [chatRoomList, setChatRoomList] = useState<ChatRoom[]>([]);
-  //
-  // useEffect(() => {
-  //   if (data) {
-  //     setChatRoomList(data);
-  //   }
-  // }, [data]);
 
   if (isLoading) return <div>Loading...</div>;
   if (!data) return <div>no data...</div>;
@@ -31,11 +26,15 @@ const ChatListPage = () => {
           <ChatIcon />
         </HeaderItem>
       </Header>
-      <Container>
-        <ChatListWrap chatRoomListProp={progressChatRoom} />
-        <Divider>종료된 팟</Divider>
-        <ChatListWrap chatRoomListProp={closeChatRoom} />
-      </Container>
+      {data.length > 0 ? (
+        <Container>
+          <ChatListWrap chatRoomListProp={progressChatRoom} />
+          <Divider>종료된 팟</Divider>
+          <ChatListWrap chatRoomListProp={closeChatRoom} />
+        </Container>
+      ) : (
+        <NoData>채팅 내역이 없습니다</NoData>
+      )}
       <Footer />
     </>
   );

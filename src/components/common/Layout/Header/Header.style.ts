@@ -17,7 +17,7 @@ export const HeaderItem = styled.h1`
   text-align: center;
 
   font-size: var(--font-medium);
-  font-weight: var(--weight-semi-bold);
+  font-weight: var(--weight-bold);
 
   & > svg {
     margin-left: 5px;
