@@ -20,26 +20,37 @@ import * as S from '@/components/PostDetail/PostDetail.style';
 
 import ArrowLeftIcon from '@/assets/icons/arrow-left-icon.svg?react';
 import useErrorHandle from '@/hooks/useErrorHandle.ts';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
 
 const PostDetailPage = () => {
   const navigate = useNavigate();
   const id = useLocation().pathname.split('/')[2];
   const { data, isLoading, refetch } = useGetPostByIdQuery(id);
-  const [participationChat, { error: participationChatError }] =
-    useParticipationChatMutation();
+  const [participationChat] = useParticipationChatMutation();
   const [leaveChat, { error: leaveChatError }] = useLeaveChatMutation();
-  useErrorHandle(participationChatError);
+  const isLogin = useSelector((state: RootState) => state.userSlice.isLogin);
+  const goChatRoom = () => {
+    navigate(CLIENT_PATH.CHAT_ROOM.replace(':chatRoomId', id));
+  };
+
   useErrorHandle(leaveChatError);
+
   if (isLoading) return <div>Loading...</div>;
   if (!data) return <div>no data...</div>;
 
   const participationChatHandler = async () => {
+    if (!isLogin) {
+      return navigate('/login');
+    }
     if (data.status !== 'PARTICIPATING') {
       const result = await participationChat(data.id).unwrap();
       alert(result.message);
       refetch();
+      goChatRoom();
+    } else if (data.status === 'PARTICIPATING') {
+      goChatRoom();
     }
-    navigate(CLIENT_PATH.CHAT_ROOM.replace(':chatRoomId', id));
   };
 
   const leaveChatHandler = async () => {
