@@ -25,7 +25,7 @@ export const LocationInfoBody = styled.div`
   margin-left: 50px;
 
   font-size: var(--font-small);
-  font-weight: var(--weight-light);
+  font-weight: var(--weight-regular);
   color: var(--color-gray-200);
 
   overflow: hidden;

@@ -90,7 +90,7 @@ export const MessageTime = styled.span`
   padding: 0 2px 3px;
   color: var(--color-gray-100);
   font-size: var(--font-micro);
-  font-weight: var(--weight-light);
+  font-weight: var(--weight-regular);
   white-space: nowrap;
 `;
 
@@ -144,7 +144,7 @@ export const SystemMessage = styled.div`
   background-color: var(--color-gray-300);
   color: var(--color-gray-100);
   font-size: var(--font-semi-micro);
-  font-weight: var(--weight-light);
+  font-weight: var(--weight-regular);
 
   border-radius: 30px;
 `;
@@ -157,7 +157,7 @@ export const GoNewMessageButtonContainer = styled.button`
   gap: 8px;
   align-items: center;
 
-  font-weight: var(--weight-light);
+  font-weight: var(--weight-regular);
   box-shadow: 0 0 2px 4px var(--color-gray-300);
   border-radius: 10px;
 

@@ -52,7 +52,7 @@ export const ContentContainer = styled.div`
   padding: 0 20px;
 
   font-size: var(--font-small);
-  font-weight: var(--weight-light);
+  font-weight: var(--weight-regular);
   color: var(--color-gray-100);
 
   white-space: pre-wrap;
@@ -62,7 +62,7 @@ export const MoveInfoContainer = styled.div`
   padding: 15px 20px;
 
   font-size: var(--font-semi-micro);
-  font-weight: var(--weight-light);
+  font-weight: var(--weight-regular);
   color: var(--color-gray-100);
 
   border-bottom: 1px solid var(--color-gray-300);
