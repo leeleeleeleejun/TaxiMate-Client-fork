@@ -28,9 +28,15 @@ const ChatListPage = () => {
       </Header>
       {data.length > 0 ? (
         <Container>
-          <ChatListWrap chatRoomListProp={progressChatRoom} />
-          <Divider>종료된 팟</Divider>
-          <ChatListWrap chatRoomListProp={closeChatRoom} />
+          {progressChatRoom.length > 0 && (
+            <ChatListWrap chatRoomListProp={progressChatRoom} />
+          )}
+          {closeChatRoom.length > 0 && (
+            <>
+              <Divider>종료된 팟</Divider>{' '}
+              <ChatListWrap chatRoomListProp={closeChatRoom} />
+            </>
+          )}
         </Container>
       ) : (
         <NoData>채팅 내역이 없습니다</NoData>
