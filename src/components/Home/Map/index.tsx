@@ -40,7 +40,7 @@ const Map = ({
       <NaverMap
         defaultCenter={centerLocation}
         defaultZoom={15}
-        minZoom={15}
+        minZoom={12}
         ref={setMap}
         onCenterChanged={onCenterChangedFunc}
         logoControl={false}

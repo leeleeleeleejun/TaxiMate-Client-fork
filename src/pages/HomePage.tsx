@@ -24,7 +24,8 @@ const HomePage = () => {
   const [isLoading, setIsLoading] = useState(false); // 로딩 상태 관리
   const [showResearchButton, setShowResearchButton] = useState(false);
 
-  const [trigger, { data }] = useLazyGetPostsQuery();
+  const [trigger, { data, isLoading: getPostsIsLoading }] =
+    useLazyGetPostsQuery();
 
   const getPostsQueryTrigger = () => {
     if (!map) return;
@@ -70,7 +71,7 @@ const HomePage = () => {
         {showResearchButton && (
           <ResearchButton onClick={getPostsQueryTrigger} />
         )}
-        {isLoading && <LoadingIcon />}
+        {(isLoading || getPostsIsLoading) && <LoadingIcon />}
         <MoveCurrentLocation
           map={map}
           activeButton={activeButton}
