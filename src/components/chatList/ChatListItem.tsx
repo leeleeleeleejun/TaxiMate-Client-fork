@@ -19,6 +19,7 @@ const ChatListItem = ({
   recentMessageTime,
   unreadCount,
   id,
+  isProgress,
 }: ChatRoom) => {
   const formatTime = reformatDetailDate(recentMessageTime);
   return (
@@ -30,6 +31,7 @@ const ChatListItem = ({
             <PeopleCountTag
               currentParticipants={currentParticipants}
               maxParticipants={maxParticipants}
+              isClose={!isProgress}
             />
           </div>
           {recentMessageTime && <span>{formatTime}</span>}

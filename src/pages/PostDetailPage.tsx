@@ -90,7 +90,9 @@ const PostDetailPage = () => {
         <UserContainer img={data.host.profileImage} name={data.host.nickname} />
         <S.ButtonBox>
           <S.JoinButton onClick={participationChatHandler}>
-            {data.status === 'PARTICIPATING' ? '채팅방' : '팟 참여'}
+            {data.status === 'PARTICIPATING' || data.status === 'TERMINATED'
+              ? '채팅방'
+              : '팟 참여'}
           </S.JoinButton>
           {data.status === 'PARTICIPATING' && (
             <S.LeaveButton onClick={leaveChatHandler}>나가기</S.LeaveButton>
