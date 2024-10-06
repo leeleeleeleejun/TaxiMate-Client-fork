@@ -10,6 +10,7 @@ import {
 } from '@/components/Home/PostList/PostList.style.ts';
 import PostListItem from '@/components/common/PostListItem';
 import { Post } from '@/types/post.ts';
+import NoData from '@/components/common/NoData.tsx';
 
 const PostList = ({
   activeMarker,
@@ -55,20 +56,24 @@ const PostList = ({
       expandOnContentDrag
       onSpringEnd={() => setPostListHeight(sheetRef.current?.height || 0)}
     >
-      <PostListContainer>
-        {data.map((post) => (
-          <PostListItem
-            key={post.id}
-            id={post.id}
-            title={post.title}
-            currentParticipants={post.currentParticipants}
-            maxParticipants={post.maxParticipants}
-            departureTime={reformatDate(post.departureTime)}
-            origin={post.origin}
-            destination={post.destination}
-          />
-        ))}
-      </PostListContainer>
+      {data.length > 0 ? (
+        <PostListContainer>
+          {data.map((post) => (
+            <PostListItem
+              key={post.id}
+              id={post.id}
+              title={post.title}
+              currentParticipants={post.currentParticipants}
+              maxParticipants={post.maxParticipants}
+              departureTime={reformatDate(post.departureTime)}
+              origin={post.origin}
+              destination={post.destination}
+            />
+          ))}
+        </PostListContainer>
+      ) : (
+        <NoData>주위 검색된 팟이 없습니다</NoData>
+      )}
     </BottomSheet>
   );
 };
