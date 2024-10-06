@@ -19,7 +19,10 @@ const fadeIn = keyframes`
 `;
 
 export const ActivePostListContainer = styled.ul`
+  margin: 0 auto;
+  max-width: 380px;
   width: 90%;
+  padding: 0 20px;
 
   background-color: var(--color-white);
 

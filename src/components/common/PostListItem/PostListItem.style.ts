@@ -1,13 +1,12 @@
 import styled from 'styled-components';
 
 export const PostListItemContainer = styled.li`
-  padding: 10px;
+  padding: 16px 0;
 
   display: flex;
   flex-direction: column;
 
   border-bottom: 1px solid var(--color-gray-300);
-  border-radius: 16px;
 `;
 
 export const PostHeaderContainer = styled.div`
