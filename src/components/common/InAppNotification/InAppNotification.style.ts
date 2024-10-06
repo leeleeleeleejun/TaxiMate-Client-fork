@@ -38,6 +38,7 @@ export const Container = styled(Link)<{ $show: boolean }>`
         `};
 
   align-items: center;
+  max-width: 400px;
   width: 100%;
   padding: 10px 14px;
   position: absolute;
