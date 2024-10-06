@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import {
   useGetPostByIdQuery,
+  useLeaveChatMutation,
   useParticipationChatMutation,
 } from '@/api/localApi.ts';
 import { CLIENT_PATH } from '@/constants/path.ts';
@@ -25,9 +26,11 @@ const PostDetailPage = () => {
   const navigate = useNavigate();
   const id = useLocation().pathname.split('/')[2];
   const { data, isLoading, refetch } = useGetPostByIdQuery(id);
-  const [participationChat, { error }] = useParticipationChatMutation();
-  useErrorHandle(error);
-
+  const [participationChat, { error: participationChatError }] =
+    useParticipationChatMutation();
+  const [leaveChat, { error: leaveChatError }] = useLeaveChatMutation();
+  useErrorHandle(participationChatError);
+  useErrorHandle(leaveChatError);
   if (isLoading) return <div>Loading...</div>;
   if (!data) return <div>no data...</div>;
 
@@ -46,6 +49,14 @@ const PostDetailPage = () => {
       refetch();
     }
     navigate(CLIENT_PATH.CHAT_ROOM.replace(':chatRoomId', id));
+  };
+
+  const leaveChatHandler = async () => {
+    if (data.status === 'PARTICIPATING') {
+      const result = await leaveChat(data.id).unwrap();
+      alert(result.message);
+      refetch();
+    }
   };
 
   const formatCreatedAt = reformatDetailDate(data.createdAt);
@@ -97,7 +108,7 @@ const PostDetailPage = () => {
             {data.status === 'PARTICIPATING' ? '채팅방' : '팟 참여'}
           </S.JoinButton>
           {data.status === 'PARTICIPATING' && (
-            <S.LeaveButton>나가기</S.LeaveButton>
+            <S.LeaveButton onClick={leaveChatHandler}>나가기</S.LeaveButton>
           )}
         </S.ButtonBox>
       </S.PostDetailContainer>

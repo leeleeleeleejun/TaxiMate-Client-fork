@@ -127,6 +127,13 @@ export const localApi = createApi({
         body: { partyId: Number(partyId) },
       }),
     }),
+    leaveChat: builder.mutation<{ message: string }, string>({
+      query: (partyId) => ({
+        url: API_PATH.CHAT.PARTICIPATION,
+        method: 'DELETE',
+        body: { partyId: Number(partyId) },
+      }),
+    }),
     getProfile: builder.query<UserProfile, null>({
       query: () => API_PATH.USER.GET_PROFILES,
       transformResponse: (response: { data: UserProfile }) => {
@@ -161,6 +168,7 @@ export const {
   useGetAccessTokenQuery,
   useGetRefreshAccessTokenQuery,
   useParticipationChatMutation,
+  useLeaveChatMutation,
   useGetProfileQuery,
   useGetChatListQuery,
   useGetChatQuery,
