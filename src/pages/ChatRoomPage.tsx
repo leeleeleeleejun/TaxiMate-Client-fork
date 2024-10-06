@@ -39,8 +39,12 @@ const ChatRoomPage = ({
   const { data: userData, isLoading } = useGetProfileQuery(null);
   const { data: chatData, isLoading: chatIsLoading } =
     useGetChatQuery(currentPartyId);
-  const { notification, showNotification, handleNewMessage } =
-    useInAppNotificationHandler();
+  const {
+    notification,
+    showNotification,
+    handleNewMessage,
+    setShowNotification,
+  } = useInAppNotificationHandler();
   const [initialChatMessage, setInitialChatMessage] = useState<GroupMessage[]>(
     []
   );
@@ -51,7 +55,7 @@ const ChatRoomPage = ({
     const array: GroupMessage[] = [];
     let currentDate = '';
 
-    chatData.chat.forEach((message) => {
+    chatData.chats.forEach((message) => {
       const messageDate = formatDate(message.createdAt);
 
       if (messageDate !== currentDate) {
@@ -100,6 +104,9 @@ const ChatRoomPage = ({
           }}
           createdAt={''}
           type={'MESSAGE'}
+          setShowNotification={() => {
+            setShowNotification(false);
+          }}
         />
       )}
       <Header>
