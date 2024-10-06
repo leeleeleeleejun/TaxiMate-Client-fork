@@ -141,7 +141,7 @@ export const SystemMessage = styled.div`
 
   background-color: var(--color-gray-300);
   color: var(--color-gray-100);
-  font-size: var(--font-small);
+  font-size: var(--font-semi-micro);
   font-weight: var(--weight-light);
 
   border-radius: 30px;
