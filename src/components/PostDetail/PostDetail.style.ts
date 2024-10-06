@@ -117,3 +117,13 @@ export const CloseTag = styled(statusTag)`
   color: var(--color-unavailable-text);
   background-color: var(--color-unavailable-background);
 `;
+
+export const ParticipantsBox = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+
+  & > div {
+    max-width: 50%;
+    flex-grow: 0.5;
+  }
+`;

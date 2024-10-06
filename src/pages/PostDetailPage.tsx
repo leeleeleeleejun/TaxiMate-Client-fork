@@ -1,4 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
+import useErrorHandle from '@/hooks/useErrorHandle.ts';
 
 import {
   useGetPostByIdQuery,
@@ -19,9 +22,6 @@ import UserContainer from '@/components/common/UserContainer';
 import * as S from '@/components/PostDetail/PostDetail.style';
 
 import ArrowLeftIcon from '@/assets/icons/arrow-left-icon.svg?react';
-import useErrorHandle from '@/hooks/useErrorHandle.ts';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/store';
 
 const PostDetailPage = () => {
   const navigate = useNavigate();
@@ -98,7 +98,18 @@ const PostDetailPage = () => {
           소요시간
           <span>{Math.ceil(Number(data.taxi.duration) / 60)}분</span>
         </S.MoveInfoContainer>
-        <UserContainer img={data.host.profileImage} name={data.host.nickname} />
+        <S.ParticipantsBox>
+          {[...data.participants] // 배열의 복사본을 생성
+            .sort((a) => (a.role === 'HOST' ? -1 : 1)) // 'HOST'인 데이터를 앞으로 이동
+            .map((item) => (
+              <UserContainer
+                key={item.id}
+                img={item.profileImage}
+                name={item.nickname}
+                isHost={item.role === 'HOST'}
+              />
+            ))}
+        </S.ParticipantsBox>
         <S.ButtonBox>
           <S.JoinButton onClick={participationChatHandler}>
             {data.status === 'PARTICIPATING' || data.status === 'TERMINATED'
