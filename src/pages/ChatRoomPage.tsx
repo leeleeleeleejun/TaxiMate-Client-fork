@@ -75,9 +75,8 @@ const ChatRoomPage = ({
       const isSameUser = lastMessage.sender?.id === message.sender?.id;
       const isSameTime =
         lastMessage.createdAt.slice(0, 16) === message.createdAt?.slice(0, 16);
-      const isSameType = lastMessage.type === message.type;
 
-      if (isSameUser && isSameTime && isSameType) {
+      if (isSameUser && isSameTime) {
         // 이전 메시지와 같은 유저, 같은 시간대의 메시지라면 chat 배열에 추가
         lastMessage.chat.push(message.message);
       } else {
@@ -142,11 +141,11 @@ const ChatRoomPage = ({
         initialChatMessage={initialChatMessage}
         checkReceive={checkReceive}
       >
-        {initialChatMessage.map((message, index) =>
+        {initialChatMessage.map((message) =>
           message.type === 'SYSTEM' ? (
-            <SystemMessage key={message.createdAt + index}>
-              {message.chat[0]}
-            </SystemMessage>
+            message.chat.map((item, index) => (
+              <SystemMessage key={index}>{item}</SystemMessage>
+            ))
           ) : message.sender?.id === userData.id ? (
             <MyMessageBox
               key={message.createdAt}

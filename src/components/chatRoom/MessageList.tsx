@@ -93,8 +93,8 @@ const MessageList = ({
       <Container>
         {children}
         {messageList.map((message) =>
-          !message.sender ? (
-            <SystemMessage>{message.chat[0]}</SystemMessage>
+          message.type === 'SYSTEM' ? (
+            message.chat.map((item) => <SystemMessage>{item}</SystemMessage>)
           ) : message.sender?.id === userId ? (
             <MyMessageBox
               key={message.createdAt}
