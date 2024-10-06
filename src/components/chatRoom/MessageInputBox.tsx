@@ -2,7 +2,7 @@ import {
   MessageInput,
   MessageInputBoxContainer,
 } from '@/components/chatRoom/chatRoom.style.ts';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import ArrowUpIcon from '@/assets/icons/arrow-up-icon.svg?react';
 
@@ -14,12 +14,15 @@ const MessageInputBox = ({
   partyId: string;
 }) => {
   const [input, setInput] = useState('');
-
+  const inputRef = useRef<HTMLTextAreaElement>(null);
   const sendMessageFunc = () => {
     if (input.trim()) {
       sendMessage(partyId, input);
 
       setInput('');
+      if (inputRef.current) {
+        inputRef.current.focus();
+      }
     } else {
       console.log('유효하지 않은 메시지이거나 파티입니다.');
     }
@@ -32,6 +35,7 @@ const MessageInputBox = ({
         value={input}
         onChange={(e) => setInput(e.target.value)}
         $inputLineLength={input.split('\n').length}
+        ref={inputRef}
       />
       <button onClick={sendMessageFunc}>
         <ArrowUpIcon />
