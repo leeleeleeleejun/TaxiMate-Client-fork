@@ -74,17 +74,30 @@ export const MoveInfoContainer = styled.div`
   }
 `;
 
+export const ButtonBox = styled.div`
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+
+  & > button {
+    width: 110px;
+    min-height: 45px;
+    font-size: 18px;
+    font-weight: var(--weight-bold);
+  }
+`;
+
 export const JoinButton = styled.button`
-  margin: 20px auto;
   border-radius: 6px;
-  width: 110px;
-  min-height: 45px;
   background-color: var(--color-main);
 
-  font-size: 18px;
-  font-weight: var(--weight-bold);
-
   color: var(--color-white);
+`;
+
+export const LeaveButton = styled.button`
+  color: var(--color-red);
+  text-decoration: underline;
 `;
 
 const statusTag = styled.div`

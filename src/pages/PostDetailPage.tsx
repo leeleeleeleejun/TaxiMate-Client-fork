@@ -92,9 +92,14 @@ const PostDetailPage = () => {
           <span>{Math.ceil(Number(data.taxi.duration) / 60)}분</span>
         </S.MoveInfoContainer>
         <UserContainer img={data.host.profileImage} name={data.host.nickname} />
-        <S.JoinButton onClick={participationChatHandler}>
-          {data.status === 'PARTICIPATING' ? '채팅방' : '팟 참여'}
-        </S.JoinButton>
+        <S.ButtonBox>
+          <S.JoinButton onClick={participationChatHandler}>
+            {data.status === 'PARTICIPATING' ? '채팅방' : '팟 참여'}
+          </S.JoinButton>
+          {data.status === 'PARTICIPATING' && (
+            <S.LeaveButton>나가기</S.LeaveButton>
+          )}
+        </S.ButtonBox>
       </S.PostDetailContainer>
     </>
   );
