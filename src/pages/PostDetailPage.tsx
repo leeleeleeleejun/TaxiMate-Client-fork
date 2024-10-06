@@ -11,7 +11,6 @@ import reformatDetailDate from '@/utils/reformatDetailDate.ts';
 import { PostDetailStatus } from '@/types/post.ts';
 
 import Header from '@/components/common/Layout/Header';
-import DropDown from '@/components/common/DropDown.tsx';
 import { BackButton } from '@/components/common/Layout/Header/Header.style.ts';
 import Map from '@/components/PostDetail/Map';
 import PeopleCountTag from '@/components/common/PeopleCountTag';
@@ -33,14 +32,6 @@ const PostDetailPage = () => {
   useErrorHandle(leaveChatError);
   if (isLoading) return <div>Loading...</div>;
   if (!data) return <div>no data...</div>;
-
-  const clickUpdateHandler = () => {
-    if (data.currentParticipants > 1) {
-      navigate(CLIENT_PATH.UPDATE_POST.replace(':postId', id));
-    } else {
-      alert('이미 참여자가 존재하여 정보가 수정되지 않습니다');
-    }
-  };
 
   const participationChatHandler = async () => {
     if (data.status !== 'PARTICIPATING') {
@@ -66,12 +57,6 @@ const PostDetailPage = () => {
         <BackButton onClick={() => navigate('/')}>
           <ArrowLeftIcon />
         </BackButton>
-        {data.host.isMe && (
-          <DropDown
-            items={[{ name: '수정', handler: clickUpdateHandler }]}
-            danger={'삭제'}
-          />
-        )}
       </Header>
       <S.PostDetailContainer>
         <PostDetailHeader

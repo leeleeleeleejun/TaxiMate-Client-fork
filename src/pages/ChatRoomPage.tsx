@@ -7,7 +7,6 @@ import { useGetChatQuery, useGetProfileQuery } from '@/api/localApi.ts';
 import useInAppNotificationHandler from '@/hooks/useInAppNotificationHandler.ts';
 
 import Header from '@/components/common/Layout/Header';
-import DropDown from '@/components/common/DropDown.tsx';
 import { PostBody } from '@/components/common/PostListItem';
 import PeopleCountTag from '@/components/common/PeopleCountTag';
 import MessageList from '@/components/chatRoom/MessageList.tsx';
@@ -119,10 +118,6 @@ const ChatRoomPage = ({
           <ArrowLeftIcon />
         </BackButton>
         <RoomTitle>{chatData.party.title}</RoomTitle>
-        <DropDown
-          items={[{ name: '알림끄기', handler: () => {} }]}
-          danger={'나가기'}
-        />
       </Header>
       <NotificationContainer
         to={CLIENT_PATH.POST_DETAIL.replace(':postId', currentPartyId)}
