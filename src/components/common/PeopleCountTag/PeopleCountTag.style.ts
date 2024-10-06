@@ -9,8 +9,8 @@ export const PeopleCountTagContainer = styled.div<{
 
   padding: 5px 8px;
 
-  font-size: var(--font-semi-micro);
-  font-weight: 600;
+  font-size: var(--font-small);
+  font-weight: var(--weight-semi-bold);
 
   right: 5%;
   z-index: 2;
@@ -41,6 +41,6 @@ export const PeopleCountTagContainer = styled.div<{
           ? 'var(--color-unavailable-text)'
           : 'var(--color-available-text)'};
 
-    margin-right: 6px;
+    margin-right: 4px;
   }
 `;

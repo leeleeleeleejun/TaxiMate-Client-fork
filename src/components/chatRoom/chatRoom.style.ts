@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export const RoomTitle = styled.h2`
   font-size: 18px;
-  font-weight: var(--weight-medium);
+  font-weight: var(--weight-semi-bold);
 
   overflow: hidden;
   white-space: nowrap;
