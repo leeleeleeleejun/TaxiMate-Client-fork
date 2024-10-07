@@ -42,7 +42,7 @@ const MarkerContainerStyle = `
 
     & > span {
       margin-left: 3px;
-      font-weight: var(--weight-light);
+      font-weight: var(--weight-regular);
     }
   }
 

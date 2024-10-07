@@ -42,7 +42,7 @@ export const SearchListItemContainer = styled.li`
 
     color: var(--color-gray-100);
     font-size: var(--font-small);
-    font-weight: var(--weight-light);
+    font-weight: var(--weight-regular);
   }
 `;
 

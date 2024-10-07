@@ -14,6 +14,7 @@ const Map = ({
   setActiveButton,
   activeMarker,
   setActiveMarker,
+  setShowResearchButton,
   data,
 }: HomeMapProps) => {
   const centerLocation = JSON.parse(localStorage.getItem('Location') || '');
@@ -26,6 +27,7 @@ const Map = ({
 
     // 내 위치로 이동 버트 비활성화
     setActiveButton(false);
+    setShowResearchButton(true);
   };
 
   return (
@@ -38,7 +40,7 @@ const Map = ({
       <NaverMap
         defaultCenter={centerLocation}
         defaultZoom={15}
-        minZoom={15}
+        minZoom={12}
         ref={setMap}
         onCenterChanged={onCenterChangedFunc}
         logoControl={false}

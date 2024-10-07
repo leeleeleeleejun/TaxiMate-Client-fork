@@ -6,7 +6,7 @@ export const Container = styled.div`
 
   padding: 15px 20px;
 
-  img {
+  & > img {
     border-radius: 50%;
     object-fit: cover;
 
@@ -15,10 +15,16 @@ export const Container = styled.div`
     margin-right: 10px;
   }
 
-  span {
+  & > span {
     padding-right: 10px;
 
     font-size: var(--font-small);
     font-weight: var(--weight-bold);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  & > svg {
+    margin-right: 4px;
   }
 `;

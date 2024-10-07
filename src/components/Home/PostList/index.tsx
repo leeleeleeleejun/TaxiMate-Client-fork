@@ -10,6 +10,7 @@ import {
 } from '@/components/Home/PostList/PostList.style.ts';
 import PostListItem from '@/components/common/PostListItem';
 import { Post } from '@/types/post.ts';
+import NoData from '@/components/common/NoData.tsx';
 
 const PostList = ({
   activeMarker,
@@ -42,20 +43,20 @@ const PostList = ({
   }
 
   return (
-    <>
-      <BottomSheet
-        open
-        blocking={false}
-        ref={sheetRef}
-        defaultSnap={() => 80}
-        snapPoints={({ maxHeight }) => [
-          Math.floor(maxHeight * 0.9),
-          Math.floor(maxHeight * 0.4),
-          80,
-        ]}
-        expandOnContentDrag
-        onSpringEnd={() => setPostListHeight(sheetRef.current?.height || 0)}
-      >
+    <BottomSheet
+      open
+      blocking={false}
+      ref={sheetRef}
+      defaultSnap={() => 80}
+      snapPoints={({ maxHeight }) => [
+        Math.floor(maxHeight * 0.9),
+        Math.floor(maxHeight * 0.4),
+        80,
+      ]}
+      expandOnContentDrag
+      onSpringEnd={() => setPostListHeight(sheetRef.current?.height || 0)}
+    >
+      {data.length > 0 ? (
         <PostListContainer>
           {data.map((post) => (
             <PostListItem
@@ -70,8 +71,10 @@ const PostList = ({
             />
           ))}
         </PostListContainer>
-      </BottomSheet>
-    </>
+      ) : (
+        <NoData>주위 검색된 팟이 없습니다</NoData>
+      )}
+    </BottomSheet>
   );
 };
 

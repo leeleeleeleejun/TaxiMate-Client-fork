@@ -30,7 +30,7 @@ export const NavItem = styled(Link)<{ $isActive: boolean }>`
   text-align: center;
 
   color: var(--color-gray-200);
-  font-weight: var(--weight-light);
+  font-weight: var(--weight-regular);
   font-size: var(--font-micro);
 
   svg {

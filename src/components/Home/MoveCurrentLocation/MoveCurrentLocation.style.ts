@@ -17,7 +17,7 @@ export const Button = styled.button<{
   position: absolute;
   transition: bottom 0.5s ease;
   bottom: ${({ $isMax, $bottom, $activeMarker }) =>
-    $activeMarker ? '125px' : $isMax ? '30px' : `${$bottom - 50}px`};
+    $activeMarker ? '130px' : $isMax ? '30px' : `${$bottom - 50}px`};
   right: 5%;
   z-index: 2;
 

@@ -4,8 +4,12 @@ import InAppNotification from '@/components/common/InAppNotification/index.tsx';
 import useInAppNotificationHandler from '@/hooks/useInAppNotificationHandler.ts';
 
 const InAppNotificationLayout = () => {
-  const { notification, showNotification, handleNewMessage } =
-    useInAppNotificationHandler();
+  const {
+    notification,
+    showNotification,
+    setShowNotification,
+    handleNewMessage,
+  } = useInAppNotificationHandler();
 
   useMessageSubscription(handleNewMessage);
 
@@ -17,15 +21,20 @@ const InAppNotificationLayout = () => {
     <>
       {notification && (
         <InAppNotification
+          setShowNotification={() => {
+            setShowNotification(false);
+          }}
+          id={notification.id}
           showNotification={showNotification}
           partyTitle={partyTitle}
           partyId={partyId}
           message={message}
           sender={{
-            profileImage: '',
-            nickname: '이준석',
-            id: '1',
+            profileImage: notification.sender.profileImage || '',
+            nickname: notification.sender.nickname || '',
+            id: notification.sender.id,
           }}
+          type={'MESSAGE'}
           createdAt={''}
         />
       )}

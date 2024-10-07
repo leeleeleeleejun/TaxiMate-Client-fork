@@ -77,3 +77,14 @@ export const MessageCounter = styled.span`
   font-size: var(--font-semi-micro);
   color: var(--color-white);
 `;
+
+export const Divider = styled.div`
+  width: 100%;
+  background-color: var(--color-gray-300);
+  color: var(--color-gray-100);
+  padding: 6px 8px;
+  font-size: var(--font-small);
+  font-weight: var(--weight-medium);
+  border-radius: 4px;
+  margin-top: 10px;
+`;

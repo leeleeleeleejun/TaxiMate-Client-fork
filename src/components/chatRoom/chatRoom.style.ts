@@ -2,8 +2,10 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const RoomTitle = styled.h2`
+  flex-grow: 1;
+  text-align: center;
   font-size: 18px;
-  font-weight: var(--weight-medium);
+  font-weight: var(--weight-semi-bold);
 
   overflow: hidden;
   white-space: nowrap;
@@ -68,6 +70,9 @@ const Message = styled.div`
   font-size: var(--font-small);
   border-radius: 14px;
   white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
 `;
 
 export const OthersMessage = styled(Message)`
@@ -85,7 +90,7 @@ export const MessageTime = styled.span`
   padding: 0 2px 3px;
   color: var(--color-gray-100);
   font-size: var(--font-micro);
-  font-weight: var(--weight-light);
+  font-weight: var(--weight-regular);
   white-space: nowrap;
 `;
 
@@ -130,7 +135,7 @@ export const MessageInput = styled.textarea<{ $inputLineLength: number }>`
 
 export const SystemMessage = styled.div`
   width: fit-content;
-  margin: 2px auto;
+  margin: 20px auto;
 
   display: flex;
   padding: 8px 16px;
@@ -138,8 +143,38 @@ export const SystemMessage = styled.div`
 
   background-color: var(--color-gray-300);
   color: var(--color-gray-100);
-  font-size: var(--font-small);
-  font-weight: var(--weight-light);
+  font-size: var(--font-semi-micro);
+  font-weight: var(--weight-regular);
 
   border-radius: 30px;
+`;
+
+export const GoNewMessageButtonContainer = styled.button`
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 10px;
+  margin: 0 10px 8px;
+  gap: 8px;
+  align-items: center;
+
+  font-weight: var(--weight-regular);
+  box-shadow: 0 0 2px 4px var(--color-gray-300);
+  border-radius: 10px;
+
+  & > div {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+
+    & > span {
+      color: var(--color-gray-200);
+      font-size: var(--font-small);
+      white-space: nowrap;
+    }
+  }
+
+  & > svg {
+    flex-shrink: 0;
+    margin-right: 10px;
+  }
 `;

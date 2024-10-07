@@ -27,7 +27,7 @@ export const SearchBarWrapper = styled.button`
 
   border-radius: 8px;
   background: var(--color-white);
-  box-shadow: 0 0 6px 2px var(--color-shadow);
+  box-shadow: 0 0 2px 2px var(--color-gray-300);
 `;
 
 export const MyLocationButton = styled.button`

@@ -1,7 +1,11 @@
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
+import useErrorHandle from '@/hooks/useErrorHandle.ts';
 
 import {
   useGetPostByIdQuery,
+  useLeaveChatMutation,
   useParticipationChatMutation,
 } from '@/api/localApi.ts';
 import { CLIENT_PATH } from '@/constants/path.ts';
@@ -10,7 +14,6 @@ import reformatDetailDate from '@/utils/reformatDetailDate.ts';
 import { PostDetailStatus } from '@/types/post.ts';
 
 import Header from '@/components/common/Layout/Header';
-import DropDown from '@/components/common/DropDown.tsx';
 import { BackButton } from '@/components/common/Layout/Header/Header.style.ts';
 import Map from '@/components/PostDetail/Map';
 import PeopleCountTag from '@/components/common/PeopleCountTag';
@@ -24,41 +27,38 @@ const PostDetailPage = () => {
   const navigate = useNavigate();
   const id = useLocation().pathname.split('/')[2];
   const { data, isLoading, refetch } = useGetPostByIdQuery(id);
-  const [participationChat, { error }] = useParticipationChatMutation();
+  const [participationChat] = useParticipationChatMutation();
+  const [leaveChat, { error: leaveChatError }] = useLeaveChatMutation();
+  const isLogin = useSelector((state: RootState) => state.userSlice.isLogin);
+  const goChatRoom = () => {
+    navigate(CLIENT_PATH.CHAT_ROOM.replace(':chatRoomId', id));
+  };
+
+  useErrorHandle(leaveChatError);
 
   if (isLoading) return <div>Loading...</div>;
   if (!data) return <div>no data...</div>;
 
-  if (error) {
-    if ('status' in error) {
-      let errMsg = '';
-
-      if ('data' in error) {
-        const errorData = error.data as {
-          message: string;
-        };
-        errMsg = errorData.message;
-      } else {
-        errMsg = 'error' in error ? error.error : 'An unknown error occurred';
-      }
-
-      alert(errMsg);
+  const participationChatHandler = async () => {
+    if (!isLogin) {
+      return navigate('/login');
     }
-  }
-
-  const clickUpdateHandler = () => {
-    if (data.currentParticipants > 1) {
-      navigate(CLIENT_PATH.UPDATE_POST.replace(':postId', id));
-    } else {
-      alert('이미 참여자가 존재하여 정보가 수정되지 않습니다');
+    if (data.status !== 'PARTICIPATING') {
+      const result = await participationChat(data.id).unwrap();
+      alert(result.message);
+      refetch();
+      goChatRoom();
+    } else if (data.status === 'PARTICIPATING') {
+      goChatRoom();
     }
   };
 
-  const participationChatHandler = async () => {
-    const result = await participationChat(data.id).unwrap();
-    alert(result.message);
-    refetch();
-    // TODO: 채팅방으로 이동 로직 추가
+  const leaveChatHandler = async () => {
+    if (data.status === 'PARTICIPATING') {
+      const result = await leaveChat(data.id).unwrap();
+      alert(result.message);
+      refetch();
+    }
   };
 
   const formatCreatedAt = reformatDetailDate(data.createdAt);
@@ -68,12 +68,6 @@ const PostDetailPage = () => {
         <BackButton onClick={() => navigate('/')}>
           <ArrowLeftIcon />
         </BackButton>
-        {data.host.isMe && (
-          <DropDown
-            items={[{ name: '수정', handler: clickUpdateHandler }]}
-            danger={'삭제'}
-          />
-        )}
       </Header>
       <S.PostDetailContainer>
         <PostDetailHeader
@@ -104,8 +98,28 @@ const PostDetailPage = () => {
           소요시간
           <span>{Math.ceil(Number(data.taxi.duration) / 60)}분</span>
         </S.MoveInfoContainer>
-        <UserContainer img={data.host.profileImage} name={data.host.nickname} />
-        <S.JoinButton onClick={participationChatHandler}>팟 참여</S.JoinButton>
+        <S.ParticipantsBox>
+          {[...data.participants] // 배열의 복사본을 생성
+            .sort((a) => (a.role === 'HOST' ? -1 : 1)) // 'HOST'인 데이터를 앞으로 이동
+            .map((item) => (
+              <UserContainer
+                key={item.id}
+                img={item.profileImage}
+                name={item.nickname}
+                isHost={item.role === 'HOST'}
+              />
+            ))}
+        </S.ParticipantsBox>
+        <S.ButtonBox>
+          <S.JoinButton onClick={participationChatHandler}>
+            {data.status === 'PARTICIPATING' || data.status === 'TERMINATED'
+              ? '채팅방'
+              : '팟 참여'}
+          </S.JoinButton>
+          {data.status === 'PARTICIPATING' && (
+            <S.LeaveButton onClick={leaveChatHandler}>나가기</S.LeaveButton>
+          )}
+        </S.ButtonBox>
       </S.PostDetailContainer>
     </>
   );

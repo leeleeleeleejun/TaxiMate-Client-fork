@@ -11,8 +11,8 @@ export const API_PATH = {
       BY_ID: `/api/v1/parties/:partyId`,
       // 특정 유저의 전체 포스트 조회
       BY_USER: `/posts/user/:userId`,
-      JOIN_POSTS: `${LocalAPI}/join-posts`,
-      CLOSE_POSTS: `${LocalAPI}/close-posts`,
+      JOIN_POSTS: `${LocalAPI}/api/v1/participation`,
+      CLOSE_POSTS: `${LocalAPI}/api/v1/participation?isTerminated=true`,
     },
     POST: `/api/v1/parties`,
   },
@@ -23,7 +23,8 @@ export const API_PATH = {
   },
   CHAT: {
     PARTICIPATION: `/api/v1/participation`,
-    GET_CHAT_LIST: `/api/v1/chat`,
+    GET_CHAT_LIST: `/api/v1/chats`,
+    GET_CHAT: '/api/v1/chats/:partyId',
   },
 };
 

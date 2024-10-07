@@ -10,7 +10,7 @@ import type {
   FetchBaseQueryError,
 } from '@reduxjs/toolkit/query';
 import { setIsLogin } from '@/components/myProfile/userSlice.ts';
-import { ChatRoom } from '@/types/chat.ts';
+import { ChatList, ChatRoom } from '@/types/chat.ts';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -127,17 +127,33 @@ export const localApi = createApi({
         body: { partyId: Number(partyId) },
       }),
     }),
+    leaveChat: builder.mutation<{ message: string }, string>({
+      query: (partyId) => ({
+        url: API_PATH.CHAT.PARTICIPATION,
+        method: 'DELETE',
+        body: { partyId: Number(partyId) },
+      }),
+    }),
     getProfile: builder.query<UserProfile, null>({
       query: () => API_PATH.USER.GET_PROFILES,
       transformResponse: (response: { data: UserProfile }) => {
         return response.data;
       },
     }),
+    // 채팅방 목록
     getChatList: builder.query<ChatRoom[], null>({
       query: () => API_PATH.CHAT.GET_CHAT_LIST,
       transformResponse: (response: { data: ChatRoom[] }) => {
         return response.data;
       },
+      keepUnusedDataFor: 0,
+    }),
+    getChat: builder.query<ChatList, string>({
+      query: (id) => API_PATH.CHAT.GET_CHAT.replace(':partyId', id),
+      transformResponse: (response: { data: ChatList }) => {
+        return response.data;
+      },
+      keepUnusedDataFor: 0,
     }),
   }),
 });
@@ -152,6 +168,8 @@ export const {
   useGetAccessTokenQuery,
   useGetRefreshAccessTokenQuery,
   useParticipationChatMutation,
+  useLeaveChatMutation,
   useGetProfileQuery,
   useGetChatListQuery,
+  useGetChatQuery,
 } = localApi;

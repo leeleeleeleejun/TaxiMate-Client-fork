@@ -14,6 +14,7 @@ import Footer from '@/components/common/Layout/Footer';
 import { useGetClosePostsQuery, useGetJoinPostsQuery } from '@/api/localApi.ts';
 import PostListItem from '@/components/common/PostListItem';
 import reformatDate from '@/utils/reformatDate.ts';
+import NoData from '@/components/common/NoData.tsx';
 
 const UsageHistoryPage = () => {
   const [isActive, setIsActive] = useState('join');
@@ -25,7 +26,7 @@ const UsageHistoryPage = () => {
     isActive === 'join' ? getJoinPostsResult : getClosePostsResult;
 
   if (isLoading) return <div>Loading...</div>;
-  if (!data) return <div>Missing data!</div>;
+
   return (
     <>
       <Header>
@@ -53,21 +54,29 @@ const UsageHistoryPage = () => {
             종료된 팟
           </Button>
         </ButtonContainer>
-        <PostListContainer>
-          {data.map((post) => (
-            <PostListItem
-              key={post.id}
-              id={post.id}
-              title={post.title}
-              currentParticipants={post.currentParticipants}
-              maxParticipants={post.maxParticipants}
-              departureTime={reformatDate(post.departureTime)}
-              origin={post.origin}
-              destination={post.destination}
-              isClose={isActive === 'close'}
-            />
-          ))}
-        </PostListContainer>
+        {data && data.length > 0 ? (
+          <PostListContainer>
+            {data.map((post) => (
+              <PostListItem
+                key={post.id}
+                id={post.id}
+                title={post.title}
+                currentParticipants={post.currentParticipants}
+                maxParticipants={post.maxParticipants}
+                departureTime={reformatDate(post.departureTime)}
+                origin={post.origin}
+                destination={post.destination}
+                isClose={isActive === 'close'}
+              />
+            ))}
+          </PostListContainer>
+        ) : (
+          <NoData>
+            {isActive === 'join'
+              ? '참여 중인 팟이 없습니다'
+              : '종료된 팟이 없습니다'}
+          </NoData>
+        )}
       </Container>
       <Footer />
     </>

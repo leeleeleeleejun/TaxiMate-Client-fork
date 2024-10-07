@@ -44,7 +44,7 @@ export const ContentTitle = styled.h2`
   p {
     padding-top: 10px;
     font-size: var(--font-small);
-    font-weight: var(--weight-light);
+    font-weight: var(--weight-regular);
     color: var(--color-gray-100);
   }
 `;
@@ -60,7 +60,7 @@ export const TitleInput = styled.input`
   background-color: var(--color-gray-300);
 
   font-size: var(--font-small);
-  font-weight: var(--weight-light);
+  font-weight: var(--weight-regular);
 
   &::placeholder {
     color: var(--color-gray-200);
@@ -100,7 +100,7 @@ export const TextArea = styled.textarea`
   background-color: var(--color-gray-300);
 
   font-size: var(--font-small);
-  font-weight: var(--weight-light);
+  font-weight: var(--weight-regular);
 
   &:focus {
     outline: none;
@@ -123,7 +123,7 @@ export const CheckLength = styled.div`
   text-align: right;
   color: var(--color-gray-200);
   font-size: var(--font-semi-micro);
-  font-weight: var(--weight-light);
+  font-weight: var(--weight-regular);
 
   padding: 2px 8px;
 `;

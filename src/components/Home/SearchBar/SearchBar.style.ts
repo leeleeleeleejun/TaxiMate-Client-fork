@@ -7,8 +7,7 @@ export const SearchBarWrapper = styled(Link)`
   top: 20px;
   left: 5%;
   right: 5%;
-
-  box-shadow: 0 0 6px 2px var(--color-shadow);
+  box-shadow: 0 0 2px 2px var(--color-gray-300);
 
   height: 46px;
   padding: 14px;

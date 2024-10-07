@@ -16,21 +16,22 @@ export type PostDetailStatus =
   | 'WARNED'
   | 'BANNED';
 
+interface Participants {
+  id: string;
+  nickname: string;
+  profileImage: string;
+  role: 'HOST' | 'PARTICIPANT';
+}
+
 export interface PostDetail extends Post {
   explanation: string;
   originAddress: string;
   destinationAddress: string;
-  originLocation: { latitude: number; longitude: number };
   destinationLocation: { latitude: number; longitude: number };
   status: PostDetailStatus;
   createdAt: string;
   views: string;
-  host: {
-    id: string;
-    nickname: string;
-    profileImage: string;
-    isMe: boolean;
-  };
+  participants: Participants[];
   taxi: {
     route: { latitude: number; longitude: number }[];
     fare: string;
