@@ -33,9 +33,7 @@ const MessageList = ({
   const handleNewMessage = (message: ChatMessage) => {
     if (message.partyId === Number(currentPartyId)) {
       chatHandler(message, setMessageList);
-      console.log('a');
       if (message.sender.id !== userId) {
-        console.log(message.id);
         checkReceive(currentPartyId, message.id);
       }
     } else {
