@@ -4,10 +4,9 @@ export const PeopleCountTagContainer = styled.div<{
   $isClose: boolean | undefined;
   $isMax: boolean;
 }>`
-  min-width: 100%;
   display: flex;
   align-items: center;
-
+  white-space: nowrap;
   padding: 5px 8px;
 
   font-size: var(--font-small);
