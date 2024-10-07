@@ -28,11 +28,17 @@ const LoginLoadingPage = lazy(() => import('@/pages/LoginLoadingPage'));
 import LoadingPage from '@/pages/LoadingPage';
 import AuthChecker from '@/AuthChecker.tsx';
 import InAppNotificationLayout from '@/components/common/InAppNotification/InAppNotificationLayout.tsx';
-import useStompClient from '@/hooks/useStompClient.ts';
+import { Client } from '@stomp/stompjs';
 
-const Router = () => {
-  const client = useStompClient();
-
+const Router = ({
+  client,
+}: {
+  client: {
+    client: Client | null;
+    sendMessage: (partyId: string, message: string) => void;
+    checkReceive: (partyId: string, chatId: string) => void;
+  };
+}) => {
   return (
     <BrowserRouter>
       <Suspense fallback={<LoadingPage />}>
