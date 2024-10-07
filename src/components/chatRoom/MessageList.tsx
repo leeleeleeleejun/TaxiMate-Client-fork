@@ -25,6 +25,7 @@ const MessageList = ({
   checkReceive: (partyId: string, chatId: string) => void;
   children: ReactNode;
 }) => {
+
   const messageEndRef = useRef<HTMLDivElement>(null);
   const [messageList, setMessageList] = useState<GroupMessage[]>([]);
   const [isVisible, setIsVisible] = useState(false);
@@ -42,6 +43,7 @@ const MessageList = ({
   };
 
   useMessageSubscription(handleNewMessage);
+
 
   useLayoutEffect(() => {
     if (!messageEndRef.current) return; // Ref가 없으면 아무 작업도 하지 않음
