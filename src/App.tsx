@@ -32,9 +32,7 @@ function App() {
   const { isSuccess, isLoading } = useGetRefreshAccessTokenQuery(null);
   const client = useStompClient();
 
-  window.ReactNativeWebView.postMessage(
-    JSON.stringify({ message: 'your message', data: 'your data' })
-  );
+  window.ReactNativeWebView.postMessage('push_notification');
 
   useEffect(() => {
     // API 호출이 완료될 때까지 기다림
