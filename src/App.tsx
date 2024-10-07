@@ -33,6 +33,9 @@ function App() {
   const client = useStompClient();
 
   window.ReactNativeWebView.postMessage('push_notification');
+  window.addEventListener('message', (e) => {
+    console.log('Received message', e);
+  });
 
   useEffect(() => {
     // API 호출이 완료될 때까지 기다림
