@@ -15,6 +15,7 @@ const kakaoJsKey = import.meta.env.VITE_KAKAO_JS_KEY;
 declare global {
   interface Window {
     Kakao: any;
+    ReactNativeWebView?: any;
   }
 }
 
@@ -31,9 +32,9 @@ function App() {
   const { isSuccess, isLoading } = useGetRefreshAccessTokenQuery(null);
   const client = useStompClient();
 
-  window.addEventListener('message', (e) => {
-    console.log('Received message', e);
-  });
+  window.ReactNativeWebView.postMessage(
+    JSON.stringify({ message: 'your message', data: 'your data' })
+  );
 
   useEffect(() => {
     // API 호출이 완료될 때까지 기다림
