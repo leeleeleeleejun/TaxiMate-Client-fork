@@ -15,7 +15,6 @@ const kakaoJsKey = import.meta.env.VITE_KAKAO_JS_KEY;
 declare global {
   interface Window {
     Kakao: any;
-    ReactNativeWebView?: any;
   }
 }
 
@@ -33,6 +32,7 @@ function App() {
   const client = useStompClient();
 
   window.ReactNativeWebView.postMessage('push_notification');
+
   window.addEventListener('message', (e) => {
     console.log('Received message', e);
   });
