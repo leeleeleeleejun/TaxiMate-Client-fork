@@ -102,10 +102,10 @@ const ChatRoomPage = ({
     };
 
     if (window.visualViewport) {
-      window.visualViewport.addEventListener(
-        'resize',
-        handleVisualViewPortResize
-      );
+      window.visualViewport.addEventListener('resize', (e) => {
+        e.preventDefault();
+        handleVisualViewPortResize();
+      });
     }
 
     // 컴포넌트 언마운트 시 이벤트 해제
