@@ -19,6 +19,7 @@ const LoginLoadingPage = () => {
 
   useEffect(() => {
     const handleMessage = (e: MessageEvent) => {
+      alert('messageEvent' + e.data);
       setPushAlarmTrigger(e.data);
     };
     window.addEventListener('message', handleMessage);
@@ -31,6 +32,8 @@ const LoginLoadingPage = () => {
     if (!isLoading) {
       if (isSuccess) {
         dispatch(setIsLogin(true));
+        alert('postMessage');
+
         window.ReactNativeWebView.postMessage('push_notification');
       }
       // 모든 작업이 완료된 후 네비게이션 수행

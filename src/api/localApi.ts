@@ -156,11 +156,14 @@ export const localApi = createApi({
       keepUnusedDataFor: 0,
     }),
     setPushAlarm: builder.mutation<{ data: string }, string>({
-      query: (data: string) => ({
-        url: API_PATH.USER.SET_PUSH_ALARM,
-        method: 'POST',
-        body: data,
-      }),
+      query: (data: string) => {
+        console.log('setPushAlarm : ', data);
+        return {
+          url: API_PATH.USER.SET_PUSH_ALARM,
+          method: 'POST',
+          body: data,
+        };
+      },
     }),
   }),
 });
