@@ -38,7 +38,10 @@ const MessageInputBox = ({
         $inputLineLength={input.split('\n').length}
         ref={inputRef}
       />
-      <input ref={hiddenInput} style={{ display: 'none' }} />
+      <input
+        ref={hiddenInput}
+        style={{ position: 'absolute', opacity: 0, height: 0 }}
+      />
       <button onClick={sendMessageFunc}>
         <ArrowUpIcon />
       </button>
