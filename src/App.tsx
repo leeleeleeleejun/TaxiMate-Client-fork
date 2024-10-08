@@ -7,7 +7,6 @@ import Router from '@/Router.tsx';
 import { useGetRefreshAccessTokenQuery } from '@/api/localApi.ts';
 import { setIsLogin } from '@/components/myProfile/userSlice.ts';
 import GlobalStyle from '@/styles/GlobalStyle.ts';
-import useStompClient from '@/hooks/useStompClient.ts';
 
 const naverMapApi = import.meta.env.VITE_NAVER_MAP_API;
 const kakaoJsKey = import.meta.env.VITE_KAKAO_JS_KEY;
@@ -29,7 +28,6 @@ function App() {
   const dispatch = useDispatch();
   const [isReady, setIsReady] = useState(false); // 렌더링 준비 상태
   const { isSuccess, isLoading } = useGetRefreshAccessTokenQuery(null);
-  const client = useStompClient();
 
   useEffect(() => {
     // API 호출이 완료될 때까지 기다림
@@ -47,7 +45,7 @@ function App() {
     <NavermapsProvider ncpClientId={naverMapApi}>
       {/*<NextUIProvider>*/}
       <GlobalStyle />
-      <Router client={client} />
+      <Router />
       {/*</NextUIProvider>*/}
     </NavermapsProvider>
   );
