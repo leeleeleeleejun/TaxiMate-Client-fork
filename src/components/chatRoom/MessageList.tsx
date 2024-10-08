@@ -97,7 +97,11 @@ const MessageList = ({
 
     if (isVisible || isLastMessageMine) {
       // 요소가 보이거나 마지막 메시지가 내 메시지일 경우
-      messageEndRef.current.scrollIntoView();
+      // messageEndRef.current.scrollIntoView();
+      if (messageListRef.current) {
+        messageListRef.current.scrollTop =
+          messageListRef.current.scrollHeight || 0;
+      }
     } else {
       // 새로운 메시지가 있고 마지막 메시지가 다른 유저일 경우
       setShowUpButton(true);
@@ -128,8 +132,12 @@ const MessageList = ({
   }, [isVisible]);
 
   useEffect(() => {
-    if (messageEndRef.current) {
-      messageEndRef.current.scrollIntoView();
+    // if (messageEndRef.current) {
+    //   messageEndRef.current.scrollIntoView();
+    // }
+    if (messageListRef.current) {
+      messageListRef.current.scrollTop =
+        messageListRef.current.scrollHeight || 0;
     }
   }, [initialChatMessage]);
 
@@ -168,7 +176,11 @@ const MessageList = ({
             ]
           }
           onClick={() => {
-            messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+            if (messageListRef.current) {
+              messageListRef.current.scrollTop =
+                messageListRef.current.scrollHeight || 0;
+            }
+            // messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
           }}
         />
       )}
