@@ -5,7 +5,7 @@ import { useMessageSubscription } from '@/hooks/useMessageSubscription.ts';
 import MyMessageBox from '@/components/chatRoom/MyMessageBox.tsx';
 import OthersMessageBox from '@/components/chatRoom/OthersMessageBox.tsx';
 import {
-  Container,
+  MessageListContainer,
   SystemMessage,
 } from '@/components/chatRoom/chatRoom.style.ts';
 import GoNewMessageButton from '@/components/chatRoom/GoNewMessageButton.tsx';
@@ -135,7 +135,7 @@ const MessageList = ({
 
   return (
     <>
-      <Container ref={messageListRef}>
+      <MessageListContainer ref={messageListRef}>
         {children}
         {messageList.map((message) =>
           message.type === 'SYSTEM' ? (
@@ -157,7 +157,7 @@ const MessageList = ({
           )
         )}
         <div ref={messageEndRef} style={{ height: '2px' }} />
-      </Container>
+      </MessageListContainer>
       {showUpButton && messageList.length > 0 && (
         <GoNewMessageButton
           img={messageList[messageList.length - 1].sender?.profileImage || ''}

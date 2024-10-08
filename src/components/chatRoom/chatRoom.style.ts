@@ -1,5 +1,12 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import Container from '@/components/common/Layout/Layout.style.ts';
+
+export const LayoutContainer = styled(Container)`
+  transition:
+    height 0.1s ease,
+    transform 0.1s ease;
+`;
 
 export const RoomTitle = styled.h2`
   margin-right: 34px;
@@ -14,7 +21,7 @@ export const RoomTitle = styled.h2`
   text-overflow: ellipsis;
 `;
 
-export const Container = styled.div`
+export const MessageListContainer = styled.div`
   height: 100%;
   overflow: auto;
 

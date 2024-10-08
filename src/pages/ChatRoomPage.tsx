@@ -17,6 +17,7 @@ import OthersMessageBox from '@/components/chatRoom/OthersMessageBox.tsx';
 
 import { BackButton } from '@/components/common/Layout/Header/Header.style.ts';
 import {
+  LayoutContainer,
   NotificationContainer,
   NotificationHeader,
   RoomTitle,
@@ -25,7 +26,6 @@ import {
 
 import ArrowLeftIcon from '@/assets/icons/arrow-left-icon.svg?react';
 import ArrowRightIcon from '@/assets/icons/arrow-right-icon.svg?react';
-import Container from '@/components/common/Layout/Layout.style.ts';
 
 const ChatRoomPage = ({
   sendMessage,
@@ -123,7 +123,7 @@ const ChatRoomPage = ({
   if (!userData || !chatData) return <div>no data...</div>;
 
   return (
-    <Container ref={divRef}>
+    <LayoutContainer ref={divRef}>
       {notification && (
         <InAppNotification
           id={notification.id}
@@ -195,7 +195,7 @@ const ChatRoomPage = ({
         )}
       </MessageList>
       <MessageInputBox sendMessage={sendMessage} partyId={currentPartyId} />
-    </Container>
+    </LayoutContainer>
   );
 };
 
