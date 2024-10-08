@@ -19,14 +19,12 @@ const LoginLoadingPage = () => {
 
   useEffect(() => {
     const handleMessage = (e: MessageEvent) => {
+      console.log('Received message', e);
       alert('messageEvent' + e.data);
       setPushAlarmTrigger(e.data);
     };
     window.addEventListener('message', handleMessage);
-    return () => {
-      window.removeEventListener('message', handleMessage);
-    };
-  }, [setPushAlarmTrigger]);
+  }, []);
 
   useEffect(() => {
     if (!isLoading) {
