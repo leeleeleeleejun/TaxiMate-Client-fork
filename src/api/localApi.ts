@@ -91,10 +91,12 @@ export const localApi = createApi({
     getJoinPosts: builder.query<Post[], string>({
       query: () => API_PATH.POST.GET.JOIN_POSTS,
       transformResponse: (response: { data: Post[] }) => response.data,
+      keepUnusedDataFor: 0,
     }),
     getClosePosts: builder.query<Post[], string>({
       query: () => API_PATH.POST.GET.CLOSE_POSTS,
       transformResponse: (response: { data: Post[] }) => response.data,
+      keepUnusedDataFor: 0,
     }),
     createPost: builder.mutation<CreatePostRes, RegisterData>({
       query: (patch) => ({

@@ -20,7 +20,7 @@ const useInAppNotificationHandler = () => {
     // 3초 후 알림 숨김 처리
     timeoutRef.current = setTimeout(() => {
       setShowNotification(false);
-    }, 3000);
+    }, 2000);
   };
 
   // 컴포넌트가 unmount될 때 타이머 정리
