@@ -43,8 +43,24 @@ const MessageList = ({
     const currentScrollTop = messageListRef.current.scrollTop;
     const clientHeight = messageListRef.current.clientHeight;
 
+    // 사용자 에이전트를 확인하여 웹뷰인지 판단하는 함수
+    const isWebView = () => {
+      const userAgent = navigator.userAgent || navigator.vendor;
+
+      // iOS WebView
+      if (/iPhone|iPod|iPad/.test(userAgent)) {
+        return /CriOS|FxiOS|Safari/.test(userAgent) === false;
+      }
+
+      // Android WebView
+      return /wv|Android.*Version\/[\d.]+.*Chrome/.test(userAgent);
+    };
+
+    // 웹뷰일 경우 더 큰 오차값을 적용
+    const scrollThreshold = isWebView() ? 20 : 10;
+
     isAtBottomRef.current =
-      currentScrollTop + clientHeight >= currentScrollHeight - 10;
+      currentScrollTop + clientHeight >= currentScrollHeight - scrollThreshold;
 
     if (isAtBottomRef.current) {
       messageListRef.current.scrollTop = currentScrollHeight - clientHeight;

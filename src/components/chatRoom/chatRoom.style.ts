@@ -6,6 +6,7 @@ export const LayoutContainer = styled(Container)`
   transition:
     height 0.1s ease,
     transform 0.1s ease;
+  overflow: hidden;
 `;
 
 export const RoomTitle = styled.h2`
