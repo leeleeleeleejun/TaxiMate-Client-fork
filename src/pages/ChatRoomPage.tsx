@@ -37,6 +37,7 @@ const ChatRoomPage = ({
   const navigate = useNavigate();
   const currentPartyId = useLocation().pathname.split('/')[2];
   const divRef = useRef<HTMLDivElement>(null);
+  // const { height } = useVisualViewport();
 
   const { data: userData, isLoading } = useGetProfileQuery(null);
   const { data: chatData, isLoading: chatIsLoading } =
@@ -47,7 +48,6 @@ const ChatRoomPage = ({
     handleNewMessage,
     setShowNotification,
   } = useInAppNotificationHandler();
-
   const [initialChatMessage, setInitialChatMessage] = useState<GroupMessage[]>(
     []
   );
@@ -94,6 +94,10 @@ const ChatRoomPage = ({
       if (window.visualViewport && divRef.current) {
         const currentVisualViewport = window.visualViewport.height;
         divRef.current.style.height = `${currentVisualViewport}px`;
+        window.visualViewport.onscroll = (e) => {
+          e.preventDefault();
+          // window.scrollTo(0, 0);
+        };
         setTimeout(() => {
           window.scrollTo(0, 0);
         }, 0);
@@ -104,6 +108,14 @@ const ChatRoomPage = ({
       window.visualViewport.onresize = handleVisualViewportResize;
     }
   }, []);
+
+  // useEffect(() => {
+  //   if (divRef.current) {
+  //     divRef.current.style.height = `${height}px`;
+  //     // 스크롤 조정에 약간의 지연을 추가
+  //     window.scrollTo(0, 10);
+  //   }
+  // }, [height]);
 
   if (isLoading || chatIsLoading) return <div>Loading...</div>;
   if (!userData || !chatData) return <div>no data...</div>;

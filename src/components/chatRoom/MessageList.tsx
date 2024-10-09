@@ -9,7 +9,7 @@ import {
   SystemMessage,
 } from '@/components/chatRoom/chatRoom.style.ts';
 import GoNewMessageButton from '@/components/chatRoom/GoNewMessageButton.tsx';
-import useVisualViewport from '@/hooks/useVisualViewport.ts';
+// import useVisualViewport from '@/hooks/useVisualViewport.ts';
 
 const MessageList = ({
   userId,
@@ -31,53 +31,37 @@ const MessageList = ({
   const [isVisible, setIsVisible] = useState(false);
   const [showUpButton, setShowUpButton] = useState(false);
   const messageListRef = useRef<HTMLDivElement>(null);
-  const { height: viewportHeight, heightDifference } = useVisualViewport();
-  const lastScrollHeight = useRef(0);
-  const lastScrollTop = useRef(0);
+  // const { height: viewportHeight, heightDifference } = useVisualViewport();
+  // const lastScrollHeight = useRef(0);
+  // const lastScrollTop = useRef(0);
   const isAtBottomRef = useRef(true);
 
   useEffect(() => {
-    if (!messageListRef.current) return;
+    if (!messageListRef.current || !window.visualViewport) return;
 
-    const currentScrollHeight = messageListRef.current.scrollHeight;
-    const currentScrollTop = messageListRef.current.scrollTop;
-    const clientHeight = messageListRef.current.clientHeight;
+    // 가상 키보드가 올라올 때의 viewport 높이
+    let previousViewportHeight = window.visualViewport.height;
 
-    // 사용자 에이전트를 확인하여 웹뷰인지 판단하는 함수
-    const isWebView = () => {
-      const userAgent = navigator.userAgent || navigator.vendor;
+    window.visualViewport.addEventListener('resize', (e) => {
+      e.preventDefault();
+      if (!messageListRef.current || !window.visualViewport) return;
 
-      // iOS WebView
-      if (/iPhone|iPod|iPad/.test(userAgent)) {
-        return /CriOS|FxiOS|Safari/.test(userAgent) === false;
+      const currentViewportHeight = window.visualViewport.height;
+
+      // 가상 키보드가 올라온 만큼의 높이
+      const keyboardHeight = previousViewportHeight - currentViewportHeight;
+
+      if (keyboardHeight > 0) {
+        // 스크롤을 가상 키보드가 차지한 높이만큼 내리기
+        messageListRef.current.scrollTo({
+          top: messageListRef.current.scrollTop + keyboardHeight,
+        });
       }
 
-      // Android WebView
-      return /wv|Android.*Version\/[\d.]+.*Chrome/.test(userAgent);
-    };
-
-    // 웹뷰일 경우 더 큰 오차값을 적용
-    const scrollThreshold = isWebView() ? 20 : 10;
-
-    isAtBottomRef.current =
-      currentScrollTop + clientHeight >= currentScrollHeight - scrollThreshold;
-
-    if (isAtBottomRef.current) {
-      messageListRef.current.scrollTop = currentScrollHeight - clientHeight;
-    } else if (heightDifference !== 0) {
-      // 키보드가 나타나거나 사라질 때 스크롤 위치 조정
-      messageListRef.current.scrollTop = currentScrollTop - heightDifference;
-    } else {
-      // 일반적인 콘텐츠 변경에 대한 스크롤 위치 조정
-      const scrollTopDifference =
-        currentScrollHeight - lastScrollHeight.current;
-      messageListRef.current.scrollTop =
-        lastScrollTop.current + scrollTopDifference;
-    }
-
-    lastScrollHeight.current = currentScrollHeight;
-    lastScrollTop.current = messageListRef.current.scrollTop;
-  }, [viewportHeight, heightDifference, messageList]);
+      // 현재 뷰포트 높이를 다음에 사용할 수 있도록 저장
+      previousViewportHeight = currentViewportHeight;
+    });
+  }, []);
 
   const handleNewMessage = (message: ChatMessage) => {
     if (message.partyId === Number(currentPartyId)) {
