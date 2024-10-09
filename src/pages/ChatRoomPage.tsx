@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { GroupMessage } from '@/types/chat.ts';
 import { CLIENT_PATH } from '@/constants/path.ts';
@@ -36,7 +36,6 @@ const ChatRoomPage = ({
 }) => {
   const navigate = useNavigate();
   const currentPartyId = useLocation().pathname.split('/')[2];
-  const divRef = useRef<HTMLDivElement>(null);
   // const { height } = useVisualViewport();
 
   const { data: userData, isLoading } = useGetProfileQuery(null);
@@ -93,7 +92,7 @@ const ChatRoomPage = ({
   if (!userData || !chatData) return <div>no data...</div>;
 
   return (
-    <LayoutContainer ref={divRef}>
+    <LayoutContainer>
       {notification && (
         <InAppNotification
           id={notification.id}

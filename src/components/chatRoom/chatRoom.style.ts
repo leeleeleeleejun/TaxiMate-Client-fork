@@ -2,9 +2,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Container from '@/components/common/Layout/Layout.style.ts';
 
-export const LayoutContainer = styled(Container)`
-  justify-content: flex-start;
-`;
+export const LayoutContainer = styled(Container)``;
 
 export const RoomTitle = styled.h2`
   margin-right: 34px;

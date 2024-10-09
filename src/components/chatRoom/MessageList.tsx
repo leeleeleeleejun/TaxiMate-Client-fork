@@ -29,54 +29,54 @@ const MessageList = ({
   const [messageList, setMessageList] = useState<GroupMessage[]>([]);
   const [isVisible, setIsVisible] = useState(false);
   const [showUpButton, setShowUpButton] = useState(false);
-  const messageListRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleVisualViewportResize = () => {
-      if (window.visualViewport && messageListRef.current) {
-        const currentVisualViewport = window.visualViewport.height;
-        const pageHeight = window.innerHeight;
-
-        const distanceFromBottom =
-          messageListRef.current.scrollHeight -
-          messageListRef.current.scrollTop -
-          messageListRef.current.clientHeight;
-
-        if (currentVisualViewport === pageHeight) {
-          // 키보드가 내려갔을 때 실행할 코드
-          messageListRef.current.style.height = '100%'; // 다시 100%로 설정
-          window.visualViewport.onscroll = null;
-          requestAnimationFrame(() => {
-            if (messageListRef.current) {
-              messageListRef.current.scrollTop =
-                messageListRef.current.scrollHeight -
-                messageListRef.current.clientHeight -
-                distanceFromBottom;
-            }
-          });
-        } else {
-          // 키보드가 올라왔을 때 실행할 코드
-          requestAnimationFrame(() => {
-            if (messageListRef.current) {
-              messageListRef.current.style.height = `${pageHeight - currentVisualViewport - 80}px`;
-              messageListRef.current.scrollTop =
-                messageListRef.current.scrollHeight -
-                messageListRef.current.clientHeight -
-                distanceFromBottom;
-            }
-          });
-          window.visualViewport.onscroll = () => {
-            window.scrollTo(0, 0);
-          };
-        }
-        window.scrollTo(0, 0);
-      }
-    };
-
-    if (window.visualViewport) {
-      window.visualViewport.onresize = handleVisualViewportResize;
-    }
-  }, []);
+  // const messageListRef = useRef<HTMLDivElement>(null);
+  //
+  // useEffect(() => {
+  //   const handleVisualViewportResize = () => {
+  //     if (window.visualViewport && messageListRef.current) {
+  //       const currentVisualViewport = window.visualViewport.height;
+  //       const pageHeight = window.innerHeight;
+  //
+  //       const distanceFromBottom =
+  //         messageListRef.current.scrollHeight -
+  //         messageListRef.current.scrollTop -
+  //         messageListRef.current.clientHeight;
+  //
+  //       if (currentVisualViewport === pageHeight) {
+  //         // 키보드가 내려갔을 때 실행할 코드
+  //         messageListRef.current.style.height = '100%'; // 다시 100%로 설정
+  //         window.visualViewport.onscroll = null;
+  //         requestAnimationFrame(() => {
+  //           if (messageListRef.current) {
+  //             messageListRef.current.scrollTop =
+  //               messageListRef.current.scrollHeight -
+  //               messageListRef.current.clientHeight -
+  //               distanceFromBottom;
+  //           }
+  //         });
+  //       } else {
+  //         // 키보드가 올라왔을 때 실행할 코드
+  //         requestAnimationFrame(() => {
+  //           if (messageListRef.current) {
+  //             messageListRef.current.style.height = `${pageHeight - currentVisualViewport - 80}px`;
+  //             messageListRef.current.scrollTop =
+  //               messageListRef.current.scrollHeight -
+  //               messageListRef.current.clientHeight -
+  //               distanceFromBottom;
+  //           }
+  //         });
+  //         window.visualViewport.onscroll = () => {
+  //           window.scrollTo(0, 0);
+  //         };
+  //       }
+  //       window.scrollTo(0, 0);
+  //     }
+  //   };
+  //
+  //   if (window.visualViewport) {
+  //     window.visualViewport.onresize = handleVisualViewportResize;
+  //   }
+  // }, []);
 
   const handleNewMessage = (message: ChatMessage) => {
     if (message.partyId === Number(currentPartyId)) {
@@ -132,18 +132,18 @@ const MessageList = ({
   }, [initialChatMessage]);
 
   const scrollToBottom = () => {
-    if (messageListRef.current) {
-      messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
+    if (messageEndRef.current) {
+      messageEndRef.current.scrollIntoView();
     }
   };
 
-  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
-    e.stopPropagation(); // 스크롤 이벤트가 상위로 전파되는 것을 방지
-  };
+  // const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+  //   e.stopPropagation(); // 스크롤 이벤트가 상위로 전파되는 것을 방지
+  // };
 
   return (
     <>
-      <MessageListContainer ref={messageListRef} onScroll={handleScroll}>
+      <MessageListContainer>
         {children}
         {messageList.map((message) =>
           message.type === 'SYSTEM' ? (
