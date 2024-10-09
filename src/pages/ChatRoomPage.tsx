@@ -93,9 +93,13 @@ const ChatRoomPage = ({
     const handleVisualViewportResize = () => {
       if (window.visualViewport && divRef.current) {
         const currentVisualViewport = window.visualViewport.height;
-
-        divRef.current.style.height = `${currentVisualViewport - 30}px`;
-        window.scrollTo(0, 0);
+        window.visualViewport.onscroll = () => {
+          window.scrollTo(0, 0);
+        };
+        divRef.current.style.height = `${currentVisualViewport}px`;
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+        }, 0);
       }
     };
 
