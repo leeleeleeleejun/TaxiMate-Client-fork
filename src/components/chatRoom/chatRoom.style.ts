@@ -26,6 +26,7 @@ export const MessageListContainer = styled.div`
   overflow: auto;
 
   padding: 0 20px;
+  -webkit-overflow-scrolling: touch;
 `;
 
 export const NotificationContainer = styled(Link)`

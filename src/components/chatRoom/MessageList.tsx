@@ -122,9 +122,13 @@ const MessageList = ({
     }
   };
 
+  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    e.stopPropagation(); // 스크롤 이벤트가 상위로 전파되는 것을 방지
+  };
+
   return (
     <>
-      <MessageListContainer ref={messageListRef}>
+      <MessageListContainer ref={messageListRef} onScroll={handleScroll}>
         {children}
         {messageList.map((message) =>
           message.type === 'SYSTEM' ? (
