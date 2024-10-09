@@ -9,7 +9,6 @@ import {
   SystemMessage,
 } from '@/components/chatRoom/chatRoom.style.ts';
 import GoNewMessageButton from '@/components/chatRoom/GoNewMessageButton.tsx';
-// import useVisualViewport from '@/hooks/useVisualViewport.ts';
 
 const MessageList = ({
   userId,
@@ -31,36 +30,52 @@ const MessageList = ({
   const [isVisible, setIsVisible] = useState(false);
   const [showUpButton, setShowUpButton] = useState(false);
   const messageListRef = useRef<HTMLDivElement>(null);
-  // const { height: viewportHeight, heightDifference } = useVisualViewport();
-  // const lastScrollHeight = useRef(0);
-  // const lastScrollTop = useRef(0);
-  const isAtBottomRef = useRef(true);
 
   useEffect(() => {
-    if (!messageListRef.current || !window.visualViewport) return;
+    const handleVisualViewportResize = () => {
+      if (window.visualViewport && messageListRef.current) {
+        const currentVisualViewport = window.visualViewport.height;
+        const pageHeight = window.innerHeight;
 
-    // 가상 키보드가 올라올 때의 viewport 높이
-    let previousViewportHeight = window.visualViewport.height;
+        const distanceFromBottom =
+          messageListRef.current.scrollHeight -
+          messageListRef.current.scrollTop -
+          messageListRef.current.clientHeight;
 
-    window.visualViewport.addEventListener('resize', (e) => {
-      e.preventDefault();
-      if (!messageListRef.current || !window.visualViewport) return;
-
-      const currentViewportHeight = window.visualViewport.height;
-
-      // 가상 키보드가 올라온 만큼의 높이
-      const keyboardHeight = previousViewportHeight - currentViewportHeight;
-
-      if (keyboardHeight > 0) {
-        // 스크롤을 가상 키보드가 차지한 높이만큼 내리기
-        messageListRef.current.scrollTo({
-          top: messageListRef.current.scrollTop + keyboardHeight,
-        });
+        if (currentVisualViewport === pageHeight) {
+          // 키보드가 내려갔을 때 실행할 코드
+          messageListRef.current.style.height = '100%'; // 다시 100%로 설정
+          window.visualViewport.onscroll = null;
+          requestAnimationFrame(() => {
+            if (messageListRef.current) {
+              messageListRef.current.scrollTop =
+                messageListRef.current.scrollHeight -
+                messageListRef.current.clientHeight -
+                distanceFromBottom;
+            }
+          });
+        } else {
+          // 키보드가 올라왔을 때 실행할 코드
+          messageListRef.current.style.height = `${pageHeight - currentVisualViewport - 10}px`;
+          requestAnimationFrame(() => {
+            if (messageListRef.current) {
+              messageListRef.current.scrollTop =
+                messageListRef.current.scrollHeight -
+                messageListRef.current.clientHeight -
+                distanceFromBottom;
+            }
+          });
+          window.visualViewport.onscroll = () => {
+            window.scrollTo(0, 0);
+          };
+        }
+        window.scrollTo(0, 0);
       }
+    };
 
-      // 현재 뷰포트 높이를 다음에 사용할 수 있도록 저장
-      previousViewportHeight = currentViewportHeight;
-    });
+    if (window.visualViewport) {
+      window.visualViewport.onresize = handleVisualViewportResize;
+    }
   }, []);
 
   const handleNewMessage = (message: ChatMessage) => {
@@ -83,7 +98,7 @@ const MessageList = ({
       messageList.length > 0 &&
       messageList[messageList.length - 1].sender?.id === userId;
 
-    if (isVisible || isLastMessageMine || isAtBottomRef.current) {
+    if (isVisible || isLastMessageMine) {
       scrollToBottom();
     } else {
       setShowUpButton(true);

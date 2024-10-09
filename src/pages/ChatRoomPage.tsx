@@ -89,34 +89,6 @@ const ChatRoomPage = ({
     setInitialChatMessage(array);
   }, [chatData]);
 
-  useEffect(() => {
-    const handleVisualViewportResize = () => {
-      if (window.visualViewport && divRef.current) {
-        const currentVisualViewport = window.visualViewport.height;
-        divRef.current.style.height = `${currentVisualViewport}px`;
-        window.visualViewport.onscroll = (e) => {
-          e.preventDefault();
-          // window.scrollTo(0, 0);
-        };
-        setTimeout(() => {
-          window.scrollTo(0, 0);
-        }, 0);
-      }
-    };
-
-    if (window.visualViewport) {
-      window.visualViewport.onresize = handleVisualViewportResize;
-    }
-  }, []);
-
-  // useEffect(() => {
-  //   if (divRef.current) {
-  //     divRef.current.style.height = `${height}px`;
-  //     // 스크롤 조정에 약간의 지연을 추가
-  //     window.scrollTo(0, 10);
-  //   }
-  // }, [height]);
-
   if (isLoading || chatIsLoading) return <div>Loading...</div>;
   if (!userData || !chatData) return <div>no data...</div>;
 

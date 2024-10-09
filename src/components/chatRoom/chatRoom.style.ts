@@ -3,10 +3,7 @@ import { Link } from 'react-router-dom';
 import Container from '@/components/common/Layout/Layout.style.ts';
 
 export const LayoutContainer = styled(Container)`
-  transition:
-    height 0.1s ease,
-    transform 0.1s ease;
-  overflow: hidden;
+  justify-content: flex-start;
 `;
 
 export const RoomTitle = styled.h2`
