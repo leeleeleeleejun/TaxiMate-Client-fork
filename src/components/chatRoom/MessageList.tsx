@@ -56,7 +56,7 @@ const MessageList = ({
           });
         } else {
           // 키보드가 올라왔을 때 실행할 코드
-          messageListRef.current.style.height = `${pageHeight - currentVisualViewport - 10}px`;
+          messageListRef.current.style.height = `${pageHeight - currentVisualViewport - 40}px`;
           requestAnimationFrame(() => {
             if (messageListRef.current) {
               messageListRef.current.scrollTop =
