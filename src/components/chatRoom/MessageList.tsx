@@ -9,6 +9,7 @@ import {
   SystemMessage,
 } from '@/components/chatRoom/chatRoom.style.ts';
 import GoNewMessageButton from '@/components/chatRoom/GoNewMessageButton.tsx';
+import useVisualViewport from '@/hooks/useVisualViewport.ts';
 
 const MessageList = ({
   userId,
@@ -30,50 +31,37 @@ const MessageList = ({
   const [isVisible, setIsVisible] = useState(false);
   const [showUpButton, setShowUpButton] = useState(false);
   const messageListRef = useRef<HTMLDivElement>(null);
+  const { height: viewportHeight, heightDifference } = useVisualViewport();
+  const lastScrollHeight = useRef(0);
+  const lastScrollTop = useRef(0);
+  const isAtBottomRef = useRef(true);
 
   useEffect(() => {
-    let previousHeight = window.visualViewport?.height || window.innerHeight;
+    if (!messageListRef.current) return;
 
-    const handleVisualViewPortResize = () => {
-      if (!messageListRef.current) return;
+    const currentScrollHeight = messageListRef.current.scrollHeight;
+    const currentScrollTop = messageListRef.current.scrollTop;
+    const clientHeight = messageListRef.current.clientHeight;
 
-      const currentHeight = window.visualViewport?.height || window.innerHeight;
-      const currentScrollTop = messageListRef.current.scrollTop;
-      const maxScrollTop =
-        messageListRef.current.scrollHeight -
-        messageListRef.current.clientHeight;
+    isAtBottomRef.current =
+      currentScrollTop + clientHeight >= currentScrollHeight - 10;
 
-      // 스크롤이 맨 아래에 있는지 여부 확인
-      const isAtBottom = currentScrollTop >= maxScrollTop;
+    if (isAtBottomRef.current) {
+      messageListRef.current.scrollTop = currentScrollHeight - clientHeight;
+    } else if (heightDifference !== 0) {
+      // 키보드가 나타나거나 사라질 때 스크롤 위치 조정
+      messageListRef.current.scrollTop = currentScrollTop - heightDifference;
+    } else {
+      // 일반적인 콘텐츠 변경에 대한 스크롤 위치 조정
+      const scrollTopDifference =
+        currentScrollHeight - lastScrollHeight.current;
+      messageListRef.current.scrollTop =
+        lastScrollTop.current + scrollTopDifference;
+    }
 
-      if (isAtBottom) {
-        // 맨 아래에 있었다면, 키보드가 내려갈 때 다시 맨 아래로 스크롤
-        messageListRef.current.scrollTop =
-          messageListRef.current.scrollHeight -
-          messageListRef.current.clientHeight;
-      } else {
-        // 스크롤 위치를 높이 변화에 따라 보정
-        messageListRef.current.scrollTop += previousHeight - currentHeight;
-      }
-
-      // 이전 높이 갱신
-      previousHeight = currentHeight;
-    };
-
-    // 이벤트 리스너 추가
-    window.visualViewport?.addEventListener(
-      'resize',
-      handleVisualViewPortResize
-    );
-
-    return () => {
-      // 컴포넌트 언마운트 시 이벤트 리스너 제거
-      window.visualViewport?.removeEventListener(
-        'resize',
-        handleVisualViewPortResize
-      );
-    };
-  }, [messageListRef]);
+    lastScrollHeight.current = currentScrollHeight;
+    lastScrollTop.current = messageListRef.current.scrollTop;
+  }, [viewportHeight, heightDifference, messageList]);
 
   const handleNewMessage = (message: ChatMessage) => {
     if (message.partyId === Number(currentPartyId)) {
@@ -89,26 +77,19 @@ const MessageList = ({
   useMessageSubscription(handleNewMessage);
 
   useLayoutEffect(() => {
-    if (!messageEndRef.current) return; // Ref가 없으면 아무 작업도 하지 않음
+    if (!messageEndRef.current) return;
 
     const isLastMessageMine =
       messageList.length > 0 &&
       messageList[messageList.length - 1].sender?.id === userId;
 
-    if (isVisible || isLastMessageMine) {
-      // 요소가 보이거나 마지막 메시지가 내 메시지일 경우
-      // messageEndRef.current.scrollIntoView();
-      if (messageListRef.current) {
-        messageListRef.current.scrollTop =
-          messageListRef.current.scrollHeight || 0;
-      }
+    if (isVisible || isLastMessageMine || isAtBottomRef.current) {
+      scrollToBottom();
     } else {
-      // 새로운 메시지가 있고 마지막 메시지가 다른 유저일 경우
       setShowUpButton(true);
     }
   }, [messageList]);
 
-  // Intersection Observer를 사용해 요소 가시성 감지
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -132,14 +113,14 @@ const MessageList = ({
   }, [isVisible]);
 
   useEffect(() => {
-    // if (messageEndRef.current) {
-    //   messageEndRef.current.scrollIntoView();
-    // }
-    if (messageListRef.current) {
-      messageListRef.current.scrollTop =
-        messageListRef.current.scrollHeight || 0;
-    }
+    scrollToBottom();
   }, [initialChatMessage]);
+
+  const scrollToBottom = () => {
+    if (messageListRef.current) {
+      messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
+    }
+  };
 
   return (
     <>
@@ -147,7 +128,9 @@ const MessageList = ({
         {children}
         {messageList.map((message) =>
           message.type === 'SYSTEM' ? (
-            message.chat.map((item) => <SystemMessage>{item}</SystemMessage>)
+            message.chat.map((item) => (
+              <SystemMessage key={item}>{item}</SystemMessage>
+            ))
           ) : message.sender?.id === userId ? (
             <MyMessageBox
               key={message.createdAt}
@@ -175,13 +158,7 @@ const MessageList = ({
               messageList[messageList.length - 1].chat.length - 1
             ]
           }
-          onClick={() => {
-            if (messageListRef.current) {
-              messageListRef.current.scrollTop =
-                messageListRef.current.scrollHeight || 0;
-            }
-            // messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-          }}
+          onClick={scrollToBottom}
         />
       )}
     </>
