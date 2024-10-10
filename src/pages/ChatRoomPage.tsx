@@ -36,7 +36,6 @@ const ChatRoomPage = ({
 }) => {
   const navigate = useNavigate();
   const currentPartyId = useLocation().pathname.split('/')[2];
-  // const { height } = useVisualViewport();
 
   const { data: userData, isLoading } = useGetProfileQuery(null);
   const { data: chatData, isLoading: chatIsLoading } =
