@@ -1,10 +1,11 @@
-import UserIcon from '@/assets/icons/footer/user-icon.svg?react';
+import ProfileIcon from '@/assets/icons/common/profile-icon.svg?react';
+
 import styled from 'styled-components';
 
 const UserBasicImg = () => {
   return (
     <Container>
-      <UserIcon />
+      <ProfileIcon />
     </Container>
   );
 };
@@ -24,9 +25,9 @@ const Container = styled.div`
   overflow: hidden;
 
   svg {
-    margin-top: 15px;
-    width: 40px;
-    height: 40px;
+    margin-top: 10px;
+    width: 30px;
+    height: 30px;
     fill: var(--color-gray-300);
   }
 `;
