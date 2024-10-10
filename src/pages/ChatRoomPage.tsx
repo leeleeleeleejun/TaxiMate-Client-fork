@@ -17,7 +17,6 @@ import OthersMessageBox from '@/components/chatRoom/OthersMessageBox.tsx';
 
 import { BackButton } from '@/components/common/Layout/Header/Header.style.ts';
 import {
-  LayoutContainer,
   NotificationContainer,
   NotificationHeader,
   RoomTitle,
@@ -26,6 +25,7 @@ import {
 
 import ArrowLeftIcon from '@/assets/icons/arrow-left-icon.svg?react';
 import ArrowRightIcon from '@/assets/icons/arrow-right-icon.svg?react';
+import LoadingIcon from '@/components/common/LoadingIcon';
 
 const ChatRoomPage = ({
   sendMessage,
@@ -46,6 +46,7 @@ const ChatRoomPage = ({
     handleNewMessage,
     setShowNotification,
   } = useInAppNotificationHandler();
+
   const [initialChatMessage, setInitialChatMessage] = useState<GroupMessage[]>(
     []
   );
@@ -87,11 +88,11 @@ const ChatRoomPage = ({
     setInitialChatMessage(array);
   }, [chatData]);
 
-  if (isLoading || chatIsLoading) return <div>Loading...</div>;
+  if (isLoading || chatIsLoading) return <LoadingIcon />;
   if (!userData || !chatData) return <div>no data...</div>;
 
   return (
-    <LayoutContainer>
+    <>
       {notification && (
         <InAppNotification
           id={notification.id}
@@ -163,7 +164,7 @@ const ChatRoomPage = ({
         )}
       </MessageList>
       <MessageInputBox sendMessage={sendMessage} partyId={currentPartyId} />
-    </LayoutContainer>
+    </>
   );
 };
 

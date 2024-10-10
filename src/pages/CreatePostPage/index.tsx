@@ -1,6 +1,4 @@
 import { ReactNode, useState } from 'react';
-// import { useLocation } from 'react-router-dom';
-// import { useGetPostByIdQuery } from '@/api/localApi.ts';
 import useCreatePost from '@/hooks/useCreatePost.ts';
 import { RegisterDataKey, RegisterData, StepType } from '@/types';
 
