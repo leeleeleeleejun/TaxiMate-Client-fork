@@ -44,8 +44,7 @@ const PostDetailPage = () => {
       return navigate('/login');
     }
     if (data.status !== 'PARTICIPATING') {
-      const result = await participationChat(data.id).unwrap();
-      alert(result.message);
+      await participationChat(data.id).unwrap();
       refetch();
       goChatRoom();
     } else if (data.status === 'PARTICIPATING') {
@@ -55,8 +54,7 @@ const PostDetailPage = () => {
 
   const leaveChatHandler = async () => {
     if (data.status === 'PARTICIPATING') {
-      const result = await leaveChat(data.id).unwrap();
-      alert(result.message);
+      await leaveChat(data.id).unwrap();
       refetch();
     }
   };
