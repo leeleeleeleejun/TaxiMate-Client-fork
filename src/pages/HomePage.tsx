@@ -70,6 +70,7 @@ const HomePage = () => {
       }
     };
     window.addEventListener('message', handleMessage);
+    window.ReactNativeWebView.postMessage('chat');
 
     return () => window.removeEventListener('message', handleMessage);
   }, []);
