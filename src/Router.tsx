@@ -1,5 +1,5 @@
-import { lazy, Suspense } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { lazy, Suspense, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 
 import { CLIENT_PATH } from '@/constants/path.ts';
 import useStompClient from '@/hooks/useStompClient.ts';
@@ -7,6 +7,7 @@ import AuthChecker from '@/AuthChecker.tsx';
 import Layout from '@/components/common/Layout';
 import LoadingIcon from '@/components/common/LoadingIcon';
 import InAppNotificationLayout from '@/components/common/InAppNotification/InAppNotificationLayout.tsx';
+import reactNativePostMessage from '@/utils/postMessage.ts';
 
 const HomePage = lazy(() => import('@/pages/HomePage'));
 const SearchPage = lazy(() => import('@/pages/SearchPage'));
@@ -21,6 +22,21 @@ const LoginLoadingPage = lazy(() => import('@/pages/LoginLoadingPage'));
 
 const Router = () => {
   const client = useStompClient();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleMessage = (e: MessageEvent) => {
+      console.log('Received message', e);
+      const { partyId } = JSON.parse(e.data);
+      if (partyId) {
+        navigate(CLIENT_PATH.CHAT_ROOM.replace(':chatRoomId', partyId));
+      }
+    };
+    window.addEventListener('message', handleMessage);
+    reactNativePostMessage('chat');
+
+    return () => window.removeEventListener('message', handleMessage);
+  }, []);
 
   return (
     <BrowserRouter>

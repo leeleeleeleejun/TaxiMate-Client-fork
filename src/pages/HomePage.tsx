@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useLazyGetPostsQuery } from '@/api/localApi.ts';
 import reactNativePostMessage from '@/utils/postMessage.ts';
-import { CLIENT_PATH } from '@/constants/path.ts';
 
 import Header from '@/components/common/Layout/Header';
 import { HeaderItem } from '@/components/common/Layout/Header/Header.style.ts';
@@ -20,8 +18,6 @@ import getCurrentLocation from '@/utils/getCurrentlocation.ts';
 import LoadingIcon from '@/components/common/LoadingIcon';
 
 const HomePage = () => {
-  const navigate = useNavigate();
-
   const [map, setMap] = useState<naver.maps.Map | null>(null);
   const [activeButton, setActiveButton] = useState<boolean>(true);
   const [activeMarker, setActiveMarker] = useState<string | null>(null);
@@ -60,21 +56,6 @@ const HomePage = () => {
         setActiveButton(false);
       }
     })();
-  }, []);
-
-  useEffect(() => {
-    const handleMessage = (e: MessageEvent) => {
-      console.log('Received message', e);
-      const { partyId } = JSON.parse(e.data);
-      alert('Received message' + e);
-      if (partyId) {
-        alert(partyId);
-
-        navigate(CLIENT_PATH.CHAT_ROOM.replace(':chatRoomId', partyId));
-      }
-    };
-    window.addEventListener('message', handleMessage);
-    reactNativePostMessage('chat');
   }, []);
 
   return (
