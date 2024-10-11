@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useLazyGetPostsQuery } from '@/api/localApi.ts';
+import reactNativePostMessage from '@/utils/postMessage.ts';
+import { CLIENT_PATH } from '@/constants/path.ts';
 
 import Header from '@/components/common/Layout/Header';
 import { HeaderItem } from '@/components/common/Layout/Header/Header.style.ts';
@@ -15,8 +18,6 @@ import TaxiIcon from '@/assets/icons/header/taxi-icon.svg?react';
 import KnuLogoIcon from '@/assets/icons/header/knu-logo-icon.svg?react';
 import getCurrentLocation from '@/utils/getCurrentlocation.ts';
 import LoadingIcon from '@/components/common/LoadingIcon';
-import { useNavigate } from 'react-router-dom';
-import { CLIENT_PATH } from '@/constants/path.ts';
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -70,7 +71,7 @@ const HomePage = () => {
       }
     };
     window.addEventListener('message', handleMessage);
-    window.ReactNativeWebView.postMessage('chat');
+    reactNativePostMessage('chat');
 
     return () => window.removeEventListener('message', handleMessage);
   }, []);
@@ -82,7 +83,13 @@ const HomePage = () => {
           택시팟
           <TaxiIcon />
         </HeaderItem>
-        <KnuLogoIcon />
+        <button
+          onClick={() => {
+            reactNativePostMessage('like_knu');
+          }}
+        >
+          <KnuLogoIcon />
+        </button>
       </Header>
       <Main>
         <SearchBar path={'/search'} />

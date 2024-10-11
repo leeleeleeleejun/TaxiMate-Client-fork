@@ -1,11 +1,12 @@
+import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import reactNativePostMessage from '@/utils/postMessage.ts';
 import {
   useGetAccessTokenQuery,
   useSetPushAlarmMutation,
 } from '@/api/localApi.ts';
 import { setIsLogin } from '@/components/myProfile/userSlice.ts';
-import { useEffect } from 'react';
 
 const LoginLoadingPage = () => {
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ const LoginLoadingPage = () => {
     if (!isLoading) {
       if (isSuccess && pushAlarmSuccess) {
         dispatch(setIsLogin(true));
-        window.ReactNativeWebView.postMessage('push_notification');
+        reactNativePostMessage('push_notification');
       }
       // 모든 작업이 완료된 후 네비게이션 수행
       navigate('/');
