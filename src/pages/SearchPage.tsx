@@ -19,12 +19,9 @@ const SearchPage = ({
   const inputEl = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      inputEl.current?.focus();
-    }, 100);
-
-    return () => clearTimeout(timer);
+    inputEl.current?.focus();
   }, []);
+
   const listClickHandler = (lat: number, lng: number) => {
     if (step && setStep && setRegisterDataFunc) {
       // 팟생성에서 검색 시 사용
