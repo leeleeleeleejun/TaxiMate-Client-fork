@@ -75,8 +75,6 @@ const HomePage = () => {
     };
     window.addEventListener('message', handleMessage);
     reactNativePostMessage('chat');
-
-    return () => window.removeEventListener('message', handleMessage);
   }, []);
 
   return (
