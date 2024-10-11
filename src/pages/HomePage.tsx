@@ -16,6 +16,7 @@ import KnuLogoIcon from '@/assets/icons/header/knu-logo-icon.svg?react';
 import getCurrentLocation from '@/utils/getCurrentlocation.ts';
 import LoadingIcon from '@/components/common/LoadingIcon';
 import { useNavigate } from 'react-router-dom';
+import { CLIENT_PATH } from '@/constants/path.ts';
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -63,7 +64,10 @@ const HomePage = () => {
   useEffect(() => {
     const handleMessage = (e: MessageEvent) => {
       console.log('Received message', e);
-      navigate(e.data.chatId);
+      const { chatId } = JSON.parse(e.data.chatId);
+      if (chatId) {
+        navigate(CLIENT_PATH.CHAT_ROOM.replace(':chatRoomId', chatId));
+      }
     };
     window.addEventListener('message', handleMessage);
 
