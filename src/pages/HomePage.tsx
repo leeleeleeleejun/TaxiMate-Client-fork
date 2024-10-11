@@ -66,7 +66,9 @@ const HomePage = () => {
     const handleMessage = (e: MessageEvent) => {
       console.log('Received message', e);
       const { chatId } = JSON.parse(e.data);
-      if (chatId) {
+      if ('Received message' + chatId) {
+        alert(chatId);
+
         navigate(CLIENT_PATH.CHAT_ROOM.replace(':chatRoomId', chatId));
       }
     };
