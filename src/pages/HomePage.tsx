@@ -15,8 +15,11 @@ import TaxiIcon from '@/assets/icons/header/taxi-icon.svg?react';
 import KnuLogoIcon from '@/assets/icons/header/knu-logo-icon.svg?react';
 import getCurrentLocation from '@/utils/getCurrentlocation.ts';
 import LoadingIcon from '@/components/common/LoadingIcon';
+import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
+  const navigate = useNavigate();
+
   const [map, setMap] = useState<naver.maps.Map | null>(null);
   const [activeButton, setActiveButton] = useState<boolean>(true);
   const [activeMarker, setActiveMarker] = useState<string | null>(null);
@@ -55,6 +58,19 @@ const HomePage = () => {
         setActiveButton(false);
       }
     })();
+  }, []);
+
+  useEffect(() => {
+    const handleMessage = (e: MessageEvent) => {
+      console.log('Received message', e);
+      const { chatId } = JSON.parse(e.data);
+      if (chatId) {
+        navigate(chatId);
+      }
+    };
+    window.addEventListener('message', handleMessage);
+
+    return () => window.removeEventListener('message', handleMessage);
   }, []);
 
   return (
