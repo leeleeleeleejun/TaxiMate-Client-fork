@@ -12,33 +12,48 @@ const LoginLoadingPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const code = queryParams.get('code') || '';
-  const [setPushAlarmTrigger, { isSuccess: pushAlarmSuccess }] =
-    useSetPushAlarmMutation();
+  const code = new URLSearchParams(location.search).get('code') || '';
 
-  const { isLoading, isSuccess } = useGetAccessTokenQuery({ code: code });
+  const { isLoading: isTokenLoading, isSuccess: isTokenSuccess } =
+    useGetAccessTokenQuery({ code: code });
+  const [
+    setPushAlarmTrigger,
+    { isLoading: isPushAlarmLoading, isSuccess: isPushAlarmSuccess },
+  ] = useSetPushAlarmMutation();
 
   useEffect(() => {
     const handleMessage = (e: MessageEvent) => {
-      console.log('Received message', e);
       setPushAlarmTrigger(e.data);
     };
     window.addEventListener('message', handleMessage);
 
     return () => window.removeEventListener('message', handleMessage);
-  }, [pushAlarmSuccess]);
+  }, []);
 
   useEffect(() => {
-    if (!isLoading) {
-      if (isSuccess && pushAlarmSuccess) {
+    if (isTokenSuccess && !isTokenLoading) {
+      dispatch(setIsLogin(true));
+      reactNativePostMessage('push_notification');
+    }
+  }, [isTokenSuccess, isTokenLoading, dispatch]);
+
+  useEffect(() => {
+    if (!isTokenLoading && !isPushAlarmLoading) {
+      if (isTokenSuccess && isPushAlarmSuccess) {
         dispatch(setIsLogin(true));
         reactNativePostMessage('push_notification');
       }
       // 모든 작업이 완료된 후 네비게이션 수행
       navigate('/');
     }
-  }, [isSuccess, isLoading, dispatch, navigate, pushAlarmSuccess]);
+  }, [
+    isTokenLoading,
+    isTokenSuccess,
+    dispatch,
+    navigate,
+    isPushAlarmLoading,
+    isPushAlarmSuccess,
+  ]);
 
   return null;
 };
