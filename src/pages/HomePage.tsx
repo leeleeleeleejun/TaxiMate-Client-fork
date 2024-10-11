@@ -65,11 +65,12 @@ const HomePage = () => {
   useEffect(() => {
     const handleMessage = (e: MessageEvent) => {
       console.log('Received message', e);
-      const { chatId } = JSON.parse(e.data);
-      if ('Received message' + chatId) {
-        alert(chatId);
+      const { partyId } = JSON.parse(e.data);
+      alert('Received message' + e);
+      if (partyId) {
+        alert(partyId);
 
-        navigate(CLIENT_PATH.CHAT_ROOM.replace(':chatRoomId', chatId));
+        navigate(CLIENT_PATH.CHAT_ROOM.replace(':chatRoomId', partyId));
       }
     };
     window.addEventListener('message', handleMessage);
