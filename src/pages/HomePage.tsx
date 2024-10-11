@@ -63,10 +63,7 @@ const HomePage = () => {
   useEffect(() => {
     const handleMessage = (e: MessageEvent) => {
       console.log('Received message', e);
-      const { chatId } = JSON.parse(e.data);
-      if (chatId) {
-        navigate(chatId);
-      }
+      navigate(e.data.chatId);
     };
     window.addEventListener('message', handleMessage);
 
