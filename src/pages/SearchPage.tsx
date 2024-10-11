@@ -19,7 +19,9 @@ const SearchPage = ({
   const inputEl = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    inputEl.current?.focus();
+    setTimeout(() => {
+      inputEl.current?.focus();
+    }, 0);
   }, []);
 
   const listClickHandler = (lat: number, lng: number) => {
