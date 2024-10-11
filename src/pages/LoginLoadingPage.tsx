@@ -13,7 +13,8 @@ const LoginLoadingPage = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const code = queryParams.get('code') || '';
-  const [setPushAlarmTrigger] = useSetPushAlarmMutation();
+  const [setPushAlarmTrigger, { isSuccess: pushAlarmSuccess }] =
+    useSetPushAlarmMutation();
 
   const { isLoading, isSuccess } = useGetAccessTokenQuery({ code: code });
 
@@ -23,18 +24,20 @@ const LoginLoadingPage = () => {
       setPushAlarmTrigger(e.data);
     };
     window.addEventListener('message', handleMessage);
-  }, []);
+
+    return () => window.removeEventListener('message', handleMessage);
+  }, [pushAlarmSuccess]);
 
   useEffect(() => {
     if (!isLoading) {
-      if (isSuccess) {
+      if (isSuccess && pushAlarmSuccess) {
         dispatch(setIsLogin(true));
         window.ReactNativeWebView.postMessage('push_notification');
       }
       // 모든 작업이 완료된 후 네비게이션 수행
       navigate('/');
     }
-  }, [isSuccess, isLoading, dispatch, navigate]);
+  }, [isSuccess, isLoading, dispatch, navigate, pushAlarmSuccess]);
 
   return null;
 };
