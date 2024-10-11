@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import reactNativePostMessage from '@/utils/postMessage.ts';
+import reactNativePostMessage from '@/utils/reactNativePostMessage.ts';
 import {
   useGetAccessTokenQuery,
   useSetPushAlarmMutation,

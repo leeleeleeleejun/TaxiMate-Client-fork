@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLazyGetPostsQuery } from '@/api/localApi.ts';
-import reactNativePostMessage from '@/utils/postMessage.ts';
+import reactNativePostMessage from '@/utils/reactNativePostMessage.ts';
 
 import Header from '@/components/common/Layout/Header';
 import { HeaderItem } from '@/components/common/Layout/Header/Header.style.ts';
