@@ -14,6 +14,8 @@ export const Container = styled.div`
     min-height: 40px;
     max-width: 40px;
     max-height: 40px;
+
+    margin-right: 10px;
   }
 
   & > span {
