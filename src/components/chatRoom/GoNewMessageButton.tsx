@@ -1,10 +1,8 @@
-import {
-  GoNewMessageButtonContainer,
-  OthersProfile,
-} from '@/components/chatRoom/chatRoom.style.ts';
+import { GoNewMessageButtonContainer } from '@/components/chatRoom/chatRoom.style.ts';
 import UserBasicImg from '@/components/common/userBasicImg';
 import { Message } from '@/components/common/InAppNotification/InAppNotification.style.ts';
 import ArrowDownIcon from '@/assets/icons/arrow-down-icon.svg?react';
+import { UserProfileImg } from '@/components/common/UserContainer/userContainer.style.ts';
 
 const GoNewMessageButton = ({
   img,
@@ -20,7 +18,7 @@ const GoNewMessageButton = ({
   return (
     <GoNewMessageButtonContainer onClick={onClick}>
       <div>
-        {img ? <OthersProfile src={img} alt='profile' /> : <UserBasicImg />}
+        {img ? <UserProfileImg src={img} alt='profile' /> : <UserBasicImg />}
         <span>{name}</span>
       </div>
       <Message>{message}</Message>

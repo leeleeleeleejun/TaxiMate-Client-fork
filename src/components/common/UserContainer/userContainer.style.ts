@@ -5,19 +5,6 @@ export const Container = styled.div`
   align-items: center;
 
   padding: 15px 20px;
-
-  & > img {
-    border-radius: 50%;
-    object-fit: cover;
-
-    min-width: 40px;
-    min-height: 40px;
-    max-width: 40px;
-    max-height: 40px;
-
-    margin-right: 10px;
-  }
-
   & > span {
     padding-right: 10px;
 
@@ -30,4 +17,16 @@ export const Container = styled.div`
   & > svg {
     margin-right: 4px;
   }
+`;
+
+export const UserProfileImg = styled.img`
+  border-radius: 50%;
+  object-fit: cover;
+
+  min-width: 40px;
+  min-height: 40px;
+  max-width: 40px;
+  max-height: 40px;
+
+  margin-right: 10px;
 `;

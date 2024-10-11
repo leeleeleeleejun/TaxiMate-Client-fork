@@ -97,18 +97,6 @@ export const MessageTime = styled.span`
   white-space: nowrap;
 `;
 
-export const OthersProfile = styled.img`
-  border-radius: 50%;
-  object-fit: cover;
-
-  min-width: 40px;
-  min-height: 40px;
-  max-width: 40px;
-  max-height: 40px;
-
-  margin-right: 10px;
-`;
-
 export const OthersName = styled.span`
   margin-bottom: 5px;
 
