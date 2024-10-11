@@ -64,7 +64,7 @@ const HomePage = () => {
   useEffect(() => {
     const handleMessage = (e: MessageEvent) => {
       console.log('Received message', e);
-      const { chatId } = JSON.parse(e.data.chatId);
+      const { chatId } = JSON.parse(e.data);
       if (chatId) {
         navigate(CLIENT_PATH.CHAT_ROOM.replace(':chatRoomId', chatId));
       }
