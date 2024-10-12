@@ -32,12 +32,12 @@ const LoginLoadingPage = () => {
   useEffect(() => {
     const handleMessage = (e: MessageEvent) => {
       console.log('로그인 로딩 페이지', handleMessage);
-      if (
-        e.origin === 'https://vercel.live' ||
-        e.data.source === 'react-devtools-content-script'
-      ) {
-        return;
-      }
+      // if (
+      //   e.origin === 'https://vercel.live' ||
+      //   e.data.source === 'react-devtools-content-script'
+      // ) {
+      //   return;
+      // }
       setPushAlarmTrigger(e.data);
     };
 
