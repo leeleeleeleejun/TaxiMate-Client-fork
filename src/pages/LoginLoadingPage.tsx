@@ -25,7 +25,11 @@ const LoginLoadingPage = () => {
 
   const [
     setPushAlarmTrigger,
-    { isLoading: isPushAlarmLoading, isError: isPushAlarmError },
+    {
+      isLoading: isPushAlarmLoading,
+      isError: isPushAlarmError,
+      isSuccess: isPushAlarmSuccess,
+    },
   ] = useSetPushAlarmMutation();
 
   useErrorHandle(tokenError);
@@ -57,6 +61,9 @@ const LoginLoadingPage = () => {
   // 푸쉬 토큰 요청 후
   useEffect(() => {
     if (isTokenSuccess && !isPushAlarmLoading) {
+      if (isPushAlarmSuccess) {
+        alert('푸시 알람 설정에 성공했습니다.');
+      }
       if (isPushAlarmError) {
         alert('푸시 알람 설정에 실패했습니다.');
       }
