@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import reactNativePostMessage from '@/utils/reactNativePostMessage.ts';
@@ -14,6 +14,7 @@ const LoginLoadingPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const code = new URLSearchParams(location.search).get('code') || '';
+  const [isPushNotificationSent, setIsPushNotificationSent] = useState(false);
 
   const {
     isLoading: isTokenLoading,
@@ -29,45 +30,39 @@ const LoginLoadingPage = () => {
 
   useErrorHandle(tokenError);
 
+  // 토큰이 성공적으로 받아졌을 때
   useEffect(() => {
-    const handleMessage = (e: MessageEvent) => {
-      alert('로그인 로딩 페이지' + e.data);
-      // if (
-      //   e.origin === 'https://vercel.live' ||
-      //   e.data.source === 'react-devtools-content-script'
-      // ) {
-      //   return;
-      // }
-      setPushAlarmTrigger(e.data);
-    };
-
-    window.addEventListener('message', handleMessage);
-    return () => window.removeEventListener('message', handleMessage);
-  }, []);
-
-  useEffect(() => {
-    if (!isTokenLoading) {
-      if (isTokenSuccess) {
-        dispatch(setIsLogin(true));
-        reactNativePostMessage('push_notification');
-      } else if (isTokenError) {
-        navigate('/login');
-      }
+    if (!isTokenLoading && isTokenSuccess) {
+      dispatch(setIsLogin(true));
+      reactNativePostMessage('push_notification');
+      setIsPushNotificationSent(true); // push_notification을 보낸 후 상태를 업데이트
+    } else if (isTokenError) {
+      navigate('/login');
     }
-  }, [isTokenSuccess, isTokenError]);
+  }, [isTokenLoading, isTokenSuccess, isTokenError, dispatch, navigate]);
+
+  // push_notification을 보낸 후 메시지를 처리
+  useEffect(() => {
+    if (isPushNotificationSent) {
+      const handleMessage = (e: MessageEvent) => {
+        alert('로그인 로딩 페이지에서 받은 메시지: ' + e.data);
+        setPushAlarmTrigger(e.data);
+      };
+
+      window.addEventListener('message', handleMessage);
+      return () => window.removeEventListener('message', handleMessage);
+    }
+  }, [isPushNotificationSent, setPushAlarmTrigger]);
 
   // 푸쉬 토큰 요청 후
   useEffect(() => {
-    alert('푸쉬 토큰 요청 후');
     if (isTokenSuccess && !isPushAlarmLoading) {
       if (isPushAlarmError) {
-        // console.error('Failed to set push alarm');
-        // 푸시 알람 설정 실패 시 처리 (예: 사용자에게 알림)
-        alert('푸시알람 설정에 실패했습니다.');
+        alert('푸시 알람 설정에 실패했습니다.');
       }
       navigate('/');
     }
-  }, [isTokenSuccess]);
+  }, [isTokenSuccess, isPushAlarmLoading, isPushAlarmError, navigate]);
 
   return null;
 };
