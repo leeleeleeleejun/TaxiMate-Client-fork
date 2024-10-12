@@ -9,12 +9,12 @@ const Layout = () => {
 
   useEffect(() => {
     const handleMessage = (e: MessageEvent) => {
-      if (
-        e.origin === 'https://vercel.live' ||
-        e.data.source === 'react-devtools-content-script'
-      ) {
-        return;
-      }
+      // if (
+      //   e.origin === 'https://vercel.live' ||
+      //   e.data.source === 'react-devtools-content-script'
+      // ) {
+      //   return;
+      // }
 
       console.log('Received message', e);
 
