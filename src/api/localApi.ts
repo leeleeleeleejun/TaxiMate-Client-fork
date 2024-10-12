@@ -107,10 +107,13 @@ export const localApi = createApi({
       }),
     }),
     getAccessToken: builder.query<{ accessToken: string }, { code: string }>({
-      query: (arg) => ({
-        url: API_PATH.USER.GET_ACCESS_TOKEN,
-        params: arg,
-      }),
+      query: (arg) => {
+        alert('accessToken 토큰 요청');
+        return {
+          url: API_PATH.USER.GET_ACCESS_TOKEN,
+          params: arg,
+        };
+      },
       transformResponse: (response: { data: { accessToken: string } }) => {
         accessToken = response.data.accessToken;
         return response.data;
