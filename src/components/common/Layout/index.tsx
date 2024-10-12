@@ -9,7 +9,12 @@ const Layout = () => {
 
   useEffect(() => {
     const handleMessage = (e: MessageEvent) => {
+      if (e.origin === 'https://vercel.live') {
+        return;
+      }
+
       console.log('Received message', e);
+
       const { partyId } = JSON.parse(e.data);
       if (partyId) {
         navigate(CLIENT_PATH.CHAT_ROOM.replace(':chatRoomId', partyId));
