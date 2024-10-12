@@ -7,6 +7,7 @@ import {
   useSetPushAlarmMutation,
 } from '@/api/localApi.ts';
 import { setIsLogin } from '@/components/myProfile/userSlice.ts';
+import useErrorHandle from '@/hooks/useErrorHandle.ts';
 
 const LoginLoadingPage = () => {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ const LoginLoadingPage = () => {
     setPushAlarmTrigger,
     { isLoading: isPushAlarmLoading, isError: isPushAlarmError },
   ] = useSetPushAlarmMutation();
+  useErrorHandle(tokenError);
 
   useEffect(() => {
     const handleMessage = (e: MessageEvent) => {
@@ -46,7 +48,7 @@ const LoginLoadingPage = () => {
         dispatch(setIsLogin(true));
         reactNativePostMessage('push_notification');
       } else if (isTokenError) {
-        console.error('Login failed:', tokenError);
+        //        alert('Login failed:', tokenError);
         navigate('/login');
       }
     }
