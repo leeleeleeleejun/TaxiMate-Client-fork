@@ -31,7 +31,7 @@ const LoginLoadingPage = () => {
 
   useEffect(() => {
     const handleMessage = (e: MessageEvent) => {
-      alert('로그인 로딩 페이지' + e);
+      alert('로그인 로딩 페이지' + e.data);
       // if (
       //   e.origin === 'https://vercel.live' ||
       //   e.data.source === 'react-devtools-content-script'
@@ -58,6 +58,7 @@ const LoginLoadingPage = () => {
 
   // 푸쉬 토큰 요청 후
   useEffect(() => {
+    alert('푸쉬 토큰 요청 후');
     if (isTokenSuccess && !isPushAlarmLoading) {
       if (isPushAlarmError) {
         // console.error('Failed to set push alarm');
