@@ -31,7 +31,7 @@ const LoginLoadingPage = () => {
 
   useEffect(() => {
     const handleMessage = (e: MessageEvent) => {
-      console.log('로그인 로딩 페이지', handleMessage);
+      alert('로그인 로딩 페이지' + e);
       // if (
       //   e.origin === 'https://vercel.live' ||
       //   e.data.source === 'react-devtools-content-script'
