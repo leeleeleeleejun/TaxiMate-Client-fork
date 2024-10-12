@@ -22,6 +22,7 @@ function App() {
   const dispatch = useDispatch();
   const [isReady, setIsReady] = useState(false); // 렌더링 준비 상태
   const { isSuccess, isLoading } = useGetRefreshAccessTokenQuery(null);
+
   useEffect(() => {
     // API 호출이 완료될 때까지 기다림
     if (!isLoading) {

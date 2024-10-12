@@ -163,7 +163,7 @@ export const localApi = createApi({
     }),
     setPushAlarm: builder.mutation<{ data: string }, string>({
       query: (data: string) => {
-        console.log('setPushAlarm : ', data);
+        alert(accessToken);
         return {
           url: API_PATH.USER.SET_PUSH_ALARM,
           method: 'POST',
