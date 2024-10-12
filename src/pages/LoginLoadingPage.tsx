@@ -67,8 +67,8 @@ const LoginLoadingPage = () => {
         // 푸시 알람 설정 실패 시 처리 (예: 사용자에게 알림)
         alert('푸시알람 설정에 실패했습니다.');
       }
+      navigate('/');
     }
-    navigate('/');
   }, [isPushAlarmLoading, isPushAlarmError, navigate]);
 
   return null;
