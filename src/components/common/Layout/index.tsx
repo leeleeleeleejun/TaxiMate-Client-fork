@@ -9,7 +9,10 @@ const Layout = () => {
 
   useEffect(() => {
     const handleMessage = (e: MessageEvent) => {
-      if (e.origin === 'https://vercel.live') {
+      if (
+        e.origin === 'https://vercel.live' ||
+        e.data.source === 'react-devtools-content-script'
+      ) {
         return;
       }
 
@@ -25,6 +28,7 @@ const Layout = () => {
 
     return () => window.removeEventListener('message', handleMessage);
   }, []);
+
   return (
     <Container>
       <Outlet />

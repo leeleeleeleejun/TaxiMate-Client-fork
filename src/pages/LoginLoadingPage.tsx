@@ -28,7 +28,10 @@ const LoginLoadingPage = () => {
 
   useEffect(() => {
     const handleMessage = (e: MessageEvent) => {
-      if (e.origin === 'https://vercel.live') {
+      if (
+        e.origin === 'https://vercel.live' ||
+        e.data.source === 'react-devtools-content-script'
+      ) {
         return;
       }
       setPushAlarmTrigger(e.data);
