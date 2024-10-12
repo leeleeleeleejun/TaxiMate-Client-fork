@@ -54,7 +54,7 @@ const LoginLoadingPage = () => {
         navigate('/login');
       }
     }
-  }, [isTokenLoading, isTokenSuccess, isTokenError, tokenError, navigate]);
+  }, [isTokenSuccess, isTokenError]);
 
   // 푸쉬 토큰 요청 후
   useEffect(() => {
@@ -67,7 +67,7 @@ const LoginLoadingPage = () => {
       }
       navigate('/');
     }
-  }, [isTokenSuccess, isPushAlarmLoading, isPushAlarmError, navigate]);
+  }, [isTokenSuccess]);
 
   return null;
 };
