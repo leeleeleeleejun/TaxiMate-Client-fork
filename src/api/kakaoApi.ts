@@ -54,7 +54,7 @@ export const getKakaoInga = async () => {
   // const isiOS = /(iPhone|iPad|iPod)/.test(navigator.userAgent);
   try {
     if (isAndroid) {
-      window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${kakaoClient}&redirect_uri=https://taxi-mate.like-knu.com/login-loading&response_type=code`;
+      window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${kakaoClient}&redirect_uri=${localUrl + CLIENT_PATH.LOGIN_LOADING}&response_type=code`;
     } else {
       await window.Kakao.Auth.authorize({
         redirectUri: localUrl + CLIENT_PATH.LOGIN_LOADING,
