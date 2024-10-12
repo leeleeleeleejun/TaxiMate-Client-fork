@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import reactNativePostMessage from '@/utils/reactNativePostMessage.ts';
@@ -14,7 +14,7 @@ const LoginLoadingPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const code = new URLSearchParams(location.search).get('code') || '';
-  const [isPushNotificationSent, setIsPushNotificationSent] = useState(false);
+  // const [isPushNotificationSent, setIsPushNotificationSent] = useState(false);
 
   const {
     isLoading: isTokenLoading,
@@ -39,7 +39,7 @@ const LoginLoadingPage = () => {
     if (!isTokenLoading && isTokenSuccess) {
       dispatch(setIsLogin(true));
       reactNativePostMessage('push_notification');
-      setIsPushNotificationSent(true); // push_notification을 보낸 후 상태를 업데이트
+      // setIsPushNotificationSent(true); // push_notification을 보낸 후 상태를 업데이트
     } else if (isTokenError) {
       navigate('/login');
     }
@@ -47,16 +47,16 @@ const LoginLoadingPage = () => {
 
   // push_notification을 보낸 후 메시지를 처리
   useEffect(() => {
-    if (isPushNotificationSent) {
-      const handleMessage = (e: MessageEvent) => {
-        alert('로그인 로딩 페이지에서 받은 메시지: ' + e.data);
-        setPushAlarmTrigger(e.data);
-      };
+    // if (isPushNotificationSent) {
+    const handleMessage = (e: MessageEvent) => {
+      alert('로그인 로딩 페이지에서 받은 메시지: ' + e.data);
+      setPushAlarmTrigger(e.data);
+    };
 
-      window.addEventListener('message', handleMessage);
-      return () => window.removeEventListener('message', handleMessage);
-    }
-  }, [isPushNotificationSent, setPushAlarmTrigger]);
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+    // }
+  }, []);
 
   // 푸쉬 토큰 요청 후
   useEffect(() => {
