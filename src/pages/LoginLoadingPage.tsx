@@ -50,18 +50,11 @@ const LoginLoadingPage = () => {
         navigate('/login');
       }
     }
-  }, [
-    isTokenLoading,
-    isTokenSuccess,
-    isTokenError,
-    tokenError,
-    dispatch,
-    navigate,
-  ]);
+  }, [isTokenLoading, isTokenSuccess, isTokenError, tokenError, navigate]);
 
   // 푸쉬 토큰 요청 후
   useEffect(() => {
-    if (!isPushAlarmLoading) {
+    if (isTokenSuccess && !isPushAlarmLoading) {
       if (isPushAlarmError) {
         console.error('Failed to set push alarm');
         // 푸시 알람 설정 실패 시 처리 (예: 사용자에게 알림)
@@ -69,7 +62,7 @@ const LoginLoadingPage = () => {
       }
       navigate('/');
     }
-  }, [isPushAlarmLoading, isPushAlarmError, navigate]);
+  }, [isTokenSuccess, isPushAlarmLoading, isPushAlarmError, navigate]);
 
   return null;
 };
