@@ -69,7 +69,13 @@ const LoginLoadingPage = () => {
       }
       navigate('/');
     }
-  }, [isTokenSuccess, isPushAlarmLoading, isPushAlarmError, navigate]);
+  }, [
+    isPushAlarmSuccess,
+    isTokenSuccess,
+    isPushAlarmLoading,
+    isPushAlarmError,
+    navigate,
+  ]);
 
   return null;
 };
