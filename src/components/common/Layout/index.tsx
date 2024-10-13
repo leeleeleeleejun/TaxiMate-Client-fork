@@ -2,7 +2,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import Container from '@/components/common/Layout/Layout.style.ts';
 import { useEffect } from 'react';
 import { CLIENT_PATH } from '@/constants/path.ts';
-import reactNativePostMessage from '@/utils/reactNativePostMessage.ts';
+// import reactNativePostMessage from '@/utils/reactNativePostMessage.ts';
 
 const Layout = () => {
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ const Layout = () => {
       }
     };
     window.addEventListener('message', handleMessage);
-    reactNativePostMessage('chat');
+    // reactNativePostMessage('chat');
 
     setTimeout(() => {
       window.removeEventListener('message', handleMessage);
