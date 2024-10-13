@@ -36,7 +36,7 @@ function App() {
 
     // SDK 초기화 여부를 판단합니다.
     console.log(window.Kakao.isInitialized());
-    setIsReady(false);
+    setIsReady(true);
   }, []);
 
   if (!isReady) return null;
