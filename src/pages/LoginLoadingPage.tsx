@@ -34,17 +34,6 @@ const LoginLoadingPage = () => {
 
   useErrorHandle(tokenError);
 
-  // 토큰이 성공적으로 받아졌을 때
-  useEffect(() => {
-    if (!isTokenLoading && isTokenSuccess) {
-      dispatch(setIsLogin(true));
-      reactNativePostMessage('push_notification');
-      // setIsPushNotificationSent(true); // push_notification을 보낸 후 상태를 업데이트
-    } else if (isTokenError) {
-      navigate('/login');
-    }
-  }, [isTokenLoading, isTokenSuccess, isTokenError, dispatch, navigate]);
-
   // push_notification을 보낸 후 메시지를 처리
   useEffect(() => {
     // if (isPushNotificationSent) {
@@ -57,6 +46,17 @@ const LoginLoadingPage = () => {
     return () => window.removeEventListener('message', handleMessage);
     // }
   }, []);
+
+  // 토큰이 성공적으로 받아졌을 때
+  useEffect(() => {
+    if (!isTokenLoading && isTokenSuccess) {
+      dispatch(setIsLogin(true));
+      reactNativePostMessage('push_notification');
+      // setIsPushNotificationSent(true); // push_notification을 보낸 후 상태를 업데이트
+    } else if (isTokenError) {
+      navigate('/login');
+    }
+  }, [isTokenLoading, isTokenSuccess, isTokenError, dispatch, navigate]);
 
   // 푸쉬 토큰 요청 후
   useEffect(() => {
