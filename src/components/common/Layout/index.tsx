@@ -26,7 +26,11 @@ const Layout = () => {
     window.addEventListener('message', handleMessage);
     reactNativePostMessage('chat');
 
-    return () => window.removeEventListener('message', handleMessage);
+    setTimeout(() => {
+      window.removeEventListener('message', handleMessage);
+    }, 5000);
+
+    // return () => window.removeEventListener('message', handleMessage);
   }, []);
 
   return (
