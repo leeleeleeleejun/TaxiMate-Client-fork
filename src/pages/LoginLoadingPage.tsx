@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import reactNativePostMessage from '@/utils/reactNativePostMessage.ts';
@@ -13,15 +13,23 @@ const LoginLoadingPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const code = new URLSearchParams(location.search).get('code') || '';
-  // const [isPushNotificationSent, setIsPushNotificationSent] = useState(false);
+  const code = useMemo(
+    () => new URLSearchParams(location.search).get('code') || '',
+    [location.search]
+  );
 
   const {
     isLoading: isTokenLoading,
     isSuccess: isTokenSuccess,
     isError: isTokenError,
     error: tokenError,
-  } = useGetAccessTokenQuery({ code });
+  } = useGetAccessTokenQuery(
+    { code },
+    {
+      skip: !code, // code가 없으면 쿼리 실행 안 함
+      refetchOnMountOrArgChange: true, // 컴포넌트 마운트나 인자 변경 시에만 재실행
+    }
+  );
 
   const [
     setPushAlarmTrigger,
