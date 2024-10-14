@@ -18,6 +18,7 @@ const Layout = () => {
       ) {
         return;
       }
+      console.log(e);
 
       try {
         const { data, type } = JSON.parse(e.data);
