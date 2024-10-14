@@ -20,13 +20,11 @@ const Layout = () => {
   useEffect(() => {
     const handleMessage = (e: MessageEvent) => {
       const { data, type } = JSON.parse(e.data);
-      console.log('e.data : ', e.data);
-      console.log('data : ', data, 'type : ', type);
+      console.log(data, type);
 
       if (type !== 'CHAT' || type !== 'PUSH_NOTIFICATION') return;
 
       try {
-        // console.log('Received message', e);
         if (type === 'CHAT') {
           if (data.partyId) {
             navigate(
@@ -34,6 +32,8 @@ const Layout = () => {
             );
           }
         } else if (type === 'PUSH_NOTIFICATION') {
+          console.log('data : ', data.token, 'type : ', type);
+
           if (data.token) {
             setPushAlarmTrigger(data.token);
           }
