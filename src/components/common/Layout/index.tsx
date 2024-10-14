@@ -19,6 +19,8 @@ const Layout = () => {
 
   useEffect(() => {
     const handleMessage = (e: MessageEvent) => {
+      alert(e);
+
       if (!e.data.type) return;
 
       try {
