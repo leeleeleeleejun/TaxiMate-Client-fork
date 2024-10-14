@@ -12,24 +12,29 @@ const Layout = () => {
 
   useEffect(() => {
     const handleMessage = (e: MessageEvent) => {
-      console.log(e);
-      const { data, type } = JSON.parse(e.data);
-
-      if (type !== 'CHAT' && type !== 'PUSH_NOTIFICATION') return;
+      if (
+        e.origin === 'https://vercel.live' ||
+        e.data.source === 'react-devtools-content-script'
+      ) {
+        return;
+      }
 
       try {
-        if (type === 'CHAT') {
-          if (data.partyId) {
-            navigate(
-              CLIENT_PATH.CHAT_ROOM.replace(':chatRoomId', data.partyId)
-            );
-          }
-        } else if (type === 'PUSH_NOTIFICATION') {
-          console.log('data : ', data.token, 'type : ', type);
+        const { data, type } = JSON.parse(e.data);
 
-          if (data.token) {
-            setPushAlarmTrigger(data.token);
-          }
+        switch (type) {
+          case 'CHAT':
+            if (data.partyId) {
+              navigate(
+                CLIENT_PATH.CHAT_ROOM.replace(':chatRoomId', data.partyId)
+              );
+            }
+            break;
+          case 'PUSH_NOTIFICATION':
+            if (data.token) {
+              setPushAlarmTrigger(data.token);
+            }
+            break;
         }
       } catch (error) {
         console.error('메시지 처리 중 오류 발생:', error);

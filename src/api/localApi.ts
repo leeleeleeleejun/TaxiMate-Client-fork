@@ -107,13 +107,10 @@ export const localApi = createApi({
       }),
     }),
     getAccessToken: builder.query<{ accessToken: string }, { code: string }>({
-      query: (arg) => {
-        alert('accessToken 토큰 요청');
-        return {
-          url: API_PATH.USER.GET_ACCESS_TOKEN,
-          params: arg,
-        };
-      },
+      query: (arg) => ({
+        url: API_PATH.USER.GET_ACCESS_TOKEN,
+        params: arg,
+      }),
       transformResponse: (response: { data: { accessToken: string } }) => {
         accessToken = response.data.accessToken;
         return response.data;
@@ -162,13 +159,11 @@ export const localApi = createApi({
       keepUnusedDataFor: 0,
     }),
     setPushAlarm: builder.mutation<{ data: string }, string>({
-      query: (data: string) => {
-        return {
-          url: API_PATH.USER.SET_PUSH_ALARM,
-          method: 'POST',
-          body: data,
-        };
-      },
+      query: (data: string) => ({
+        url: API_PATH.USER.SET_PUSH_ALARM,
+        method: 'POST',
+        body: data,
+      }),
     }),
   }),
 });

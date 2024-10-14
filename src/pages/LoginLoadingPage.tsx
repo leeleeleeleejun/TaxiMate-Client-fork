@@ -26,9 +26,9 @@ const LoginLoadingPage = () => {
     if (!isTokenLoading && isTokenSuccess) {
       dispatch(setIsLogin(true));
       reactNativePostMessage('push_notification');
-      alert('로그인 상태 변경 및 push_notification 전송 완료');
       navigate('/');
     } else if (isTokenError) {
+      alert('로그인에 실패했습니다.');
       navigate('/login');
     }
   }, [isTokenLoading, isTokenSuccess, isTokenError]);
