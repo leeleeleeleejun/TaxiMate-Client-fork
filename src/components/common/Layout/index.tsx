@@ -20,9 +20,8 @@ const Layout = () => {
   useEffect(() => {
     const handleMessage = (e: MessageEvent) => {
       const { data, type } = JSON.parse(e.data);
-      console.log(data, type);
 
-      if (type !== 'CHAT' || type !== 'PUSH_NOTIFICATION') return;
+      if (type !== 'CHAT' && type !== 'PUSH_NOTIFICATION') return;
 
       try {
         if (type === 'CHAT') {
