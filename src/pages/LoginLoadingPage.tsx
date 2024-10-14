@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-// import reactNativePostMessage from '@/utils/reactNativePostMessage.ts';
+import reactNativePostMessage from '@/utils/reactNativePostMessage.ts';
 import {
   useGetAccessTokenQuery,
   useSetPushAlarmMutation,
@@ -38,7 +38,7 @@ const LoginLoadingPage = () => {
   useEffect(() => {
     // if (isPushNotificationSent) {
     const handleMessage = (e: MessageEvent) => {
-      alert('로그인 로딩 페이지에서 받은 메시지: ' + e.data);
+      alert('로그인 로딩 페이지에서 받은 메시지 (푸시토큰): ' + e.data);
       setPushAlarmTrigger(e.data);
     };
 
@@ -51,8 +51,7 @@ const LoginLoadingPage = () => {
   useEffect(() => {
     if (!isTokenLoading && isTokenSuccess) {
       dispatch(setIsLogin(true));
-      // reactNativePostMessage('push_notification');
-      // setIsPushNotificationSent(true); // push_notification을 보낸 후 상태를 업데이트
+      reactNativePostMessage('push_notification');
     } else if (isTokenError) {
       navigate('/login');
     }

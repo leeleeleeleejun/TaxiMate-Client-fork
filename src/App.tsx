@@ -1,11 +1,11 @@
-// import { useEffect, useState } from 'react';
-// import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { NavermapsProvider } from 'react-naver-maps';
 
 //import { NextUIProvider } from '@nextui-org/system';
 import Router from '@/Router.tsx';
-// import { useGetRefreshAccessTokenQuery } from '@/api/localApi.ts';
-// import { setIsLogin } from '@/components/myProfile/userSlice.ts';
+import { useGetRefreshAccessTokenQuery } from '@/api/localApi.ts';
+import { setIsLogin } from '@/components/myProfile/userSlice.ts';
 import GlobalStyle from '@/styles/GlobalStyle.ts';
 
 const naverMapApi = import.meta.env.VITE_NAVER_MAP_API;
@@ -19,21 +19,21 @@ const splashDom = document.getElementById('splash');
 splashDom?.remove();
 
 function App() {
-  // const dispatch = useDispatch();
-  // const [isReady, setIsReady] = useState(false); // 렌더링 준비 상태
-  // const { isSuccess, isLoading } = useGetRefreshAccessTokenQuery(null);
-  //
-  // useEffect(() => {
-  //   // API 호출이 완료될 때까지 기다림
-  //   if (!isLoading) {
-  //     if (isSuccess) {
-  //       dispatch(setIsLogin(true));
-  //     }
-  //     setIsReady(true); // 모든 작업이 완료되었음을 표시
-  //   }
-  // }, [isSuccess, isLoading, dispatch]);
-  //
-  // if (!isReady) return null;
+  const dispatch = useDispatch();
+  const [isReady, setIsReady] = useState(false); // 렌더링 준비 상태
+  const { isSuccess, isLoading } = useGetRefreshAccessTokenQuery(null);
+
+  useEffect(() => {
+    // API 호출이 완료될 때까지 기다림
+    if (!isLoading) {
+      if (isSuccess) {
+        dispatch(setIsLogin(true));
+      }
+      setIsReady(true); // 모든 작업이 완료되었음을 표시
+    }
+  }, [isSuccess, isLoading, dispatch]);
+
+  if (!isReady) return null;
 
   return (
     <NavermapsProvider ncpClientId={naverMapApi}>
