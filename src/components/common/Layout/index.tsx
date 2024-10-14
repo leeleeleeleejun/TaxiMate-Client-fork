@@ -2,35 +2,49 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import Container from '@/components/common/Layout/Layout.style.ts';
 import { useEffect } from 'react';
 import { CLIENT_PATH } from '@/constants/path.ts';
-// import reactNativePostMessage from '@/utils/reactNativePostMessage.ts';
+import reactNativePostMessage from '@/utils/reactNativePostMessage.ts';
+import { useSetPushAlarmMutation } from '@/api/localApi.ts';
 
 const Layout = () => {
   const navigate = useNavigate();
 
+  const [
+    setPushAlarmTrigger,
+    // {
+    //   isLoading: isPushAlarmLoading,
+    //   isError: isPushAlarmError,
+    //   isSuccess: isPushAlarmSuccess,
+    // },
+  ] = useSetPushAlarmMutation();
+
   useEffect(() => {
     const handleMessage = (e: MessageEvent) => {
-      // if (
-      //   e.origin === 'https://vercel.live' ||
-      //   e.data.source === 'react-devtools-content-script'
-      // ) {
-      //   return;
-      // }
+      if (!e.data.type) return;
 
-      // console.log('Received message', e);
+      try {
+        const { data, type } = JSON.parse(e.data);
 
-      const { partyId } = JSON.parse(e.data);
-      if (partyId) {
-        navigate(CLIENT_PATH.CHAT_ROOM.replace(':chatRoomId', partyId));
+        // console.log('Received message', e);
+        if (type === 'CHAT') {
+          if (data.partyId) {
+            navigate(
+              CLIENT_PATH.CHAT_ROOM.replace(':chatRoomId', data.partyId)
+            );
+          }
+        } else if (type === 'PUSH_NOTIFICATION') {
+          if (data.token) {
+            setPushAlarmTrigger(data.token);
+          }
+        }
+      } catch (error) {
+        console.error('메시지 처리 중 오류 발생:', error);
       }
     };
+
     window.addEventListener('message', handleMessage);
-    // reactNativePostMessage('chat');
+    reactNativePostMessage('chat');
 
-    setTimeout(() => {
-      window.removeEventListener('message', handleMessage);
-    }, 5000);
-
-    // return () => window.removeEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
   }, []);
 
   return (

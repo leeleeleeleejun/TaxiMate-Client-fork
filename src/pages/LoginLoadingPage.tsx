@@ -35,17 +35,17 @@ const LoginLoadingPage = () => {
   useErrorHandle(tokenError);
 
   // push_notification을 보낸 후 메시지를 처리
-  useEffect(() => {
-    // if (isPushNotificationSent) {
-    const handleMessage = (e: MessageEvent) => {
-      alert('로그인 로딩 페이지에서 받은 메시지 (푸시토큰): ' + e.data);
-      // setPushAlarmTrigger(e.data);
-    };
-
-    window.addEventListener('message', handleMessage);
-    // return () => window.removeEventListener('message', handleMessage);
-    // }
-  }, []);
+  // useEffect(() => {
+  //   // if (isPushNotificationSent) {
+  //   const handleMessage = (e: MessageEvent) => {
+  //     alert('로그인 로딩 페이지에서 받은 메시지 (푸시토큰): ' + e.data);
+  //     // setPushAlarmTrigger(e.data);
+  //   };
+  //
+  //   window.addEventListener('message', handleMessage);
+  //   // return () => window.removeEventListener('message', handleMessage);
+  //   // }
+  // }, []);
 
   // 토큰이 성공적으로 받아졌을 때
   useEffect(() => {
