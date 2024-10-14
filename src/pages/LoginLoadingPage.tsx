@@ -57,7 +57,7 @@ const LoginLoadingPage = () => {
     } else if (isTokenError) {
       navigate('/login');
     }
-  }, [isTokenLoading, isTokenSuccess, isTokenError, dispatch, navigate]);
+  }, [isTokenLoading, isTokenSuccess, isTokenError]);
 
   // 푸쉬 토큰 요청 후
   // useEffect(() => {
