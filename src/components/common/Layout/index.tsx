@@ -14,11 +14,11 @@ const Layout = () => {
     const handleMessage = (e: MessageEvent) => {
       if (
         e.origin === 'https://vercel.live' ||
-        e.data.source === 'react-devtools-content-script'
+        e.data.source === 'react-devtools-content-script' ||
+        e.data.source === 'react-devtools-bridge'
       ) {
         return;
       }
-      console.log(e);
 
       try {
         const { data, type } = JSON.parse(e.data);
