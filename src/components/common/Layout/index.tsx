@@ -19,7 +19,7 @@ const Layout = () => {
 
   useEffect(() => {
     const handleMessage = (e: MessageEvent) => {
-      alert(e);
+      alert(JSON.stringify(e));
 
       if (!e.data.type) return;
 
