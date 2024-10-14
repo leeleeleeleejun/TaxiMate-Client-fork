@@ -8,17 +8,11 @@ import { useSetPushAlarmMutation } from '@/api/localApi.ts';
 const Layout = () => {
   const navigate = useNavigate();
 
-  const [
-    setPushAlarmTrigger,
-    // {
-    //   isLoading: isPushAlarmLoading,
-    //   isError: isPushAlarmError,
-    //   isSuccess: isPushAlarmSuccess,
-    // },
-  ] = useSetPushAlarmMutation();
+  const [setPushAlarmTrigger] = useSetPushAlarmMutation();
 
   useEffect(() => {
     const handleMessage = (e: MessageEvent) => {
+      console.log(e);
       const { data, type } = JSON.parse(e.data);
 
       if (type !== 'CHAT' && type !== 'PUSH_NOTIFICATION') return;
