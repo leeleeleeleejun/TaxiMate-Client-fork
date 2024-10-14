@@ -181,7 +181,7 @@ export const {
   useGetJoinPostsQuery,
   useGetClosePostsQuery,
   useCreatePostMutation,
-  useGetAccessTokenQuery,
+  useLazyGetAccessTokenQuery,
   useGetRefreshAccessTokenQuery,
   useParticipationChatMutation,
   useLeaveChatMutation,
