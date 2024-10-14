@@ -23,7 +23,8 @@ const Layout = () => {
 
       try {
         const { data, type } = JSON.parse(e.data);
-        alert(data, type);
+        alert(data);
+        alert(type);
         // console.log('Received message', e);
         if (type === 'CHAT') {
           if (data.partyId) {
