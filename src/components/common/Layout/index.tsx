@@ -19,12 +19,13 @@ const Layout = () => {
 
   useEffect(() => {
     const handleMessage = (e: MessageEvent) => {
-      if (e.data.type !== 'CHAT' || e.data.type !== 'PUSH_NOTIFICATION') return;
+      const { data, type } = JSON.parse(e.data);
+      alert(data);
+      alert(type);
+
+      if (type !== 'CHAT' || type !== 'PUSH_NOTIFICATION') return;
 
       try {
-        const { data, type } = JSON.parse(e.data);
-        alert(data);
-        alert(type);
         // console.log('Received message', e);
         if (type === 'CHAT') {
           if (data.partyId) {
