@@ -25,7 +25,7 @@ const MoveCurrentLocation = ({
 
   useEffect(() => {
     if (activeMarker) {
-      setBottom(Math.floor(windowHeight * 0.9));
+      setBottom(Math.floor(windowHeight * 0.2));
     }
   }, [activeMarker]);
 
