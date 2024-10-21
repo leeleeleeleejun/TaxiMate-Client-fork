@@ -64,7 +64,7 @@ const baseQueryWithReauth: BaseQueryFn<
 // base URL과 엔드포인트들로 서비스 정의
 // 배포 시 BASE URL 변경 필요
 export const baseApi = createApi({
-  reducerPath: 'localApi',
+  reducerPath: 'baseApi',
   // refetchOnFocus: true,
   baseQuery: baseQueryWithReauth,
   endpoints: () => ({}),
