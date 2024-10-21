@@ -50,8 +50,7 @@ const PostList = ({
       defaultSnap={() => 80}
       snapPoints={({ maxHeight }) => [
         Math.floor(maxHeight * 0.9),
-        Math.floor(maxHeight * 0.4),
-        80,
+        Math.floor(maxHeight * 0.2),
       ]}
       expandOnContentDrag
       onSpringEnd={() => setPostListHeight(sheetRef.current?.height || 0)}
