@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import reactNativePostMessage from '@/utils/reactNativePostMessage.ts';
-import { useGetAccessTokenQuery } from '@/api/localApi.ts';
+import { useGetAccessTokenQuery } from '@/api/userApi.ts';
 import { setIsLogin } from '@/components/MyProfile/userSlice.ts';
 import useErrorHandle from '@/hooks/useErrorHandle.ts';
 

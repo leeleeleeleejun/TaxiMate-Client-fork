@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useGetClosePostsQuery, useGetJoinPostsQuery } from '@/api/postApi.ts';
 
 import Header from '@/components/common/Layout/Header';
 import { HeaderItem } from '@/components/common/Layout/Header/Header.style.ts';
@@ -8,14 +9,13 @@ import {
   Container,
   PostListContainer,
 } from '@/components/UsageHistory/usageHistory.style.ts';
-
-import UsageHistoryIcon from '@/assets/icons/header/usage-history-icon.svg?react';
 import Footer from '@/components/common/Layout/Footer';
-import { useGetClosePostsQuery, useGetJoinPostsQuery } from '@/api/localApi.ts';
 import PostListItem from '@/components/common/PostListItem';
 import reformatDate from '@/utils/reformatDate.ts';
 import NoData from '@/components/common/NoData.tsx';
 import LoadingIcon from '@/components/common/LoadingIcon';
+
+import UsageHistoryIcon from '@/assets/icons/header/usage-history-icon.svg?react';
 
 const UsageHistoryPage = () => {
   const [isActive, setIsActive] = useState('join');
