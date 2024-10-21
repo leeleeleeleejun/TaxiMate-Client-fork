@@ -47,7 +47,7 @@ const PostList = ({
       open
       blocking={false}
       ref={sheetRef}
-      defaultSnap={() => 80}
+      defaultSnap={({ maxHeight }) => Math.floor(maxHeight * 0.2)}
       snapPoints={({ maxHeight }) => [
         Math.floor(maxHeight * 0.9),
         Math.floor(maxHeight * 0.2),
