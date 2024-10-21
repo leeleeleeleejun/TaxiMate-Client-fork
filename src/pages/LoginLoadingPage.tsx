@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import reactNativePostMessage from '@/utils/reactNativePostMessage.ts';
 import { useGetAccessTokenQuery } from '@/api/localApi.ts';
-import { setIsLogin } from '@/components/myProfile/userSlice.ts';
+import { setIsLogin } from '@/components/MyProfile/userSlice.ts';
 import useErrorHandle from '@/hooks/useErrorHandle.ts';
 
 const LoginLoadingPage = () => {

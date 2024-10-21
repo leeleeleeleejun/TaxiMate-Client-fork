@@ -1,4 +1,4 @@
-import { GoNewMessageButtonContainer } from '@/components/chatRoom/chatRoom.style.ts';
+import { GoNewMessageButtonContainer } from '@/components/ChatRoom/chatRoom.style.ts';
 import UserBasicImg from '@/components/common/userBasicImg';
 import { Message } from '@/components/common/InAppNotification/InAppNotification.style.ts';
 import ArrowDownIcon from '@/assets/icons/arrow-down-icon.svg?react';

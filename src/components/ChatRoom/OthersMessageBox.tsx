@@ -5,7 +5,7 @@ import {
   OthersMessage,
   OthersName,
   ResentMessage,
-} from '@/components/chatRoom/chatRoom.style.ts';
+} from '@/components/ChatRoom/chatRoom.style.ts';
 import UserBasicImg from '@/components/common/userBasicImg';
 import formatMongoDate from '@/utils/formatMongoDate.ts';
 import { UserProfileImg } from '@/components/common/UserContainer/userContainer.style.ts';
